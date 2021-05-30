@@ -1,0 +1,29 @@
+<div class="xt_changeHtml">
+
+	<div class="search-filter-box">
+		<div>
+			<label>路径<span>:</span></label>
+			<input type="text" placeholder="路径" ng-model="path" style="width: 245px;">
+		</div>
+        <div>
+			<label>参数<span>:</span></label>
+			<input type="text" placeholder="参数" ng-model="scene" style="width: 245px;">
+		</div>
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;" ng-click="createQrcode();">
+				生成</a>
+        </div>
+        <div>{{qrcodePath}}</div>
+	</div>
+	<div class="search-filter-box">
+		<div>
+			<label>套餐详情<span>:</span></label>
+			pages/promotion/comPackageDetail
+		</div>
+		<div>
+			<label>用户注册<span>:</span></label>
+			pages/login
+		</div>
+        
+	</div>
+</div>

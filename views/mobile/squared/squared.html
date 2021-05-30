@@ -1,0 +1,82 @@
+<ion-content>
+    <ion-refresher pulling-text="下拉查看活动..." on-refresh="onRefresh()"></ion-refresher>
+    <div class="main">
+        <div class="game-title" ng-show="false">幸运有礼</div>
+        <div class="game_bg">
+            <div class="game-top">
+                <div class="game-top-left" ng-click="$root.goMine()">
+                    <div class="game-top-left-img">
+                        <img ng-src="{{sessioninfo.mb_img}}" alt="">
+                    </div>
+                    <div class="game-top-person-name">
+                        <span>{{sessioninfo.mb_nickname}}</span>
+                    </div>
+                </div>
+                <div class="game-top-right" ng-click="$root.goHome()">
+                    <img src="img/mobile/squared/shop.png" alt="">
+                </div>
+            </div>
+            <div class="my-point" ng-show="activityMain.mm_lucky_rat_people_type==2">今天剩余抽奖次数：{{(drawChanceNum.drawChanceDay-drawChanceNum.drawNumDay)>99?99+'+':(drawChanceNum.drawChanceDay-drawChanceNum.drawNumDay)}}</div>
+            <div class="my-point" ng-show="activityMain.mm_lucky_rat_people_type==1">剩余总抽奖次数：{{(drawChanceNum.drawChanceAll-drawChanceNum.drawNumAll)>99?99+'+':(drawChanceNum.drawChanceAll-drawChanceNum.drawNumAll)}}</div>
+            <div class="panel">
+                <div class="panel-content">
+                    <div class="squared-item" ng-class="{select:active==1}">
+                        <img ng-show="prizeList[0].mp_img" src="{{prizeList[0].mp_img}}">
+                        <span ng-show="prizeList[0].mp_img">{{prizeList[0].mp_name}}</span>
+                        <i ng-show="!prizeList[0].mp_img">{{prizeList[0].mp_name}}</i>
+                    </div>
+                    <div class="squared-item" ng-class="{select:active==2}">
+                        <img ng-show="prizeList[1].mp_img" src="{{prizeList[1].mp_img}}">
+                        <span ng-show="prizeList[1].mp_img">{{prizeList[1].mp_name}}</span>
+                        <i ng-show="!prizeList[1].mp_img">{{prizeList[1].mp_name}}</i>
+                    </div>
+                    <div class="squared-item" ng-class="{select:active==3}">
+                        <img ng-show="prizeList[2].mp_img" src="{{prizeList[2].mp_img}}">
+                        <span ng-show="prizeList[2].mp_img">{{prizeList[2].mp_name}}</span>
+                        <i ng-show="!prizeList[2].mp_img">{{prizeList[2].mp_name}}</i>
+                    </div>
+                </div>
+                <div class="panel-content">
+                    <div class="squared-item" ng-class="{select:active==8}">
+                        <img ng-show="prizeList[7].mp_img" src="{{prizeList[7].mp_img}}">
+                        <span ng-show="prizeList[7].mp_img">{{prizeList[7].mp_name}}</span>
+                        <i ng-show="!prizeList[7].mp_img">{{prizeList[7].mp_name}}</i>
+                    </div>
+                    <div class="squared-item item-center" ng-class="{'center-select':btnDisable}" ng-click="start()"><a>立即抽奖</a></div>
+                    <div class="squared-item" ng-class="{select:active==4}">
+                        <img ng-show="prizeList[3].mp_img" src="{{prizeList[3].mp_img}}">
+                        <span ng-show="prizeList[3].mp_img">{{prizeList[3].mp_name}}</span>
+                        <i ng-show="!prizeList[3].mp_img">{{prizeList[3].mp_name}}</i>
+                    </div>
+                </div>
+                <div class="panel-content">
+                    <div class="squared-item" ng-class="{select:active==7}">
+                        <img ng-show="prizeList[6].mp_img" src="{{prizeList[6].mp_img}}">
+                        <span ng-show="prizeList[6].mp_img">{{prizeList[6].mp_name}}</span>
+                        <i ng-show="!prizeList[6].mp_img">{{prizeList[6].mp_name}}</i>
+                    </div>
+                    <div class="squared-item" ng-class="{select:active==6}">
+                        <img ng-show="prizeList[5].mp_img" src="{{prizeList[5].mp_img}}">
+                        <span ng-show="prizeList[5].mp_img">{{prizeList[5].mp_name}}</span>
+                        <i ng-show="!prizeList[5].mp_img">{{prizeList[5].mp_name}}</i>
+                    </div>
+                    <div class="squared-item" ng-class="{select:active==5}">
+                        <img ng-show="prizeList[4].mp_img" src="{{prizeList[4].mp_img}}">
+                        <span ng-show="prizeList[4].mp_img">{{prizeList[4].mp_name}}</span>
+                        <i ng-show="!prizeList[4].mp_img">{{prizeList[4].mp_name}}</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="game_btns" ng-style="{bottom:$root.isBottomTab?'5rem':'1.5rem'}">
+            <div class="game_tip">{{shakeInfo.me_shopid_nameref}}欢迎您！</div>
+            <div class="btn-content">
+                <a class="btns" ng-click="showTabPop()">活动规则</a>
+            </div>
+            <div class="btn-content">
+                <a class="btns color-yellow" ng-click="showTabPop(true)">我的奖品</a>
+            </div>
+        </div>
+    </div>
+</ion-content>
+<video-pop></video-pop>

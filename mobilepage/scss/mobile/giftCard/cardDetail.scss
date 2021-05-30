@@ -1,0 +1,44 @@
+.card-detail-main {
+	$green: #14ab12;
+	$radius: 0.4rem;
+	$gray: #444;
+	$red: #a94641;
+	$lightGray: #999;
+	.card-top {
+		text-align: center;
+		padding: 1rem 1.5rem;
+		img {
+			width: 100%;
+			border-radius: 1rem;
+		}
+	}
+	.card-center {
+		text-align: center;
+		.money-left {
+			span {
+				&:first-of-type {
+					color: $gray;
+					font-size: 1.2rem;
+				}
+				&:last-of-type {
+					color: $red;
+				}
+			}
+		}
+		.use-now {
+			margin-top: 2rem;
+			margin-bottom: 2rem;
+			button {
+				width: 50%;
+			}
+		}
+	}
+	.card-bottom {
+		span {
+			color: $gray;
+		}
+		.color-gray {
+			color: $lightGray;
+		}
+	}
+}

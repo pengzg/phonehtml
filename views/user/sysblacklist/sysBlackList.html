@@ -1,0 +1,244 @@
+<div class="setting_panel panel-default">
+    <div class="panel-heading text-left">
+        <div class="setting_nav">
+            <ul>
+                <li><a href="">黑名单列表</a></li>
+            </ul>
+        </div>
+	</div>
+	<div class="search-filter-box">
+		<div>
+			
+			<label>启用状态<span>:</span></label>
+			<select ng-model="searchParam.sbl_status" >
+				<option ng-repeat="x in statusList" value="{{x.id}}" >{{x.name}}</option>
+			</select>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="请输入姓名或手机号" ng-model="searchParam.searchKey">
+		</div>
+		
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="searchParam.searchKey='';searchParam.sbl_status='';doSearch();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success add-btn" style="float:right;margin-right:50px;" ng-click="toEdit();"><i class="icon icon-plus"></i>新增</a>
+		</div>
+	</div>
+    
+    
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                        <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>姓名</th>
+                                <th>手机号</th>
+                                <th>截止时间</th>
+                                <th>添加人</th>
+                                <th>添加时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in workUserList">
+                                <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+                                <td class="text-center f14">{{x.sbl_userid_nameref}}</td>
+                                <td class="text-center f14">{{x.sbl_mobile}}</td>
+                                <td class="text-center f14">{{x.sbl_expired}}</td>
+                                <td class="text-center f14">{{x.sbl_adduser_nameref}}</td>
+                                <td class="text-center f14">{{x.sbl_addtime}}</td>
+                                <td class="text-center f14">{{x.sbl_status_nameref}}</td>
+                                <td class="text-center f14">
+
+                                    <a class="common_edit" title="详情" ng-click="toEdit(x.sbl_id);"></a>
+                                    <div  style="display: inline-block;position: relative;">
+										<a ng-if="x.sbl_status == '1'" class="common_btns common_band" ng-click="changeStatus(x,0)" title="禁用"></a>
+										<a ng-if="x.sbl_status == '0'" class="common_btns common_active" ng-click="changeStatus(x,1)" title="启用"></a>
+									</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--工作人员新增和修改弹出框  -->
+<div class="dialog" ng-show="dialogShow" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<div class="dg-xg-zh" style="z-index:1000; width:608px;height:451px;margin-left: -369px; top:80px;" ng-show="dialogShow">
+		<div class="dg-xg-js" style="width:608px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		<div class="clearfix" style="padding: 0 10px; box-sizing: border-box;">
+		    <form class="form-horizontal w5c-form demo-form" role="form" w5c-form-validate="vmm" novalidate name="validateForm">
+				<div class="dg-content" style="width: 100%; margin-bottom:10px;margin-top:30px;" >
+					<div class="tab-panel" style="height:320px;" >
+						<div class="panel panel-default" style="border:0;box-shadow:none;">
+								<div class="panel-content-box">
+									<div style="width:100%">
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>手机号：</div>
+											<div class="input-group-su su-single">
+												<input type="text" ng-disabled="vo.sbl_id" name="mobile" ng-model="vo.sbl_mobile" ng-change="checkMobile(vo.sbl_mobile)" maxlength="11" required="true" >
+											</div>
+										</div>
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>姓名：</div>
+											<div class="input-group-su su-single">
+												<input type="text" ng-model="vo.sbl_userid_nameref" readonly="true" required="true">
+											</div>
+										</div>
+										
+										
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">状态：</div>
+											<div class="input-group-su su-radio-wrap">
+												<div class="zk_controlRadio" style=" width: 200px;">
+													<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+														<input class="xt_radio ng-pristine ng-untouched ng-valid valid" name="sbl_status" ng-model="vo.sbl_status" value="1" type="radio">
+														<div class="xt_inputBackimg"></div>启用
+													</lable>
+													<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+													<input class="xt_radio ng-pristine ng-untouched ng-valid" name="sbl_status" ng-model="vo.sbl_status" value="0" type="radio">
+														<div class="xt_inputBackimg"></div>禁用
+													</lable>
+												</div>
+											</div>
+										</div>
+										
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>截止时间：</div>
+											<div class="input-group-su-date">
+												<input id="expired" type="text" class="Wdate" style="width: 125px; height: 33px; margin-left:-4px;border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;"
+												onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+												ng-model="vo.sbl_expired"/>
+											</div>
+										</div>
+										
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">备注：</div>
+											<div class="input-group-su-date">
+												<input type="text" name="note" ng-model="vo.sbl_note" maxlength="255">
+											</div>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div> 
+						
+				</div>
+				<div class="dg-submint" style=" width:100%; text-align: center; margin-bottom:20px;">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="savaEdit(vo.mbw_id)">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- 重置密码弹框 -->
+<div class="dialog" ng-show="editPwddialogShow">
+	<div class="dialog-zdc"></div>
+
+	<form class="form-horizontal w5c-form demo-form" role="form"
+		w5c-form-validate="vm" novalidate name="validateForm1">
+		<div class="dg-xg-zh" style="width: 620px; height:160px; margin-left: -310px; top: 50%; margin-top:-125px;" ng-show="editPwddialogShow">
+			<div class="dg-xg-js" style="width: 620px">
+				重置密码
+				<div class="dg-cancle" ng-click="closeDialogPwd()"></div>
+			</div>
+			<div class="dg-content" style="margin: 12px auto; height:80px;overflow: visible;">
+				<div id="formJiLu" class="" style="border: none;height:80px;margin-top:10px;">
+					<form>
+						<div>
+							<div class="contentGroup clearfix">
+								<div class="zk_controlLabel">
+									<span class="f14">新密码</span> <i>*</i>
+								</div>
+
+								<div class="floatLeft p10left f14">
+									<input style="width: 226px;" type="text" name="password"  ng-maxlength="10"  ng-minlength="6"
+										ng-model="passWord" required="">
+										（ 请输入新密码6~10位）
+								</div>
+							</div>
+							
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" w5c-form-submit="modifyPwdComplete();">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialogPwd();">取消</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+</div>
+<div class="dialog" ng-show="showUserPop" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50px;"  ng-show="showUserPop">
+		<div class="dg-xg-js" style="width:660px;">
+			用户角色分配-{{popName}}
+			<div class="dg-cancle" ng-click="hideUserRole()"></div>
+		</div>
+		<div class="xt_sySearch" style="margin-top: 10px;margin-bottom: 10px;margin-left: 10px">
+			<input class="xt_searchInput" ng-model="searchKey" type='text' placeholder="请输入角色名搜索" 
+				autocomplete="off" ng-enter="doSearchRole()">
+			<i class="btn btn-success" ng-click="doSearchRole()" style="position: relative;top: -1px;padding: 5px 12px 6px;margin-left: 10px;">查找</i>
+		</div>
+	    <form class="form-horizontal">
+			<div class="dg-content" style=" margin:5px auto;height: 370px;overflow-y: scroll;">
+				<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-left-color: transparent;border-right-color: transparent;">
+					<thead>
+						<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+							<th class="colorCenter noSortCss" style="width:10%;">
+								<input type="checkbox" id="selectedAll" class="checkbox" 
+								ng-checked="so_isCheck == true" ng-click="selectedAllOrg();">
+							</th>
+							<th class="colorCenter noSortCss" style="width:10%;">序号</th>
+							<th class="colorCenter noSortCss" style="width:80%;">所属角色</th>
+						</tr>
+							
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in roleList" style=" height:30px">
+							<td class="colorCenter noSortCss" style="width:10%;"><input type="checkbox" class="checkbox" 
+							   ng-checked="x.sr_isCheck == true" name = "role" sr_id="{{x.sr_id}}" ></td>
+							<td class="colorCenter" style="width:10%;">{{rolepager.rows * (rolepager.page - 1)+$index+1}}</td>
+							<td class="colorCenter" style="width:80%;">{{x.sr_name}}</td>
+						</tr>
+						
+					</tbody>
+				</table>
+				<tm-pagination conf="rolepager" search-param ="rolesearchParam"></tm-pagination>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="roleUser();">授权</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="hideUserRole()">关闭</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+

@@ -1,0 +1,86 @@
+.common_copy { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_copy:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/copyAnd.png") no-repeat; }
+
+.common_add { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_add:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/add.png") no-repeat; }
+
+.common_edit { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_edit:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/bianji.png") no-repeat; }
+
+.common_delete { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_delete:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/shanchu.png") no-repeat; }
+
+.common_detail { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_detail:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/chaxun.png") no-repeat; }
+
+.common_band { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_band:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/band.png") no-repeat; }
+
+.common_active { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_active:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/active.png") no-repeat; }
+
+.common_judge { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_judge:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/judge.png") no-repeat; }
+
+.common_abandon { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_abandon:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/abandon.png") no-repeat; }
+
+.common_change { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_change:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/change.png") no-repeat; }
+
+.common_publish { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_publish:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/publish.png") no-repeat; }
+
+.common_publish_cancle { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_publish_cancle:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/publish-cancle.png") no-repeat; }
+
+.common_up { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_up:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/shangyi.png") no-repeat; }
+
+.common_down { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_down:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/xiayi.png") no-repeat; }
+
+.common_preview { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_preview:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/preview.png") no-repeat; }
+
+.common_stick { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_stick:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/stick.png") no-repeat; }
+
+.common_recovery { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_recovery:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/recovery.png") no-repeat; }
+
+.common_print { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_print:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/print.png") no-repeat; }
+
+.common_cancel { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_cancel:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/cancel.png") no-repeat; }
+
+.common_setting { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_setting:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/setting.png") no-repeat; }
+
+.common_relate { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_relate:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/relate.png") no-repeat; }
+
+.common_offsell { width: 26px; height: 14px; display: inline-block; position: relative; }
+.common_offsell:before { content: ""; position: absolute; top: -1px; left: 5px; width: 16px; height: 16px; background: url("../img/btns/offsell.png") no-repeat; }
+
+.common_dropdown { position: relative; display: inline-block; padding: 5px 10px; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; }
+.common_dropdown i { position: relative; top: -3px; left: 1px; }
+.common_dropdown > div:nth-of-type(2) { min-width: 100% !important; }
+.common_dropdown > div:nth-of-type(2) > div { text-align: center; padding: 5px 0; }
+.common_dropdown > div:nth-of-type(2) > div:hover { background: #ddd; cursor: pointer; }
+
+.common-bar-top { margin: 0 auto; border: 1px solid #ddd; }
+.common-bar-top .common-bar-top-t { border-bottom: 1px solid #ddd; padding: 10px 15px; background: #f3f3f3; }
+.common-bar-top .common-bar-top-b { display: -webkit-box; display: -ms-flexbox; display: flex; background: #fff; }
+.common-bar-top .common-bar-top-b > div { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; margin: 10px 0; padding: 0 10px; text-align: center; border-left: 1px solid #ddd; }
+.common-bar-top .common-bar-top-b > div .div-first { color: #737273; }
+.common-bar-top .common-bar-top-b > div .div-second { color: #737273; font-size: 40px; font-weight: 600; }
+.common-bar-top .common-bar-top-b > div:first-of-type { border-left: none; }
+
+.common_table_1 { width: 100%; text-align: center; border: 1px solid #ddd; }
+.common_table_1 thead { background: #f3f3f3; }
+.common_table_1 tr { border-bottom: 1px solid #ddd; }
+.common_table_1 th { text-align: center; padding: 5px; }
+
+.col-sm-12, .container { box-sizing: border-box; -moz-box-sizing: border-box; /* Firefox */ -webkit-box-sizing: border-box; /* Safari */ }

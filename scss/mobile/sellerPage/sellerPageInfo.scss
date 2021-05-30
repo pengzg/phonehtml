@@ -1,0 +1,31 @@
+.seller-page-info-main {
+	.video-source {
+            width: 100%;
+            float: left;
+        }
+    video::-webkit-media-controls-mute-button {
+        display: none;
+    }
+    video::-webkit-media-controls-volume-slider {
+        display: none;
+    }
+    video::-webkit-media-controls-fullscreen-button {
+        display: none;
+    }
+    video::-internal-media-controls-download-button {
+        display: none;
+    }
+    video::-webkit-media-controls-enclosure {
+        overflow: hidden;
+    }
+    video::-webkit-media-controls-panel {
+        width: calc(100% + 40px);
+    }
+	img {
+		width: 100%;
+		float: left;
+		&:last-of-type{
+			padding-bottom: 4rem;
+		}
+	}
+}

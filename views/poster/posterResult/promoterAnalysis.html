@@ -1,0 +1,63 @@
+<div style="padding-left: 15px;">
+    <span class="red">*</span>
+    <span>推广人：通过公众号至少生成过1次海报记录的粉丝</span>
+</div>
+<common-toolbar>
+    <common-date-range config="{{config}}" on-pick="datePick(start,end)"></common-date-range>
+    <input class="su-input" type="text" placeholder="请输入微信昵称 或 用户ID">
+    <div class="btn btn-success su-btn">查询</div>
+    <div class="btn btn-default su-btn">导出</div>
+</common-toolbar>
+    
+<div class="panel-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                    <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                </div>
+                
+                <table class="table table3 table-bordered table-hover user_table">
+                    <thead>
+                        <tr>
+                            <th>用户ID</th>
+                            <th>头像</th>
+                            <th>用户名</th>
+                            <th>手机号</th>
+                            <th>直接推广粉丝数量</th>
+                            <th>ip地址</th>
+                            <th>关注时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in [1,2,3,4,5,6]">
+                            <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+                            <td class="text-center f14" ><img src="img/login/2016-11-18-12.png"  style="width:30px;height:30px;border-radius:50%;"></td>
+                            <td class="text-center f14">王小明</td>
+                            <td class="text-center f14">13388888888</td>
+                            <td class="text-center f14">456</td>
+                            <td class="text-center f14">192.168.0.0.1</td>
+                            <td class="text-center f14">2018-01-15 17:02</td>
+                            <td class="text-center f14">
+                                <a class="red" ui-sref="index.posterUser({tab:0})">
+                                    <i class="fa fa-share-alt"></i>
+                                    关系图谱
+                                </a>
+                                <a class="red" ui-sref="index.posterUser({tab:1})">
+                                    <i class="fa fa-list-alt"></i>
+                                    奖励记录
+                                </a>
+                                <a class="red" ui-sref="index.posterUser({tab:2})">
+                                    <i class="fa fa-list-alt"></i>
+                                    提现记录
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+            </div>
+        </div>
+    </div>
+</div>

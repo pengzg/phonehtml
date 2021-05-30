@@ -1,0 +1,74 @@
+<script language="javascript" type="text/javascript">
+	window.onload = function(){
+	}
+    </script>
+<!-- 搜索框 -->
+<div class="xt_shouYeDiv" ng-show="!$root.isPager">
+	<span><a href="#/index/homePage">首页</a>  > <a  style="font-size: 14px;font-weight: 100;" href="#/index/customer/csTypeList"></a> </span>
+	<div class="xt_powerSearch" >高级<br>搜索</div>
+	<div class="xt_sySearch">
+		<input class="xt_searchInput" type='text' placeholder="请输入编码或名称" autocomplete="off">
+		<i class="xt_searchBtn" title="查找"></i>
+	</div>
+</div>
+<div class="xt_changeHtml">
+	<div class="xt_offOne clearfix">
+		<div class="xt_addBtn">
+			<div class="xt_addBtnAnNiu"><a href="#/index/customer/csTypeAdd"><i class="xt_addImg"></i>新增</a></div>
+		</div>
+	</div>
+	<div class="xt_childTable">
+		<table class="table table3 table-striped table-hover table-bordered SortCss">
+			<thead>
+				<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+					<th class="colorCenter noSortCss">序号</th>
+					<th ng-class="sortFun('ct_id',true);" ng-click="clickSortFun('主键');">主键</th>
+					<th ng-class="sortFun('ct_orgid',true);" ng-click="clickSortFun('所属公司');">所属公司</th>
+					<th ng-class="sortFun('ct_parentid',true);" ng-click="clickSortFun('上级父类ID');">上级父类ID</th>
+					<th ng-class="sortFun('ct_code',true);" ng-click="clickSortFun('客户类别编码');">客户类别编码</th>
+					<th ng-class="sortFun('ct_name',true);" ng-click="clickSortFun('客户类别名称');">客户类别名称</th>
+					<th ng-class="sortFun('ct_stats',true);" ng-click="clickSortFun('状态');">状态</th>
+					<th ng-class="sortFun('ct_remarks',true);" ng-click="clickSortFun('备注');">备注</th>
+					<th ng-class="sortFun('ct_dr',true);" ng-click="clickSortFun('有效标志位 1 有效 2 删除');">有效标志位 1 有效 2 删除</th>
+					<th ng-class="sortFun('ct_ts',true);" ng-click="clickSortFun('更新时间');">更新时间</th>
+					<th ng-class="sortFun('ct_version',true);" ng-click="clickSortFun('版本');">版本</th>
+					<th ng-class="sortFun('ct_updateuserid',true);" ng-click="clickSortFun('最后修改人');">最后修改人</th>
+					<th ng-class="sortFun('ct_updatetime',true);" ng-click="clickSortFun('最后修改时间');">最后修改时间</th>
+					<th ng-class="sortFun('',false);">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in csTypeList" class="" style=" height:50px">
+					<td class="colorCenter">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+					<td>{{x.ct_id}}</td>
+					<td>{{x.ct_orgid}}</td>
+					<td>{{x.ct_parentid}}</td>
+					<td>{{x.ct_code}}</td>
+					<td>{{x.ct_name}}</td>
+					<td>{{x.ct_stats}}</td>
+					<td>{{x.ct_remarks}}</td>
+					<td>{{x.ct_dr}}</td>
+					<td>{{x.ct_ts}}</td>
+					<td>{{x.ct_version}}</td>
+					<td>{{x.ct_updateuserid}}</td>
+					<td>{{x.ct_updatetime}}</td>
+					<td class="colorCenter">
+						<a class="colorBlue" ng-click="toDetail(x.ct_id)" href="javascript:;" title="明细">明细</a>&nbsp;&nbsp;
+						<a class="edit colorBlue" ng-click="toEdit(x.ct_id)" title="修改">修改</a>&nbsp;&nbsp;
+						<a class="edit colorBlue" ng-show="pager.total>1" ng-click="toDelete(x.ct_id)" title="删除">删除</a>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+		<!-- 分页 -->
+     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+		<!--分页 -->
+	</div>
+</div>
+
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>

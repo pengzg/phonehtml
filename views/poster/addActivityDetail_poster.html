@@ -1,0 +1,573 @@
+<div class="contentHtml" style="left: 0;">
+	
+	<div id="mainHtml" style="padding: 0;top:0;">
+		<div class="wrapper" id="game_wrapper" style="padding: 0; margin: 0;" ng-init="checkedIdx0=0">
+			<div class="su-header">
+				<h3>创建活动：</h3>
+				<div class="warn">
+					<p>温馨提示：1、请勿在海报上添加“扫码可得xx元，关注即可得xx元”等诱导类文字，一经查实，平台有权暂停该活动！</p>
+					<p style="padding-left: 65px;">2、公众号粉丝数少于1500人，首次创建活动请在“高级设置”中限制推广人区域，便于安全涨粉</p>
+					<p style="padding-left: 65px;">3、活动期间请时刻关注账户余额变化，因余额不足导致大量粉丝无法拿到奖励举报公众号造成的清粉或封号等情况，与我方无关</p>
+				</div>
+			</div>
+			<div class="editContent">
+				<div class="previewPhone">
+					<div class="wxTitle">
+					</div>
+					<div id="gameContent">
+						<div class="post-content" id="postContent">
+							<img ng-src="{{templateData.bgImg.path}}" ng-style="templateData.bgImg.style" style="position: absolute;">
+							<edit-img imgdata="templateData.bannerImg"></edit-img>	
+							<edit-img imgdata="templateData.codeImg" 
+									  show-change-code="true" 
+									  show-change="true" 
+									  change-path="upImage('codeImg')"
+									  change-code="changeCode()"></edit-img>	
+							<edit-img imgdata="templateData.headerImg" ng-show="templateData.headerImg.showState==1"></edit-img>	
+							<edit-text ng-repeat="x in templateData.posterText" textdata="x" on-del="deleteText($index)"></edit-text>
+							<edit-text textdata="templateData.representText" disable-edit="123" hide-del="true" ng-show="templateData.representText.showState==1"></edit-text>
+							
+						</div>
+					</div>
+					<div class="preview-control">
+            			<p class="control-title">添加内容</p>
+            			<ul class="control-label">
+							<li id="label_logo">
+								<a id="label_logo_tips" 
+									href="javascript:;" 
+									data-toggle="tooltip" 
+									data-trigger="hover" 
+									data-original-title="{{templateData.headerImg.showState==0?'显示':'隐藏'}}" 
+									ng-click="toggleHead()">粉丝头像</a>
+							</li>
+							<li id="label_nickname">
+								<a id="label_nickname_tips" 
+									href="javascript:;" 
+									data-toggle="tooltip" 
+									data-trigger="hover"
+									data-original-title="{{templateData.representText.showState==0?'显示':'隐藏'}}" 
+									ng-click="toggleName()">粉丝昵称</a>
+							</li>
+							<li id="label_poster">
+								<a href="javascript:;" ng-click="addText()">海报文案</a>
+							</li>
+							<li id="label_bgimg">
+								<a href="javascript:;" ng-click="showBackPop=true;upImage('bgImg')">大背景图</a>
+								<div class="reset" ng-click="resetImg()">还原</div>
+							</li>
+						</ul>
+            </div>
+				</div>
+				<div class="editDetail" ng-init="checkedIdx1=0">
+					<ul class="nav nav-tabs config-tab" id="configTab">
+						<li ng-class="{active:checkedIdx1==0}" ng-click="checkedIdx1=0"><a href="">基础设置</a></li>
+						<li ng-class="{active:checkedIdx1==1}" ng-click="checkedIdx1=1" ng-show="false"><a href="">奖励设置</a></li>
+						<li class="prize_config_tab" ng-class="{active:checkedIdx1==2}" ng-click="checkedIdx1=2" ng-show="false"><a href="">高级设置</a></li>
+						<li ng-class="{active:checkedIdx1==3}" ng-click="checkedIdx1=3;checkedIdx=0;"><a href="">规则说明</a></li> 
+					</ul>
+					<div class="tab-content config-tab-content">
+						<div class="config_view" id="panel_1" ng-show="checkedIdx1==0">
+							<form action="#" class="form-horizontal-2" id="form_activity_config">
+								<!-- <div id="set_actName_box" class="control-group" ng-class="{checkBorder:titleCheck}" ng-mouseleave="titleCheck=false;" >
+									<label class="control-label" for="title">
+										公众号类型：
+									</label>
+									<div class="controls">
+										<input type="text" id="title" class="span2" value="未认证订阅号" disabled="disabled" />
+									</div>
+								</div> -->
+								<div class="control-group" >
+									<label class="control-label">海报推广活动名称：</label>
+									<div class="controls">
+										<input type="text" ng-model="vo.mf_name" class="span4" placeholder="请输入活动名称" />
+										</select>
+										<span class="maroon">*</span>
+										<span class="help-inline">不能超过16个字，将会在粉丝手机端显示</span>
+									</div>
+								</div>
+								<div id="set_acttime_box" class="control-group" >
+									<label class="control-label" for="startDate">
+										海报推广开始时间：
+									</label>
+									<div class="controls">
+										<input type="text" id="activityRange" class="span4" maxlength="50" ng-model="vo.time"/>
+										<span class="maroon">*</span>
+										<span class="help-inline">创建后不允许修改</span>
+									</div>
+								</div>
+								<!-- <div class="control-group" id="joinPeopel" >
+									<label class="control-label" for="helpType">海报推广活动周期：</label>
+									<div class="controls helpType_1_cont">
+										<label class="inline">
+											<input type="radio" data-editable="false" 
+											name="helpEffect" 
+											id="helpEffectForAddPlayCount" ng-value="1" 
+											ng-model="config.base.join_people.show" />
+											持续1~3天
+										</label>
+										<select name="awardType" class="span2" data-editable="false" ng-model="x.mp_sortnum" style="margin-left: 7px;" ng-options="y as y for y in [1,2,3]" ng-change="showGiftPreview();" > </select>
+									</div>
+								</div>
+								<div class="control-group" id="joinPeopel" >
+									<label class="control-label" style="opacity: 0;"></label>
+									<div class="controls helpType_1_cont">
+										<label class="inline" style="margin-top:7px">
+											<input type="radio" 
+											data-editable="false" name="helpEffect" 
+											id="helpEffectForHelp" ng-value="2" 
+											ng-model="config.base.join_people.show"/>
+											持续1~90天
+										</label>
+										<select name="awardType" class="span2" data-editable="false" ng-model="x.mp_sortnum" ng-options="y as y for y in [1,2,3]" ng-change="showGiftPreview();" > </select>
+										<span class="maroon">*</span>
+										<span class="help-inline">创建后不允许修改</span>
+									</div>
+								</div> -->
+								<div class="control-group">
+									<label class="control-label" for="helpType">海报推广奖励类型：</label>
+									<div class="controls helpType_1_cont">
+										<!-- <label class="inline">
+											<input type="radio" data-editable="false" 
+											name="helpEffect1" 
+											id="helpEffect1ForAddPlayCount" ng-value="1" 
+											ng-model="vo.mf_spread_type" />
+											红包
+										</label> -->
+										<label class="inline">
+											<input type="radio" data-editable="false" 
+											name="helpEffect1" 
+											id="helpEffect1ForAddPlayCount" ng-value="2" 
+											ng-model="vo.mf_spread_type" />
+											卡券
+										</label>
+										<!-- <label class="inline">
+											<input type="radio" data-editable="false" 
+											name="helpEffect1" 
+											id="helpEffect1ForAddPlayCount" ng-value="3" 
+											ng-model="vo.mf_spread_type" />
+											积分
+										</label> -->
+										<span class="maroon">*</span>
+										<span class="help-inline">结合卡券、积分奖励更有助于粉丝留存转化哦</span>
+									</div>
+								</div>
+								<div id="set_acttime_box" class="control-group" >
+									<label class="control-label" for="startDate">
+										奖励卡券：
+									</label>
+									<div class="controls">
+										<select class="span2" data-editable="false">
+											<option>优惠券1</option>
+											<option>优惠券2</option>
+											<option>优惠券3</option>
+										 </select>
+									</div>
+								</div>
+								<div id="set_acttime_box" ng-show="vo.mf_spread_type!=2" class="control-group" >
+									<label class="control-label" for="startDate">
+										海报推广奖励金：
+									</label>
+									<div class="controls">
+										<input type="text" id="activityRange" class="span4" value maxlength="50" ng-model="config.base.time" placeholder="最近充值10元" /> 元
+										<span class="maroon">*</span>
+										<span class="help-inline">红包账号余额：</span>
+										<span class="red">&yen;10.00</span>
+										<a style="color: #08c;">查看详情></a>
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="control-label">限制海报数量：</div>
+									<div class="controls helpType_1_cont">
+										<input type="radio" ng-value="1" 
+										ng-click="vo.mf_flyer_num=500" ng-checked="vo.mf_flyer_num==500" name="mf_flyer_num"/>
+										<label class="inline" for="input3">
+											500
+										</label>
+										&ensp;
+										<input type="radio" ng-checked="vo.mf_flyer_num==30000" name="mf_flyer_num" ng-click="vo.mf_flyer_num=30000" 
+										id="input4"/>
+										<label class="inline" for="input4">
+											3万
+										</label>
+										<span class="maroon">*</span>
+										<span class="help-inline">该活动允许粉丝生成推广海报的总数量</span>
+									</div>
+								</div>
+								<div class="control-group" >
+									<div class="control-label">推广人地域限制：</div>
+									<div class="controls helpType_1_cont">
+										<input type="radio" ng-click="vo.mf_isrecommend_area='Y'" ng-checked="vo.mf_isrecommend_area=='Y'" 
+										name="mf_isrecommend_area" ng-model="vo.mf_isrecommend_area" />
+										<label class="inline" for="input1">
+											限制
+										</label>
+										&ensp;
+										<input type="radio" ng-value="N" 
+										name="mf_isrecommend_area" ng-click="vo.mf_isrecommend_area='N'" ng-checked="vo.mf_isrecommend_area=='N'"  />
+										<label class="inline" for="input2">
+											不限制
+										</label>
+										<span class="maroon">*</span>
+										<span class="help-inline">活动推广范围最小支持一个市，最大范围支持1个省</span>
+									</div>
+								</div>
+								<div class="control-group" ng-show="vo.mf_isrecommend_area=='Y'">
+									<div class="control-label" style="opacity: 0;"></div>
+									<div class="controls helpType_1_cont">
+										<div class="btn btn-success" ng-click="showAddress()">增加授权海报推广地域</div>
+									</div>
+								</div>
+								<div class="control-group" >
+									<div class="control-label">手机端开屏幕广告：</div>
+									<div class="controls helpType_1_cont">
+										<input type="radio" ng-value="1" 
+										name="mf_ad_type" ng-click="vo.mf_ad_type=1" ng-checked="vo.mf_ad_type==1" id="input3"/>
+										<label class="inline" for="input3">
+											系统
+										</label>
+										&ensp;
+										<input type="radio" ng-value="2" 
+										name="mf_ad_type" ng-click="vo.mf_ad_type=2" ng-checked="vo.mf_ad_type==2" id="input4"/>
+										<label class="inline" for="input4">
+											自定义
+										</label>
+										<span class="maroon">*</span>
+										<span class="help-inline">
+											粉丝进入个人中心前看到的开屏广告
+											<a class="check-preview" href="javascript:;" id="check_preview">查看示例</a>
+										</span>
+									</div>
+								</div>
+							</form>
+						</div>
+						
+						<div class="config_view" id="panel_2" ng-show="false"> <!-- ng-show="checkedIdx1==1" -->
+							<form action="#" class="form-horizontal-2" id="form_play_help">
+								<div class="control-group" >
+									<label class="control-label">扫码人关注奖励：</label>
+									<div class="controls">
+										<input type="text" name="mp_level" class="span4" placeholder="输入范围：0.2~1元" /> 元
+										</select>
+										<span class="maroon">*</span>
+										<br>
+										<span class="help-inline" style="margin-left: 30px;margin-top:5px;">(扫码人扫码关注公众账号，扫码人所获得的奖励)</span>
+									</div>
+								</div>
+								<div class="control-group" >
+									<label class="control-label">推荐人奖励：</label>
+									<div class="controls">
+										<input type="text" name="mp_level" class="span4" placeholder="输入范围：0.2~1元" /> 元
+										</select>
+										<span class="maroon">*</span>
+										<br>
+										<span class="help-inline" style="margin-left: 30px;margin-top:5px;">(推广海报每吸引一个新增粉丝，推广人所获得的奖励)</span>
+									</div>
+								</div>
+								<div class="control-group" >
+									<label class="control-label">单人奖励日上限：</label>
+									<div class="controls">
+										<input type="text" name="mp_level" class="span4" placeholder="输入范围：1~50元" /> 元
+										</select>
+										<span class="maroon">*</span>
+										<br>
+										<span class="help-inline" style="margin-left: 30px;margin-top:5px;">(单人每日获得奖励上限，达到上限的粉丝，当天推广海报新增好友，无法继续获得推荐人奖励，第2天推广海报新增好友可正常获得奖励；)</span>
+									</div>
+								</div>
+								<div class="control-group" >
+									<label class="control-label">单人奖励总上限：</label>
+									<div class="controls">
+										<input type="text" name="mp_level" class="span4" placeholder="输入范围：1~50元" /> 元
+										</select>
+										<span class="maroon">*</span>
+										<br>
+										<span class="help-inline" style="margin-left: 30px;margin-top:5px;">(单人获得奖励总上限，达到奖励总上限后，用户在该活动中推广海报新增好友，无法继续获得推荐人奖励；)</span>
+									</div>
+								</div>
+								<div class="control-group" >
+									<label class="control-label">单人提现门槛：</label>
+									<div class="controls helpType_1_cont">
+										<label class="inline">
+											<input type="radio" ng-value="1" 
+											ng-model="bb" />
+											1元
+										</label>
+										<label class="inline">
+											<input type="radio" ng-value="2" 
+											ng-model="bb" />
+											自定义
+										</label>
+										<span class="maroon">*</span>
+										<span class="help-inline">用户红包奖励金额达到提现门槛才能进行提现，每人每日限提1次</span>
+									</div>
+								</div>
+								<div class="control-group" ng-show="bb==2">
+									<label class="control-label" style="opacity: 0;"></label>
+									<div class="controls helpType_1_cont">
+										<input type="text" name="">
+									</div>
+								</div>
+							</form>
+						</div>
+							
+						<div class="config_view" id="panel_3" ng-show="false"><!-- ng-show="checkedIdx1==2"  -->
+							<form class="form-horizontal-2">
+								<div class="control-group" >
+									<div class="control-label">推广人地域限制：</div>
+									<div class="controls helpType_1_cont">
+										<input type="radio" ng-click="vo.mf_isrecommend_area='Y'" ng-checked="vo.mf_isrecommend_area=='Y'" 
+										name="mf_isrecommend_area" ng-model="vo.mf_isrecommend_area" />
+										<label class="inline" for="input1">
+											限制
+										</label>
+										&ensp;
+										<input type="radio" ng-value="N" 
+										name="mf_isrecommend_area" ng-click="vo.mf_isrecommend_area='N'" ng-checked="vo.mf_isrecommend_area=='N'"  />
+										<label class="inline" for="input2">
+											不限制
+										</label>
+										<span class="maroon">*</span>
+										<span class="help-inline">活动推广范围最小支持一个市，最大范围支持1个省</span>
+									</div>
+								</div>
+								<div class="control-group" ng-show="vo.mf_isrecommend_area=='Y'">
+									<div class="control-label" style="opacity: 0;"></div>
+									<div class="controls helpType_1_cont">
+										<div class="btn btn-success" ng-click="showAddress()">增加授权海报推广地域</div>
+									</div>
+								</div>
+								<div class="control-group" ng-show ="false">
+									<div class="control-label">海报时效限制：</div>
+									<div class="controls helpType_1_cont">
+										<input type="radio" ng-value="1" 
+										ng-model="cc" id="input3"/>
+										<label class="inline" for="input3">
+											24小时
+										</label>
+										&ensp;
+										<input type="radio" ng-value="2" 
+										ng-model="cc" id="input4"/>
+										<label class="inline" for="input4">
+											48小时
+										</label>
+										<span class="maroon">*</span>
+										<span class="help-inline">定义每张海报的有效期，超过有效期海报将无法访问。为保证粉丝体验，建议不要修改此项。</span>
+									</div>
+								</div>
+								<div class="control-group" ng-show="false">
+									<div class="control-label">限制海报数量：</div>
+									<div class="controls helpType_1_cont">
+										<input type="radio" ng-value="1" 
+										ng-model="cc" id="input3"/>
+										<label class="inline" for="input3">
+											500
+										</label>
+										&ensp;
+										<input type="radio" ng-value="2" 
+										ng-model="cc" id="input4"/>
+										<label class="inline" for="input4">
+											3万
+										</label>
+										<span class="maroon">*</span>
+										<span class="help-inline">该活动允许粉丝生成推广海报的总数量</span>
+									</div>
+								</div>
+								<div class="control-group" >
+									<div class="control-label">手机端开屏幕广告：</div>
+									<div class="controls helpType_1_cont">
+										<input type="radio" ng-value="1" 
+										ng-model="cc" id="input3"/>
+										<label class="inline" for="input3">
+											系统
+										</label>
+										&ensp;
+										<input type="radio" ng-value="2" 
+										ng-model="cc" id="input4"/>
+										<label class="inline" for="input4">
+											自定义
+										</label>
+										<span class="maroon">*</span>
+										<span class="help-inline">
+											粉丝进入个人中心前看到的开屏广告
+											<a class="check-preview" href="javascript:;" id="check_preview">查看示例</a>
+										</span>
+									</div>
+								</div>
+								<div class="control-group" ng-show = "false">
+									<div class="control-label">开启社交掠夺：</div>
+									<div class="controls helpType_1_cont">
+										<input type="radio" ng-value="1" 
+										ng-model="cc" id="input3"/>
+										<label class="inline" for="input3">
+											开启
+										</label>
+										&ensp;
+										<input type="radio" ng-value="2" 
+										ng-model="cc" id="input4"/>
+										<label class="inline" for="input4">
+											关闭
+										</label>
+										<span class="maroon">*</span>
+										<span class="help-inline">
+											开启社交掠夺后，将允许粉丝对好友的奖励金额进行随机掠夺
+										</span>
+									</div>
+								</div>
+								<div class="control-group" ng-show="false">
+									<div class="control-label">提现短信验证：</div>
+									<div class="controls helpType_1_cont">
+										<input type="radio" ng-value="1" 
+										ng-model="cc" id="input3"/>
+										<label class="inline" for="input3">
+											关闭
+										</label>
+										&ensp;
+										<input type="radio" ng-value="2" 
+										ng-model="cc" id="input4"/>
+										<label class="inline" for="input4">
+											普通短信
+										</label>
+										&ensp;
+										<input type="radio" ng-value="2" 
+										ng-model="cc" id="input4"/>
+										<label class="inline" for="input4">
+											语音短信
+										</label>
+										<div class="su-header">
+											<div class="alert warn" id="view-msg-tips" style="margin-left: 0;">
+												<div class="alert-tips-warn" style="color: #999; line-height: 18px;">
+													<span>预计消耗<span class="j-msg-send-num text-price">0</span>条短信，当前有娱短信余额<span class="j-msg-balance-num text-price">0</span>条<span class="j-msg-balance-tips" style="display: none;">不足支付</span></span> 
+													<a class="text-link" style="white-space: nowrap;">立即充值&gt;</a>
+												</div>
+												<div class="alert-tips-warn" style="color: #999; line-height: 18px;">
+													<span>如何去除粉丝绑定手机号欺诈提示信息？</span> 
+													 <a style="color: #0088cc; white-space: nowrap;">查看秘籍&gt;</a>
+												</div>
+											</div>
+										</div>
+										<span class="maroon">*</span>
+										<span class="help-inline">
+					       					开启后，粉丝需通过短信验证才能提现, 请时刻关注短信余额变化，及时充值
+					       					<a href="javascript:void(0);" class="check-preview j-view-popover" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="部分安卓手机系统自动开启防骚扰拦截功能导致无法接收短信或语音电话，需关闭防骚扰拦截功能重新验证，每人每天限3次短信或语音电话验证，超过次数可第2天再验证" title="" data-original-title="温馨提示">更多贴士&gt;</a>
+					       				</span>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="config_view" id="panel_4" ng-init="checkedIdx=0;" ng-show="checkedIdx1==3">
+							
+							<form action="#" class="form-horizontal-2" id="form_high_setting" style="margin-top: 20px;">
+								<div class="rule-cont">
+					    			<p>规则说明</p>
+					    			<textarea rows="15" id="rule_detail" style="width: 500px;">
+1、本活动时间为 XX ~ XX；
+2、每推广一个新好友可获得XX元；
+3、奖励金满XX元可提现，提现金额以微信红包的形式发放；
+4、每人每日限提奖励金1次；
+5、活动结束前请及时提现，活动结束后账户自动清零，如有疑问可联系商家；
+6、活动结束时，如你的奖励达到提现金额但未提现，可联系商家派发全额微信红包；
+7、活动结束时，未达到提现金额的奖励将被清除，不会累计到下次活动；
+8、活动期间，只有邀请新关注好友双方才能获得奖励，当你邀请多个好友而未获得奖励，是你的好友在活动前就已关注过公众号或已参与活动导致无法获得奖励噢！
+9、活动期间，好友取消关注将倒扣双方的奖励
+									</textarea>
+					    			<p>粉丝在个人收益中心查看</p>
+					    		</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="saveBottomBar fixBottombar" >
+					<div class="buttonBox">
+						<div class="btn btn-default black" style="width: 70px; text-shadow: none !important;" 
+						 ng-click="returnList();">返回</div>
+						<div ng-show="detail != 1 " class="btn btn-success" 
+						style="width: 70px;" ng-click="save();">保存</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					更改二维码内容
+				</h4>
+			</div>
+			<div class="modal-body">
+				<label for="barcodeId">二&nbsp;维&nbsp;码&nbsp;生成方式&nbsp;：</label>
+				<input type="radio" ng-value="1" name="codeType" ng-click="codeImg.type=1" ng-checked="codeImg.type==1"/>
+				<label class="inline" for="input4">
+					系统
+				</label>
+				&ensp;
+				<input type="radio" ng-value="2" name="codeType" ng-click="codeImg.type=2" ng-checked="codeImg.type==2"/>
+				<label class="inline" for="input4">
+					自定义
+				</label>
+			</div>
+			<div class="modal-body" ng-show="codeImg.type=='2'">
+				<label for="barcodeId">请输入二维码内容：</label>
+				<input id="barcodeId" type="text" ng-model="codeImg.url" style="width: 250px;">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消
+				</button>
+
+				<button type="button" class="btn btn-success" ng-click="setCode()">确定
+				</button>
+				
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="addressId" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 560px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					选择推广区域
+				</h4>
+			</div>
+			<div class="modal-body su-address">
+				<div class="area-title-wrap">
+					<div class="area-title">可选省、市</div>
+					<div class="area-title">已选省、市</div>
+				</div>
+				<div class="wrap-address clearfix">
+					<div class="wrap-address-left">
+						<ul class="address-list ztree" id="addressLeft"></ul>
+					</div>
+					<div class="wrap-address-right">
+						<ul class="address-list ztree" id="addressRight"></ul>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消
+				</button>
+
+				<button type="button" class="btn btn-success" ng-click="setAddress()">确定
+				</button>
+				
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<div  style="display:none;" 
+		id="myeditor" 
+		get-ue="ue_myeditor = getUe" 
+		class="ueditor" 
+		ng-model="gb_content1"></div>

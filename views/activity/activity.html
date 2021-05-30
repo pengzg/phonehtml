@@ -1,0 +1,29 @@
+<div id="second-sidebar">
+	<p class="nav_header">活动状态</p>
+	<ul>
+		<li ui-sref=".noreleasedList({'mm_state':2})" class="selected"><a href="">未发布</a></li>
+		<li ui-sref=".noreleasedList({'mm_state':3})"><a href="">已发布</a></li>
+		<!-- <li ui-sref=".noreleasedList({'mm_state':1})"><a href="">已取消</a></li> -->
+		<li ui-sref=".noreleasedList({'mm_state':4})"><a href="">已结束</a></li>
+		<!-- <li ui-sref=".activityList"><a href="">一物一码</a></li> -->
+	</ul>
+</div>
+<div class="contentHtml" style="padding: 10px;">
+	<!-- 路由 -->
+	<div data-ui-view=""></div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+	    $("#second-sidebar li").click(function() {
+	        $(this).siblings('li').removeClass('selected');
+	        $(this).addClass('selected'); 
+	    });
+	});
+	$(function(){
+	    $(".searchItem_list a").click(function() {
+	        $(this).siblings('a').removeClass('selected');
+	        $(this).addClass('selected'); 
+	    });
+	}); 
+</script>

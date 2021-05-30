@@ -1,0 +1,947 @@
+<div class="contentHtml" style="left: 0;">
+	
+	<div id="mainHtml" style="padding: 0;top:0;">
+		<div class="wrapper" id="game_wrapper" style="padding: 0; margin: 0;" ng-init="checkedIdx0=0">
+			<div class="topBar" style="min-width: 911px;">
+				<div class="columnCont">
+					<div class="column" 
+						ng-class="{checked:$parent.checkedIdx0==$index,'first-column':$index==0,'last-column':$index==(navigate.length-1)}" 
+						ng-style="{'z-index':'{{20-$index}}'}" 
+						ng-click="$parent.checkedIdx0=$index;showPreview($index)" 
+						ng-repeat="x in navigate">
+						<span class="name" ng-bind="x"></span>
+					</div>
+				</div>
+			</div>
+			<div class="editContent">
+				<div class="previewPhone">
+					<div class="wxTitle">
+						<div id="actName" class="layerId-1 defBgColor" 
+							 ng-class="{'border-edit':titleFocus}" 
+							 ng-mouseenter="titleFocus=true;" 
+							 ng-mouseleave="titleFocus=false;" 
+							 ng-init="titleFocus=false"
+							 ng-click="titleCheck=true"
+							 ng-bind="config.base.name">大富翁</div>
+					</div>
+					<div id="changeLeft" class="changePage" ng-click="changePage('left');">
+						<div class="leftImg img"></div>
+					</div>
+					<div id="changeRight" class="changePage" ng-click="changePage('right');">
+						<div class="rightImg img"></div>
+					</div>
+					<div id="gameContent">
+						<iframe id="iframeId" name="" frameborder="0" scrolling="auto" style="width: 100%; height: 100%;" ng-src="{{iFrameSrc}}"></iframe>
+					</div>
+				</div>
+				<div class="editDetail" ng-init="checkedIdx1=0">
+					<ul class="nav nav-tabs config-tab" id="configTab">
+						<li ng-class="{active:checkedIdx1==0}" ng-click="checkedIdx1=0"><a href="">基础设置</a></li>
+						<li ng-class="{active:checkedIdx1==1}" ng-click="checkedIdx1=1"><a href="">派奖设置</a></li>
+						<li class="prize_config_tab" ng-class="{active:checkedIdx1==2}" ng-click="checkedIdx1=2"><a href="">奖品设置</a></li>
+						<li ng-class="{active:checkedIdx1==3}" ng-click="checkedIdx1=3"><a href="">高级设置</a></li>
+					</ul>
+					<div class="tab-content config-tab-content">
+						<div class="config_view" id="panel_1" ng-show="checkedIdx1==0">
+							<form action="#" class="form-horizontal-2" id="form_activity_config">
+								<div id="set_actName_box" class="control-group" ng-class="{checkBorder:titleCheck}" ng-mouseleave="titleCheck=false;" ng-show="config.base.name!=undefined">
+									<label class="control-label" for="title">
+										活动名称：
+									</label>
+									<div class="controls">
+										<input type="text" id="title" class="span4" value maxlength="50" ng-model="config.base.name"/>
+										<span class="maroon">*</span>
+										<span class="help-inline">不能超过50个字</span>
+									</div>
+								</div>
+								<div id="set_acttime_box" class="control-group" ng-show="config.base.time!=undefined">
+									<label class="control-label" for="startDate">
+										活动时间：
+									</label>
+									<div class="controls">
+										<input type="text" id="activityRange" class="span4" value maxlength="50" ng-model="config.base.time"/>
+										<span class="maroon">*</span>
+										<span class="help-inline">活动时间不能超过3个月</span>
+									</div>
+								</div>
+								<div class="control-group" id="joinPeopel" ng-show="config.base.join_people!=undefined">
+									<label class="control-label" for="helpType">参与人数：</label>
+									<div class="controls helpType_1_cont">
+										<label class="inline">
+											<input type="radio" data-editable="false" name="helpEffect" id="helpEffectForAddPlayCount" value="0" ng-checked="config.base.join_people.show" />
+											显示
+										</label>
+										<label class="inline" style="margin-top:7px">
+											<input type="radio" data-editable="false" name="helpEffect" id="helpEffectForHelp" value="32" ng-checked="!config.base.join_people.show"/>
+											隐藏
+										</label>
+										<div id="lotteryCount" class="clearfix" style="display: block;">
+											在实际参与人数基础上增加
+											<input type="text" id="lotteryAddCount" data-editable="false" name="lotteryAddCount" class="span1 onlyNum" value="1" maxlength="2" ng-model="config.base.join_people.num"/>
+											人
+											<span class="help-inline">(该数据仅用于展现，不计入统计)</span>
+										</div>
+									</div>
+								</div>
+								<div id="set_ruletext_box" class="control-group" ng-show="config.base.rule!=undefined">
+									<label class="control-label" for="ruleTips">
+										活动规则：
+									</label>
+									<div class="controls">
+										<textarea name="ruleTips" style="width: 500px;" rows="10" class="span4" id="ruleTips" placeholder="这里填写商家自定义的活动规则" ng-model="config.base.rule" ng-change="setPreviewToChild()"/>
+									</div>
+								</div>
+								<div id="set_seller_name_box" class="control-group" ng-show="config.base.seller_name!=undefined">
+									<label class="control-label" for="seller_name">商家名称：</label>
+									<div class="controls">
+										<input name="seller_name" id="seller_name" class="span4" type="text" maxlength="10" ng-model="base.seller_name" 
+											bind-child-scope="iframeId,wordenvelopePreview,set_seller_name_box">
+									</div>
+								</div>
+								<div id="set_bless_box" class="control-group" ng-show="config.base.belss!=undefined">
+									<label class="control-label" for="bless">祝福语：</label>
+									<div class="controls">
+										<input name="bless" id="bless" class="span4" type="text" maxlength="30" ng-model="config.base.bless" 
+											bind-child-scope="iframeId,wordenvelopePreview,set_bless_box">
+									</div>
+								</div>
+								<div id="set_bless_note" class="control-group" ng-show="config.base.tip!=undefined">
+									<label class="control-label" for="bless_note">温馨提示：</label>
+									<div class="controls">
+										<input name="bless" id="bless_note" class="span4" type="text" maxlength="30" ng-model="config.base.note" 
+											bind-child-scope="iframeId,wordenvelopePreview,bless_note">
+									</div>
+								</div>
+							</form>
+						</div>
+						
+						<div class="config_view" id="panel_2" ng-show="checkedIdx1==1">
+							<form action="#" class="form-horizontal-2" id="form_play_help">
+								<div class="control-group" ng-show="config.sendprize.times_original!=undefined">
+									<label class="control-label" for="initCount">初始游戏次数：</label>
+									<div class="controls">
+										<input type="text" id="initCount" name="initCount" class="span1" value="99999" disabled="disabled" ng-model="config.sendprize.times_original"/>
+										次 （每个粉丝初始获得的游戏次数）
+									</div>
+								</div>
+								<div class="control-group" ng-show="config.sendprize.times_day_add!=undefined">
+									<label class="control-label" for="dayIncrCount">每日新增次数：</label>
+									<div class="controls">
+										<input type="text" id="dayIncrCount" name="dayIncrCount" class="span1" value="99999" disabled="disabled" ng-model="config.sendprize.times_day_add"/>
+										 次 （每个粉丝每天自动新增的游戏次数）
+									</div>
+								</div>
+								<div class="control-group" ng-show="config.sendprize.times_day_max!=undefined">
+									<label class="control-label" for="dayCount">每日参与次数：</label>
+									<div class="controls">
+										<input type="text" id="dayCount" name="dayCount" class="span1" value="99999" disabled="disabled" ng-model="config.sendprize.times_day_max"/>
+										 次 （每个粉丝每天最多参与的游戏次数）
+									</div>
+								</div>
+								<div class="control-group" ng-show="config.sendprize.times_max!=undefined">
+									<label class="control-label" for="playCount">累计参与次数：</label>
+									<div class="controls">
+										<input type="text" id="playCount" name="playCount" class="span1" value="99999" disabled="disabled" ng-model="config.sendprize.times_max"/>
+										 次 （每位玩家累计最多参与的游戏次数）
+									</div>
+								</div>
+								<div id="lucky_award_box">
+									<div class="control-group" id="set_actlimit_box" ng-show="config.sendprize.single_one_chance!=undefined">
+										<label class="control-label" style="margin-top: 8px;" for="totalLotteryCountRadio">单人总抽奖机会：</label>
+										<div class="controls">
+											<label class="inline">
+												<input type="radio" name="totalLotteryCountRadio" ng-value="1" ng-model="config.sendprize.single_one_chance.disable" />
+												不限
+											</label>
+											<label class="inline" style="margin-top:7px">
+												<input type="radio" name="totalLotteryCountRadio" style="margin-top: 11px;" ng-value="2" ng-model="config.sendprize.single_one_chance.disable" />
+												限制
+												<span class="totalLotteryInput">
+													每人最多有
+													<input type="text" id="totalLotteryCount" class="span1 onlyNum" name="totalLotteryCount" maxlength="3" ng-model="config.sendprize.single_one_chance.times"/>
+													次
+												</span>
+											</label>
+										</div>
+									</div>
+									<div class="control-group" id="set_daylimit_box" ng-show="config.sendprize.day_chance!=undefined">
+										<label class="control-label" for="dayLotteryCount">每日抽奖机会：</label>
+										<div class="controls">
+											每人每日有
+											<input type="text" id="dayLotteryCount" name="dayLotteryCount" class="span1 onlyNum" maxlength="3" ng-model="config.sendprize.day_chance"/>
+											次抽奖机会<br>
+											<span class="maroon">*</span>
+											<span class="help-inline help-inline-1">达到最大抽奖机会后，粉丝需要分享助力才能获得更多抽奖机会</span>
+											<span class="help-inline help-inline-2" style="display: none;">抽奖机会用光后，参与者不能再进行抽奖</span>
+										</div>
+									</div>
+									<div id="set_minscore_box" class="control-group" ng-show="config.sendprize.award_point!=undefined">
+										<label class="control-label" for="passCondition">抽奖门槛：</label>
+										<div class="controls">
+											游戏成绩达到
+											<input type="text" id="passCondition" name="passCondition" class="span1 onlyNum" maxlength="7" ng-model="config.sendprize.award_point"/>
+											分，即为挑战成功可抽奖
+											<span class="maroon">*</span>
+										</div>
+									</div>
+									<div class="control-group" id="set_singleUserAwards_box" ng-show="config.sendprize.total_award_times!=undefined">
+										<label class="control-label" for="singleUserAwards">总中奖机会：</label>
+										<div class="controls">
+											每人最多中奖
+											<input type="text" id="singleUserAwards" name="singleUserAwards" class="span1 onlyNum" maxlength="7" ng-model="config.sendprize.total_award_times"/>
+											次
+											<span class="maroon">*</span>
+										</div>
+									</div>
+									<div class="control-group" id="set_probabilityMode_box" ng-show="config.sendprize.award_chance_type!=undefined">
+										<label class="control-label" for="probabilityMode">中奖概率模式：</label>
+										<div class="controls">
+											<label class="inline">
+												<input type="radio" name="probabilityMode" value="1" ng-checked="config.sendprize.award_chance_type.type==1" />
+												按总中奖概率
+											</label>
+											<label class="inline" style="position: relative;" style="margin-top:7px">
+												<input type="radio" name="probabilityMode" value="2" ng-checked="config.sendprize.award_chance_type.type==2"/>
+												按单个奖项中奖概率
+											</label>
+										</div>
+										<div class="controls" style="margin-top: 16px;">
+											总中奖概率：
+											<input type="text" id="globalProbability" name="globalProbability" class="span1 onlyIntNum" maxlength="3" ng-model="config.sendprize.award_chance_type.chance"/>
+											%<br>
+											<span class="help-inline">
+												(玩100次游戏，
+												<span class="globalProbabilityText">30</span>
+												次有获奖机会，奖品随机)
+											</span>
+										</div>
+									</div>
+									<div class="control-group" id="set_probabilityType_box" ng-show="config.sendprize.gift_average!=undefined">
+										<label class="control-label" for="probabilityType">奖品均匀发放：</label>
+										<div class="controls">
+											<label class="checkbox inline" for="probabilityType">
+												<input type="checkbox" name="probabilityType" id="probabilityType" ng-model="config.sendprize.gift_average"/>
+												开启
+											</label>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="control-group" id="set_globalAwardVirtualNum_box" ng-show="config.sendprize.virtual_gift_count!=undefined">
+										<label class="control-label" for="globalAwardVirtualNum">总虚拟奖品数量：</label>
+										<div class="controls">
+											<input type="text" id="globalAwardVirtualNum" name="globalAwardVirtualNum" class="span1 onlyIntNum" maxlength="7" ng-model="config.sendprize.virtual_gift_count"/>
+											<span class="help-inline">(手机端游戏页面展示奖品数量=剩余奖品数量+总虚拟奖品数量)</span>
+										</div>
+									</div>
+								</div>
+								<div class="control-group" id="set_withHelp_box" ng-show="config.sendprize.with_help!=undefined">
+									<label class="control-label" for="withHelp">是否开启助力：</label>
+									<div class="controls">
+										<label class="checkbox inline" for="withHelp">
+											<input data-editable="false" type="checkbox" name="withHelp" id="withHelp" ng-model="config.sendprize.with_help" />
+											开启
+										</label>
+										<span class="help-inline" style="padding: 7px 0 0 20px;">勾选后，助力相关设置才生效，助力设置发布后将不能更改</span>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<div class="control-group" ng-show="config.sendprize.help_percent!=undefined">
+									<label class="control-label" for="percentage">助力成功率：</label>
+									<div class="controls">
+										<input type="text" class="span1 onlyIntNum" name="percentage" id="percentage" ng-model="config.sendprize.help_percent" />
+										%
+									</div>
+								</div>
+								<div class="control-group" id="other_cgroup" ng-show="config.sendprize.help_way!=undefined">
+									<label class="control-label" for="helpType">助力效果：</label>
+									<div class="controls helpType_1_cont">
+										<label class="inline">
+											<input type="radio" data-editable="false" name="helpEffect" id="helpEffectForAddPlayCount" value="1" ng-checked="config.sendprize.help_way.type==1"/>
+											增加抽奖次数
+										</label>
+										<label class="inline" style="margin-top:7px">
+											<input type="radio" data-editable="false" name="helpEffect" id="helpEffectForHelp" value="2" ng-checked="config.sendprize.help_way.type==2"/>
+											助力领奖
+										</label>
+										<div id="lotteryCount" class="clearfix" style="display: block;">
+											每被助力1次,被助力者增加
+											<input type="text" id="lotteryAddCount" data-editable="false" name="lotteryAddCount" class="span1 onlyNum" maxlength="2" ng-model="config.sendprize.help_way.times"/>
+											次抽奖机会
+										</div>
+										<div id="helpAward" class="clearfix hide">
+											中奖后,粉丝需要在
+											<input type="text" id="awardCycleTime" data-editable="false" name="awardCycleTime" class="span1 onlyNum" value="5" maxlength="4" disabled="disabled" />
+											分钟内获得
+											<input type="text" id="unlockPrizeCount" data-editable="false" name="unlockPrizeCount" class="span1 onlyNum" value="3" maxlength="2" disabled="disabled" />
+											次助力才能领奖
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+							
+						<div class="config_view" id="panel_3" ng-show="checkedIdx1==2">
+							<span class="help-inline clearfix" style="margin-bottom: 3px; display: inline-block;" id="singleUserAwards-help-inline">
+								每个粉丝只可中奖一次，如果设置中奖次数，请前往
+								<a href="" class="i-c-blue2" style="text-decoration: underline; display: inline-block;" ng-click="checkedIdx1=1">派奖设置</a>
+							</span>
+							<span class="help-inline clearfix" style="margin-bottom: 10px; display: inline-block;">
+								如果设置每个奖项的中奖概率，请前往
+								<a href="" class="i-c-blue2"  style="text-decoration: underline; display: inline-block;" ng-click="checkedIdx1=1">派奖设置</a>
+								切换单项中奖概率模式
+							</span>
+							<div id="set_actaward_box">
+								<ul class="nav nav-tabs ui-nav-tabs clearfix award_tab_item" ng-init="checkedIdx2=0">
+									<li class="prize_tab_item" ng-repeat="x in config.gift_setting  track by $index" ng-class="{active:$parent.checkedIdx2==$index}" ng-click="$parent.checkedIdx2=$index">
+										<a href="" class="award_tab_item_link" data-idx="0">{{x.gift_title}}</a>
+									</li>
+									<li>
+										<a class="del_award_tab_item" ng-click="subtrackPrize()" ng-show="config.gift_setting.length>1">-</a>
+									</li>
+									<li>
+										<a class="add_award_tab_item" style="display: block;" ng-click="addPrize()" ng-show="config.gift_setting.length<7">+</a>
+									</li>
+								</ul>
+								<div class="award_tab_content tab-content" ng-init="isDetail=false" ng-repeat="x in config.gift_setting track by $index" ng-show="$parent.checkedIdx2==$index">
+									<div class="award_tab award_tab_0" data-id="0" data-awardid style="display: block;">
+										<form action="#" class="form-horizontal-2 award_detail_form" data-awardid id="award_detail_form_0">
+											<div class="control-group" ng-show="x.gift_level!=undefined">
+												<label class="control-label">奖项等级：</label>
+												<div class="controls">
+													<input type="text" name="awardName" class="span2" data-editable="false" ng-model="x.gift_level" ng-change="setPreviewToChild()"/>
+												</div>
+											</div>
+											<div class="control-group" ng-show="x.gift_type!=undefined">
+												<label class="control-label">礼品类型：</label>
+												<div class="controls">
+													<select name="awardType" class="span2" data-editable="false" ng-model="x.gift_type" ng-options="x for x in ['实物礼品（奖券','微信红包']">
+														<option value="" selected hidden></option>
+													</select>
+													<span class="maroon">*</span>
+													<span class="help-inline">活动发布后，奖品类型不能更改</span>
+												</div>
+											</div>
+											<div class="control-group" ng-show="x.gift!=undefined">
+												<label class="control-label">选择礼品：</label>
+												<div class="controls">
+													<select name="awardType" class="span2" data-editable="false" ng-model="x.gift" ng-options="x for x in ['微信红包100元','微信红包1000元']" ng-change="setPreviewToChild()">
+														<option value="" selected hidden></option>
+													</select>
+													<span class="maroon">*</span>
+													<span class="help-inline">活动发布后，奖品不能更改</span>
+												</div>
+											</div>
+											<div class="control-group trophy_datetime" ng-show="x.available_time!=undefined">
+												<label class="control-label">兑奖时间：</label>
+												<div class="controls">
+													<input type="text" name="" class="span2" id="dateTimeRange" style="width: 170px;" ng-model="x.available_time"/>
+													<span class="maroon">*</span>
+													<span class="help-inline">超过有效期奖券将失效</span>
+												</div>
+											</div>
+											<div class="control-group redpack_award_type" ng-show="x.gift_num!=undefined">
+												<label class="control-label awardNumLabel">奖品数量：</label>
+												<div class="controls">
+													<input type="text" name="awardRealNum" class="span1 onlyNum" maxlength="6" ng-model="x.gift_num.total"/>
+													<span class="maroon">*</span>
+													<span class="awardLoseBox">
+														 &nbsp;已领：&nbsp;
+														 <input type="text" name="awardLoseNum" class="span1 onlyNum" disabled="disabled" ng-model="x.gift_num.used"/>
+													</span>
+												</div>
+											</div>
+											<!-- <div class="control-group redpack_award_type" ng-show="x.oprate_tip!=undefined"> -->
+											<div class="control-group set_operationTip_box" ng-show="x.oprate_tip!=undefined">
+												<label class="control-label">操作提示： </label>
+												<div class="controls">
+													<input type="text" name="operationTip" class="span4" maxlength="100" ng-model="x.oprate_tip"/>
+													<span class="maroon">*</span>
+												</div>
+											</div>
+											<div class="control-group j-sncode-type" style="overflow: hidden;" ng-show="x.generate_num!=undefined">
+												<label class="control-label" for="sncodeType">生成券号：</label>
+												<div class="controls">
+													<label class="inline">
+														<input type="radio" name="sncodeType" ng-value="1" ng-model="x.generate_num" data-editable="false" />
+														系统生成
+													</label>
+													<label class="inline" style="margin-top: 7px;">
+														<input type="radio" name="sncodeType" ng-value="2" ng-model="x.generate_num" data-editable="false" />
+														手工导入
+													</label>
+												</div>
+												<div class="controls hide sncode-controls j-sncode-controls">
+													<textarea name="sncodes" data-editable="false" disabled="disabled"></textarea>
+													<p>
+														<span class="j-sncode-msg">一行一个券号，券号数量与奖品数量需一致</span>
+														<a href="" class="j-check-sncode">检测格式</a>
+													</p>
+												</div>
+											</div>
+											<div class="control-group set_isWxCard_box" ng-show="x.sync_to_wechat!=undefined">
+												<label class="control-label" for="isWxCard">同步发布至微信卡券（包）：</label>
+												<div class="controls" style="overflow: hidden;">
+													<label class="inline">
+														<input type="radio" name="isWxCard" disabled="disabled" ng-value="1" data-editable="false" ng-model="x.sync_to_wechat"/>
+														是
+													</label>
+													<label class="inline" style="margin-top: 7px;">
+														<input type="radio" name="isWxCard" disabled="disabled" ng-value="2" data-editable="false" ng-model="x.sync_to_wechat"/>
+														否
+													</label>
+												</div>
+												<div class="controls">
+													<p>
+														（你还没有进行公众号服务授权，使用微信卡券需绑定认证微信公众号，且公众号需开通卡券功能，点击<a href="" class="i-c-blue2" style="text-decoration:underline;padding: 0 2px; display: inline-block;">服务授权</a>进行绑定。若没有进行绑定及开通卡券功能，将仍采用平台优惠券，不同步至微信卡券）
+													</p>
+												</div>
+											</div>
+											<div class="awardSettingLine" ng-class="{'showDetail':isDetail}" ng-click="isDetail=!isDetail">
+												<span style="margin-left: 17px;">详情设置</span>
+												<div class="detailIcon awardDetailIcon"></div>
+											</div>
+											<div class="awardDetailSetting" ng-show="isDetail">
+												<div class="control-group set_subhead_box" ng-show="x.second_title!=undefined">
+													<label class="control-label" for="sncodeType">副标题：</label>
+													<div class="controls">
+														<input type="text" name="subhead" class="span4" maxlength="20" ng-model="x.second_title"/>
+													</div>
+												</div>
+												<div class="control-group set_storeAddress_box" ng-show="x.get_gift_address!=undefined">
+													<label class="control-label" for="sncodeType">兑奖地址：</label>
+													<div class="controls">
+														<input type="text" name="subhead" class="span4" maxlength="20" ng-model="x.get_gift_address"/>
+													</div>
+												</div>
+												<div class="control-group set_serviceTel_box" ng-show="x.service_phone!=undefined">
+													<label class="control-label" for="sncodeType">客服电话：</label>
+													<div class="controls">
+														<input type="text" name="subhead" class="span4" maxlength="20" ng-model="x.service_phone"/>
+													</div>
+												</div>
+												<div class="control-group set_description_box" ng-show="x.gift_note!=undefined">
+													<label class="control-label" for="sncodeType">兑奖须知：</label>
+													<div class="controls">
+														<textarea name="description" style="height:100px;" class="span4" maxlength="220" ng-model="x.gift_note"/>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						<div class="config_view" id="panel_4" ng-init="checkedIdx=0;" ng-show="checkedIdx1==3">
+							<ul id="adv_subtab" class="nav nav-tabs" style="margin-bottom: 5px;">
+								<li ng-class="{active:checkedIdx==0}" ng-click="checkedIdx=0"><a>企业信息</a></li>
+								<li ng-class="{active:checkedIdx==1}" ng-click="checkedIdx=1"><a>分享设置</a></li>
+								<li ng-class="{active:checkedIdx==2}" ng-click="checkedIdx=2" ng-show="false"><a>游戏设置</a></li>
+								<li ng-class="{active:checkedIdx==3}" ng-click="checkedIdx=3"><a>关注设置</a></li>
+								<li ng-class="{active:checkedIdx==4}" ng-click="checkedIdx=4"><a>安全设置</a></li>
+							</ul>
+							<form action="#" class="form-horizontal-2" id="form_high_setting" style="margin-top: 20px;">
+								<div id="adv_subtab_content">
+									<div class="tab-pane active" id="adv_subtab_1" ng-show="checkedIdx==0" ng-init="company_info=config.higher_setting.company_info;">
+										<div class="control-group clearfix" id="set_organizer_box" ng-show="company_info.company!=undefined">
+											<label class="control-label" for="organizer">主办单位：</label>
+											<div class="controls">
+												<input type="text" name="organizer" class="span4" ng-model="company_info.company"/>
+											</div>
+										</div>
+										<div class="control-group set_jumpLink_box clearfix" id="set_organizer_box" ng-show="company_info.jump_open!=undefined">
+											<label class="control-label qijianban-label" for="organizerLink">主办单位开启跳转：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="1" ng-model="company_info.jump_open" />
+													否
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="2" ng-model="company_info.jump_open"/>
+													开启
+												</label>
+											</div>
+										</div>
+										<div class="control-group clearfix" id="set_jumpLink2_box" ng-show="company_info.jump_url!=undefined">
+											<label class="control-label">跳转链接：</label>
+											<div class="controls">
+												<input type="text" name="organizer" class="span4" ng-model="company_info.jump_url"/>
+											</div>
+										</div>
+										<div class="control-group clearfix" id="" ng-show="company_info.logo!=undefined">
+											<label class="control-label qijianban-label" for="">
+												<span class="nofree_tips">企业logo：</span>
+											</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="1" name="logo" ng-model="company_info.logo" />
+													隐藏
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="2" name="logo" ng-model="company_info.logo"/>
+													显示
+												</label>
+											</div>
+										</div>
+										<div class="control-group clearfix" id="" ng-show="company_info.show_right!=undefined">
+											<label class="control-label zhuanyeban-label" for="">显示版权：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="1" name="isRight" ng-model="company_info.show_right"/>
+													隐藏
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="2" name="isRight" ng-model="company_info.show_right"/>
+													显示
+												</label>
+											</div>
+										</div>
+										<div class="control-group set_jumpLink_box clearfix" id="" ng-show="company_info.right_setting!=undefined">
+											<label class="control-label zhuanyeban-label" for="">版权设置：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="1" name="rightSet" ng-model="company_info.right_setting" />
+													隐藏
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="2" name="rightSet" ng-model="company_info.right_setting"/>
+													显示
+												</label>
+											</div>
+										</div>
+										<div class="control-group set_jumpLink_box clearfix" id="" ng-show="company_info.loading_page!=undefined">
+											<label class="control-label control-fufei-label" for="">加载页面：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="1" name="isLoading" ng-model="company_info.loading_page"/>
+													默认
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="2" name="isLoading" ng-model="company_info.loading_page"/>
+													自定义
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane" id="adv_subtab_2"  ng-show="checkedIdx==1" ng-init="share_setting=config.higher_setting.share_setting;">
+										<div class="control-group clearfix" ng-show="share_setting.share_type!=undefined">
+											<label class="control-label">分享形式：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="1" name="isShare" ng-model="share_setting.share_type"/>
+													图片分享
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="2" name="isShare" ng-model="share_setting.share_type"/>
+													自定义
+												</label>
+											</div>
+										</div>
+										<div>
+											<div class="control-group clearfix" ng-show="share_setting.share_logo!=undefined">
+												<label class="control-label">微信分享图标：</label>
+												<div class="controls" style="overflow: hidden;">
+													<label class="inline">
+														<input type="radio" ng-value="1" name="share_logo" ng-model="share_setting.share_logo"/>
+														默认
+													</label>
+													<label class="inline" style="margin-top: 7px;">
+														<input type="radio" ng-value="2" name="share_logo" ng-model="share_setting.share_logo"/>
+														自定义
+													</label>
+												</div>
+												<div class="controls">
+													<div class="cover-area">
+														<div class="cover-hd">
+															<div class="info">
+																图片像素建议为 
+																<span class="uploadSize">200px*200px</span><br>
+																大小在100k以内，格式为jpg\bmp\png\gif
+																<div class="sanjiao"></div>
+															</div>
+															<span class="btn btn-primary fileinput-button">
+																上传图片 
+																<input type="file" name="fileupload" id="file_upload_0" />
+															</span>
+														</div>
+														<p class="upload-tip">请上传jpg、png、gif格式的图片。</p>
+														<div class="cover-bd img-area">
+															<div class="imgBox">
+																<img class="thumb_img prize_thumb_img" src="../../img/def_img_1.png"/>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="control-group clearfix" ng-show="share_setting.share_title!=undefined">
+												<label class="control-label">微信分享标题：</label>
+												<div class="controls" style="overflow: hidden;">
+													<label class="inline">
+														<input type="radio" ng-value="1" name="share_setting" ng-model="share_setting.share_title"/>
+														默认
+													</label>
+													<label class="inline" style="margin-top: 7px;">
+														<input type="radio" ng-value="2" name="share_setting" ng-model="share_setting.share_title"/>
+														自定义
+													</label>
+												</div>
+												<div class="controls share-txt-controls" style="width: 385px;">
+													<div class="share-txt-box j-share-txt-box">
+														<div class="share-txt-header">
+															<div class="share-txt-titel">分享标题</div>
+															<div class="share-txt-insert">
+																<span></span>
+																插入
+																<ul class="hide2">
+																	<li class="j-insert-tag" ng-click="addTitleData()">玩家名称</li>
+																</ul>
+															</div>
+														</div>
+														<div class="share-txt-content j-share-txt-content j-share-title-content" 
+															contenteditable="true" ng-model="titleData">
+														</div>
+														<p class="share-msg j-share-msg">提示信息</p>
+													</div>
+												</div>
+											</div>
+											<div class="control-group clearfix" ng-show="share_setting.share_content!=undefined">
+												<label class="control-label">微信分享内容：</label>
+												<div class="controls">
+													<label class="inline">
+														<input type="radio" ng-value="1" name="share_content" ng-model="share_setting.share_content"/>
+														默认
+													</label>
+													<label class="inline" style="margin-top: 7px;">
+														<input type="radio" ng-value="2" name="share_content" ng-model="share_setting.share_content"/>
+														自定义
+													</label>
+												</div>
+												<div class="controls share-txt-controls" style="width: 385px;">
+													<div class="share-txt-box j-share-txt-box clearfix">
+														<div class="share-txt-header">
+															<div class="share-txt-titel">分享内容（没有获奖有成绩的玩家）</div>
+															<div class="share-txt-insert">
+																<span></span>
+																插入
+																<ul class="hide2">
+																	<li class="j-insert-tag" ng-click="addShareData('name')">玩家名称</li>
+																	<li class="j-insert-tag" ng-click="addShareData('game')">游戏成绩</li>
+																</ul>
+															</div>
+														</div>
+														<div class="share-txt-content j-share-txt-content j-share-title-content" 
+															contenteditable="true" ng-model="shareData"></div>
+														<p class="share-msg j-share-msg">提示信息</p>
+													</div>
+													<div class="share-txt-box j-share-txt-box">
+														<div class="share-txt-header">
+															<div class="share-txt-titel">分享内容（获奖的玩家）</div>
+															<div class="share-txt-insert">
+																<span></span>
+																插入
+																<ul class="hide2">
+																	<li class="j-insert-tag" ng-click="addShareContentData('name')">玩家名称</li>
+																	<li class="j-insert-tag" ng-click="addShareContentData('game')">游戏成绩</li>
+																	<li class="j-insert-tag" ng-click="addShareContentData('level')">奖项等级</li>
+																	<li class="j-insert-tag" ng-click="addShareContentData('prize')">奖品名称</li>
+																</ul>
+															</div>
+														</div>
+														<div class="share-txt-content j-share-txt-content j-share-title-content" 
+															contenteditable="true" ng-model="shareContentData">
+														</div>
+														<p class="share-msg j-share-msg">提示信息</p>
+													</div>
+													<p class="help-inline">注：若奖品名称、奖项等级中含有敏感词如“红包”，分享时系统会自动屏蔽敏感词。</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane" id="adv_subtab_3"  ng-show="false">
+										<div class="control-group clearfix">
+											<label class="control-label" style="margin-top: 7px;">游戏时间：</label>
+											<div class="controls">
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" value="1" checked="checked" />
+													默认
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" value="2" disabled="disabled" style="margin-top: 11px;" />
+													自定义
+													<span class="gameTimeInput">
+														<input type="text" class="span1 onlyNum" value="100" maxlength="4" disabled="disabled" />
+														秒
+													</span>
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane" id="adv_subtab_4"  ng-show="checkedIdx==3" ng-init="follow_setting=config.higher_setting.follow_setting;">
+										<div class="control-group clearfix" ng-show="follow_setting.account!=undefined">
+											<label class="control-label">承办活动微信公众号：</label>
+											<div class="controls">
+												<select class="span4" style="width: 374px;" ng-model="follow_setting.account" ng-options="x for x in ['社区快线']">
+												</select>
+											</div>
+										</div>
+										<div class="control-group clearfix" ng-show="follow_setting.gain_url!=undefined">
+											<label class="control-label">引导关注图文链接：</label>
+											<div class="controls" style="margin-left: 135px;">
+												<input type="text" class="span4" style="width: 360px;" ng-model="follow_setting.gain_url" />
+												<span class="help-inline">
+													请前往微信公众平台新建图文，如示例
+													<a href="" class="i-c-blue2" style="display: inline-block;">（点击查看）</a>
+													，将新建好的图文链接填入输入框即可实现一键关注。
+												</span>
+												<span class="help-inline" style="margin-top: 12px;">
+													提示：需要填写图文链接，而非预览链接，
+													<a href="" class="i-c-blue2" style="display: inline-block;">详情请查看帮助</a>
+												</span>												
+											</div>
+										</div>
+										<div class="control-group clearfix" ng-show="follow_setting.join_restrict!=undefined">
+											<label class="control-label">参与限制：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="1" ng-model="follow_setting.join_restrict" />
+													开启
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="2" ng-model="follow_setting.join_restrict"/>
+													关闭
+												</label>
+												<span class="help-inline">开启后，粉丝需填写手机号方可参与游戏</span>
+											</div>
+										</div>
+										<div class="control-group clearfix" ng-show="follow_setting.follow_restrict!=undefined">
+											<label class="control-label">限制关注后参与：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="1" ng-model="follow_setting.follow_restrict" />
+													开启
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="2" ng-model="follow_setting.follow_restrict"/>
+													关闭
+												</label>
+												<span class="help-inline">开启后，用户需要先关注商家公众号才能参与活动。</span>
+											</div>
+										</div>
+									</div>
+									<div class="tab-pane" id="adv_subtab_5" ng-show="checkedIdx==4" ng-init="safe_setting=config.higher_setting.safe_setting;">
+										<div class="control-group clearfix" ng-show="safe_setting.get_gift_code!=undefined">
+											<label class="control-label">领奖验证码：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="1" name="get_gift_code" ng-model="safe_setting.get_gift_code"/>
+													开启
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="2" name="get_gift_code" ng-model="safe_setting.get_gift_code"/>
+													关闭
+												</label>
+												<span class="help-inline">粉丝在领奖前需要输入图片验证码</span>
+											</div>
+										</div>
+										<div class="control-group clearfix" ng-show="safe_setting.black_list!=undefined">
+											<label class="control-label">开启黑名单：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="1"  name="black_list" ng-model="safe_setting.black_list"/>
+													开启
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="2"  name="black_list" ng-model="safe_setting.black_list"/>
+													关闭
+												</label>
+												<span class="help-inline">开启黑名单后，黑名单用户将不会获奖。</span>
+											</div>
+										</div>
+										<div class="control-group clearfix" ng-show="safe_setting.gift_contact!=undefined">
+											<label class="control-label">联系兑奖：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" ng-value="true" name="gift_contact" ng-model="safe_setting.gift_contact"/>
+													开启
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" ng-value="false" name="gift_contact" ng-model="safe_setting.gift_contact"/>
+													关闭
+												</label>
+												<span class="help-inline">需要先填写兑奖信息才能领取兑换券或者领取微信红包</span>
+											</div>
+										</div>
+										<div class="control-group clearfix" ng-show="safe_setting.gift_contack_info!=undefined">
+											<label class="control-label">兑奖信息：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="checkbox" value="1" ng-checked="safe_setting.gift_contack_info==1" />
+													姓名
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="checkbox" value="2" disabled="disabled" ng-checked="safe_setting.gift_contack_info==2" />
+													手机号
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="checkbox" value="3" disabled="disabled" ng-checked="safe_setting.gift_contack_info==3" />
+													地址
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="checkbox" value="4" disabled="disabled" ng-checked="safe_setting.gift_contack_info==4" />
+													扩展信息
+												</label>
+											</div>
+										</div>
+										<div class="control-group clearfix" ng-show="safe_setting.safe_level!=undefined">
+											<label class="control-label">红包安全机制：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="checkbox" value="1" ng-checked="safe_setting.safe_level==1" />
+													初级
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="checkbox" value="2" disabled="disabled" ng-checked="safe_setting.safe_level==2" />
+													中级
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="checkbox" value="3" disabled="disabled" ng-checked="safe_setting.safe_level==3" />
+													高级
+												</label>
+											</div>
+										</div>
+										<div class="control-group clearfix" ng-show="safe_setting.verify_type!=undefined">
+											<label class="control-label">验证方式：</label>
+											<div class="controls">
+												<label class="inline">
+													<input type="radio" value="1" ng-checked="safe_setting.verify_type==1" />
+													短信验证码
+												</label>
+												<label class="inline" style="margin-top: 7px;">
+													<input type="radio" value="2" disabled="disabled" ng-checked="safe_setting.verify_type==2"/>
+													语音验证码
+												</label>
+											</div>
+										</div>
+										<div>
+											<div class="control-group clearfix" ng-show="safe_setting.voice_count!=undefined">
+												<label class="control-label">预计语音验证量：</label>
+												<div class="controls money_text">
+													<span class="smsfreeze_total">0</span>
+													<span class="yuan">条</span>
+												</div>
+											</div>
+											<div class="control-group clearfix" ng-show="safe_setting.voice_left!=undefined">
+												<label class="control-label">账户语音余额：</label>
+												<div class="controls money_text">
+													<span class="smsfreeze_total">0</span>
+													<span class="yuan">条</span>
+												</div>
+											</div>
+											<p class="tips2">
+												温馨提示：中级红包安全机制会通过语音验证来校验中奖粉丝的手机。请确保活动过程中有足够的语音验证余额（建议是红包数量的三倍），否则将可能导致粉丝无法正常领取红包。
+												<a href="" class="i-c-blue2" style="display: inline-block;">了解详情>>></a>
+											</p>
+										</div>
+										<p class="tips_bind_wx">
+											您尚未使用<span style="color: red;">认证服务号</span>进行<span style="color: red;">服务授权</span>，请授权后再启用高级红包安全机制。
+											<a href="" class="i-c-blue2" style="display: inline-block;">马上去开启>>></a>
+										</p>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="saveBottomBar fixBottombar">
+					<div class="buttonBox">
+						<div class="btn btn-default black" style="width: 70px; text-shadow: none !important;">返回</div>
+						<div class="btn btn-success" style="width: 70px;">保存</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="common-pop" style="width: 500px;margin-left: -250px;" ng-show="showBackPop">
+			<div class="common-pop-header">
+				<a class="common-pop-header-a" ng-click="showBackPop=false">×</a>
+				<div class="common-pop-header-div">修改图片</div>
+			</div>
+			<div class="common-pop-body">
+				<div class="control-group clearfix">
+					<div class="controls" style="position: relative;">
+						<label class="control-label-a" for="title" style="position: absolute;top:10px;width: 80px;">背景图片：</label>
+						<div class="cover-area" style="border: none;margin-left: 80px;">
+							<div class="cover-hd" style="left: 125px;">
+								<div class="info">
+									图片像素建议为 
+									<span class="uploadSize">200px*200px</span><br>
+									大小在100k以内，格式为png
+									<div class="sanjiao"></div>
+								</div>
+								<span class="btn btn-primary fileinput-button">
+									上传图片 
+									<input type="file" name="fileupload" id="file_upload_i_0" onchange="angular.element($('#appIndex')).scope().imgPreview2(this.files,'uploadImg','iframeId','wordenvelopePreview','word_back_img')"/>
+								</span>
+							</div>
+							<p class="upload-tip" style="left: 125px;">请上传透明png格式的图片。</p>
+							<a class="upload-default" set-to-default-scope="uploadImg,{{defalut_back}},iframeId,wordenvelopePreview,word_back_img,file_upload_i_0">恢复默认</a>
+							<div class="cover-bd img-area">
+								<div class="imgBox upload-img-preview">
+									<img class="thumb_img prize_thumb_img" ng-src="{{defalut_back}}" id="uploadImg" style="height: 98%;" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="controls" style="position: relative;">
+						<label class="control-label-a" for="title" style="position: absolute;top:10px;width: 80px;">banner：</label>
+						<div class="cover-area" style="border: none;margin-left: 80px;">
+							<div class="cover-hd" style="left: 125px;">
+								<div class="info">
+									图片像素建议为 
+									<span class="uploadSize">200px*200px</span><br>
+									大小在100k以内，格式为jpg\bmp\png\gif
+									<div class="sanjiao"></div>
+								</div>
+								<span class="btn btn-primary fileinput-button">
+									上传图片 
+									<input type="file" name="fileupload" id="file_upload_i_1" onchange="angular.element($('#appIndex')).scope().imgPreview(this.files,'uploadImg2','iframeId','word_banner')"/>
+								</span>
+							</div>
+							<p class="upload-tip" style="left: 125px;">请上传jpg、png、gif格式的图片。</p>
+							<a class="upload-default" set-to-default="uploadImg2,{{defalut_banner}},iframeId,word_banner,file_upload_i_1">恢复默认</a>
+							<div class="cover-bd img-area">
+								<div class="imgBox upload-img-preview">
+									<img class="thumb_img prize_thumb_img" ng-src="{{defalut_banner}}" id="uploadImg2"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="controls" style="position: relative;">
+						<label class="control-label-a" for="title" style="position: absolute;top:10px;width: 80px;">logo：</label>
+						<div class="cover-area" style="border: none;margin-left: 80px;">
+							<div class="cover-hd" style="left: 125px;">
+								<div class="info">
+									图片像素建议为 
+									<span class="uploadSize">200px*200px</span><br>
+									大小在100k以内，格式为jpg\bmp\png\gif
+									<div class="sanjiao"></div>
+								</div>
+								<span class="btn btn-primary fileinput-button">
+									上传图片 
+									<input type="file" name="fileupload" id="file_upload_i_2" onchange="angular.element($('#appIndex')).scope().imgPreview(this.files,'uploadImg3','iframeId','word_logo')"/>
+								</span>
+							</div>
+							<p class="upload-tip" style="left: 125px;">请上传jpg、png、gif格式的图片。</p>
+							<a class="upload-default" set-to-default="uploadImg3,{{defalut_logo}},iframeId,word_logo,file_upload_i_2">恢复默认</a>
+							<div class="cover-bd img-area">
+								<div class="imgBox upload-img-preview">
+									<img class="thumb_img prize_thumb_img" ng-src="{{defalut_logo}}" id="uploadImg3"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="common-pop-backdrop" ng-show="showBackPop" ng-click="showBackPop=false"></div>
+	</div>
+</div>

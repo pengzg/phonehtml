@@ -1,0 +1,100 @@
+<div class="contentHtml-new" style=" z-index: 10001; background-color: #fff;left:0;">
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;">
+	    <div class="row">
+        	<div class="col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-3"   ng-repeat="x in productTypeList">
+								<div class="thumbnail">
+									<p class="con-img">
+										<!-- <i class="icon icon-archive fa-3x red"></i> -->
+										<img class="fa-3x red" src="{{x.pt_picture_nameref}}">
+									</p>
+									<div class="caption">
+										<h4>{{x.pt_name}}</h4>
+										<p class="info" title="{{x.pt_remarks}}" style="height: 22px;text-overflow: ellipsis;white-space: nowrap;">{{x.pt_remarks}}</p>
+										<!-- <a class="btn btn-default" disabled="disabled" href="" style="text-shadow: none !important; color: #333 !important;">未开通</a>
+									 	-->	
+									 	<a class="btn btn-success" ng-click="productAdd(x);">创建</a>
+									</div>
+								</div>
+							</div>
+							<div style="text-align: center;" ng-if="productTypeList.length<1">对不起，请联系管理员分配商品类型,然后才能添加商品。</div>
+							<!-- <div class="col-md-3">
+            					<div class="thumbnail">
+									<p class="con-img"><i class="icon icon-archive fa-3x red"></i></p>
+									<div class="caption">
+										<h4>微信红包(代发)</h4>
+										<p class="info">由立返利代发红包，无需申请开通微信支付。用户收到的红包由立返利公众号发出，红包标注您的账户名称及活动名称</p>
+										<a class="btn btn-success" href="#/index/product/productRedAdd">创建</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+            					<div class="thumbnail">
+									<p class="con-img"><i class="icon icon-ticket fa-3x red"></i></p>
+									<div class="caption">
+										<h4>小额红包</h4>
+										<p class="info">实现金额小于1元的红包，可以累加至用户在本公众号下的个人中心账户中，累计金额超过1元后可微信红包提现</p>
+										<a class="btn btn-default" disabled="disabled" href="" style="text-shadow: none !important; color: #333 !important;">未开通</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+            					<div class="thumbnail">
+									<p class="con-img"><i class="icon icon-bitbucket-sign fa-3x yellow"></i></p>
+									<div class="caption">
+										<h4>积分</h4>
+										<p class="info">将积分做为礼品，获得的积分可以在积分商城兑换消费</p>
+										<a class="btn btn-success" href="#/index/product/productPointAdd">创建</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="thumbnail">
+									<p class="con-img"><i class="icon icon-phone fa-3x blue-2"></i></p>
+									<div class="caption">
+										<h4>话费</h4>
+										<p class="info">将话费作为礼品，直接充入用户手机，支持全国全网</p>
+										<a class="btn btn-default" disabled="disabled" href="" style="text-shadow: none !important; color: #333 !important;">未开通</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="thumbnail">
+									<p class="con-img"><i class="icon icon-truck fa-3x black"></i></p>
+									<div class="caption">
+										<h4>实物礼品</h4>
+										<p class="info">实物礼品为需要快递发货给用户的礼品，用户兑换实物礼品后，需企业处理用户的兑换订单，并自行发货处理</p>
+										<a class="btn btn-success" href="#/index/product/productAdd">创建</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="thumbnail">
+									<p class="con-img"><i class="icon icon-gift fa-3x blue"></i></p>
+									<div class="caption">
+										<h4>虚拟礼品</h4>
+										<p class="info">虚拟礼品无快递发货，系统自动发货, 由企业自行通过其他渠道交付于用户，用户确认收货后订单完成。如为卡密票券类虚拟礼品，请创建“卡密票券”礼品</p>
+										<a class="btn btn-success" href="#/index/product/productAdd">创建</a>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="thumbnail">
+									<p class="con-img"><i class="icon icon-money fa-3x green-2"></i></p>
+									<div class="caption">
+										<h4>卡密票券</h4>
+										<p class="info">卡密票券为虚拟礼品的一种，通过下发密码或兑换码的方式给用户</p>
+										<a class="btn btn-success" href="#/index/product/moneyCoupon">创建</a>
+									</div>
+								</div>
+							</div> -->
+						</div>
+					</div>
+				</div>
+        	</div>
+    	</div>
+	</div>
+</div>

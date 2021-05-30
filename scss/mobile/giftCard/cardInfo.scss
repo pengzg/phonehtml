@@ -1,0 +1,39 @@
+.card-info-main {
+	$green: #14ab12;
+	$radius: 0.4rem;
+	$gray: #444;
+	$lightGray: #999;
+	padding: 2rem;
+	.info-top {
+		color: $gray;
+		padding: 1rem;
+		padding-left: 0;
+		padding-bottom: 0.4rem;
+		border-bottom: 1px solid #ddd;
+		font-size: 1.2rem;
+	}
+	.info-tel {
+		display: flex;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		.tel-left {
+			flex: 1;
+			color: $lightGray;
+		}
+		.tel-right {
+			flex: 3;
+			color: $green;
+		}
+	}
+	.info-note {
+		display: flex;
+		.note-left {
+			flex: 1;
+			color: $lightGray;
+		}
+		.note-right {
+			flex: 3;
+			color: $gray;
+		}
+	}
+}

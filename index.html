@@ -1,0 +1,143 @@
+<div id="main">
+	<div id="leftHtml" >
+		<div id="logo">
+			 <a href="" title="社区盒子，让生意更简单"><img src="img/logo.png" style="width:75px"></a>
+		</div>
+		<div id="mainNav">
+	    	 <ul>
+	    		<li ng-repeat="x in menu" ng-click="selectFun(x)" ng-class="{selected:stateNow.indexOf('index'+x.sm_url)>=0}"><!-- ui-sref="{{x.sm_url}}" -->
+	    			<a href=""><i class="iconImg {{x.sm_iconcls}}"></i>{{x.sm_name}}</a>
+	    		</li>
+	    	</ul>
+		</div> 
+		<div class="account_menu">
+			<div class="account_name">账号</div>
+			<div class="dropdown_layer">
+				<ul>
+					<li ng-click="showPwdBox(1);"><a href="javaScript:void(0);">修改密码</a></li>
+					<li ng-click="exitLogin()"><a href="javaScript:void(0)">退出</a></li>
+			       <!--  <li><a ng-click="showChangePassword()" href="javaScript:void(0)">修改密码</a></li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="header">
+		<div class="headImg"  ><img src="{{USER.avatar}}" style="position: relative;top: -13px"></div>
+		<div class="userName" ng-if="shopList.length>0">
+			<select id="shop-select" class="shop-box" ng-model="shopid" ng-change="changeShop();">
+				<option ng-repeat="x in shopList"  value="{{x.ms_id}}">{{x.ms_name}}</option>
+			</select>
+
+
+		</div>
+		<div class="userName" style="font-weight: normal;">{{USER.name}}</div>
+		<!-- <i class="headIcon headIcon1"></i>
+		<i class="headIcon headIcon2"></i> -->
+		<!--
+		<a href=""><img src="../../img/upgrade_btn.png"></a>
+		<a href=""><img src="../../img/pintuan_2.gif"></a> -->
+	</div>
+	<div class="contentHtml1">
+		<div id="mainHtml">
+			<!-- 路由 -->
+			<div class="slidebar2" style="z-index:100;" ng-repeat="x in menu" ng-show="showMenu('index'+x.sm_url)&&x.childMenus.length>0">
+				<p class="nav_header">{{x.sm_name}}</p>
+				<ul>
+					<li ng-repeat="y in x.childMenus" ui-sref="index{{x.sm_url}}{{y.sm_url}}" 
+						ng-class="{selected:stateNow==('index'+x.sm_url+y.sm_url)}"
+						><a>{{y.sm_name}}</a></li>
+				</ul>
+			</div>
+			<div data-ui-view="">
+
+			</div>
+		</div>
+	</div>
+	
+	<div id="rightHtml" ng-show="$root.isIndexPage">
+		<div class="kefu_box">
+			<div class="box_header">平台客服</div>
+			<div class="box_content clearfix">
+				<div class="kefu_header"><img src="../../img/header_kefu.png"></div>
+				<p class="kefu_name">专属售后</p>
+				<p class="kefu_tel">电话：010-62119907</p>
+				<!-- <a href="" class="dzbtn contact_btn">在线联系</a> -->
+			</div>
+		</div>
+		<div class="dingzhi_box box" style="border-left: 0; border-bottom: 0;display: none;">
+			<div class="box_header">专属定制服务</div>
+			<div class="box_content clearfix">
+				<ul class="clearfix">
+					<li>
+						<img src="../../img/dingzhi_icon_1.png">
+						<p class="dingzhi_text">定制开发</p>
+					</li>
+					<li>
+						<img src="../../img/dingzhi_icon_2.png">
+						<p class="dingzhi_text">定制开发</p>
+					</li>
+					<li style="margin-right: 0;">
+						<img src="../../img/dingzhi_icon_3.png">
+						<p class="dingzhi_text">定制开发</p>
+					</li>
+				</ul>
+				<a href="" class="dingzhi_btn"><img src="../../img/dingzhi_btn.png"></a>
+			</div>
+		</div>
+	</div>
+</div>
+<setting-pop></setting-pop>  
+
+<!-- 重置密码弹框 -->
+<div class="dialog" ng-if="showPwd==1">
+	<div class="dialog-zdc"></div>
+
+	<form class="form-horizontal w5c-form demo-form" role="form"
+		w5c-form-validate="vm" novalidate name="validateForm1">
+		<div class="dg-xg-zh" style="width: 620px; height:160px; margin-left: -310px; top: 50%; margin-top:-125px;" ng-if="showPwd==1">
+			<div class="dg-xg-js" style="width: 620px">
+				重置密码
+				<div class="dg-cancle" ng-click="showPwdBox(0)"></div>
+			</div>
+			<div class="dg-content" style="margin: 12px auto; height:80px;overflow: visible;">
+				<div id="formJiLu" class="" style="border: none;height:80px;margin-top:10px;">
+					<form>
+						<div>
+							<div class="contentGroup clearfix">
+								<div class="zk_controlLabel">
+									<span class="f14">新密码</span> <i>*</i>
+								</div>
+
+								<div class="floatLeft p10left f14">
+									<input style="width: 226px;" class="pass-box" type="text" name="password"  ng-maxlength="10"  ng-minlength="6"
+										ng-model="passWord" required="">
+										（ 请输入新密码6~10位）
+								</div>
+							</div>
+							
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" w5c-form-submit="modifyPwdComplete();">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="showPwdBox(0);">取消</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+</div>
+<style>
+.shop-box{border: 0px;}	
+
+</style>
+<script type="text/javascript">
+	$(function(){
+	    $("#mainNav li").click(function() {
+	        $(this).siblings('li').removeClass('selected');
+	        $(this).addClass('selected'); 
+	    });
+	}); 
+</script>

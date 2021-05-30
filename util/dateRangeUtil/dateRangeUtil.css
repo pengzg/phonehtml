@@ -1,0 +1,48 @@
+/*时间选择器*/
+
+.date_check_main {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 14px !important;
+}
+
+.date_check_main:focus {
+    outline: none;
+}
+
+.date_check_content {
+    position: absolute;
+    width: 220px;
+    background-color: #fff;
+    top: 39px;
+    left: 0;
+    z-index: 999;
+    border: 1px solid #ddd;
+}
+
+.date_check_content div div {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.date_check_content div div:hover {
+    background-color: #ddd;
+}
+
+.date_div_first {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-top: 5px;
+}
+
+.date_div_second {
+	padding-top: 5px;
+}
+
+.date_div_last {
+	margin-bottom: 5px;
+}

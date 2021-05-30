@@ -1,0 +1,9 @@
+.seller-page-info-main .video-source { width: 100%; float: left; }
+.seller-page-info-main video::-webkit-media-controls-mute-button { display: none; }
+.seller-page-info-main video::-webkit-media-controls-volume-slider { display: none; }
+.seller-page-info-main video::-webkit-media-controls-fullscreen-button { display: none; }
+.seller-page-info-main video::-internal-media-controls-download-button { display: none; }
+.seller-page-info-main video::-webkit-media-controls-enclosure { overflow: hidden; }
+.seller-page-info-main video::-webkit-media-controls-panel { width: calc(100% + 40px); }
+.seller-page-info-main img { width: 100%; float: left; }
+.seller-page-info-main img:last-of-type { padding-bottom: 4rem; }

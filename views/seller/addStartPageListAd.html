@@ -1,0 +1,168 @@
+<div class="add-start-page-main">
+    <div class="panel panel-default">
+        <div class="panel-heading">广告信息</div>
+        <div class="panel-body">
+            <div class="content">
+                <div class="content-left">广告类型</div>
+                <div class="content-right">
+                    <lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+                        <input class="xt_radio" name="adType" ng-model="adtype" value="1" type="radio" ng-click="searchFun()">
+                        <div class="xt_inputBackimg"></div>
+                        图片广告
+                    </lable>
+                    <lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+                        <input class="xt_radio" name="adType" ng-model="adtype" value="2" type="radio" ng-click="searchFun()">
+                        <div class="xt_inputBackimg"></div>
+                        图片音频广告
+                    </lable>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-left">广告图片</div>
+                <div class="content-right">
+                    <a ng-click="upImage($event)" style="color:#099fb8;" class="f14">上传图片</a> <span class="gray">上传启动页广告图片,建议大小：1000*750px</span>
+                    <div style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor" get-ue="ue_myeditor = getUe" ng-show="false" class="ueditor" ng-model="gb_content1"></div>
+                    <div style="margin-top:5px;">
+                        <div ng-repeat="x in imageList" style="float:left;margin:5px;">
+                            <div class="gsGoodsImgs" style="width:100px; height:100px;border:1px solid #ddd;">
+                                <img alt="" src="{{x.pathDesc}}" style="width:100px; height:100px;">
+                                <div class="gsGoodsImgsBtns" style="position:absolute;bottom:0;left:0;width:100px;background:#fff;">
+                                    <a class="common_btns common_stick" title="设置主封面" ng-click="setStick(x)"></a>
+                                    <a class="common_btns common_delete" title="删除" ng-click="deletePic($index)"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content" ng-show="adtype==2">
+                <div class="content-left">音频</div>
+                <div class="content-right">
+                	<div>
+                		<a ng-click="uploadAudio()" style="color:#099fb8;" class="f14">上传音频</a>  
+                		<span class="gray">上传启动页音频,大小不得超过1M，时长不得超过8s</span>
+                		<input type="file" accept="audio/*" ng-show="false" id="audioInput" onchange="angular.element(this).scope().audioChange()">
+                	</div> 
+                	<div>
+                		<audio id="audio" controls="controls" style="display: none;"></audio>
+                	</div>
+                </div>
+            </div>
+
+            <div class="content" ng-show="adtype==2">
+                <div class="content-left">音频链接</div>
+                <div class="content-right">
+                	<input type="text" placeholder="请填写音频链接地址(只支持mp3格式的音频文件)" style="width: 300px;">
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-left">广告链接</div>
+                <div class="content-right">
+                	<input type="text" value="https://" style="width: 300px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">投放设置</div>
+        <div class="panel-body">
+            <div class="content">
+                <div class="content-left">投放时间段</div>
+                <div class="content-right">
+					<div class="controls">
+						<input type="text" id="dateTimeRange" class="span4"  ng-model="config.base.time"/>
+						<span class="maroon">*</span>
+						<span class="help-inline">活动时间不能超过3个月</span>
+					</div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-left">投放方式</div>
+                <div class="content-right">
+                     <lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+                        <input class="xt_radio" name="dropType" ng-model="searchParam.type1" value="1" type="radio" ng-click="searchFun()">
+                        <div class="xt_inputBackimg"></div>
+                        选择投放设备分组
+                        <div class="gray radio_tip">可以选择多个分组的设备，进行投放</div>
+                    </lable>
+                    <lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+                        <input class="xt_radio" name="dropType" ng-model="searchParam.type1" value="2" type="radio" ng-click="searchFun()">
+                        <div class="xt_inputBackimg"></div>
+                        选择投放区域分组
+                        <div class="gray radio_tip">区级代理商目前只能投放在自身区域</div>
+                    </lable>
+                    <div class="btn btn-success" data-toggle="modal" data-target="#myModal" style="vertical-align: top;">配置设备分组</div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-left">计费模版</div>
+                <div class="content-right">
+                	<select ng-model="charging" ng-options="charge for charge in charges" style="width: 314px;"></select>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-left">投放次数</div>
+                <div class="content-right">
+                	<input type="number" placeholder="投放次数在100次以上" style="width: 300px;">
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-left">投放预算</div>
+                <div class="content-right">
+                	1000.00 元
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    	<div class="btn btn-success">提交</div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 750px;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					配置投放设备分组 <span class="gray" style="font-size: 12px;">&ensp;&ensp;&ensp;按住ctrl键进行多选，双击移动</span>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="xt_childTable" style="padding:0; overflow: hidden;">
+					<div class="zk_mainSelect" style="height:auto">
+						<span class="mt10 floatLeft colorBlue f14" style="line-height: 28px;">可选投放设备分组</span>
+						<input type="text" class="floatLeft" style="padding:0;margin-left: 10px;padding-left: 5px;line-height: 28px;" ng-model="query1" placeholder="按仓库名称搜索">
+						<!-- <div class="zk_head_lab"><div class="first">分组名</div><div class="last">所属运营商</div></div> -->
+						<select class="zk_selectStyle" multiple id="list1"  ng-dblclick="moveOptionSh($event);query1='';query2='';" style="min-height:310px">
+							<option ng-repeat="x in baseStoreList1 | filter:query1" value="{{x.bs_id}}" class="f14">{{x.bs_name}}</option>
+						</select>
+					</div>
+					<div class="zk_mainTxt" style="height:auto; padding-top: 145px;">
+						<span><input type="button" value="添加 ->" class="input1" ng-click="moveOptionBatchSh('list1');query1='';query2='';"></span>
+						<span><input type="button" value="<- 删除" class="input2" ng-click="moveOptionBatchSh('list2');query1='';query2='';"></span>
+					</div>
+					<div class="zk_mainSelect" style="height:auto">
+						<span class="mt10 floatLeft colorBlue f14" style="line-height: 28px;">已选择</span>
+						<input type="text" class="floatLeft" style="padding:0;margin-left: 10px;padding-left: 5px;line-height: 28px;"  ng-model="query2" placeholder="按仓库名称搜索">
+						<select class="zk_selectStyle" multiple id="list2" ng-dblclick="moveOptionSh($event);query1='';query2='';" style="min-height:310px">
+							<option ng-repeat="x in baseStoreList2 | filter:query2" value="{{x.bs_id}}" class="f14">{{x.bs_name}}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>

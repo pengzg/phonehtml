@@ -1,0 +1,379 @@
+<div class="game-container">
+	<div class="headers">
+		<h3>核销员管理：</h3>
+		
+		<p style="font-size: 14px;margin-bottom: 22px;">
+			核销员可以直接通过微信进行扫码核销，已绑定本账号的微信号均有核销员身份
+			<a class="btn btn-success" style="float: right; width: 100px; margin-top: -7px;" ng-show="user.mb_isuse_fx==Y"
+			 ng-click="add();">添加核销员</a>
+		</p>
+		<div class="control-group" style="margin-top: 10px;">
+			<div class="controls" style="margin-left: 0px;">
+				<input class="f14" type="text" ng-model="searchParam.searchKey" style="width: 170px; height: 21px; top: 2px; position: relative;" placeholder="请输入用户名或昵称"> 
+				<button class="btn btn-success" style="width: 80px; height: 36px;" ng-click="searchFun();">查询</button>
+			</div>
+		</div>
+	</div>
+	<div class="content" style="margin-top: 15px;">
+		<table class="table table3 table-hover table-bordered">
+            <thead>
+                <tr>
+                	<th>序号</th>	                	
+                    <th>头像</th>
+                    <th>昵称</th>
+                    <th>手机</th>
+                    <th>关联人</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody class="borBottom">
+                <tr class="js_selectLine" ng-repeat="x in dataList">
+                	<td>{{pager.rows * (pager.page - 1)+
+							$index+1}}</td>
+                    <td><img ng-src="{{x.mmu_member_img}}" class="headIcon" /></td>
+                    <td ng-bind="x.mmu_member_name"></td>
+                    <td ng-bind="x.mmu_member_mobile"></td>
+                     <td><span ng-show="x.mmu_userid">{{x.mmu_usertype_nameref}}:{{x.mmu_userid_name}}</span></td>
+                    <td>
+                    	<a class="red displayIn-Block" ng-click="deleteUser(x);" ng-show="user.mb_isuse_fx==Y">
+                    		<i class="icon-trash" ></i>
+                    		删除
+                    	</a>
+                    	<a class="red displayIn-Block" style="margin-left:12px;" 
+                    	ng-click="showUserCheckLog(x);">
+                    		<i class="icon-list-alt" ></i>
+                    		查看核销记录
+                    	</a>
+                    	
+                    	<a ng-show="!x.mmu_userid&&user.mb_isuse_fx==Y" class="red displayIn-Block" 
+                    	ng-click="showConcatData(3,x);">
+                    		<i class="icon-trash" ></i>
+                    		关联用户 
+                    	</a>
+                    	<a ng-show="!x.mmu_userid&&user.mb_isuse_fx==Y" class="red displayIn-Block" 
+                    	ng-click="showConcatData(2,x);">
+                    		<i class="icon-trash" ></i>
+                    		关联客户 
+                    	</a>
+                    	<a ng-show="x.mmu_userid" class="red displayIn-Block" 
+                    	ng-click="showMMSecret(x);">
+                    		<i class="icon-trash" ></i>
+                    		设置核销密码
+                    	</a>
+                    	<a ng-show="x.mmu_pwd" class="red displayIn-Block" 
+                    	ng-click="showPwdDioalg(x);">
+                    		<i class="icon-trash" ></i>
+                    		查看核销密码
+                    	</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+		<!--分页 -->
+	</div>
+</div>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 1000px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						核销记录
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div class="content">
+						<table class="table table3 table-hover table-bordered ">
+				            <thead>
+				                <tr>
+				                	<th>活动名称</th>	                	
+				                    <th>头像</th>
+				                    <th>粉丝昵称</th>
+				                    <th>手机号码</th>
+				                    <th>中奖时间</th>
+				                    <th>领取状态</th>
+				                    <th>领取时间</th>
+				                    <th>sn码</th>
+				                    <th>奖品名称</th>
+				                    <th>核销员</th>
+				                </tr>
+				            </thead>
+				            <tbody class="borBottom">
+				                <tr class="js_selectLine" ng-repeat="x in winningList">
+				                	<td title="" ng-bind="x.mw_activity_name"></td>
+				                    <td class="i-c-blue">
+				                    	<img ng-src="{{x.mw_member_mb_img}}" class="headIcon" />
+				                    </td>
+				                    <td ng-bind="x.mw_member_name"></td>
+				                    <td ng-bind="x.mw_member_phone"></td>
+				                    <td ng-bind="x.mw_winningtime"></td>
+				                    <td ng-bind="x.mw_state_nameref"></td>
+				                    <td ng-bind="x.mw_receivetime"></td>
+				                    <td ng-bind="x.mw_prizecode"></td>
+				                    <td ng-bind="x.mw_productname"></td>
+				                    <td ng-bind="x.mw_grant_userid_name"></td>
+				                </tr>
+				            </tbody>
+				        </table>
+			        <!-- 分页 -->
+			     	<tm-pagination conf="winningpager" search-param ="winningsearchParam"></tm-pagination>
+					<!--分页 -->
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div>
+</div><!-- /.modal -->
+
+
+<!-- 用户模态框（Modal） -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 800px;">
+			<div class="modal-content" >
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						会员列表
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div class="content">
+						<div>
+							<input type="text" ng-model="userpager.searchKey" 
+									placeholder="请输入用户名或昵称"> 
+							<div class="btn btn-success" ng-click="searchUserList();" 
+								 style="display:inline-block;position:relative;top:-2px;">查询</div>
+						</div>
+						<table class="table table3 table-hover table-bordered">
+				            <thead>
+				                <tr> 
+				                <th ><input type="checkbox" ng-model="allChecked2" ng-change="toggleAllGloobal(allChecked2,userList)"></th>
+				                	<th>序号</th>	                	
+				                    <th>头像</th>
+				                    <th>昵称</th>
+				                    <th>手机</th>
+				                </tr>
+				            </thead>
+				            <tbody class="borBottom">
+				                <tr class="js_selectLine" ng-repeat="x in userList">
+				                <td class="colorCenter"><input type="checkbox" ng-model="x.checked"></td>
+				                	<td>{{userpager.rows * (userpager.page - 1)+
+											$index+1}}</td>
+				                    <td><img ng-src="{{x.mb_img}}" class="headIcon" /></td>
+				                    <td ng-bind="x.mb_nickname"></td>
+				                    <td ng-bind="x.mb_mobile"></td>
+				                </tr>
+				            </tbody>
+				        </table>
+			        <!-- 分页 -->
+			     	<tm-pagination conf="userpager" search-param ="usersearchParam"></tm-pagination>
+					<!--分页 -->
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="setUserChecked();">
+					确定
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div>
+</div><!-- /.modal -->
+
+
+<!-- 用户模态框（Modal） -->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 800px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						用户列表
+					</h4>
+				</div>
+				<div class="modal-body"> 
+					<div class="content">
+						<div>
+							<input type="text" ng-model="sysUserpager.searchKey" 
+									placeholder="请输入用户名或昵称"> 
+							<div class="btn btn-success" ng-click="searchSysUserList();" 
+								 style="display:inline-block;position:relative;top:-2px;">查询</div>
+						</div>
+						<table class="table table3 table-hover table-bordered">
+				            <thead>
+				                <tr> 
+				                <th ></th>
+				                	<th>序号</th>	                	
+				                    <th>登录名</th>
+				                    <th>昵称</th>
+				                    <th>用户类型</th>
+				                </tr>
+				            </thead>
+				            <tbody class="borBottom">
+				                <tr class="js_selectLine" ng-repeat="x in sysUserList">
+				                <td class="colorCenter">
+				               <!--  <input type="radio" name="sysUser" ng-model="x.checked" ng-checked=""> -->
+				                <input type="radio" ng-value="x" ng-model="$parent.checkedSysUser" name="sysName">
+				                </td>
+				                	<td>{{sysUserpager.rows * (sysUserpager.page - 1)+
+											$index+1}}</td>
+				                    <td ng-bind="x.su_loginname"></td>
+				                    <td ng-bind="x.su_name"></td>
+				                    <td ng-bind="x.su_usertype_nameref"></td>
+				                </tr>
+				            </tbody>
+				        </table>
+			        <!-- 分页 -->
+			     	<tm-pagination conf="sysUserpager" search-param ="sysUsersearchParam"></tm-pagination>
+					<!--分页 -->
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="setSysUserConcat(3);">
+					确定
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div>
+</div><!-- /.modal -->
+
+<!-- 用户模态框（Modal） -->
+<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 800px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						客户小店列表
+					</h4>
+				</div>
+				<div class="modal-body"> 
+					<div class="content"> 
+						<div>
+							<input type="text" ng-model="customerpager.searchKey" 
+									placeholder="请输入用户名或昵称"> 
+							<div class="btn btn-success" ng-click="searchCustomerList();" 
+								 style="display:inline-block;position:relative;top:-2px;">查询</div>
+						</div>
+						<table class="table table3 table-hover table-bordered">
+				            <thead>
+				                <tr> 
+				                <th ></th>
+				                	<th>序号</th>	                	
+				                    <th>客户名称</th>
+				                    <th>客户联系人</th>
+				                    <th>客户类型</th>
+				                    <th>手机</th>
+				                </tr>
+				            </thead>
+				            <tbody class="borBottom">
+				                <tr class="js_selectLine" ng-repeat="x in customerList">
+				                <td class="colorCenter">
+				                <input type="radio" ng-value="x" ng-model="$parent.checkedCustomer" name="customer">
+				                </td>
+				                	<td>{{customerpager.rows * (customerpager.page - 1)+
+											$index+1}}</td>
+				                    <td ng-bind="x.cc_name"></td>
+				                    <td ng-bind="x.cc_contacts_name"></td>
+				                     <td ng-bind="x.cc_type_nameref"></td>
+				                    <td ng-bind="x.cc_contacts_mobile"></td>
+				                </tr>
+				            </tbody>
+				        </table>
+			        <!-- 分页 -->
+			     	<tm-pagination conf="customerpager" search-param ="customersearchParam"></tm-pagination>
+					<!--分页 -->
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="setSysUserConcat(2);">
+					确定
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div>
+</div><!-- /.modal -->
+
+
+<!-- 用户模态框（Modal） -->
+<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 648px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						设置核销密码 
+					</h4>
+				</div>
+				<div class="modal-body"> 
+					<div class="content"> 
+						<div>
+							<div style="display: inline-block;line-height: 50px;">密码:</div>
+							<div style="display: inline-block;line-height: 50px;margin-left: 10px;">
+								<input style="line-height: 20px;" name="bless" id="bless" class="span4" type="text" maxlength="30" 
+								ng-model="mmu_pwd" >
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer" ng-show="showPwd != 1 ">
+					<button type="button" class="btn btn-default" data-dismiss="modal" >取消
+					</button>
+					<button type="button" class="btn btn-primary" ng-click="setUserPwd();">
+						确定
+					</button>
+				</div>
+		</div><!-- /.modal-content -->
+	</div>
+</div><!-- /.modal -->
+<!-- 用户模态框（Modal） -->
+<div class="modal fade" id="myModal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 648px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						设置核销密码 
+					</h4>
+				</div>
+				<div class="modal-body"> 
+					<div class="content"> 
+						<div>
+							<div style="display: inline-block;line-height: 50px;">密码:</div>
+							<div style="display: inline-block;line-height: 50px;margin-left: 10px;">{{mmu_pwd}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">
+						确定
+					</button>
+				</div>
+		</div><!-- /.modal-content -->
+	</div>
+</div><!-- /.modal -->

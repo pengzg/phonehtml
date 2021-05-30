@@ -1,0 +1,133 @@
+<div class="xt_changeHtml" style="margin-bottom: 120px;">
+	<div class="addlistCenter" style="padding-top: 30px;padding-bottom: 30px;">
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 标题：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.mtc_title" maxlength="60" style="width:150px" placeholder="请输入名称" />
+			</div>
+		</div>
+
+		<div style="min-width:900px;margin-bottom: 20px;margin-top: 25px;box-sizing:border-box;padding:0 46px;">
+            <table class="table table3" style="margin-bottom: 0 !important; border: 1px solid #dedede; border-bottom: 0;">
+                <tbody>
+                    <tr class="zk_headerTrSty">
+                        <th style="width:10%;" ng-show="false">
+                            <div class="glyphicon glyphicon-cog" ng-show="false" style="width: 15px; height: 15px; cursor: pointer"></div>
+                        </th>
+                        <th style="width:50%;border-right: 1px solid #dedede;">商品 </th>
+                    </tr>
+                    <tr>
+                        <td colspan="14" style="padding: 0; border-bottom: 0;border-top:0;">
+                            <div style="padding-bottom: 2px;">
+                                <table class="table table3 table-bordered" style="border: 0; margin-bottom: 0 !important;">
+                                    <tbody>
+                                        <tr >
+                                            <td ng-show="false" style="width:10%; border-left: 0 !important;" class="colorCenter"></td>
+                                            <td style="width:50%;" class="SelectMulti-Container2 posRelative">
+                                                <input type="text" class="inputBorderStyle2 SelectMulti-ShowDiv2" ng-model="vo.mtc_productid_nameref" ng-change="keySearchFun(vo.mtc_productid_nameref,'goods');"
+                                                 ng-focus="goods_type=1;showDroplist($event,getGoods,1)" style="height: 33px; line-height: 33px;">
+                                                <div class="droplistWrap2" style="width: 689px; left: 5px; top: 40px; overflow: hidden;">
+                                                    <div class="clearfix">
+                                                        <table>
+                                                            <tr class="listItem2" style="width:683px;">
+                                                                <td style="width:30px;line-height: 0px !important;"></td>
+                                                                <td style="width:430px;line-height: 0px !important;">商品</td>
+                                                                <td style="width:120px;line-height: 0px !important;">编号</td>
+                                                                <td style="width:120px;line-height: 0px !important;">类型</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="clearfix" style="height: 160px;overflow-y: auto;">
+
+                                                        <table style="width:683px;">
+                                                            <tr class="listItem" ng-repeat="y in goodsList" ng-click="chooseGoods(y,index_i,1);">
+                                                                <td style="width:30px;padding:4px !important;">
+                                                                    {{pager1.rows * (pager1.page - 1)+ $index+1}}
+                                                                </td>
+                                                                <td style="width:430px;padding:4px !important;" title="{{y.pm_title}}">
+                                                                    {{y.pm_title | cut:true:20:' ...'}}
+                                                                </td>
+
+                                                                <td style="width:120px;padding:4px !important;">
+                                                                    {{y.pm_code}}
+                                                                </td>
+                                                                <td style="width:120px;padding:4px !important;">
+                                                                    {{y.pm_typeid_nameref}}
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="droplistWrap2 zk_fanye" style="width:689px !important; top:226px !important; left:5px !important;height:25px;">
+                                                    <a ng-click="prevPage(pager1,getGoods)" class="m30right m20left">上一页</a>
+                                                    <a ng-click="nextPage(pager1,getGoods)" class="m30right">下一页</a>
+                                                    <span class="m30right">{{pager1.page}}/{{pager1.pageTotal}}</span>
+                                                    <span>共{{pager1.total}}条</span>
+                                                </div>
+                                            </td>
+
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi width-just">类型：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				<div ng-repeat="x in ticketTypeList">
+					<label class="m10right">
+						<input type="radio" ng-model="vo.mtc_type" value="{{x.bd_code}}" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />
+						{{x.bd_name}}
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" >
+			<span class="xt_bzWenZi width-just"> <i class="colorRed">*</i>实物票总数：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="number" maxlength="10" min="1" ng-model="vo.mtc_total_num" ng-disabled="vo.mtc_id" style="width:50px;" />张
+			</div>
+		</div>
+		
+
+		
+
+	
+	
+		
+		
+		
+	</div>
+	<div class="fixedBottom">
+		<div class="btnStyle Btncolor1 BtnHover1" ng-click="submit();">保存</div>
+        <div class="btnStyle Btncolor2 BtnHover2" ng-click="goBack();"><a class="btnStyle Btncolor2 BtnHover2">返回</a></div>
+	</div>
+</div>
+
+		<script>
+
+			$(function () {
+				$('.droplistWrap2').hide()
+				$(document).on('click', function (ev) {
+					if ($(ev.target).parents('.SelectMulti-Container2').length) { return }
+					$('.droplistWrap2').hide()
+				})
+
+				
+
+				
+			});
+
+			function showDropList(obj) {
+				$('.droplistWrap2').hide();
+				$(obj).parent().find('.droplistWrap2').toggle();
+				console.log($(obj).parent().find('.droplistWrap2'))
+			};
+		</script>

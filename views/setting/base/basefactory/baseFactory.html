@@ -1,0 +1,410 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">工厂列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+        <div>
+            <label>是否启用<span>:</span></label>
+            <select ng-model="searchParam.bf_state">
+				<option value="{{x.bd_code}}" ng-repeat="x in stateList">{{x.bd_name}}</option>
+			</select>
+           
+			<label>关键字<span>:</span></label>
+			<input type="text" ng-model="searchParam.searchKey" placeholder="工厂名或者编码">
+		</div>
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();doSearch();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success add-btn" style="float:right;margin-right:50px;" ng-click="add();"><i class="icon icon-plus"></i>新增</a>
+        </div>
+    </div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>图片</th>
+								<th style="min-width:80px;">名称</th>
+								<th>编码</th>
+								<th>省</th>
+								<th>市</th>
+								<th>区</th>
+								<th>地址</th>
+								<th>启用状态</th>
+								<th>添加时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in dataList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								
+								<td class="text-center f14">
+									<img ng-click="showCover(x,1);" style="height:30px;width:30px;" 
+										src="{{x.bf_cover_show?x.bf_cover_show:'img/prizedef.jpg'}}" 
+										img-err="img/prizedef.jpg"/>
+								</td>
+								<td class="text-center f14">{{x.bf_name}}</td>
+								<td class="text-center f14">{{x.bf_code}}</td>
+								<td class="text-center f14">{{x.bf_province_nameref}}</td>
+								<td class="text-center f14">{{x.bf_city_nameref}}</td>
+								<td class="text-center f14">{{x.bf_district_nameref}}</td>
+								<td>{{x.bf_address}}</td>
+								<td>
+									<span ng-if="x.bf_state==1">启用</span>
+									<span ng-if="x.bf_state!=1">禁用</span><br>
+
+								</td>
+								<td class="text-center f14">{{x.bf_add_time}}</td>
+								<td class="text-center f14" style="position: relative;">
+									<a class="common_btns common_edit" ng-click="toEdit(x)" title="修改"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 添加和修改弹窗 -->
+<div class="dialog" ng-show="dialogShow" style="z-index:90">
+	<div class="dialog-zdc"style="z-index:100" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:110; width:760px; margin-left: -380px; top: 40%; margin-top: -204px;height:510px;"  ng-show="dialogShow">
+		<div class="dg-xg-js" style="width:760px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+	    
+			<div class="dg-content" style="height: 450px; margin-bottom:0px;margin-top:0px;margin-left:0px;overflow: scroll;">
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">名称</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" name="bf_name" 
+										ng-model="vo.bf_name" maxlength="15">
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 400px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">编码</span>
+						<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 300px;">
+							<input style="width: 100px;" type="text" name="bf_code"
+										ng-model="vo.bf_code"  maxlength="10">
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">联系人</span>
+						<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 100px;" type="text" name="bf_contacts"
+										ng-model="vo.bf_contacts"  maxlength="100">
+										
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">联系电话</span>
+						<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 100px;" type="text" name="bf_tel"
+										ng-model="vo.bf_tel"  >
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">省，市</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							{{vo.bf_province_nameref}}-{{vo.bf_city_nameref}}
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 400px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">城市</span>
+						<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 300px;">
+							<input style="width: 100px;" type="text" name="bf_district_nameref"
+										ng-model="vo.bf_district_nameref" disabled  maxlength="10">
+										<a class="btn btn-success"  ng-click="showCityDialog()">选择城市</a>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">账期</span>
+							<!-- <i class="f14">*</i> -->
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 50px;" type="text" 
+										ng-model="vo.bf_account_days" >
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">开户行</span>
+							<!-- <i class="f14">*</i> -->
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" 
+										ng-model="vo.bf_bankname" >
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">持卡人</span>
+							<!-- <i class="f14">*</i> -->
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" 
+										ng-model="vo.bf_def1" >
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">银行账号</span>
+							<!-- <i class="f14">*</i> -->
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" 
+										ng-model="vo.bf_bankcode" >
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">身份证号</span>
+							<!-- <i class="f14">*</i> -->
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" 
+										ng-model="vo.bf_idcard" >
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">公司全名</span>
+							<!-- <i class="f14">*</i> -->
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" 
+										ng-model="vo.bf_companyname" >
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">状态</span>
+						</div>
+						<div class="zk_controlRadio" style=" width: 140px;">
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bf_state" ng-model="vo.bf_state" value="1" type="radio">
+								<div class="xt_inputBackimg"></div>启用
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bf_state" ng-model="vo.bf_state" value="0" type="radio">
+								<div class="xt_inputBackimg"></div>禁用
+							</lable>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 600px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">街道</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 450px;" type="text" name="bf_street" 
+										ng-model="vo.bf_street" maxlength="200">
+						</div>
+					</div>
+				</div> -->
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 600px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">详细地址</span>
+							<!-- <i class="f14">*</i> -->
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 450px;" type="text" name="bf_address" 
+										ng-model="vo.bf_address" maxlength="200">
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				
+				
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="save();">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+	</div>
+</div>
+
+
+
+<div class="dialog" ng-show="showCity">
+	<div class="dialog-zdc"></div>
+	<div class="dg-xg-zh"
+		style=" width: 438px; margin-left: -219px; top: 50%; margin-top: -205px;"
+		ng-show="showCity">
+		<div class="dg-xg-js" style="width: 438px;">
+			选择城市
+			<div class="dg-cancle" ng-click="closeCityDialog()"></div>
+		</div>
+		<form role="form" name="myform">
+			<div class="dg-content"
+				style="margin-bottom: 0px; margin-top: 0px; height: 320px; overflow: auto; z-index: 100;">
+				<div style="border-right: none;">
+					<ul tree id="tree2" class="ztree f14"
+						data-options='{"url":"/admin/base/baseAreaControl/queryBaseAreaTreeNew.action?state=1"}'
+						mysetting='mysetting' style="width: 400px; overflow: auto; border-right: none;" max-length="25"></ul>
+				</div>
+			</div>
+		</form>
+		<div class="dg-submint"
+			style="width: 100%; text-align: center; margin: 10px 0;">
+			<div class="btnStyle Btncolor1 BtnHover1"
+				ng-click="selectCity()">确定</div>
+			<div class="btnStyle Btncolor2 BtnHover2"
+				ng-click="closeCityDialog()">取消</div>
+		</div>
+	</div>
+</div>
+
+<!-- 添加和修改弹窗 -->
+<div class="dialog" ng-show="showPic" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -164px;"  ng-show="showPic">
+		<div class="dg-xg-js" style="width:660px;">
+			{{storeTitle}}
+			<div class="dg-cancle" ng-click="showPic=false"></div>
+		</div>
+	    
+			<div class="dg-content" style="height: 290px; margin-bottom:0px;margin-top:0px;margin-left:0px;text-align:center;">
+				<img src="{{picUrl}}" style="height:290px;" >
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<a ng-show="false" class="btnStyle Btncolor1 BtnHover1" download="{{storeTitle}}"  href="{{picUrl}}">下载图片</a>
+					<a class="btnStyle Btncolor1 BtnHover1" target="_blank" href="{{picUrl}}">查看原图</a>
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="showPic=false">确定</div>
+					
+				</div>
+			</div>
+	</div>
+</div>
+
+<!-- 添加和修改弹窗 -->
+<div class="dialog" ng-show="appidShow" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -164px;"  ng-show="appidShow">
+		<div class="dg-xg-js" style="width:660px;">
+			请选择小程序
+			<div class="dg-cancle" ng-click="appCode='';appidShow=false"></div>
+		</div>
+	    
+			<div class="dg-content" style="height: 290px; margin-bottom:0px;margin-top:0px;margin-left:0px;text-align:center;">
+				<table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>选择</th>
+                                <th>小程序编码</th>
+                                <th>小程序</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in appList track by $index">
+                                <td><input name="app" type="radio" value="{{x.wi_code}}" ng-model="vo.appCode" ></td>
+								<td >{{x.wi_code}} </td>
+								<td>{{x.wi_name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<!-- <a class="btnStyle Btncolor1 BtnHover1" target="_blank" href="{{bs_def1_show}}">查看原图</a> -->
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="createQRcode();">确定</div>
+					
+				</div>
+			</div>
+	</div>
+</div>
+
+<script>
+$(function(){
+
+
+	$(".show_qrcode").on("mouseover mouseout",function(event){
+		
+		if(event.type == "mouseover"){
+			alert(111111111);
+		}else if(event.type == "mouseout"){
+			$(this).parents("td").find("div").hide();
+		}
+	})
+});
+</script>

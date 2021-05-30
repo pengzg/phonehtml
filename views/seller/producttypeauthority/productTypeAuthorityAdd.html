@@ -1,0 +1,29 @@
+<div class="xt_changeHtml" style="margin-bottom: 120px;">
+	<div class="addlistCenter" style="padding-top:30px;padding-bottom:30px;">
+
+		<div class="divVertical clearfix ray5" style="margin-top: 17px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 经销商：</span>
+			<div class="widthAuto zk_controlInput">
+				<select id="storeSel" class="form-control" ng-model="shopId" ng-change="getDetail();">
+					<option value="{{x.ms_id}}" ng-repeat="x in shopList">{{x.ms_name}}</option>
+
+				</select>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 17px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 商品类型：</span>
+			<div class="widthAuto zk_controlInput">
+				<div ng-repeat="x in typeList">
+					<input style="width:24px;" ng-checked="x.checked" class="js_type" data-id="{{x.pt_id}}" type="checkbox" value="{{x.pt_id}}">
+					{{x.pt_name}}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="fixedBottom">
+		<div class="btnStyle Btncolor1 BtnHover1" ng-click="submit();">保存</div>
+
+		<div class="btnStyle Btncolor2 BtnHover2"><a ng-click="goBack();" class="btnStyle Btncolor2 BtnHover2">返回</a></div>
+	</div>
+</div>
+</div>

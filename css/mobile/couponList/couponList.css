@@ -1,0 +1,90 @@
+.color-gray { color: #666; }
+
+.color-light-gray { color: #999; }
+
+.coupon-main { background: #f0f0f0; }
+.coupon-main .coupon-green { position: relative; width: 90vw; height: 36.8852459016vw; margin: 5vw; background: url(../../../img/mobile/coupon/green.png) no-repeat; background-size: 100%; border: none; }
+.coupon-main .coupon-green .coupon-name { position: absolute; top: 15%; right: 10%; color: #56af00; font-size: 1.6rem; font-weight: bold; letter-spacing: 2px; }
+.coupon-main .coupon-green .coupon-content { position: absolute; top: 30%; right: 10%; }
+.coupon-main .coupon-green .coupon-content span { color: #fff; }
+.coupon-main .coupon-green .coupon-content span:nth-of-type(1) { font-size: 2.2rem; }
+.coupon-main .coupon-green .coupon-content span:nth-of-type(2) { font-size: 3.6rem; }
+.coupon-main .coupon-green .coupon-content span:last-of-type { color: #56ae00; }
+.coupon-main .coupon-green .coupon-content-bottom { position: absolute; bottom: 5%; left: 5%; right: 10%; font-size: 0.9rem; color: #666; }
+.coupon-main .coupon-green .coupon-content-bottom div:first-of-type { float: left; }
+.coupon-main .coupon-green .coupon-content-bottom div:last-of-type { float: right; }
+.coupon-main .coupon-green .coupon-outdate { position: absolute; top: 7%; right: 15%; }
+.coupon-main .coupon-green .coupon-outdate img { width: 6rem; }
+.coupon-main .coupon-blue { position: relative; width: 90vw; height: 36.8852459016vw; margin: 5vw; background: url(../../../img/mobile/coupon/blue.png) no-repeat; background-size: 100%; border: none; }
+.coupon-main .coupon-blue .coupon-name { position: absolute; top: 15%; right: 10%; color: #308cab; font-size: 1.6rem; font-weight: bold; letter-spacing: 2px; }
+.coupon-main .coupon-blue .coupon-content { position: absolute; top: 30%; right: 10%; }
+.coupon-main .coupon-blue .coupon-content span { color: #fff; }
+.coupon-main .coupon-blue .coupon-content span:nth-of-type(1) { font-size: 2.2rem; }
+.coupon-main .coupon-blue .coupon-content span:nth-of-type(2) { font-size: 3.6rem; }
+.coupon-main .coupon-blue .coupon-content span:last-of-type { color: #308cab; }
+.coupon-main .coupon-blue .coupon-content-bottom { position: absolute; bottom: 5%; left: 5%; right: 10%; font-size: 0.9rem; color: #666; }
+.coupon-main .coupon-blue .coupon-content-bottom div:first-of-type { float: left; }
+.coupon-main .coupon-blue .coupon-content-bottom div:last-of-type { float: right; }
+.coupon-main .coupon-blue .coupon-outdate { position: absolute; top: 7%; right: 15%; }
+.coupon-main .coupon-blue .coupon-outdate img { width: 6rem; }
+.coupon-main .coupon-pink { position: relative; width: 90vw; height: 36.8852459016vw; margin: 5vw; background: url(../../../img/mobile/coupon/pink.png) no-repeat; background-size: 100%; border: none; }
+.coupon-main .coupon-pink .coupon-name { position: absolute; top: 15%; right: 10%; color: #e0687e; font-size: 1.6rem; font-weight: bold; letter-spacing: 2px; }
+.coupon-main .coupon-pink .coupon-content { position: absolute; top: 30%; right: 10%; }
+.coupon-main .coupon-pink .coupon-content span { color: #fff; }
+.coupon-main .coupon-pink .coupon-content span:nth-of-type(1) { font-size: 2.2rem; }
+.coupon-main .coupon-pink .coupon-content span:nth-of-type(2) { font-size: 3.6rem; }
+.coupon-main .coupon-pink .coupon-content span:last-of-type { color: #e0687e; }
+.coupon-main .coupon-pink .coupon-content-bottom { position: absolute; bottom: 5%; left: 5%; right: 10%; font-size: 0.9rem; color: #666; }
+.coupon-main .coupon-pink .coupon-content-bottom div:first-of-type { float: left; }
+.coupon-main .coupon-pink .coupon-content-bottom div:last-of-type { float: right; }
+.coupon-main .coupon-pink .coupon-outdate { position: absolute; top: 7%; right: 15%; }
+.coupon-main .coupon-pink .coupon-outdate img { width: 6rem; }
+.coupon-main .coupon-yellow { position: relative; width: 90vw; height: 36.8852459016vw; margin: 5vw; background: url(../../../img/mobile/coupon/yellow.png) no-repeat; background-size: 100%; border: none; }
+.coupon-main .coupon-yellow .coupon-name { position: absolute; top: 15%; right: 10%; color: #d0950b; font-size: 1.6rem; font-weight: bold; letter-spacing: 2px; }
+.coupon-main .coupon-yellow .coupon-content { position: absolute; top: 30%; right: 10%; }
+.coupon-main .coupon-yellow .coupon-content span { color: #fff; }
+.coupon-main .coupon-yellow .coupon-content span:nth-of-type(1) { font-size: 2.2rem; }
+.coupon-main .coupon-yellow .coupon-content span:nth-of-type(2) { font-size: 3.6rem; }
+.coupon-main .coupon-yellow .coupon-content span:last-of-type { color: #d0950b; }
+.coupon-main .coupon-yellow .coupon-content-bottom { position: absolute; bottom: 5%; left: 5%; right: 10%; font-size: 0.9rem; color: #666; }
+.coupon-main .coupon-yellow .coupon-content-bottom div:first-of-type { float: left; }
+.coupon-main .coupon-yellow .coupon-content-bottom div:last-of-type { float: right; }
+.coupon-main .coupon-yellow .coupon-outdate { position: absolute; top: 7%; right: 15%; }
+.coupon-main .coupon-yellow .coupon-outdate img { width: 6rem; }
+.coupon-main .coupon-purple { position: relative; width: 90vw; height: 36.8852459016vw; margin: 5vw; background: url(../../../img/mobile/coupon/purple.png) no-repeat; background-size: 100%; border: none; }
+.coupon-main .coupon-purple .coupon-name { position: absolute; top: 15%; right: 10%; color: #ca5aca; font-size: 1.6rem; font-weight: bold; letter-spacing: 2px; }
+.coupon-main .coupon-purple .coupon-content { position: absolute; top: 30%; right: 10%; }
+.coupon-main .coupon-purple .coupon-content span { color: #fff; }
+.coupon-main .coupon-purple .coupon-content span:nth-of-type(1) { font-size: 2.2rem; }
+.coupon-main .coupon-purple .coupon-content span:nth-of-type(2) { font-size: 3.6rem; }
+.coupon-main .coupon-purple .coupon-content span:last-of-type { color: #ca5aca; }
+.coupon-main .coupon-purple .coupon-content-bottom { position: absolute; bottom: 5%; left: 5%; right: 10%; font-size: 0.9rem; color: #666; }
+.coupon-main .coupon-purple .coupon-content-bottom div:first-of-type { float: left; }
+.coupon-main .coupon-purple .coupon-content-bottom div:last-of-type { float: right; }
+.coupon-main .coupon-purple .coupon-outdate { position: absolute; top: 7%; right: 15%; }
+.coupon-main .coupon-purple .coupon-outdate img { width: 6rem; }
+.coupon-main .coupon-gray { position: relative; width: 90vw; height: 36.8852459016vw; margin: 5vw; background: url(../../../img/mobile/coupon/gray.png) no-repeat; background-size: 100%; border: none; }
+.coupon-main .coupon-gray .coupon-name { position: absolute; top: 15%; right: 10%; color: #b4b4b4; font-size: 1.6rem; font-weight: bold; letter-spacing: 2px; }
+.coupon-main .coupon-gray .coupon-content { position: absolute; top: 30%; right: 10%; }
+.coupon-main .coupon-gray .coupon-content span { color: #fff; }
+.coupon-main .coupon-gray .coupon-content span:nth-of-type(1) { font-size: 2.2rem; }
+.coupon-main .coupon-gray .coupon-content span:nth-of-type(2) { font-size: 3.6rem; }
+.coupon-main .coupon-gray .coupon-content span:last-of-type { color: #b4b4b4; }
+.coupon-main .coupon-gray .coupon-content-bottom { position: absolute; bottom: 5%; left: 5%; right: 10%; font-size: 0.9rem; color: #666; }
+.coupon-main .coupon-gray .coupon-content-bottom div:first-of-type { float: left; }
+.coupon-main .coupon-gray .coupon-content-bottom div:last-of-type { float: right; }
+.coupon-main .coupon-gray .coupon-outdate { position: absolute; top: 7%; right: 15%; }
+.coupon-main .coupon-gray .coupon-outdate img { width: 6rem; }
+
+.c-tab-main .c-tab-content { width: 100%; }
+.c-tab-main .c-tab-content div { text-align: center; float: left; width: 33.33%; font-size: 1rem; line-height: 2.3rem; color: #666; }
+.c-tab-main .c-tab-line { position: absolute; bottom: 0; left: 0; width: 33.33%; border-bottom: 2px solid #62accd; -webkit-transition: left 0.3s; transition: left 0.3s; }
+
+.c-tab-checked-1 .c-tab-content div:nth-of-type(1) { color: #62accd; }
+.c-tab-checked-1 .c-tab-line { left: 0%; }
+
+.c-tab-checked-2 .c-tab-content div:nth-of-type(2) { color: #62accd; }
+.c-tab-checked-2 .c-tab-line { left: 33.33%; }
+
+.c-tab-checked-3 .c-tab-content div:nth-of-type(3) { color: #62accd; }
+.c-tab-checked-3 .c-tab-line { left: 66.66%; }

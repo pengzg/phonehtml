@@ -1,0 +1,35 @@
+<ion-header-bar align-title="left">
+    <div class="scompop-tab-4 {{'c-tab-checked-'+checked}}" ng-init="checked=1">
+        <div class="c-tab-content">
+            <div ng-click="checked=1;goTop();choseState(' ')">全部</div>
+            <div ng-click="checked=2;goTop();choseState('2')">已兑奖</div>
+            <div ng-click="checked=3;goTop();choseState('1')">未兑奖</div>
+            <div ng-click="checked=4;goTop();choseState('3')">已过期</div>
+        </div>
+        <div class="c-tab-line"></div>
+    </div>
+</ion-header-bar>
+<ion-content overflow-scroll="false" class="prize-main">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="do_refresher()"></ion-refresher>
+    <div class="list">
+        <a class="item item-thumbnail-left" ng-repeat="x in items track by $index" repeat-finish="loadFinish()" ng-click="goCheck(x)">
+            <img ng-src="{{x.mw_prizeid_img_show}}" class="">
+            <h2 ng-bind="x.mw_productname"></h2>
+            <p>活动名称：{{x.mw_activity_name}}</p>
+            <p>状态：{{x.mw_state_nameref}}</p>
+            <p>中奖时间：{{x.mw_winningtime}}</p>
+            <p ng-show="x.mw_state == 2">兑奖时间：{{x.mw_granttime}}</p>
+            <div class="box-center">
+                <!-- <div ng-if="x.mw_state==1" class="button button-small button-balanced btn-right" ng-click="goCheck(x)">
+                    立即领奖
+                </div> -->
+                <div class="item-state-img" ng-show="x.mw_state == 3 "><img src="img/mobile/coupon/outdate.png" alt=""></div>
+                <div class="item-state-img" ng-show="x.mw_state == 2 "><img src="img/mobile/coupon/exchanged.png" alt=""></div>
+                <div class="item-state-btn">
+                    <i class="icon ion-ios-arrow-right color-gray"></i>
+                </div>
+            </div>
+        </a>
+    </div>
+    <ion-infinite-scroll ng-if="items.length>0" on-infinite="loadMore()" distance="1%" immediate-check="false"></ion-infinite-scroll>
+</ion-content>

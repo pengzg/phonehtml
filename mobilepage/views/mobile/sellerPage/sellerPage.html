@@ -1,0 +1,64 @@
+<div class="seller-page-main">
+	<ion-content>
+        <div class="seller-slide">
+            <ion-slide-box does-continue="true" auto-play="true" slide-interval="3000">
+                <ion-slide>
+                    <div class="seller-img">
+                        <img src="../../img/mobile/sellerPage/seller1.png" alt="">
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="seller-img">
+                        <img src="../../img/mobile/sellerPage/seller2.png" alt="">
+                    </div>
+                </ion-slide>
+                <ion-slide on-slide-changed="slideHasChanged(index)">
+                    <div class="seller-img">
+                        <img src="../../img/mobile/sellerPage/seller3.png" alt="">
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+        <div class="seller-title">
+        	<div class="seller-name">
+        		<span>洋货铺子</span>
+        	</div>
+        	<div class="seller-detail">
+        		<div class="seller-left">人气：24</div>
+        		<div class="seller-right">人均：50</div>
+        	</div>
+        </div>
+        <div class="list">
+        <a class="item item-icon-left item-icon-right" ng-click="goCash()">
+		    <i class="icon ion-ios-location" style="color: #ef6565;"></i>
+		    北京市海淀区中关村南大街12号农业科学院13号
+		    <i class="icon ion-ios-telephone color-gray"></i>
+		 </a>
+        <a class="item item-icon-left item-icon-right" ng-click="goPrize()">
+		    <i class="icon ion-android-volume-up" style="color: #3acc3a;"></i>
+		    暂无公告
+		    <i class="icon"></i>
+		</a>
+        <a class="item item-icon-left item-icon-right" ng-click="goCoupon()">
+		    <i class="icon ion-thumbsup green" style="color: #FFCC00;"></i>
+		    商家推荐
+		    <i class="icon ion-ios-arrow-right color-gray"></i>
+		</a>
+        <a class="item item-icon-left item-icon-right">
+		    <i class="icon ion-cube" style="color: #ef6565;"></i>
+		    商家活动
+		    <i class="icon ion-ios-arrow-right color-gray"></i>
+		</a>
+        <a class="item item-icon-left item-icon-right" ng-click="goData()">
+		    <i class="icon ion-document-text" style="color: #3acc3a;"></i>
+		    商家详情
+		    <i class="icon ion-ios-arrow-right color-gray"></i>
+		</a>
+        <a class="item item-icon-left item-icon-right" ng-click="goData()">
+		    <i class="icon ion-images" style="color: #FFCC00;"></i>
+		    商家环境
+		    <i class="icon ion-ios-arrow-right color-gray"></i>
+		</a>
+    </div>
+    </ion-content>
+</div>

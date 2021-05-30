@@ -1,0 +1,153 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">会员等级列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+		<div>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="等级名称或折扣" ng-model="searchKey">
+		</div>
+		
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="searchKey='';doSearch();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success add-btn" style="float:right;margin-right:50px;" ng-click="toEdit();"><i class="icon icon-plus"></i>新增</a>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>会员等级名称</th>
+								<th>折扣</th>
+								<th>排序</th>
+								<th>状态</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in baseGradeList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.bg_title}}</td>
+								<td class="text-center f14">{{x.bg_discount}}</td>
+								<td class="text-center f14">{{x.bg_sort}}</td>
+								<td class="text-center f14">{{x.bg_state_nameref}}</td>
+								
+								<td class="text-center f14">
+									<a class="common_btns common_edit" ng-click="toEdit(x.bg_id)" title="修改"></a>
+									<a class="common_btns common_delete" ng-if="x.bg_state ==0" ng-click="toDelete(x.bg_id)" title="删除"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 遮挡层 -->
+<div class="dialog" ng-show="dialogShow">
+	<div class="dialog-zdc"></div>
+
+		<!-- 弹出添加计量单位框 -->
+		<div class="dg-xg-zh" style="width: 620px; margin-left: -310px; top: 50%; margin-top: -142px;" ng-show="dialogShow">
+			<div class="dg-xg-js" style="width: 620px">
+				{{dialogTitle}}
+				<div class="dg-cancle" ng-click="closeDialog()"></div>
+			</div>
+			<div class="dg-content" style="margin: 12px auto; overflow: visible;">
+				<div id="formJiLu" class="formJiLu" style="border: none">
+						<div>
+							<input type="hidden" ng-model="vo.bg_id">
+
+							<div class="contentGroup clearfix" >
+
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14" style="line-height: 32px;">排序序号</span> <i class="f14">*</i>
+								</div>
+								<div class="floatLeft p10left f14">
+									<input style="width: 210px;" type="number" class="js_sort" name="bg_sort" 
+									 ng-model="vo.bg_sort">
+									 值越大排序序号查询时越靠前
+								</div>
+							</div>
+
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14" style="line-height: 32px;">会员等级名称</span> <i class="f14">*</i>
+								</div>
+
+								<div class="floatLeft p10left" >
+									<input style="width: 210px;" type="text" name="vo.bg_title"
+										ng-model="vo.bg_title"  maxlength="15">
+								</div>
+							</div>
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14" style="line-height: 32px;">折扣</span> <i class="f14">*</i>
+								</div>
+
+								<div class="floatLeft p10left f14">
+									<input style="width: 210px;" class="js_discount" type="number" name="bg_discount"
+										ng-model="vo.bg_discount" >
+										请输入一个0到1之间的数
+								</div>
+							</div>
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14" style="line-height: 32px;">状态</span> <i class="f14">*</i>
+								</div>
+								<div class="floatLeft p10left" >
+									<zk-control-group ng-model="vo.bg_state"
+										data-option='[{"0":"禁用"},{"1":"启用"}]'></zk-control-group>
+								</div>
+							</div>
+
+						</div>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="createGrade();">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+		</div>
+
+</div>
+<script>
+$(function(){
+	$('.js_sort,.js_discount').bind('keydown', function(event) {
+
+		　　if (event.keyCode == "8") {
+
+		　　　　//回车执行查询
+
+		　　} else {
+				if(this.value.length>=10) return false;
+		　　}
+
+		});
+	
+	
+});
+
+</script>

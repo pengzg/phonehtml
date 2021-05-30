@@ -1,0 +1,113 @@
+<div class="xt_changeHtml">
+	<div class="xt_offOne tabUl-2 clearfix">
+		<ul>
+			<li ng-class="{'active':searchParam.ppm_state==''}" style="width: 95px;" ng-click="searchParam.ppm_state='';searchFun();"><a>全部</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">6</span></li>
+			<li ng-class="{'active':searchParam.ppm_state==3}" style="width: 115px;" ng-click="searchParam.ppm_state=3;searchFun();"><a>进行中</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">6</span></li>
+			<li ng-class="{'active':searchParam.ppm_state==2}" style="width: 95px;" class="" ng-click="searchParam.ppm_state=2;searchFun();"><a>暂存</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">2</span></li>
+			<li ng-class="{'active':searchParam.ppm_state==1}" style="width: 124px;" class="" ng-click="searchParam.ppm_state=1;searchFun();"><a>取消发布</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">2</span></li>
+			<li ng-class="{'active':searchParam.ppm_state==4}" style="width: 124px;" class="" ng-click="searchParam.ppm_state=4;searchFun();"><a>已结束</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">2</span></li>
+			<li style="float: right;" ng-show="false">
+				<div ng-class="{true:'switch-block',false:'switch-lines'}[showInForm]" ng-click="showInForm=!showInForm"></div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="search-filter-box">
+		<div>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="活动名称" ng-model="searchParam.searchKey">
+		</div>
+
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;" ng-click="searchFun();"><i class="glyphicon glyphicon-filter"></i>
+				筛选</a>
+			<a class="btn btn-default" ng-click="searchParam.searchKey='';searchFun();" style="text-shadow: none !important; color: #333 !important;"><i
+				 class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success add-btn" style="float:right;margin-right:50px;" ui-sref="index.marketing.promotionOrdertypeAdd"><i class="icon icon-plus"></i>新增</a>
+		</div>
+	</div>
+
+	<div class="xt_childTable">
+		<table class="table table3 table-striped table-hover table-bordered SortCss" ng-show="showInForm">
+			<thead>
+				<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+					<th class="colorCenter noSortCss" ng-show="false"><input type="checkbox" ng-model="allChecked" ng-change="toggleAll()"></th>
+					<th class="colorCenter noSortCss">活动名称</th>
+					<th class="colorCenter noSortCss">时间</th>
+					<th class="colorCenter noSortCss">订单类型</th>
+					<th class="colorCenter noSortCss">优惠金额</th>
+					<th class="colorCenter noSortCss">状态</th>
+					<th class="colorCenter noSortCss">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in ppmList" class="common-tr-height" ng-dblclick="showLeftPop($index)">
+					<th ng-show="false" class="colorCenter noSortCss"><input type="checkbox" ng-model="x.checked"></th>
+					
+					<td class="colorCenter">{{x.ppm_name}}</td>
+					<td class="colorCenter">
+						{{x.ppm_startdate}} 至{{x.ppm_enddate}}
+					</td>
+					<td class="colorCenter">
+						{{ordertypeList[x.ppm_def4]}}
+					</td>
+					<td class="colorCenter">
+							{{x.ppm_def5}}
+						</td>
+					<td ng-class="{'xt_colorRed':false}" class="colorCenter">
+						{{x.ppm_state_nameref}}
+					</td>
+					<td class="colorCenter" style="width:178px;">
+						<div class="colorCenter">
+							<a ng-show="false" class="common_btns common_detail" ng-click="goDetail(x,1)" title="详情"></a>
+							<a class="common_btns common_edit" ng-show="false" ng-click="goDetail(x,2)" title="编辑"></a>
+							<a ng-show="x.ppm_state == 3" class="common_btns common_publish_cancle" ng-click="updatePublish(x,1,$event)" title="取消发布"></a>
+							<a ng-show="x.ppm_state == 2" class="common_btns common_publish" ng-click="updatePublish(x,3,$event)" title="发布"></a>
+						<!-- 	<a ng-show="x.ppm_state == 1 || x.ppm_state == 4 " class="common_btns common_copy" ng-click="goDetail(x,2)" title="复制"></a> -->
+							<a ng-show="x.ppm_state != 3" class="common_btns common_delete" ng-click="deltePromotion(x,$event)" title="删除"></a>
+							<!-- <a href="" ng-show="x.ppm_isgroup=='Y'&&x.ppm_state == 3" class="blue" style="display: inline-block;" ng-click="insertGroupAuto(x);">自动开团</a> -->
+						</div>
+					</td>
+				</tr>
+
+			</tbody>
+		</table>
+		<div class="salesList" ng-show="!showInForm">
+			<div class="salesItem" ng-repeat="x in paList">
+				<div>
+					<span>
+						{{x.pa_activity_name}}
+					</span>
+					<span class="salesDetailBtn" ng-click="goDetail(x)">
+						详情>
+					</span>
+				</div>
+				<div>
+					<img ng-src="{{!x.pa_cover_show?'../../../../img/2017-02-27-01.png':x.pa_cover_show}}" alt="活动促销图" style="width: 100%;height: 150px;">
+				</div>
+				<div class="salesContent">
+					<div>
+						<div style="height: 40px;">有效时间:</div>
+						<div style="margin: 5px 0;">促销方式:</div>
+					</div>
+					<div>
+						<div style="height: 40px;width: 160px;">{{x.pa_activity_start}} 到 {{x.pa_activity_end}}</div>
+						<div style="margin: 5px 0;width: 160px;">满赠</div>
+					</div>
+				</div>
+				<div class="xt_filter floatRight m10left" style="margin-top: 10px;">
+					<a ng-show="x.ppm_state == 3" href="" class="btn btn-success floatRight" ng-click="updatePublish(x,1,$event)" style="height: 22px; line-height: 22px;margin-right: 10px">取消发布</a>
+					<a ng-show="x.ppm_state == 2" href="" class="btn btn-success floatRight" ng-click="updatePublish(x,3,$event)" style="height: 22px; line-height: 22px;margin-right: 10px">发布</a>
+					<a ng-show="x.ppm_state == 1" href="" class="btn btn-success floatRight" ng-click="updatePublish(x,3,$event)" style="height: 22px; line-height: 22px;margin-right: 10px">发布</a>
+					<a ng-show="x.ppm_state == 4" href="" class="btn btn-success floatRight" style="height: 22px; line-height: 22px;margin-right: 10px;background-color: #cac8c8;border-color: #cac8c8;color: #FFFFFF;">已结束</a>
+				</div>
+			</div>
+		</div>
+		<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+	</div>
+</div>

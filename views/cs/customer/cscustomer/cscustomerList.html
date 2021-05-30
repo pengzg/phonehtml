@@ -1,0 +1,993 @@
+<common-navigater data="[{name:'设置'},{name:'基础信息'},{name:'客户档案'}]"></common-navigater>
+<div class="xt_changeHtml" style="position: relative;">
+	<div class="treeStyle" style="top: 20px; border: 0;">
+		<div class="treeTitle" style="padding:2px 10px;height: 30px;">
+			<div class="userDocTitle" style="padding-left:10px;padding-right:10px;" ng-class="{'activeBaseUser':showTree==1}" ng-click="showTree=1">类别</div>
+			<div class="userDocTitle" style="padding-left:10px;padding-right:10px;" ng-class="{'activeBaseUser':showTree==2}" ng-click="showTree=2">区域</div>
+			<div class="userDocTitle" style="padding-left:10px;padding-right:10px;" ng-class="{'activeBaseUser':showTree==3}" ng-click="showTree=3">价格方案</div>
+		</div>
+		<ul tree id="tree" ng-show="showTree==1" ng-model="selectNode"
+			tree-click="selectCategory();" class="ztree"
+			data-options='{"url":"/admin/customer/csCategoryControl/queryCsCategoryTree.action"}'
+			style="width: 180px; overflow: auto;" need-up-down="true" max-length="5"></ul>
+		<ul ng-show="showTree==2" tree id="tree3" ng-model="selectArea" tree-click="selectAreaSearch(selectArea);" 
+		class="ztree" data-options='{"url":"/admin/base/baseAreaControl/queryBaseAreaTree.action"}' 
+		style="width:180px; overflow:auto;" max-length="9"></ul>
+		<ul ng-show="showTree==3">
+			<li class="btn_li_list" ng-repeat="x in priceGradeList" ng-click="chooseGrade(x);">{{x.gpg_title}}</li>
+		
+		</ul>
+	</div>
+	<div id="ztree-btn" class="ztree-btn">
+	</div>
+	<div class="treeContent">
+		<div class="xt_orderDetail">
+			<div class="tabChange">
+				<ul id="xt_tabUlTop" class="xt_tabUlTop"
+					style="height: 39px; border-bottom: 1px solid #ddd;">
+					<li ng-click="tabSelect('')"
+						ng-class="{true:'tabColor',false:''}[searchParam.cc_islocation == '']"
+						style="background-color: white; height: 38px; border-bottom: -1px;">全部</li>
+					<li ng-click="tabSelect('Y')"
+						ng-class="{true:'tabColor',false:''}[searchParam.cc_islocation == 'Y']"
+						style="background-color: white; height: 38px; border-bottom: -1px;">已定位</li>
+					<li ng-click="tabSelect('N')"
+						ng-class="{true:'tabColor',false:''}[searchParam.cc_islocation == 'N']"
+						style="background-color: white; height: 38px; border-bottom: -1px;">未定位</li>
+
+				</ul>
+
+				<div class="xt_tabUlBottom" style="margin-top: 10px;">
+					<div class="xt_offOne floatLeft"
+						style="width: 100%; margin-bottom: 15px;">
+						<div class="xt_filter f14">
+							用户信息&nbsp; <input type="text" ng-model="searchParam.searchKey"
+								placeholder="客户名称或编号" autocomplete="off" class=""
+								style="width: 130px; height: 26px; line-height: 26px;" ng-enter="searchFun()">
+						</div>
+						<div class="xt_filter m20left f14">
+							启用状态&nbsp;
+							<tm-select-search ng-model="searchParam.cc_stats" width="150"
+								data-options='{"url":"/admin/base/baseDataControl/detailItem.action?codekey=2006","valueField":"bd_code","textField":"bd_name","defSelect":true}'></tm-select-search>
+						</div>
+						<div class="xt_filter m20left f14">
+							绑定线路&nbsp; <span
+								class="inputSpanStyle ng-isolate-scope ng-valid ng-dirty ng-valid-parse"
+								style="width: 150px; height: 36px; overflow: visible;; width: 150px; height: 36px; overflow: visible;"
+								ng-model="searchParam.isBindLine" width="150"> <input
+								style="width: 114px; padding: 2px 10px; border: none !important;"
+								
+								class="inputTxt dropdown ng-pristine ng-valid ng-touched"
+								data-toggle="dropdown" type="text" value="" ng-model="bindName" autocomplete="off"
+								readonly="readonly"><i class="inputCiycle dropdown"
+								data-toggle="dropdown"></i>
+							   <div class="zk_selectDiv2" style="width: 152px;">
+									<span ng-click="searchParam.isBindLine='';bindName='全部';" class="stOption ng-binding ng-scope">全部</span>
+									<span ng-click="searchParam.isBindLine=1;bindName='已关联';" class="stOption ng-binding ng-scope">已关联</span>
+									<span ng-click="searchParam.isBindLine=2;bindName='未关联';" class="stOption ng-binding ng-scope">未关联</span>
+								</div>
+							</span>
+						</div>
+						<div class="xt_filter f14">
+							<a href="" class="btn btn-success" ng-click="searchFun();"
+								style="height: 22px; line-height: 22px; margin-top: 1px; min-width: 50px;">查询</a>
+						</div>
+						<div class="xt_addBtn">
+							<a href="" class="btnStyle Btncolor1 BtnHover1 ray5"
+								ng-click="toEdit();">新增</a>
+						</div>
+					</div>
+					<div class="xt_childTable">
+						<table
+							class="table table3 table-striped table-hover table-bordered SortCss">
+							<thead>
+								<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+								<th class=" noSortCss">
+									<label class="zk_inputCheckbox">
+										<input type="checkbox" class="zk_checkbox js_selectAll">
+										<div class="zk_checkboxImg"></div>
+									</label>
+								</th> 
+									<th class="colorCenter noSortCss">序号</th>
+
+									<th class=" noSortCss">客户名称</th>
+									<th class=" noSortCss">客户编号</th>
+									<th class="noSortCss">联系人</th>
+									<th class="noSortCss">联系电话</th>
+									<th class="noSortCss">区域</th>
+									<th class="noSortCss">价格方案</th>
+									<th class="noSortCss">拜访周期</th>
+									<th class="noSortCss">是否定位</th>
+									<th class=" noSortCss">商城开通</th>
+									<th class="noSortCss">用户类型</th>
+									<th class="noSortCss">状态</th>
+									<th class="noSortCss" style="width:90px;">添加时间</th>
+									<th ng-class="sortFun('',false);">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in csCustomerList" class="common-tr-height">
+									<td>
+										<label class="zk_inputCheckbox">
+											<input type="checkbox" class="zk_checkbox js_select" data-id="{{x.cc_id}}">
+											<div class="zk_checkboxImg"></div>
+										</label>
+									</td>
+									<td class="colorCenter">{{pager.rows * (pager.page - 1)+
+										$index+1}}</td>
+									<td>{{x.cc_name}}</td>
+									<td>{{x.cc_code}}</td>
+									<td>{{x.cc_contacts_name}}</td>
+									<td>{{x.cc_contacts_mobile}}</td>
+									<td>{{x.cc_areaid_nameref}}</td>
+									<td>{{x.cc_goods_gradeid_nameref}}</td>
+									<td>{{x.cc_visiting_cycle}}天/次</td>
+									<td class="colorCenter"><span ng-if="x.cc_islocation=='N'"
+										class="js_openMap" ng-click="showMap(x.cc_id);" title="未定位"><img
+											src="/img/nolocation.png"></span> <span
+										ng-if="x.cc_islocation=='Y'" ng-click="showMap(x.cc_id);"
+										class="js_resetMap"
+										location="{{x.cc_longitude}},{{x.cc_latitude}}" title="已定位"><img
+											src="/img/location.png"></span></td>
+
+									<td>
+										<a ng-if="x.cc_isaccount!='Y'" ng-click="updateAccount(x,$event)" title="开通商城" style="color: #337ab7;">未开通</a>
+										<a ng-if="x.cc_isaccount=='Y'" ng-click="updateAccount(x,$event)" title="取消开通" style="color: #337ab7;">已开通</a>
+									</td>
+									<!-- <td class="colorCenter"><span ng-show="x.cc_is_offer=='2'">否</span> <span
+										ng-show="x.cc_is_offer=='1'">是</span></td> -->
+									<td><span ng-if="x.cc_type=='1'">普通客户</span> 
+									<span ng-if="x.cc_type=='2'">业务员客户</span>
+									<span ng-if="x.cc_type=='3'">供应商客户</span></td>
+									<td>{{x.cc_stats_nameref}}</td>
+									<td>{{x.cc_addtime}}</td>
+									<td class="colorCenter">
+										<a class="common_btns common_edit" ng-click="toEdit(x.cc_id)" title="修改" ><!-- ng-if="x.cc_type != 2" --></a>
+										<a ng-if="x.cc_stats == 1" class="common_btns common_band" ng-click="toDelete(x.cc_id,'禁用')" title="禁用"></a>
+										<a ng-if="x.cc_stats == 0" class="common_btns common_active" ng-click="toDelete(x.cc_id,'启用')" title="启用"></a>
+										<a class="common_btns common_judge" ng-if="x.cc_checkstats==1" ng-click="toCheck(x.cc_id)" title="审核通过"></a></td>
+								</tr>
+
+							</tbody>
+						</table>
+						<div class="xt_filter floatLeft" style="position: relative;margin-left:80px;margin-top:7px;">
+							<a class="common_hover_btn" ng-click="changeCategoryBatch();">批量修改客户类别</a>
+							<a class="common_hover_btn" ng-click="changePriceBatch();">批量修改价格方案</a>
+						</div>
+						<!-- 分页 -->
+						<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+						<!--分页 -->
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div class="treeContent"></div>
+</div>
+<!-- 选择路线弹窗 start  -->
+<div class="dialog" ng-show="dialogShow2" style="z-index: 99999998">
+	<div class="dialog-zdc" style="z-index: 99999998"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index: 99999999; width: 637px; top: 50%; margin-top: -200px;"
+		ng-show="dialogShow2">
+		<div class="dg-xg-js" style="width: 637px;">
+			选择路线
+			<div class="dg-cancle" ng-click="closeSelectLine()"></div>
+		</div>
+		<div class="dg-content"
+			style="margin-bottom: 5px; margin-top: 5px; height: 300px; overflow-y: auto; overflow-x: hidden;">
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup"
+					style="width: 600px; height: auto !important">
+					<div class="zk_controlLabel">
+						<span class="f14">线路查询</span>
+					</div>
+					<div class="zk_controlInput" style="width: 344px;">
+						<input type="text" ng-model="test" style="width: 150px;">
+					</div>
+				</div>
+				<div class="zk_controlGroup"
+					style="width: 600px; height: auto !important">
+					<div class="zk_controlLabel">
+						<span class="f14">线路名称</span>
+					</div>
+					<div class="zk_controlRadio f14" style="width: 450px;margin-top: 2px;">
+						<lable style="margin:3px 0px 3px 8px;width: 100%;display: block;"
+							ng-repeat="line in baseLineList | filter:test"> 
+							<input style="position:relative;top:2px;" 
+							class="js_select2 f14" name="time" type="checkbox"
+							data-id="{{line.bl_id}}">
+							<span str-filter="{{line.bl_name}}"
+		 					max-length="28">{{line.bl_name}}</span> </lable>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="dg-submint"
+			style="margin-left: 410px; margin-bottom: 20px;">
+			<div class="btnStyle Btncolor1 BtnHover1" ng-click="subSelectLine();">确定</div>
+			<div class="btnStyle Btncolor2 BtnHover2"
+				ng-click="cancelSelectLine(0)">取消</div>
+		</div>
+	</div>
+</div>
+<!-- 选择路线弹窗end  -->
+<script type="text/javascript">
+	$("#ztree-btn").click(function() {
+		$(".xt_changeHtml").toggleClass("enable");
+		$(".xt_changeHtml").siblings().removeClass("enable");
+	})
+</script>
+
+
+<!-- 选择渠道选择 start  -->
+<div class="dialog" ng-show="showBox" style="z-index: 200">
+	<div class="dialog-zdc" ng-show="dialogShow" style="z-index: 200"></div>
+	<div class="dg-xg-zh"
+		style="z-index: 200; width: 438px; margin-left: -219px; top: 50%; margin-top: -205px;"
+		ng-show="showBox">
+		<div class="dg-xg-js" style="width: 438px; z-index: 201;">
+			选择渠道
+			<div class="dg-cancle" ng-click="cancleBtnClick(0)"></div>
+		</div>
+		<form role="form" name="myform">
+			<div class="dg-content"
+				style="margin-bottom: 0px; margin-top: 0px; height: 320px; overflow: auto; z-index: 100;">
+				<div style="border-right: none;">
+					<ul tree id="tree4" ng-model="selectNode" class="ztree f14"
+						data-options='{"url":"/admin/customer/csChannelTypeControl/queryCsChannelTypeTree.action"}'
+						style="width: 400px; overflow: auto; border-right: none;" max-length="25"></ul>
+				</div>
+			</div>
+		</form>
+		<div class="dg-submint"
+			style="width: 100%; text-align: center; margin: 10px 0;">
+			<div class="btnStyle Btncolor1 BtnHover1"
+				ng-click="selectChannel(selectNode)">确定</div>
+			<div class="btnStyle Btncolor2 BtnHover2"
+				ng-click="cancleBtnClick(0)">取消</div>
+		</div>
+	</div>
+</div>
+<!-- 选择渠道选择 end  -->
+
+<!-- 详情弹窗 start  -->
+<div class="dialog" ng-show="dialogShow" style="z-index: 88">
+	<div class="dialog-zdc" ng-show="dialogShow" style="z-index: 88"></div>
+	<div class="dg-xg-zh"
+		style="z-index: 99; width: 1000px; margin-left: -500px; top: 10px;position: absolute;"
+		ng-show="dialogShow">
+		<div class="dg-xg-js" style="width: 1000px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		<form class="form-horizontal w5c-form demo-form" role="form"
+			w5c-form-validate="vm" novalidate name="validateForm">
+			<div class="dg-content"
+				style="margin-bottom: 10px; margin-top: 10px;">
+				<div class="tabUl clearfix" style="margin-bottom: 0;">
+					<ul>
+						<li class="active jsInit"><a href="javascript:void(0)"
+							type="#tab1">基本信息</a></li>
+						<li><a href="javascript:void(0);" type="#tab2">附属信息</a></li>
+					</ul>
+				</div>
+				<div class="t-tabContent"
+					style="overflow-y: auto; overflow-x: hidden; height: 483px;">
+					<div class="t-box" id="tab1">
+						<!-- div class="tab-panel"> -->
+						<div class="panel panel-default" style="border: 0">
+							<div class="panel-content">
+								<div class="panel-content-box">
+									<div class="leftPhoto">
+										<div class="t-leftImg">
+											<span style="height: 162px; width: 162px;"> <img
+												style="height: 162px; width: 164px; background-color: #eee;"
+												id="pic" src="{{vo.cc_image}}" />
+											</span>
+											<div class="sele_pic">
+												<a href="javascript:void(0);" ng-click="upImage($event)">选择照片</a>
+												<div
+													style="margin-bottom: 1.25rem; width: 594px; display: inline-block;"
+													id="myeditor" get-ue="ue_myeditor = getUe" ng-show="false"
+													class="ueditor" ng-model="gb_content"></div>
+											</div>
+										</div>
+									</div>
+									<div class="rightLi">
+										<ul>
+											<li>
+												<div class="t-input-group">
+													<span class="input-group-addon" style="width: 130px;">
+														<span class="star">*</span> 客户名称
+													</span>
+													<div class="floatLeft">
+														<input class="t-input" ng-maxlength="20" name="cc_name"
+															ng-model="vo.cc_name" required type="text"
+															style="width: 190px; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="t-input-group mtop15">
+													<span class="input-group-addon" style="width: 130px;">
+														<!-- <span class="star">*</span> --> 客户编号
+													</span>
+													<div class="floatLeft">
+														<input class="t-input" type="text" name="cc_code"
+															ng-model="vo.cc_code" 
+															style="width: 190px; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="t-input-group mtop15">
+													<span class="input-group-addon" style="width: 130px;">
+														<span class="star"></span> 客户条码
+													</span> <input class="t-input" type="text" name="cc_barcode"
+														ng-model="vo.cc_barcode"
+														style="width: 190px; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+												</div>
+											</li>
+											<li>
+												<div class="t-input-group mtop15">
+													<span class="input-group-addon"
+														style="width: 130px; line-height: 18px;"> 
+														<span class="star">*</span>价格方案</span>
+													<div class="floatLeft">
+														<tm-select ng-if="dialogShow" ng-model="vo.cc_goods_gradeid" data-options='{"url":"/admin/goods/gsPriceGradeControl/queryItem.action","valueField":"gpg_id","textField":"gpg_title"}' width="200px;"></tm-select>
+														<input type="text" ng-model="vo.cc_goods_gradeid" name="cc_goods_gradeid" required ng-show="false">
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div class="content-allLi clearfix">
+										<div class="panel panel-default mtop10">
+											<div class="panel-heading f14">
+												选择线路 &nbsp;&nbsp;&nbsp;
+												<a ng-click="showSelectLine();" style="" class="f14" ng-show="cwState==1">点击选择线路</a>
+												<a ng-show="cwState != 1">客户存在欠款或者未审核财务单据无法操作线路</a>
+											</div>
+											<div class="panel-content" style="overflow: hidden;">
+												<lable class="m10right js_selectedLines f14"
+													data-id="{{line.bl_id}}" style="margin-bottom:8px"
+													ng-repeat="line in baseLineList"> {{line.bl_name}}<img
+													ng-click="delLine(line.bl_id);" ng-show="cwState==1"
+													src="../../../../img/shanchu.png" /> </lable>
+											</div>
+										</div>
+
+										<div 
+											style="width: 100%; text-align: center; margin-top: 10px;">
+											<div class="btnStyle Btncolor1 BtnHover1"
+												w5c-form-submit="submit();">保存</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="t-box" id="tab2">
+						<div class="panel-content" style="overflow: hidden">
+							<div class="panel-content-box">
+								<div class="content-allLi clearfix">
+									<ul>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 联系人 </span>
+												<div class="floatLeft">
+													<input class="t-input" type="text" name="cc_contacts_name"
+														ng-model="vo.cc_contacts_name"
+														style="width: 190px; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 邮政编码 </span>
+												<div class="floatLeft">
+													<input class="t-input" type="text"
+														ng-model="vo.cc_postcode" name="cc_postcode"
+														style="width: 190px; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+												</div>
+											</div>
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 详细地址 </span>
+												<div class="floatLeft">
+													<input class="t-input" type="text" name="cc_address"
+														ng-model="vo.cc_address"
+														style="width: 190px; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+												</div>
+											</div>
+										</li>
+
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 电话 </span>
+												<div class="floatLeft">
+													<input class="t-input" type="text"
+														name="cc_contacts_mobile"
+														ng-model="vo.cc_contacts_mobile"
+														ng-pattern="/^1\d{10}$/"
+														style="width: 190px; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+												</div>
+											</div>
+										</li>
+									</ul>
+									<ul>
+										<li>
+
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 拜访周期 </span> <span
+													class="posRelative floatLeft" style="width: 130px;">
+													<input class="t-input" type="text" name="cc_visiting_cycle"
+													ng-model="vo.cc_visiting_cycle" ng-pattern="/^\d{1,2}$/"
+													style="width: 131px;">
+												</span> <span class="input-group-addon"> 天 </span>
+
+											</div>
+										</li>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 备注 </span>
+												<div class="floatLeft">
+													<input class="t-input" type="text" name="cc_remarks"
+														ng-model="vo.cc_remarks"
+														style="width: 190px; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+												</div>
+											</div>
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 渠道类型 </span>
+												<div class="floatLeft">
+													<input class="t-input" type="text"
+														placeholder="{{vo.cc_channelid_nameref}}"
+														ng-click="showSelectChannel();"
+														style="width: 190px; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; border-right: 1px solid #ccc; line-height: 18px;">
+													状态 </span>
+												<div class="floatLeft" style="width: 170px;">
+													<zk-control-group ng-model="vo.cc_stats"
+														data-option='[{"0":"禁用"},{"1":"启用"}]'></zk-control-group>
+												</div>
+											</div>
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 业务员 </span> <span
+													class="posRelative floatLeft" style="width: 129px;">
+													<input class="t-input dropdown" style="width: 132px;"
+													type="text" data-toggle="dropdown" ng-model="saleman_name">
+													<div class="droplistWrap" style="width: 168px; top: 32px;">
+														<div class="droplist">
+															<span class="listItem" ng-repeat="x in userdocList"
+																ng-click="choseUserdoc(x);">{{x.bud_name}}</span>
+														</div>
+
+													</div>
+												</span> <span class="input-group-addon" ng-click="deleteUserdoc();">
+													<img src="../../../../img/shanchu.png" />
+												</span>
+											</div>
+										</li>
+										<li>
+
+
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 安全欠款金额 </span> <span
+													class="posRelative floatLeft" style="width: 130px;">
+													<input class="t-input" type="text"
+													name="cc_safety_arrears_num"
+													ng-model="vo.cc_safety_arrears_num"
+													ng-pattern="/^\d+(\.{0,1}\d+){0,1}$/" style="width: 131px;">
+												</span> <span class="input-group-addon"> 元 </span>
+
+											</div>
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 安全欠款天数 </span> <span
+													class="posRelative floatLeft" style="width: 130px;">
+													<input class="t-input" type="text"
+													name="cc_safety_arrears_day"
+													ng-model="vo.cc_safety_arrears_day"
+													ng-pattern="/^\d{1,4}$/" style="width: 131px;">
+												</span> <span class="input-group-addon"> 天 </span>
+
+											</div>
+										</li>
+										<li>
+
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 对账日期 </span> <span
+													class="posRelative floatLeft" style="width: 130px;">
+													<input class="t-input" type="text" name="cc_check_account"
+													ng-model="vo.cc_check_account"
+													ng-pattern="/^([1-9]|[12]\d|3[0-1])$/"
+													style="width: 131px;">
+												</span> <span class="input-group-addon" style="padding-left: 3px;">
+													号/每月 </span>
+
+											</div>
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; border-right: 1px solid #ccc; line-height: 18px;">
+													是否报货 </span>
+
+												<div class="floatLeft" style="width: 170px;">
+													<zk-control-group data-htmlId="ios-checkbox2"
+														ng-model="vo.cc_is_offer"
+														data-option='[{"2":"不开启"},{"1":"开启"}]'>
+													</zk-conulol-group>
+												</div>
+											</div>
+										</li>
+										<li>
+
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 月拜访目标数 </span> <span
+													class="posRelative floatLeft" style="width: 130px;">
+													<input class="t-input" type="text" name="cc_visiting_num"
+													ng-model="vo.cc_visiting_num" ng-pattern="/^\d{1,4}$/"
+													style="width: 131px;">
+												</span> <span class="input-group-addon">家</span>
+
+											</div>
+										</li>
+									</ul>
+									<ul>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 最后拜访达成日期 </span>
+												<div class="floatLeft">
+													<input class="t-input" type="text"
+														name="cc_last_visiting_date"
+														ng-model="vo.cc_last_visiting_date" readonly
+														style="width: 190px; background-color: #eee; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; line-height: 18px;"> 所属区域 </span>
+												<div class="floatLeft">
+													<input class="t-input" type="text"
+														name="cc_areaid_nameref"
+														ng-model="vo.cc_areaid_nameref" readonly ng-click="showArea=true"
+														style="width: 190px; border-top-right-radius: 4px !important; border-bottom-right-radius: 4px !important">
+													<input ng-model="vo.cc_areaid" name="cc_areaid" ng-show="false">
+												</div>
+											</div>
+										</li>
+									</ul>
+									<ul>
+										<li ng-show="false">
+											<div class="t-input-group mtop15">
+												<span class="input-group-addon"
+													style="width: 130px; border-right: 1px solid #ccc; line-height: 18px;">
+													是否开通商城 </span>
+
+												<div class="floatLeft" style="width: 170px;">
+													<zk-control-group data-htmlId="ios-checkbox4"
+														ng-model="vo.cc_isaccount"
+														data-option='[{"N":"不开启"},{"Y":"开启"}]'>
+													</zk-conulol-group>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="floatLeft posRelative SelectMulti-Container2"
+												style="margin-left: 80px;margin-top: 14px">
+												<span class="input-group-addon"
+													style="width: 130px; height: 36px; line-height: 22px;">商城默认发货仓库 </span>
+												<input class="floatLeft" type="text" onclick="showDropList(this);" ng-click="getStoreHouse();"
+													ng-model="vo.cc_depotid_nameref" id="selectStoreHouseItem"
+													style="width: 129px; height: 24px; border-radius: 0;"
+													ng-keyup="storePager.searchKey=vo.cc_depotid_nameref;getStoreHouse();" />
+												<div class="droplistWrap2"
+													style="width: 192px; top: -225px; left: 129px; height: 202px;">
+													<div class="droplist" style="height: auto;">
+														<span class="listItem" ng-repeat="x in storeHouseList"
+															ng-click="chooseStore(x)">{{x.bs_name}}</span>
+													</div>
+												</div>
+												<div class="droplistWrap2 zk_fanye"
+													style="width: 192px !important; top: -23px !important; left: 129px !important;">
+													<a ng-click="prevPage(storePager,getStoreHouse)"
+														class="m5right m6left">上一页</a> <a
+														ng-click="nextPage(storePager,getStoreHouse)" class="m5right">下一页</a>
+													<span class="m5right">{{storePager.page}}/{{storePager.pageTotal}}</span>
+													<span>共{{storePager.total}}条</span>
+												</div>
+												<span class="input-group-addon" style="width: 40px; height: 36px;"><img
+													src="../../img/shanchu.png" alt="删除"
+													ng-click="vo.cc_depotid_nameref = '';vo.cc_depotid = '';storePager.searchKey='';getStoreHouse();" /></span>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div 
+								style="width: 100%; text-align: center; margin-top: 10px;">
+								<div class="btnStyle Btncolor1 BtnHover1"
+									w5c-form-submit="submit();">保存</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 详情弹窗 end  -->
+<!-- 地图定位 start  -->
+<div class="dialog" ng-show="mapShow" style="z-index: 98;">
+	<div class="dialog-zdc" ng-show="mapShow" style="z-index: 98;"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" ng-show="mapShow"
+		style="z-index: 99; width: 980px; top: 50px; margin-left: -490px;">
+		<div class="dg-xg-js f14" style="width: 980px;">
+			地图定位
+			<div class="dg-cancle" ng-click="hideMap();"></div>
+		</div>
+		<div>
+			<div style="width: 963px; height: 500px;">
+				<div id="r-result" class="f14" style="margin-top: 20px">
+					&nbsp;&nbsp;地点: &nbsp<input type="text" id="suggestId" size="20"
+						value="" style="width: 150px; height: 20px;" />
+					<div class="btnStyle Btncolor1 BtnHover1 js_searchMap f14">搜索</div>
+					&nbsp;&nbsp;已选择: &nbsp;<input type="text" id="selectlng" size="20"
+						value="" style="width: 70px;" />&nbsp;<input type="text"
+						id="selectlat" size="20" value="" style="width: 70px;" />
+				</div>
+				<div id="searchResultPanel"
+					style="border: 1px solid #C0C0C0; width: 150px; height: auto; display: none; z-index: 1000"></div>
+				<div id="allmap"
+					style="width: 100%; height: 90%; margin-top: 1%; margin-left: 1%">
+				</div>
+			</div>
+		</div>
+		<div class="dg-submint" style="text-align: center; margin: 10px;">
+			<div class="btnStyle Btncolor1 BtnHover1"
+				ng-click="updateLocation();">确定</div>
+			<div class="btnStyle Btncolor2 BtnHover2 " ng-click="hideMap();">取消</div>
+		</div>
+	</div>
+</div>
+<!-- 选择客户类别选择 start  -->
+<div class="dialog" ng-show="showSelectCategory" style="z-index: 200">
+	<div class="dialog-zdc" ng-show="dialogShow5" style="z-index: 200"></div>
+	<div class="dg-xg-zh"
+		style="z-index: 200; width: 438px; margin-left: -219px; top: 50%; margin-top: -205px;"
+		ng-show="showSelectCategory">
+		<div class="dg-xg-js" style="width: 438px; z-index: 201;">
+			选择客户类别
+			<div class="dg-cancle" ng-click="cancelChangeCategory()"></div>
+		</div>
+		<form role="form" name="myform">
+			<div class="dg-content"
+				style="margin-bottom: 0px; margin-top: 0px; height: 320px; overflow: auto; z-index: 100;">
+				<div style="border-right: none;">
+					<ul tree id="tree2" ng-model="selectNode" class="ztree f14" tree-click="selectCsCategory();"
+						data-options='{"url":"/admin/customer/csCategoryControl/queryCsCategoryTree.action"}'
+						style="width: 200px; overflow: auto; border-right: none;"></ul>
+				</div>
+			</div>
+		</form>
+		<div class="dg-submint"
+			style="width: 100%; text-align: center; margin: 10px 0;">
+			<div class="btnStyle Btncolor1 BtnHover1"
+				ng-click="changeCategory();">确定</div>
+			<div class="btnStyle Btncolor2 BtnHover2"
+				ng-click="cancelChangeCategory()">取消</div>
+		</div>
+	</div>
+</div>
+<!-- 选择客户类别选择 end  -->
+<!-- 选择区域选择 start  -->
+<div class="dialog" ng-if="showArea">
+	<div class="dialog-zdc"></div>
+	<div class="dg-xg-zh"
+		style=" width: 438px; margin-left: -219px; top: 50%; margin-top: -205px;"
+		ng-if="showArea">
+		<div class="dg-xg-js" style="width: 438px;">
+			选择区域
+			<div class="dg-cancle" ng-click="cancleBtnClick(0)"></div>
+		</div>
+		<form role="form" name="myform">
+			<div class="dg-content"
+				style="margin-bottom: 0px; margin-top: 0px; height: 320px; overflow: auto; z-index: 100;">
+				<div style="border-right: none;">
+					<ul tree id="tree2" ng-model="vo.selectNode" class="ztree f14"
+						data-options='{"url":"/admin/base/baseAreaControl/queryBaseAreaTree.action"}'
+						style="width: 400px; overflow: auto; border-right: none;" max-length="25"></ul>
+				</div>
+			</div>
+		</form>
+		<div class="dg-submint"
+			style="width: 100%; text-align: center; margin: 10px 0;">
+			<div class="btnStyle Btncolor1 BtnHover1"
+				ng-click="selectArea(vo.selectNode)">确定</div>
+			<div class="btnStyle Btncolor2 BtnHover2"
+				ng-click="cancleBtnClick(0)">取消</div>
+		</div>
+	</div>
+</div>
+<!-- 选择区域选择 end  -->
+<!-- 选择价格方案弹窗 start  -->
+<div class="dialog" ng-show="dialogShow3" >
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style=" width: 637px; top: 50%; margin-top: -200px;"
+		ng-show="dialogShow3">
+		<div class="dg-xg-js" style="width: 637px;">
+			选择价格方案
+			<div class="dg-cancle" ng-click="closeShow3();"></div>
+		</div>
+		<div class="dg-content"
+			style="margin-bottom: 5px; margin-top: 5px; height: 300px; overflow-y: auto; overflow-x: hidden;">
+			<div class="zk_baseInfoBox mtop16">
+				
+				<div class="zk_controlGroup"
+					style="width: 600px; height: auto !important">
+					<div class="zk_controlLabel">
+						<span class="f14">价格方案</span>
+					</div>
+					<div class="zk_controlRadio f14" style="width: 450px;margin-top: 2px;">
+						<tm-select ng-model="priceId" data-options='{"url":"/admin/goods/gsPriceGradeControl/queryItem.action","valueField":"gpg_id","textField":"gpg_title"}' width="200px;"></tm-select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="dg-submint"
+			style="margin-left: 410px; margin-bottom: 20px;">
+			<div class="btnStyle Btncolor1 BtnHover1" ng-click="subSelectPriceId($event);">确定</div>
+			<div class="btnStyle Btncolor2 BtnHover2"
+				ng-click="closeShow3()">取消</div>
+		</div>
+	</div>
+</div>
+<!-- 用户名密码弹窗 -->
+<div class="dialog" ng-show="isPassWord" >
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style=" width: 300px; top: 50%; margin-top: -200px;margin-left: -150px;"
+		ng-show="isPassWord">
+		<div class="dg-xg-js" style="width: 300px;">
+			商城账号已开通，账号信息如下：
+			<div class="dg-cancle" ng-click="closePassWord();"></div>
+		</div>
+		<div class="dg-content"
+			style="margin-bottom: 5px; margin-top: 5px; height: 130px; overflow-y: auto; overflow-x: hidden;">
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup"
+					style="width: 100%; height: auto !important">
+					<div class="zk_controlLabel">
+						<span class="f14">客户名：</span>
+					</div>
+					<div class="zk_controlLabel" >
+						<span style="float: left;margin-left: 10px;">{{name}}</span>
+					</div>
+				</div>
+				<div class="zk_controlGroup"
+					style="width: 100%; height: auto !important">
+					<div class="zk_controlLabel">
+						<span class="f14">账号：</span>
+					</div>
+					<div class="zk_controlLabel" >
+						<span style="float: left;margin-left: 10px;">{{account}}</span>
+					</div>
+				</div>
+				<div class="zk_controlGroup"
+					style="width: 100%; height: auto !important">
+					<div class="zk_controlLabel">
+						<span class="f14">密码：</span>
+					</div>
+					<div class="zk_controlLabel">
+						<span style="float: left;margin-left: 10px;">{{pass}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="dg-submint"
+			style="margin-bottom: 20px;text-align: center;">
+			<!-- <div class="btnStyle Btncolor1 BtnHover1" ng-click="subSelectPriceId($event);">确定</div> -->
+			<div class="btnStyle Btncolor2 BtnHover2"
+				ng-click="isPassWord=false;">关闭</div>
+		</div>
+	</div>
+</div>
+<!-- 地图定位 end  -->
+<input type="hidden" id="location" value="{{location}}">
+<style>
+#tab2 ul>li {
+	height: 50px;
+}
+
+.tabColor {
+	height: 40px;
+	background-color: white;
+	border-top: 1px solid #ddd;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #fff;
+}
+</style>
+
+<script type="text/javascript">
+	$(function() {
+		$(".tabUl li").click(function() {
+			$(this).siblings('li').removeClass('active');
+			$(this).addClass('active');
+		});
+
+		$(".tabUl-2 li").click(function() {
+			$(this).siblings('li').removeClass('active');
+			$(this).addClass('active');
+		});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$(".tabUl li").click(function() {
+			$(".tabUl li").removeClass("active");
+			$(this).addClass("active");
+			$(".t-box").hide();
+			var activeTab = $(this).find("a").attr("type");
+			$(activeTab).fadeIn();
+			return false;
+		});
+
+		// 显示定位
+		$('body').on("click", '.js_openMap', function() {
+			openMap("");
+		});
+
+	});
+</script>
+<script>
+	// 声明地图
+	var map;
+	function openMap(location) {
+		$('#map_show').show();
+		$("#close_mapbtn").show();
+		$("#open_mapbtn").hide();
+		map = new BMap.Map("allmap"); // 创建Map实例
+		map.centerAndZoom(new BMap.Point(116.404, 39.915), 11); // 初始化地图,设置中心点坐标和地图级别
+		map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+
+		// if (bcm_city != "") {
+		// 设置地图显示的城市 此项是必须设置的
+		// console.log(location);
+		if (location != "") {
+			var res = location.split(',');
+			$("#selectlng").val(res[0]);
+			$("#selectlat").val(res[1]);
+			setpoint(res[0], res[1]);
+			map.centerAndZoom(new BMap.Point(res[0], res[1]), 11);
+		} else {
+			var res = $("#location").val().split(',');
+			map.centerAndZoom(new BMap.Point(res[0], res[1]), 11);
+		}
+		map.enableScrollWheelZoom(true);
+		//第4步：向地图中添加缩放控件
+		var ctrlNav = new window.BMap.NavigationControl({
+			anchor : BMAP_ANCHOR_TOP_LEFT,
+			type : BMAP_NAVIGATION_CONTROL_LARGE
+		});
+		map.addControl(ctrlNav);
+		//第5步：向地图中添加缩略图控件
+		var ctrlOve = new window.BMap.OverviewMapControl({
+			anchor : BMAP_ANCHOR_BOTTOM_RIGHT,
+			isOpen : 1
+		});
+		map.addControl(ctrlOve);
+
+		//第6步：向地图中添加比例尺控件
+		var ctrlSca = new window.BMap.ScaleControl({
+			anchor : BMAP_ANCHOR_BOTTOM_LEFT
+		});
+		map.addControl(ctrlSca);
+		//单击获取点击的经纬度
+		map.addEventListener("click", function(e) {
+			setpoint(e.point.lng, e.point.lat);
+
+			$("#selectlng").val(e.point.lng);
+			$("#selectlat").val(e.point.lat);
+		});
+	}
+	// 关闭地图
+	function closeMap() {
+		$('#map_show').hide();
+		$("#close_mapbtn").hide();
+		$("#open_mapbtn").show();
+	}
+
+	// 创建标注
+	function setpoint(x, y) {
+		map.clearOverlays();
+		var new_point = new BMap.Point(x, y);
+		var marker = new BMap.Marker(new_point); // 创建标注
+		map.addOverlay(marker); // 将标注添加到地图中
+		map.panTo(new_point);
+	}
+	// 地图搜索 
+	$('.js_searchMap').click(function() {
+		var posi = $('#suggestId').val();
+		map.centerAndZoom(posi, 12);
+	});
+	// 重新定位
+	$('body').on('click', '.js_resetMap', function() {
+		var location = $(this).attr("location");
+		openMap(location);
+
+	});
+</script>
+<script type="text/javascript">
+	$(function() {
+		$(document).on('click', function(ev) {
+			if ($(ev.target).parents('.SelectMulti-Container2').length) {
+				return
+			}
+			$('.droplistWrap2').hide();
+		})
+		 $(".tabUl-2>ul>li>a").click(function(){
+		    	$('.droplistWrap2').hide();
+		    	$('.r_js_selectAll').prop('checked',false);
+		    	$('.imputLayer').hide();
+		    });
+	});
+	function showDropList(obj){
+    	$('.droplistWrap2').hide();
+		$(obj).parent().find('.droplistWrap2').toggle();
+    };
+</script>

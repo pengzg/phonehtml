@@ -1,0 +1,260 @@
+<div class="contentHtml-new" style="background-color: #fff;left:0;">
+
+	<div class="content-box">
+		<!-- 实时概况 -->
+		<div class="module-box">
+			<div class="module-head">
+				<div class="left-box">
+					<span class="title">实时概况</span>
+					<span class="time">更新时间：2018-08-13 15:32:09</span>
+				</div>
+				<div class="shop-box">
+					<span class="active">全店</span>|<span>网店</span>|<span>所有门店<img src="/img/components/arrow_left.png" class="showShopList"
+						 style="transform: rotate(270deg);" /></span>
+					<div class="shop-list">
+						<ul>
+							<li>小李门店1</li>
+							<li>小张门店1</li>
+							<li>小王门店1</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="module-content1">
+				<div class="con-left-box">
+					<div class="left-top-box">
+						<div>支付金额(元)</div>
+						<div>0.00</div>
+						<div>
+							昨天全天:0.00
+						</div>
+					</div>
+					<div>
+						<div id="echarts-box-1" style="width:auto;height:200px;"></div>
+					</div>
+
+				</div>
+				<div class="con-right-box">
+					<div>
+						<div>
+							<div>
+								<img src="/img/dingzhi_icon_1.png" />
+							</div>
+							<div>
+								<div>支付客户数</div>
+								<div>0</div>
+								<div>昨天全天：0</div>
+							</div>
+						</div>
+						<div>
+							<div>
+								<img src="/img/dingzhi_icon_1.png">
+							</div>
+							<div>
+								<div>支付订单数</div>
+								<div>0</div>
+								<div>昨天全天：0</div>
+							</div>
+						</div>
+					</div>
+					<div>
+						<div>
+							<div>
+								<img src="/img/dingzhi_icon_1.png">
+							</div>
+							<div>
+								<div>成功退款金额(元)</div>
+								<div>0</div>
+								<div>昨天全天：0</div>
+							</div>
+						</div>
+						<div>
+							<div>
+								<img src="/img/dingzhi_icon_1.png">
+							</div>
+							<div>
+								<div>客单价(元)</div>
+								<div>0</div>
+								<div>昨天全天：0</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- 头部tab -->
+		<div class="head-div">
+			<div>
+				<ul>
+					<li class="active">运营视窗</li>
+					<!-- <li>管理视窗</li> -->
+				</ul>
+			</div>
+			<div class="select-box">
+				<select>
+					<option>日</option>
+					<option>周</option>
+					<option>月</option>
+					<option>季度</option>
+				</select>
+				<input type="text" class="Wdate" autocomplete="off"  style="width: 85px; height: 21px; border-top-left-radius: 0; border-bottom-left-radius: 0;"
+				 id="start_date" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'});$('.posRelative').removeClass('open');" />
+				 <!-- <input type="text" class="Wdate" id="d122" onclick="WdatePicker({isShowWeek:true,onpicked:function() {$dp.$('d122').value=$dp.cal.getP('y')+$dp.cal.getP('W','WW');$dp.$('d122_2').value=$dp.cal.getP('W','WW');}})"/>
+				<input class="Wdate" id="d122_2">
+				<input id="d1212" class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy年MM月'})" />
+				<input id="d1213" class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy年MM季度',isShowToday:false,disabledDates:['....-0[5-9]-..','....-1[0-2]-..'],startDate:'%y-01-01'})"
+				/> -->
+			</div>
+		</div>
+		<!-- 整体看板 -->
+		<div class="module-box">
+			<div class="module-head">
+				<div class="left-box">
+					<span class="title">整体看板</span>
+					<span class="time">更新时间：2018-08-13 15:32:09</span>
+				</div>
+				<div class="shop-box">
+					<span class="active">全店</span>|<span>网店</span>|<span>所有门店<img src="/img/components/arrow_left.png" class="showShopList"
+						 style="transform: rotate(270deg);" /></span>
+					<div class="shop-list">
+						<ul>
+							<li>小李门店1</li>
+							<li>小张门店1</li>
+							<li>小王门店1</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="module-content2">
+				<div>
+					<img style="transform:rotate(180deg);" src="/img/gd.png">
+				</div>
+				<div>
+					<div class="view-item check-item">
+						<div>支付金额</div>
+						<div>0.00</div>
+						<div>较前一日 <span>0.00%-</span></div>
+						<div>较上周同期 <span>0.00%-</span></div>
+						<input type="checkbox" name="check" value="1">
+					</div>
+					<div class="view-item">
+						<div>支付订单数</div>
+						<div>0.00</div>
+						<div>较前一日 <span>0.00%-</span></div>
+						<div>较上周同期 <span>0.00%-</span></div>
+						<input type="checkbox" name="check" value="2">
+					</div>
+					<div class="view-item">
+						<div>支付客户数</div>
+						<div>0.00</div>
+						<div>较前一日 <span>0.00%-</span></div>
+						<div>较上周同期 <span>0.00%-</span></div>
+						<input type="checkbox" name="check" value="3">
+					</div>
+					<div class="view-item">
+						<div>客单价</div>
+						<div>0.00</div>
+						<div>较前一日 <span>0.00%-</span></div>
+						<div>较上周同期 <span>0.00%-</span></div>
+						<input type="checkbox" name="check" value="4">
+					</div>
+					<div class="view-item">
+						<div>新增客户数</div>
+						<div>0.00</div>
+						<div>较前一日 <span>0.00%-</span></div>
+						<div>较上周同期 <span>0.00%-</span></div>
+						<input type="checkbox" name="check" value="5">
+					</div>
+				</div>
+				<div>
+					<img src="/img/gd.png">
+				</div>
+
+			</div>
+			<div class="check-data">
+				<span></span>
+				<span>重置</span>
+				<span>已选5个</span>
+			</div>
+			<div class="bgWhite">
+				<div id="chart-box-lines" style="width:100%;height:300px;"></div>
+			</div>
+		</div>
+		<!-- 流量看板 -->
+		<div class="module-box" ng-show="false">
+			<div class="module-head">
+				<div class="left-box">
+					<span class="title">流量看板</span>
+					<span class="time">更新时间：2018-08-13 15:32:09</span>
+				</div>
+				<div class="shop-box">
+					<span class="active">全店</span>|<span>网店</span>|<span>所有门店<img src="/img/components/arrow_left.png" class="showShopList"
+						 style="transform: rotate(270deg);" /></span>
+					<div class="shop-list">
+						<ul>
+							<li>小李门店1</li>
+							<li>小张门店1</li>
+							<li>小王门店1</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="module-content3">
+				<div>
+					<div>跳失率</div>
+					<div>0.00</div>
+					<div>较前一日<span>0.00%-</span></div>
+					<div>较上周同期<span>0.00%-</span></div>
+					<div id="echarts-box-2"></div>
+				</div>
+				<div>
+					<div>人均浏览量</div>
+					<div>0.00</div>
+					<div>较前一日<span>0.00%-</span></div>
+					<div>较上周同期<span>0.00%-</span></div>
+					<div id="echarts-box-3"></div>
+				</div>
+				<div>
+					<div>平均停留时长(秒)</div>
+					<div>0.00</div>
+					<div>较前一日<span>0.00%-</span></div>
+					<div>较上周同期<span>0.00%-</span></div>
+					<div id="echarts-box-4"></div>
+				</div>
+			</div>
+		</div>
+		<!-- 商品看板 -->
+		<div class="module-box" ng-show="false">
+			<div class="module-head">
+				<div class="left-box">
+					<span class="title">商品看板</span>
+					<span class="time">更新时间：2018-08-13 15:32:09</span>
+				</div>
+				<div class="shop-box">
+					<span class="active">全店</span>|<span>网店</span>|<span>所有门店<img src="/img/components/arrow_left.png" class="showShopList"
+						 style="transform: rotate(270deg);" /></span>
+					<div class="shop-list">
+						<ul>
+							<li>小李门店1</li>
+							<li>小张门店1</li>
+							<li>小王门店1</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	$(function () {
+		$(".showShopList").click(function () {
+			$(".shop-list").hide();
+			$(this).parents(".shop-box").find(".shop-list").show();
+		})
+	});
+
+</script>

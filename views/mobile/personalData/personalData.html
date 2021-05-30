@@ -1,0 +1,33 @@
+<div class="persion-data-main">
+    <div class="p-head"> 
+    <!-- ../../img/mobile/personCenter/head.jpg -->
+        <img ng-src="{{user.mb_img}}" alt="">
+    </div>
+    <div class="p-list">
+        <div class="p-item">
+            <div class="p-item-left">昵称</div>
+            <div class="p-item-right" ng-bind="user.mb_nickname">下雨天</div>
+        </div>
+        <div class="p-item">
+            <div class="p-item-left">性别</div>
+            <div class="p-item-right" > 
+            <span ng-show="user.mb_sex == 1">男</span> 
+            <span ng-show="user.mb_sex != 1&&user.mb_sex != 2">保密</span>
+            <span ng-show="user.mb_sex == 2">女</span></div>
+        </div>
+        <div class="p-item" ng-show="user.mb_followtime">
+            <div class="p-item-left">关注时间</div>
+            <div class="p-item-right" ng-bind="user.mb_followtime">2000年12月28日</div>
+        </div>
+       <!--  <div class="p-item">
+            <div class="p-item-left">城市</div>
+            <div class="p-item-right">辽宁省、沈阳市、振兴区</div>
+        </div> -->
+       <!--  <div class="p-item">
+            <div class="p-item-left">邮箱</div>
+            <div class="p-item-right">111@qq.com</div>
+        </div> -->
+    </div>
+    <div class="p-btns"></div>
+    <div class="p-bottom"></div>
+</div>

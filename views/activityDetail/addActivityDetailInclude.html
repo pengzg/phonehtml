@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+	<link rel="stylesheet" href="../../css/base.css" />
+	<link rel="stylesheet" href="../../css/module.css" />
+	<link rel="stylesheet" href="../../css/activityDetail/activityDetail-include.css" />
+</head>
+<body style="overflow-x:hidden">
+<!--游戏通用弹出层页面-加载页面-->
+<div class="mask fire_res fire_loading">
+	<a href="" class="loading_banner_bg layerId-11 defBgColor" id="loading_banner_bg"></a>
+	<div class="hz_logo_bg layerId-12 defBgColor"></div>
+	<a href="" class="skip_btn">
+		<span class="skip_time">
+			<span class="skip_count">3</span>
+			秒
+		</span>
+		跳过
+	</a>
+	<!--加载页面开启可点击提示
+	<div class="openClick-btn imgContainer hide">
+		<a href="" class="openClick_pic_link">
+			<div class="ui-wrapper ui-resizable-autohide" style="overflow: hidden; position: absolute; width: 100px; height: 40px; top: 120px; left: -50px; margin: 0px; float: none; z-index: 100; padding: 0px; cursor: move;">
+				<img src=""  class="openClick-pic block_img slaveImg layerId-17 defBgColor ui-resizable" style="width: 100px; height: 40px; top: 6rem; left: -2.5rem; position: static; margin: 0px; resize: none; zoom: 1; display: block;">
+				<div class="ui-resizable-handle ui-resizable-n ui-resizable-imgTopTip" style="z-index: 9030; display: none;">
+					<div class="imgResizeLine imgResizeLine-first" style="width: 46px;"></div>
+					<div class="imgResizeLine imgResizeLine-second" style="width: 46px;"></div>
+				</div>
+				<div class="ui-resizable-handle ui-resizable-e ui-resizable-imgRightTip" style="z-index: 9030; display: none;"></div>
+				<div class="ui-resizable-handle ui-resizable-s ui-resizable-imgBottomTip" style="z-index: 9030; display: none;">
+					<div class="imgResizeLine imgResizeLine-first" style="width: 46px;"></div>
+					<div class="imgResizeLine imgResizeLine-second" style="width: 46px;"></div>
+				</div>
+				<div class="ui-resizable-handle ui-resizable-w ui-resizable-imgLeftTip" style="z-index: 9030; display: none;"></div>
+				<div class="ui-resizable-handle ui-resizable-ne ui-resizable-imgTopRightTip" style="z-index: 9030; display: none;"></div>
+				<div class="ui-resizable-handle ui-resizable-nw ui-resizable-imgTopLeftTip" style="z-index: 9030; display: none;"></div>
+				<div class="ui-resizable-handle ui-resizable-sw ui-resizable-imgBottomLeftTip" style="z-index: 9030; display: none;"></div>
+				<div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-resizable-imgBottomRightTip" style="z-index: 9030; display: none;"></div>
+				<a href="" class="recoverBtn"></a>
+			</div>
+		</a>
+	</div>-->
+</div>
+<!--通用弹出框-->
+<!--活动说明-->
+<div class="mask2 fire_res fire_rule hide" style=" display: none;">
+	<span class="close"></span>
+	<div class="fire_res_rule_bg"></div>
+	<div class="content" >
+		<div class="scroller" style="transition-property: transform; transform-origin: 0px 0px 0px; transform: translate(0px, 0px) translateZ(0px);">
+			<div class="rule_tab fire_res_rule_award"></div>
+			<div class="layerId-8 defBgColor">
+				<p>一等奖：价值100元礼品券</p>
+				<p>二等奖：价值50元礼品券</p>
+				<p>三等奖：价值10元礼品券</p>
+			</div>
+			<div class="rule_tab fire_res_rule_time"></div>
+			<div class="layerId-5 defBgColor">2017年04月11日~2017年04月18日</div>
+			<div class="rule_tab fire_res_rule_tips"></div>
+			<div class="fire_res_rule_tips_text layerId-6 defBgColor">
+				1、进入游戏界面后，通过摇晃手机，摇骰子来获得点数<br>
+				2、根据骰子出现的点数进行移动，走到相应的地方<br>
+				3、在落地的地方有相对应的神奇事件发生，可以有各种娱乐体验，更可以拿大奖
+			</div>
+			<div class="rule_tab fire_res_rule_organizer"></div>
+			<div class="layerId-7 defBgColor">
+				<p>
+					本次活动主办单位为
+					<a href="" class="organizer organizer_link">社区快线</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!--大富翁外页-游戏环节-->
+<div id="backfill_panel" class="game_page gameBox gameBgBox hide" style="display: none;">
+	<!--背景-->
+	<div id="gameBgBox">
+		<img id="gameBg" src="../../img/bg.jpg" style="width:100%;height:auto">
+	</div>
+	<!--可拖拽标题-->
+	<div class="game-title imgContainer" id="game_title">
+		<div class="ui-wrapper ui-resizable-autohide" style="overflow: hidden; position: absolute; width: 231px; height: 81px; top: 3px; left: 45px; margin: 0px; float: none; z-index: 100; padding: 0px; cursor: move; opacity: 1;">
+			<img data-replace-style="title" data-replace-img="title" id="title-img" class="block_img slaveImg layerId-1 defBgColor ui-resizable" alt="活动标题" src="../../img/title.png">
+			<div class="ui-resizable-handle ui-resizable-n ui-resizable-imgTopTip" z-index: 9030; display: none;>
+				<div class="imgResizeLine imgResizeLine-first" style="width: 111.5px;"></div>
+				<div class="imgResizeLine imgResizeLine-second" style="width: 111.5px;"></div>
+			</div>
+			<div class="ui-resizable-handle ui-resizable-e ui-resizable-imgRightTip" style="z-index: 9030; display: none;"></div>
+			<div class="ui-resizable-handle ui-resizable-s ui-resizable-imgBottomTip" style="z-index: 9030; display: none;">
+				<div class="imgResizeLine imgResizeLine-first" style="width: 111.5px;"></div>
+				<div class="imgResizeLine imgResizeLine-second" style="width: 111.5px;"></div>
+			</div>
+			<div class="ui-resizable-handle ui-resizable-w ui-resizable-imgLeftTip" style="z-index: 9030; display: none;"></div>
+			<div class="ui-resizable-handle ui-resizable-ne ui-resizable-imgTopRightTip" style="z-index: 9030; display: none;"></div>
+			<div class="ui-resizable-handle ui-resizable-nw ui-resizable-imgTopLeftTip" style="z-index: 9030; display: none;"></div>
+			<div class="ui-resizable-handle ui-resizable-sw ui-resizable-imgBottomLeftTip" style="z-index: 9030; display: none;"></div>
+			<div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se ui-resizable-imgBottomRightTip" style="z-index: 9030; display: none;"></div>
+			<a href="" class="recoverBtn" style="display: none;"></a>
+		</div>
+	</div>
+	<div id="gameLayerBox" style="z-index: 11;">
+		<div class="imgContainer absCenter">
+			<img class="editTarget-rule" style="width: 38px; height: 33px;" src="../../img/btn_hdsm.png">
+		</div>
+		<div class="laba">XXX获得X等奖XX</div>
+		<div class="qipan"></div>
+		<div class="imgContainer absCenter2">
+			<img class="editTarget-wysz_btn" src="../../img/wysz_btn.png">
+		</div>
+		<div class="imgContainer absCenter3">
+			<img class="editTarget-wdjp_btn" src="../../img/wdjp_btn.png">
+		</div>
+	</div>
+</div>
+<!--<script type="text/javascript">
+
+	//添加奖品 Begin!
+	var className = "";
+	// 礼盒
+	var posStr = [{"left":"8.725rem","top":"4.825rem","width":"1.975rem","height":"2.25rem"},
+	{"left":"12.725rem","top":"14.5rem","width":"2.275rem","height":"2.575rem"}];
+	// 红包
+	var posStr1 =  [{"left":"7.35rem","top":"1.25rem","width":"1.85rem","height":"2rem"},
+	{"left":"12.8rem","top":"7.75rem","width":"2.25rem","height":"2.575rem"},
+	{"left":"9.375rem","top":"11.475rem","width":"2.25rem","height":"2.575rem"},
+	{"left":"3.825rem","top":"15.4rem","width":"1.675rem","height":"1.9rem"}];
+	// 金条
+	var posStr2 =  [{"left":"13.4rem","top":"0.725rem","width":"1.85rem","height":"3rem"},
+	{"left":"1.5rem","top":"4.35rem","width":"2.5rem","height":"3.575rem"},
+	{"left":"1.2rem","top":"11.20rem","width":"1.85rem","height":"3rem"}];
+	
+	function appendBlock(className,posStr) {
+		var strDom = "";
+		for(var i=0; i<posStr.length;i++){
+			// 外面定位的盒子
+			var outer_div = className+"_outer";
+			strDom += "<div class='"+outer_div+"'><div class='"+className+"'></div></div>";
+		}
+		$(".qipan").append(strDom);
+		//加上定位
+		var slec = "."+outer_div;
+		$(".qipan").find(slec).each(function(i){
+			var $this = $(this);
+			$this.css(posStr[i]);
+		});
+	}
+	/* appendBlock("editTarget-award",posStr);
+	appendBlock("editTarget-red",posStr1);
+	appendBlock("editTarget-gold",posStr2); */
+	//  添加奖品 End!
+	
+	var parentWin = window.parent || window.top;
+	
+	//自定义配置传递
+	Edit.originDef = [
+  	{"name":"rule","pos":{"left":"0.625rem","top":"0rem","disable":"disable"},"size":{"width":"1.925rem","height":"1.675rem"},"path":[["*_resRoot*/dafuweng/game/btn_hdsm.png","活动说明","40k"]],"edit":"all"},
+  	{"name":"wysz_btn","pos":{"left":"5.375rem","top":"23.1rem","disable":"disable"},"size":{"width":"6.875rem","height":"2.775rem"},"path":[["*_resRoot*/dafuweng/game/wysz_btn.png","我要骰子","50k"]],"edit":"all"},
+  	{"name":"wdjp_btn","pos":{"left":"12.375rem","top":"23.1rem","disable":"disable"},"size":{"width":"3.1rem","height":"2.8rem"},"path":[["*_resRoot*/dafuweng/game/wdjp_btn.png","我的奖品","40k"]],"edit":"all"}  	];
+
+	var pubResizeDef={   //图片恢复默认参数
+		'title-img'  : {"width":"11.55rem","height":"4.05rem","left":"2.3rem","top":"0.35rem"}
+    };
+	
+	//替换自定义资源
+	var gameConfig = {
+		image: {},
+		style: {},
+		text: {}
+	};
+	
+	if (gamePageJson) {
+		gameConfig.image.title = HdGame.replaceResRoot(gamePageJson.titleImg.path);
+		gameConfig.style.title = {
+				"left": JSON.parse(gamePageJson.titleImg.pos).left,
+				"top": JSON.parse(gamePageJson.titleImg.pos).top,
+				"height": JSON.parse(gamePageJson.titleImg.size).height,
+				"width": JSON.parse(gamePageJson.titleImg.size).width
+		}
+
+		// 替换资源
+		window.game.replaceRes(gameConfig);
+	}
+  
+	HdGame.initModuleLayer('#title-img',-1,"",[
+        {
+            from   : "#title-img",
+            title  : '大富翁标题',
+            limit  : '100k',
+            defSrc : ''
+		}
+	]);
+    HdGame.moduleSlaveImgResize($('#title-img'));
+    HdGame.moduleDraggale('#title-img',true); 
+
+	parentWin.afterInitLoadFn = function(){
+		parentWin.jQuery("#set_awardSendType_box").hide();
+		parentWin.jQuery("#set_minscore_box").hide();
+		parentWin.jQuery("#set_showdanmu_box").hide();
+		parentWin.hideGameSetting();
+		parentWin.onlySupportQrcodeShareType();
+		parentWin.hideParticipant();
+	}
+	
+	// 父页面保存时构建gamePage
+	parentWin.addGamePageDataFn = function(gamePage){
+		gamePage.titleImg = parentWin.parsedGameArg('title-img');
+	}
+	
+</script>-->
+
+<!--我的奖品-->
+<div class="mask2 fire_res fire_rule hide" style=" display: none;">
+	<span class="close"></span>
+	<div class="fire_res_rule_bg2"></div>
+	<div class="content" id="myprizeWrapper">
+		<div class="scroller">
+			<div class="myprize_list_cont">
+				<div data-index="0" class="myprize_item s0">
+					<p class="award_name">一等奖</p>
+					<p class="expired_time">价值100元礼品券</p>
+					<p class="exchange_statu">未领取</p>
+				</div>
+			</div>
+			<div></div>
+		</div>
+	</div>
+</div>
+
+
+<!--奖品详情-->
+<div class="fire_res fire_award_info hide" style="display: none;">
+	<span class="close"></span>
+	<div class="awardDetail">
+		<div class="organizerName"></div>
+		<div id="trophyNamePhoneTxt" class="awardName ellipsis">价值100元礼品券</div>
+		<div id="subheadPhoneTxt" class="awardSubTitle"></div>
+		<div class="awardCodeTime">
+			<em>使用期限</em>
+			:
+			<span id="validityStartPhoneTxt" class="codeBgTime">2017.04.11</span>
+			-
+			<span id="validityStopPhoneTxt" class="codeBgTime">2017.04.18</span>
+		</div>
+		<div class="awardDetailWarp"></div>
+	</div>
+	<div class="codeImgBox">
+		<div id="codeDetailInfoBox">
+			<div class="codeImg-wrapper">
+				<img class="codeImg" src="../../img/qrcode_zhoubao.png">
+				<span class="codeStatu"></span>
+			</div>
+			<div class="codeLine">
+				<span id="codeName">兑奖码</span>
+				:
+				<span class="code">6666</span>
+			</div>
+			<div id="operationTipPhoneTxt" class="codeOptInfo" style="word-wrap: break-word;">凭券联系现场工作人员兑奖</div>
+		</div>
+	</div>
+	<div>
+		<div style="height:8px;"></div>
+		<div>
+			<div class="awardCusText awardDetailBtn">
+				<span class="text">兑奖券详情</span>
+				<span class="awardDeailIcon"></span>
+			</div>
+			<div id="awardCusTextInfo" class="awardDetailText">
+				<div class="ticketInfo">
+					<div class="itemList clearfix">
+						<div class="title">有效日期</div>
+						<div class="box">
+							<span id="validityStartPhoneTxt1" class="codeBgTime">2017.04.11</span>
+							-
+							<span id="validityStopPhoneTxt1" class="codeBgTime">2017.04.18</span>
+						</div>
+					</div>
+					<div class="itemList addressLine clearfix">
+						<div class="title titleAdress">兑奖地址</div>
+						<div class="box">
+							<div id="storeAddressPhoneTxt" class="address" style="word-wrap: break-word;">请填写您的兑奖地址或者门店地址</div>
+						</div>
+					</div>
+					<div class="itemList clearfix">
+						<div class="title">客服电话</div>
+						<div class="box">
+							<div id="serviceTelPhoneTxt" class="tel"></div>
+						</div>
+					</div>
+					<div class="itemList clearfix">
+						<div class="title titleNotice">兑奖须知</div>
+						<div class="box">
+							<div id="descriptionPhoneTxt" class="notice" style="word-wrap: break-word;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div style="height:55px;"></div>
+		</div>
+		<div class="awardVerifyPwd">
+			<div id="awardVerifyPwdBtn">密码核销</div>
+		</div>
+	</div>
+</div>
+<!--中奖-->
+<div class="mask2 fire_res fire_prize_success hide" style="display: block;">
+	<div class="prize_success">
+		<div class="price_success_gift"></div>
+	</div>
+	<p class="p_text_1">
+		恭喜获得
+		<span class="prizeName score">xxx</span>
+	</p>
+	<div class="fire_btn_cont">
+		<a href="" class="unlock_prize_link">
+			<div class="fire_btn fire_btn1"></div>
+		</a>
+		<div class="fire_btn fire_btn2"></div>
+	</div>
+</div>
+</body>
+</html>

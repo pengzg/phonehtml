@@ -1,0 +1,163 @@
+// 图标颜色: #94b8f3
+@mixin common_btns($url) {
+	width: 26px;
+	height: 14px;
+	display: inline-block;
+	position: relative;
+	&:before{
+		content:"";
+		position: absolute;
+		top: -1px;
+		left: 5px;
+		width: 16px;
+		height: 16px;
+		background: url('../img/btns/'+$url) no-repeat;
+	}
+}
+.common_copy{
+	@include common_btns('copyAnd.png');
+}
+.common_add{
+	@include common_btns('add.png');
+}
+.common_edit{
+	@include common_btns('bianji.png');
+}
+.common_delete{
+	@include common_btns('shanchu.png');
+}
+.common_detail{
+	@include common_btns('chaxun.png');
+}
+.common_band{
+	@include common_btns('band.png');
+}
+.common_active{
+	@include common_btns('active.png');
+}
+.common_judge{
+	@include common_btns('judge.png');
+}
+.common_abandon{
+	@include common_btns('abandon.png');
+}
+.common_change{
+	@include common_btns('change.png');
+}
+.common_publish{
+	@include common_btns('publish.png');
+}
+.common_publish_cancle{
+	@include common_btns('publish-cancle.png');
+}
+.common_up{
+	@include common_btns('shangyi.png');
+}
+.common_down{
+	@include common_btns('xiayi.png');
+}
+.common_preview{
+	@include common_btns('preview.png');
+}
+.common_stick{
+	@include common_btns('stick.png');
+}
+.common_recovery{
+	@include common_btns('recovery.png');
+}
+.common_print{
+	@include common_btns('print.png');
+}
+.common_cancel{
+	@include common_btns('cancel.png');
+}
+.common_setting{
+	@include common_btns('setting.png');
+}
+.common_relate{
+	@include common_btns('relate.png');
+}
+.common_offsell{
+	@include common_btns('offsell.png');
+}
+
+.common_dropdown {
+	position: relative;
+	display: inline-block;
+	padding: 5px 10px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	cursor: pointer;
+	i {
+		position: relative;
+		top: -3px;
+		left: 1px;
+	}
+	>div:nth-of-type(2){
+	    min-width: 100% !important;
+		>div {
+			text-align: center;
+			padding: 5px 0;
+			&:hover {
+				background: #ddd;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.common-bar-top {
+	// width: 95%;
+	margin: 0 auto;
+	border: 1px solid #ddd;
+	.common-bar-top-t{
+		border-bottom: 1px solid #ddd;
+		padding: 10px 15px;
+		background: #f3f3f3;
+		.common-bar-title {
+			
+		}
+	}
+	.common-bar-top-b{
+		display: flex;
+		background: #fff;
+		>div {
+			flex: 1;
+			margin: 10px 0;
+			padding: 0 10px;
+			text-align: center;
+			border-left: 1px solid #ddd;
+			.div-first{
+				color: #737273;
+			}
+			.div-second{
+				color: #737273;
+				font-size: 40px;
+			    font-weight: 600;
+			}
+		}
+		>div:first-of-type{
+			border-left: none;
+		}
+	}
+}
+.common_table_1 {
+	width: 100%;
+	text-align: center;
+	border: 1px solid #ddd;
+	thead {
+		background: #f3f3f3;
+	}
+	tr {
+		border-bottom: 1px solid #ddd;
+	}
+	th {
+		text-align: center;
+		padding: 5px;
+	}
+}
+.col-sm-12,.container {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+}

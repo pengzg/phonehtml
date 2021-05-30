@@ -1,0 +1,239 @@
+<div class="contentHtml-new" style=" z-index: 99; background-color: #fff;left:0;">
+	
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;" ng-init="tabIdx=1">
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0;">
+					<li  ng-class="{active:tabIdx==1}">
+						<a class="f14 i-c-black" ng-click="tabIdx=1">
+							<i class="glyphicon glyphicon-edit"></i>
+							 实物商品添加
+						</a>
+					</li>
+					<!-- <li ng-class="{active:tabIdx==2}">
+						<a class="f14 i-c-black"  ng-click="tabIdx=2">
+							<i class="icon icon-dropbox"></i>
+							 库存管理
+						</a>
+					</li> -->
+				</ul>
+				<div class="t-box clearfix" id="tab1" ng-show="tabIdx==1">
+					<form class="form-horizontal">
+						<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+							<div class="panel-body">
+								<h5>基本信息</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">礼品类型</label>
+									<div class="col-md-9 col-lg-6">
+										<div class="form-control-static f14">实物礼品</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 名称
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<input type="text" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0;">图片</label>
+									<div class="col-md-9 col-lg-6">
+										<a ng-click="upImage($event)" style="color:#099fb8;" class="f14">上传图片</a>
+										<div  style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor" 
+										get-ue="ue_myeditor = getUe" ng-show="false" class="ueditor" ng-model="gb_content1"></div>
+										<div style="margin-top:5px;">
+											<div ng-repeat="x in imageList" style="float:left;margin:5px;">
+												<div class="gsGoodsImgs" style="width:100px; height:100px;border:1px solid #ddd;">
+													<img alt="" src="{{x.pathDesc}}"  style="width:100px; height:100px;">
+													<div class="gsGoodsImgsBtns" style="position:absolute;bottom:0;left:0;width:100px;background:#fff;">
+														<a class="common_btns common_stick" title="设置主封面" ng-click="setStick(x)"></a>
+														<a class="common_btns common_delete" title="删除" ng-click="deletePic($index)"></a>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>    
+								<div class="form-group">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0;">图文详情</label>
+									<div class="col-md-9 col-lg-6">
+										<div  style="margin-bottom:1.25rem;width:664px;height: 300px; display:inline-block; z-index:1" id="myeditor1" 
+												get-ue="ue_myeditor1 = getUe"  class="ueditor" ng-model="gsGoodsIntroInfo.ggi_content" ></div>
+									</div>
+								</div>    
+								<h5 class="section-header">积分商城兑换设置</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">上架至积分商城</label>
+									<div class="col-md-9 col-lg-6">
+										<div>
+											<label ng-init="isOff=false">
+												<div class="toggle btn btn-default btn-sm" style="width: 45px; height: 30px;padding:0 5px;" ng-class="{off:isOff}" ng-click="isOff=!isOff">
+													<input type="checkbox" class="boolean optional" />
+													<div class="toggle-group">
+														<label class="btn btn-success btn-sm toggle-on">是</label>
+														<label class="btn btn-default btn-sm active toggle-off">否</label>
+														<span class="toggle-handle btn btn-default btn-sm"></span>
+													</div>
+												</div>
+											</label>
+										</div>
+										<p class="help-block f14">上架的礼品将在积分商城展示，供用户兑换；如仅作为活动奖品发放，请勿上架礼品</p>
+									</div>
+								</div>
+								<div ng-show="!isOff">
+									<div class="form-group clearfix">
+										<label class="col-md-3 col-lg-2 control-label f14">分组</label>
+										<div class="col-md-9 col-lg-6">
+											<div class="input-group" style="width: 100%;">
+												<select class="form-control" name="" style="width: 100%;">
+													<option value="">分组</option>
+													<option selected="selected" value="">推荐礼品</option>
+													<option value="">其他</option>
+												</select>
+											</div>
+											<p class="help-block f14">为礼品设置分组，在积分商城页面可以选择显示特定分组的礼品</p>
+										</div>
+									</div>
+									<div class="form-group clearfix">
+										<label class="col-md-3 col-lg-2 control-label f14">
+											<i class="form_required" title="必填">*</i>
+										 	参考价
+										</label>
+										<div class="col-md-4 col-lg-3">
+											<div class="input-group">
+												<input type="number" class="form-control" style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;" />
+												<span class="input-group-addon" style="border-left: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">元</span>
+											</div>
+											<p class="help-block f14">礼品的市场参考价，仅用于显示，不作为交易价格</p>
+										</div>
+									</div>
+									<div class="form-group clearfix">
+										<label class="radio_buttons optional col-md-3 col-lg-2 control-label f14">支付类型</label>
+										<div class="col-md-9 col-lg-6" style="padding-top: 9px;">
+											<span class="radio f14" style="padding: 0; width: 100%;">
+												<lable class="xt_inputRadio" style="margin-bottom:8px">
+													<input class="xt_radio" type="radio" >
+													<div class="xt_inputBackimg"=></div>仅限积分支付
+												</lable>
+											</span>
+											<span class="radio f14" style="padding: 0; width: 100%;">
+												<lable class="xt_inputRadio" style="margin-bottom:8px">
+													<input class="xt_radio" type="radio" >
+													<div class="xt_inputBackimg" ></div>仅限现金支付
+												</lable>
+											</span>
+											<span class="radio f14" style="padding: 0; width: 100%;">
+												<lable class="xt_inputRadio" style="margin-bottom:8px">
+													<input class="xt_radio" type="radio" >
+													<div class="xt_inputBackimg" ></div>积分+现金
+												</lable>
+											</span>
+										</div>
+									</div>
+									<div class="form-group clearfix">
+										<label class="col-md-3 col-lg-2 control-label f14">
+											<i class="form_required" title="必填">*</i>
+										 	积分价格
+										</label>
+										<div class="col-md-4 col-lg-3">
+											<div class="input-group">
+												<input type="number" class="form-control" style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;" />
+												<span class="input-group-addon" style="border-left: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">元</span>
+											</div>
+											<p class="help-block f14">建议积分价值为：1 积分 = 0.1 元</p>
+										</div>
+									</div>
+								</div>
+								
+								<hr />
+								<a href="" class="btn btn-success">创建礼品</a>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="t-box clearfix" id="tab2" ng-show="tabIdx==2">
+					<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+						<div class="panel-body">
+	    					<div class="row">
+								<div class="col-xs-4 text-center">
+							        <h4>当前库存</h4>
+							        <hr>
+							        <h1 class="stock_quantity">0</h1>
+									<hr>
+								</div>
+								<div class="col-xs-8 left-border">
+									<h5>购买库存，购买后费用将从您的账户余额中扣除</h5>
+									<hr>
+									<form class="simple_form form-horizontal new_purchase">
+										<div class="form-group hidden purchase_type">
+											<div class="col-md-9 col-lg-6">
+												<input class="hidden form-control" type="hidden" value="GoodPurchase" name="purchase[type]" id="purchase_type">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												<i class="form_required" title="必填">*</i>
+												 数量
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<input class="form-control f14" type="number" step="1" value="1" name="" style="height: 34px; line-height: 18px; box-sizing: border-box;">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												<i class="form_required" title="必填">*</i>
+												 备注
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<input class="form-control f14" type="number" step="1" value="1" name="" style="height: 34px; line-height: 18px; box-sizing: border-box;">
+											</div>
+										</div>
+										<hr>
+										<a href="" class="btn btn-success">提交购买</a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default" style="border: 0;">
+    					<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+	      					<i class="icon icon-list"></i> 共4条记录
+	    				</div>
+	    				<!--无记录时显示-->
+	    				<!--<div class="panel-body" style="border: 1px solid #ddd;">
+							<div class="table-empty text-center">
+								<i class="icon icon-search fa-3x"></i>
+								<h4>查找不到相关记录</h4>
+							</div>
+						</div>-->
+						<table class="table table3 table-bordered table-hover" style="margin-bottom: 0;">
+							<thead>
+								<tr>
+									<th class="text-left">时间</th>
+									<th class="text-left">操作类型</th>
+									<th class="text-left">数量</th>
+									<th class="text-left">结余</th>
+									<th class="text-left">备注</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in [1,2]">
+									<td class="text-left f14">2017-05-06 17:33:55</td>
+									<td class="text-left f14">管理员操作</td>
+									<td class="text-left f14">10</td>
+									<td class="text-left red f14">10</td>
+									<td class="text-left f14">无</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

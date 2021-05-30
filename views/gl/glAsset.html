@@ -1,0 +1,144 @@
+<div class="contentHtml-new" style="background-color: #fff;left:0;">
+
+    <div class="content-box-1 bgWhite" >
+        <div>
+            <div class="ye-box">
+                <span>可用店铺余额</span>
+                <span title="可用店铺余额=店铺余额-不可用店铺余额"><img src="/img/ask.png"></span>
+                <span>(不可用余额<span>0.00</span>元)</span>
+                <span>店铺余额明细</span>
+            </div>
+            <div class="cz-box">
+                <ul>
+                    <li>0.06</li>
+                    <li class="active">充值</li>
+                    <li>提现</li>
+                    <li>收益发放</li>
+                </ul>
+            </div>
+            <div class="bzj-box">
+                <div>
+                    <span>保证金</span>
+                    <span title="包括有赞担保保证金和有赞大号保证金"><img src="/img/ask.png"></span>
+                    <span>明细</span>
+                </div>
+                <div>
+                    0.00
+                </div>
+            </div>
+        </div>
+        <div class="right-box">
+            <div class="bzj-box" style="background:none;">
+                <div>
+                    <span>待结算(元)</span>
+                    <span title="最终结算的资金会减去结算前的退款并在结算后扣除手续费"><img src="/img/ask.png"></span>
+                    <span>明细</span>
+                </div>
+                <div>
+                    0.09
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-title-box">
+        <div class="title-box">
+            <span class="title">销售概况</span>
+            <span class="time" title="对近期收款和退款的数据统计"><img src="/img/ask.png"></span>
+        </div>
+        <div class="shop-box" >
+            <span class="active">全店</span>|
+            <span>网店</span>|
+            <span>所有门店
+                <img src="/img/components/arrow_left.png" class="showShopList" style="transform: rotate(270deg);"
+                />
+            </span>
+            <div class="shop-list">
+                <ul>
+                    <li>小李门店1</li>
+                    <li>小张门店1</li>
+                    <li>小王门店1</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="content-box-2  bgWhite">
+        <div class="left-box">
+            <div>
+                <div>
+                    <div>今日销售小计(元)</div>
+                    <div>0</div>
+                    <div>0笔</div>
+                </div>
+                <div>
+                    <div>今日退款小计(元)</div>
+                    <div>0</div>
+                    <div>0笔</div>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>昨日销售小计(元)</div>
+                    <div>0</div>
+                    <div>0笔</div>
+                </div>
+                <div>
+                    <div>昨日退款小计(元)</div>
+                    <div>0</div>
+                    <div>0元</div>
+                </div>
+            </div>
+        </div>
+        <div class="right-box">
+            <div class="chart-select-box">
+                <select>
+                    <option value="">近7天趋势</option>
+                    <option value="">近15天趋势</option>
+                </select>
+            </div>
+            <div id="chart-box-lines1" style="width:100%;height:300px;"></div>
+            <div id="chart-box-lines2" style="width:100%;height:300px;"></div>
+        </div>
+
+    </div>
+
+    <div class="content-title-box">
+        <div class="title-box">
+            <span class="title">收支概况</span>
+            <span class="time" title="对近期各个账户收入和支出的数据统计"><img src="/img/ask.png"></span>
+            <span style="color:#38f;margin-left:30px;">更多</span>
+        </div>
+        <div class="shop-box">
+            <span class="active">全店</span>|
+            <span>网店</span>|
+            <span>所有门店
+                <img src="/img/components/arrow_left.png" class="showShopList" style="transform: rotate(270deg);"
+                />
+            </span>
+            <div class="shop-list">
+                <ul>
+                    <li>小李门店1</li>
+                    <li>小张门店1</li>
+                    <li>小王门店1</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table class="changeColor" style="width:100%;margin-top:15px;">
+            <thead style="font-weight: bold;background:#ddd;">
+                <th>账户</th>
+                <th>收入</th>
+                <th>支出</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in [1,2,3,4]" style="border-bottom: 1px solid #eee;">
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+            </tbody>
+            
+        </table>
+        <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+    </div>
+</div>

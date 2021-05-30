@@ -1,0 +1,134 @@
+
+<div class="xt_shouYeDiv" ng-show="!$root.isPager">
+	<span><a href="#/index/homePage">首页</a><a  style="font-size: 14px;font-weight: 100;" href="#/index/line/csLineCustomerList">>列表</a> <a style="font-size: 14px;font-weight: 100;"><span ng-if="csLineCustomerInfo.clc_id==''||csLineCustomerInfo.clc_id==undefined">>添加</span><span ng-if="csLineCustomerInfo.clc_id!=''&&csLineCustomerInfo.clc_id!=undefined">>编辑</span></a></span>
+</div>
+<form class="form-horizontal w5c-form demo-form" role="form"
+	      w5c-form-validate="" novalidate name="validateForm" >
+<div class="xt_changeHtml">
+		<div class="zk_addMain">
+			<div class="zk_baseInfoBox">
+				<h4>基本信息</h4>
+				<div class="zk_controlBox">
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>主键</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_id" 
+							ng-model="csLineCustomerInfo.clc_id" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>所属公司</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_orgid" 
+							ng-model="csLineCustomerInfo.clc_orgid" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>线路ID</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_lineid" 
+							ng-model="csLineCustomerInfo.clc_lineid" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>客户ID</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_customerid" 
+							ng-model="csLineCustomerInfo.clc_customerid" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>状态</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_stats" 
+							ng-model="csLineCustomerInfo.clc_stats" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>添加人</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_adduserid" 
+							ng-model="csLineCustomerInfo.clc_adduserid" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>添加日期</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_addtime" 
+							ng-model="csLineCustomerInfo.clc_addtime" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>修改人</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_updateuserid" 
+							ng-model="csLineCustomerInfo.clc_updateuserid" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>修改日期</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_updatetime" 
+							ng-model="csLineCustomerInfo.clc_updatetime" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>TS</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_ts" 
+							ng-model="csLineCustomerInfo.clc_ts" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>有效标志位</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clc_dr" 
+							ng-model="csLineCustomerInfo.clc_dr" required>
+						</div>
+					</div>
+					<!-- 隐藏域 -->
+					<div style="display: none">
+						<input type="text" ng-model="csLineCustomerInfo.clc_id">
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<div class="zk_saveBox">
+	<a w5c-form-submit="submit();"  class="btnStyle saveBtn">保存</a>
+	<a ng-click="cancel();" id="add-without-image" class="btnStyle falseBtn">取消</a>
+</div>
+</form>

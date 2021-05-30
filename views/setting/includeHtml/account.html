@@ -1,0 +1,55 @@
+<div class="setting_panel panel-default">
+    <div class="panel-heading text-left">
+        <div class="setting_nav">
+            <ul>
+                <li><a href="">账户设置</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <form novalidate="novalidate" class="simple_form form-horizontal edit_store" accept-charset="UTF-8">
+            <div class="form-group string optional disabled store_code">
+                <label class="string optional col-md-3 col-lg-2 setting_label f14" for="store_code">账户代码</label>
+                <div class="col-md-9 col-lg-6">
+                    <input class="string optional disabled form-control" disabled="disabled" type="text" value="wx0baea7a0094fea4d" name="store[code]" id="store_code">
+                    <p class="help-block  f14">默认为绑定微信公众号AppID(应用ID)</p>
+                </div>
+            </div>
+            <div class="form-group string required store_name">
+                <label class="string required col-md-3 col-lg-2 setting_label  f14" for="store_name">
+                    账户名称</label>
+                <div class="col-md-9 col-lg-6">
+                    <input class="string required form-control f14" type="text" value="聚品国际服务号" name="store[name]" id="store_name">
+                </div>
+            </div>
+            <div class="form-group file optional store_logo">
+                <label class="file optional col-md-3 col-lg-2 setting_label f14" for="store_logo">账户头像</label>
+                <div class="col-md-9 col-lg-6">
+                    <img class="img-thumbnail" src="../img/0.jpg" alt="0?1495598871">
+                    <input type="file" class="account_input" name="store[logo]" id="store_logo">
+                    <p class="help-block f14">尺寸：180 x 180px，格式：png，jpg</p>
+                </div>
+            </div>
+            <div class="form-group select optional store_theme">
+                <label class="select optional col-md-3 col-lg-2 setting_label f14" for="store_theme">主题皮肤</label>
+                <div class="col-md-9 col-lg-6">
+                    <select class="select optional form-control f14" name="store[theme]" id="store_theme">
+                        <option value="belize_hole">海洋蓝</option>
+                        <option value="deep_blue">深空蓝</option>
+                        <option value="default">默认（石榴红）</option>
+                        <option value="green_sea">丛林绿</option>
+                        <option value="midnight_blue">夜空蓝</option>
+                        <option selected="selected" value="nephritis">青草绿</option>
+                        <option value="orange">桔黄</option>
+                        <option value="pumpkin">南瓜橙</option>
+                        <option value="wisteria">葡萄紫</option>
+                    </select>
+                    <p class="help-block f14">设置微信端界面的主题风格。</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="panel-footer text-right f14">
+        <a class="setting_btn btn-success" href="" ng-click="save()">保存</a>
+    </div>
+</div>

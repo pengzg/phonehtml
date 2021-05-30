@@ -1,0 +1,25 @@
+<div id="second-sidebar">
+	<p class="nav_header">筛选</p>
+	<ul>
+		<li ng-repeat="x in activityTypeList" ng-click="selectActivityType(x,$index);" ng-class="{true: 'selected', false: ''}[selectIndex == $index]"><a href="">{{x.mat_name}}</a></li>
+	</ul>
+</div>
+<div class="contentHtml">
+	<!-- 路由 -->
+	<div data-ui-view=""></div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+	    $("#second-sidebar li").click(function() {
+	        $(this).siblings('li').removeClass('selected');
+	        $(this).addClass('selected'); 
+	    });
+	});
+	$(function(){
+	    $(".searchItem_list a").click(function() {
+	        $(this).siblings('a').removeClass('selected');
+	        $(this).addClass('selected'); 
+	    });
+	}); 
+</script>

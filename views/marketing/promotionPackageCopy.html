@@ -1,0 +1,515 @@
+<div class="xt_changeHtml" style="margin-bottom: 120px;">
+	<div class="addlistCenter">
+
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 促销主题：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.ppm_name" maxlength="30" style="width:300px" placeholder="促销主题在30个字符以内" />
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"> 副标题：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.ppm_subtitle" style="width:300px" placeholder="请输入副标题" />
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 活动图片：</span>
+			<div class="widthAuto zk_controlInput">
+				<a ng-click="upImage($event,1,1)" style="color:#099fb8;" class="f14">上传图片（建议大小680*280，150kb以内）</a>
+				<div style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor" get-ue="ue_myeditor = getUe"
+				 ng-show="false" class="ueditor" ng-model="gb_content1"></div>
+				<div style="margin-top:5px;">
+					<div style="float:left;margin:5px;">
+						<div class="gsGoodsImgs" style="width:170px; height:70px;border:1px solid #ddd;">
+							<img alt="" src="{{vo.ppm_picture_show?vo.ppm_picture_show:'img/prizedef.jpg'}}" style="width:170px; height:70px;">
+						</div>
+
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div style="min-width:900px;margin-bottom: 20px;margin-top: 25px;box-sizing:border-box;padding:0 46px;">
+				<table class="table table3" style="margin-bottom: 0 !important; border: 1px solid #dedede; border-bottom: 0;">
+					<tbody>
+						<tr class="zk_headerTrSty">
+							<th style="width:10%;">
+								<div class="glyphicon glyphicon-cog" ng-show="false" style="width: 15px; height: 15px; cursor: pointer"></div>
+							</th>
+							<th style="width:50%;border-right: 1px solid #dedede;">活动(主)商品 </th>
+							<th style="width:10%;border-right: 1px solid #dedede;">商品编码 </th>
+
+							<th style="width:10%;border-right: 1px solid #dedede;">活动价 </th>
+							<th style="width:10%;border-right: 1px solid #dedede;">数量 </th>
+							<th style="width:10%;border-right: 1px solid #dedede;">操作 </th>
+						</tr>
+						<tr>
+							<td colspan="14" style="padding: 0; border-bottom: 0;border-top:0;">
+								<div style="padding-bottom: 2px;">
+									<table class="table table3 table-bordered" style="border: 0; margin-bottom: 0 !important;">
+										<tbody>
+											<tr ng-repeat="i in dataList track by $index" ng-init="index_i = $index">
+												<td style="width:10%; border-left: 0 !important;" class="colorCenter"><span ng-if="index_i+1<dataList.length">{{index_i+1}}</span><img
+													 src="../../../../img/sele_add.png" ng-if="index_i+1 == dataList.length" style="cursor: pointer;" ng-click="addLine(1);" /></td>
+												<td style="width:50%;" class="SelectMulti-Container2 posRelative">
+													<input type="text" class="inputBorderStyle2 SelectMulti-ShowDiv2" ng-model="i.pm_title" ng-change="i.ps_id='';cal();keySearchFun(i.pm_title,'goods');"
+													 ng-focus="goods_type=1;showDroplist($event,getGoods,1)" style="height: 33px; line-height: 33px;">
+													<div class="droplistWrap2" style="width: 689px; left: 5px; top: 40px; overflow: hidden;">
+														<div class="clearfix">
+															<table>
+																<tr class="listItem2" style="width:683px;">
+																	<td style="width:30px;line-height: 0px !important;"></td>
+																	<td style="width:430px;line-height: 0px !important;">商品</td>
+																	<td style="width:120px;line-height: 0px !important;">编号</td>
+																	<td style="width:120px;line-height: 0px !important;">类型</td>
+																	<!-- <td style="width:260px;line-height: 0px !important;">库存</td> -->
+																</tr>
+															</table>
+														</div>
+														<div class="clearfix" style="height: 160px;overflow-y: auto;">
+
+															<table style="width:683px;">
+																<tr class="listItem" ng-repeat="y in goodsList" ng-click="chooseGoods(y,index_i,1);">
+																	<td style="width:30px;padding:4px !important;">
+																		{{pager1.rows * (pager1.page - 1)+ $index+1}}
+																	</td>
+																	<td style="width:170px;padding:4px !important;" title="{{y.pm_title}}">
+																		{{y.pm_title | cut:true:20:' ...'}}
+																	</td>
+
+																	<td style="width:120px;padding:4px !important;">
+																		{{y.pm_code}}
+																	</td>
+																	<td style="width:120px;padding:4px !important;">
+																		{{y.pm_typeid_nameref}}
+																	</td>
+																	<!-- <td style="width:260px;padding:4px !important;" max-length="6">
+																	{{y.ggp_stock_desc}}
+																</td> -->
+																</tr>
+															</table>
+														</div>
+													</div>
+													<div class="droplistWrap2 zk_fanye" style="width:689px !important; top:226px !important; left:5px !important;height:25px;">
+														<a ng-click="prevPage(pager1,getGoods)" class="m30right m20left">上一页</a>
+														<a ng-click="nextPage(pager1,getGoods)" class="m30right">下一页</a>
+														<span class="m30right">{{pager1.page}}/{{pager1.pageTotal}}</span>
+														<span>共{{pager1.total}}条</span>
+														<a ng-show="false" class="common_add_all" ng-click="addAll(goodsList,index_i)">全部添加</a>
+													</div>
+												</td>
+
+
+
+												<td style="width:10%;" ng-show="true" class="open colorCenter">{{i.pm_code}}</td>
+
+												<td style="width:10%;border-right: 0;" ng-show="true" class="open colorCenter">
+													<input type="number" class="inputBorderStyle2 SelectMulti-ShowDiv2" ng-model="i.ps_price" ng-blur="cal();"
+													 step="0.01" min="0" style="height: 33px; line-height: 33px;">
+												</td>
+												<td style="width:10%;" ng-show="true" class="open colorCenter">
+													<input type="number" class="inputBorderStyle2 SelectMulti-ShowDiv2" ng-model="i.ppd_product_num" min="1"
+													 max="9999999" step="0" ng-blur="cal();" style="height: 33px; line-height: 33px;">
+												</td>
+												<td style="width:10%;border-right: 0 !important;cursor: pointer;" ng-show="true" class="open colorCenter"><img
+													 src="../../../../img/shanchu.png" ng-click="removeLine(index_i,1)" /></td>
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 促销时间：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="text" class="Wdate" style="width: 200px;" id="start_time" />
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 套餐总金额：</span>
+				<div class="widthAuto zk_controlInput">{{vo.ppm_amount_group}}
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 套餐总数量：</span>
+				<div class="widthAuto zk_controlInput">{{vo.ppm_num_group}}
+				</div>
+			</div>
+
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 限购次数：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="text" ng-model="vo.ppm_limit_num" maxlength="15" style="width:150px" placeholder="请输入次数" />(0为不限购)
+				</div>
+			</div>
+			<!-- 团购 start -->
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">是否团购：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div>
+						<label class="m10right">
+							<input type="checkbox" name="pa_isgroup" ng-model="isgroup" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />
+							开启
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" ng-if="isgroup">
+				<span class="xt_bzWenZi width-just"> <i class="colorRed">*</i>有效天数：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="number" maxlength="10" ng-model="vo.ppm_valid_day" style="width:50px;" />天
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" ng-if="isgroup">
+				<span class="xt_bzWenZi width-just"> <i class="colorRed">*</i>团购价格：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="number" maxlength="5" step="0.01" min="0" ng-model="vo.ppm_group_price" style="width:50px;" />元
+					(开团成功后水票有效期)
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" ng-if="isgroup">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i>参与次数限制：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="number" maxlength="5" ng-model="vo.ppm_limit_num" style="width:50px;" />次
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" ng-if="isgroup">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i>开团人数：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="text" maxlength="5" ng-model="vo.ppm_group_peopler_num" style="width:50px;" />人
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" ng-if="false">
+				<span class="xt_bzWenZi width-just">团购类型：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div>
+						<label class="m10right">
+							<input type="radio" name="grouptype" ng-model="vo.ppm_group_type" value="1" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" /> 新人团
+						</label>
+					</div>
+					<div>
+						<label class="m10right">
+							<input type="radio" name="grouptype" value="2" ng-model="vo.ppm_group_type" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" /> 老带新
+						</label>
+					</div>
+
+				</div>
+			</div>
+			<!-- 团购 end -->
+			<div class="divVertical clearfix ray5" ng-show="false">
+				<span class="xt_bzWenZi width-just">促销类型：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div>
+						<label class="m10right">
+							<input type="radio" name="promotionType" ng-model="vo.ppm_promotion_type" value="1" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" ng-change="promotionTypeChange()" /> 按数量
+						</label>
+					</div>
+					<div ng-show="false">
+						<label class="m10right">
+							<input type="radio" name="promotionType" value="2" ng-model="vo.ppm_promotion_type" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" ng-change="promotionTypeChange()" />按金额
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" ng-show="false">
+				<span class="xt_bzWenZi width-just">阶梯促销：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div>
+						<label class="m10right">
+							<input type="checkbox" name="pa_Labber" ng-model="isLabber" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />
+							开启
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">配送方式：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div ng-repeat="x in deliveryTypeList">
+						<label class="m10right">
+							<input type="checkbox" style="width:35px" ng-checked="(vo.ppm_def3Arr).indexOf(x.bd_code)>=0" value="{{x.bd_code}}"
+							 name="delivery_type" ng-click="getDeliveryCheckedIds();">{{x.bd_name}}
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">支付方式：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div ng-repeat="x in payMethodList">
+						<label class="m10right">
+							<input type="checkbox" style="width:35px" value="{{x.bd_code}}" name="payMethod" ng-checked="(vo.ppm_paymethodArr).indexOf(x.bd_code)>-1;">{{x.bd_name}}
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">支付类型：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div ng-repeat="x in payWayList">
+						<label class="m10right">
+							<input type="checkbox" style="width:35px" value="{{x.bd_code}}" name="payWay" ng-checked="(vo.ppm_paywayArr).indexOf(x.bd_code)>-1;">{{x.bd_name}}
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">是否与其他优惠叠加：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div>
+						<label class="m10right">
+							<input type="radio" name="shareoffers" value="1" ng-model="vo.ppm_isshareoffers" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" /> 是
+						</label>
+					</div>
+					<div>
+						<label class="m10right">
+							<input type="radio" name="shareoffers" value="2" ng-model="vo.ppm_isshareoffers" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" /> 否
+						</label>
+					</div>
+
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">是否关联优惠券：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div ng-repeat="x in iscouponList">
+						<label class="m10right">
+							<input type="radio" name="coupon" value="{{x.bd_code}}" ng-model="vo.ppm_iscoupon" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" /> {{x.bd_name}}
+						</label>
+					</div>
+				</div>
+			</div>
+			<div ng-show="vo.ppm_iscoupon==1">
+
+				<div class="divVertical clearfix ray5 SelectMulti-Container2" style="margin-top: 0;box-sizing:border-box;"
+				 ng-repeat="x in couponRelationList track by $index">
+					<span class="xt_bzWenZi width-just"> </span>
+
+					<span class="xt_bzWenZi" style="width:auto !important;"> 赠送</span>
+					<a onclick="showDropList(this);" ng-click="couponPager.searchKey='';getCouponList();" style="position:relative;float:left;color:#099fb8;height:33px;line-height:33px;"
+					 ng-show="!x.cr_couponid">请选择优惠券</a>
+					<a onclick="showDropList(this)" style="position:relative;float:left;color:#099fb8;height:33px;line-height:33px;"
+					 ng-show="x.cr_couponid">{{x.cr_couponid_nameref}}</a>
+					<div style="position:relative;">
+						<div class="droplistWrap2" style="width: 743px; left: 5px; top: 40px; overflow: hidden;">
+							<div class="clearfix" style="background:#eee;">
+								关键字搜索 <input type="text" style="height:14px;margin:3px auto 3px 20px;" ng-model="title" ng-change="couponPager.searchKey=title;getCouponList();"
+								 placeholder="请输入关键字">
+							</div>
+							<div class="clearfix">
+								<table>
+									<tr class="listItem2">
+										<td style="width:30px;line-height: 0px !important;"></td>
+										<td style="width:490px;line-height: 0px !important;">名称</td>
+										<td style="width:100px;line-height: 0px !important;">编码</td>
+										<td style="width:120px;line-height: 0px !important;">金额</td>
+									</tr>
+								</table>
+							</div>
+							<div class="clearfix" style="height: 160px;overflow-y: auto;">
+								<table>
+
+									<tr class="listItem" ng-repeat="y in couponList" ng-click="chooseGoods(y,x,4);">
+										<td style="width:30px;padding:4px !important;">
+											{{couponPager.rows * (couponPager.page - 1)+ $index+1}}
+										</td>
+										<td style="width:490px;padding:4px !important;" title="{{y.pm_title}}">
+											{{y.cb_title | cut:true:20:' ...'}}
+										</td>
+										<td style="width:100px;padding:4px !important;">
+											{{y.cb_code}}
+										</td>
+										<td style="width:120px;padding:4px !important;">
+											{{y.cb_amount}}
+										</td>
+										<!-- <td style="width:260px;padding:4px !important;">
+										{{y.pm_stock}}
+									</td> -->
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="droplistWrap2 zk_fanye" style="width:743px !important; top:261px !important; left:5px !important;height:24px;overflow:hidden;">
+							<a ng-click="prevPage(couponPager,getCouponList)" class="m30right m20left">上一页</a>
+							<a ng-click="nextPage(couponPager,getCouponList)" class="m30right">下一页</a>
+							<span class="m30right">{{couponPager.page}}/{{couponPager.pageTotal}}</span>
+							<span>共{{couponPager.total}}条</span>
+						</div>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<input type="number" ng-model="x.cr_num" min="1" style="width:100px;border-top:none;border-left:none;border-right:none;">
+						张
+					</div>
+
+					<div style="float:left;height:33px;line-height:33px;margin-left:10px;">
+						<img src="../../../../img/shanchu.png" style="cursor: pointer;vertical-align:middle;" ng-click="removeLine($index,4)">
+					</div>
+				</div>
+				<div class="divVertical clearfix ray5" style="margin-top:0;">
+					<span class="xt_bzWenZi width-just"></span>
+					<div class="widthAuto zk_controlInput">
+						<a ng-click="addLine(4)" style="color:#099fb8;"> + 添加区间</a>
+					</div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">发布状态：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div ng-show="false">
+						<label class="m10right">
+							<input type="radio" name="state" ng-model="vo.ppm_state" value="1" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />
+							取消
+						</label>
+					</div>
+					<div>
+						<label class="m10right">
+							<input type="radio" name="state" value="2" ng-model="vo.ppm_state" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />
+							暂存
+						</label>
+					</div>
+					<div>
+						<label class="m10right">
+							<input type="radio" name="state" value="3" ng-model="vo.ppm_state" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />
+							发布
+						</label>
+					</div>
+					<div ng-show="false">
+						<label class="m10right">
+							<input type="radio" name="state" value="4" ng-model="vo.ppm_state" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />
+							停止
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">区域：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div>
+						<label class="m10right">
+							<input type="radio" ng-model="vo.ppm_range" value="1" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />
+							全区域
+						</label>
+					</div>
+					<div ng-show="false">
+						<label class="m10right">
+							<input type="radio" value="2" ng-model="vo.ppm_range" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />
+							以下区域
+						</label>
+					</div>
+
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" ng-show="vo.pa_area_type==2">
+				<span class="xt_bzWenZi width-just">区域选择</span>
+				<div style="margin-left:116px">
+					<div id="treeDemo" class="ztree">
+
+					</div>
+				</div>
+
+			</div>
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 排序：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="text" ng-model="vo.ppm_sort" maxlength="10" style="width:300px" />
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 视频：</span>
+				<div class="widthAuto zk_controlInput">
+					<a ng-click="upVideo($event,1,1)" style="color:#099fb8;" class="f14">上传视频</a>
+					<a ng-click="clearVideo();" class="btnStyle Btncolor2 BtnHover2" style="margin-left:20px;">清除</a>
+					<br> <span>{{vo.ppm_def1_show}}</span>
+					<div style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myvideoeditor" get-ue="ue_myvideoeditor = getUe"
+					 ng-show="false" class="ueditor" ng-model="gb_content2"></div>
+
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 视频封面：</span>
+				<div class="widthAuto zk_controlInput">
+					<a ng-click="upImage2($event,1,1)" style="color:#099fb8;" class="f14">上传图片（建议大小680*280，150kb以内）</a>
+					<div style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor2" get-ue="ue_myeditor2 = getUe"
+					 ng-show="false" class="ueditor" ng-model="gb_content3"></div>
+					<div style="margin-top:5px;">
+						<div style="float:left;margin:5px;">
+							<div class="gsGoodsImgs" style="width:170px; height:70px;border:1px solid #ddd;">
+								<img alt="" src="{{vo.ppm_def2_show?vo.ppm_def2_show:'/img/prizedef.jpg'}}" style="width:170px; height:70px;">
+							</div>
+
+						</div>
+
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">详情</span>
+				<div class="widthAuto zk_controlInput">
+					<div style="margin-bottom:1.25rem;width:664px;height: 300px; display:inline-block; z-index:1" id="myeditor1"
+					 get-ue="ue_myeditor1 = getUe" class="ueditor" ng-model="vo.ppm_describe" config="_simpleConfig"></div>
+				</div>
+			</div>
+		</div>
+		<div class="fixedBottom">
+			<div ng-if="!vo.pa_id" class="btnStyle Btncolor1 BtnHover1" ng-click="submit();">保存</div>
+			<div ng-if="vo.pa_id&&(publish_stat==2||publish_stat==1)" class="btnStyle Btncolor1 BtnHover1" ng-click="submit();">保存</div>
+			<div class="btnStyle Btncolor2 BtnHover2"><a ui-sref="index.marketing.promotionPackage" class="btnStyle Btncolor2 BtnHover2">返回</a></div>
+		</div>
+
+
+
+		<script>
+
+			$(function () {
+				$('.droplistWrap2').hide()
+				$(document).on('click', function (ev) {
+					if ($(ev.target).parents('.SelectMulti-Container2').length) { return }
+					$('.droplistWrap2').hide()
+				})
+
+				//全选框不好使时
+				$('body').on('click', '.js_selectAll', function () {
+					var thisObj = $(this);
+					if (thisObj.is(':checked')) {
+						// $('.select').attr('checked', true); 
+						$('.js_select').prop("checked", true);
+						$('.js_selectAll').prop("checked", true);
+
+					} else {
+						$('.js_select').attr('checked', false);
+						$('.js_selectAll').prop("checked", false);
+					}
+				});
+
+				$('body').on('click', '.js_select', function (event) {
+					event.stopPropagation();
+					var thisObj = $(this);
+					if (thisObj.is(':checked')) {
+						// $('.select').attr('checked', true); 
+						// $('.select').prop("checked", true);  					 					
+					} else {
+						$('.js_selectAll').prop("checked", false);
+					}
+				});
+			});
+
+			function showDropList(obj) {
+				$('.droplistWrap2').hide();
+				$(obj).parent().find('.droplistWrap2').toggle();
+				console.log($(obj).parent().find('.droplistWrap2'))
+			};
+		</script>

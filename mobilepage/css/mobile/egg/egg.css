@@ -1,0 +1,54 @@
+.egg-main { background: #3c0300; }
+.egg-main .top img { display: block; width: 100%; }
+.egg-main .center { position: relative; width: 100%; height: 30rem; background: url(../../../img/mobile/goldEgg/curtain-top.png) no-repeat; background-size: 100% 100%; }
+.egg-main .center .egg { position: absolute; width: 7rem; height: 8rem; background-size: 100% 100%; }
+.egg-main .center .egg .egg-img { position: relative; }
+.egg-main .center .egg .egg-img .crack { position: absolute; left: 3rem; width: 3rem; height: 0; background: url(../../../img/mobile/goldEgg/crack.png) no-repeat; background-size: 100%; }
+.egg-main .center .egg .egg-img img { width: 100%; height: 100%; }
+.egg-main .center .egg .award { position: relative; width: 100%; height: 100%; }
+.egg-main .center .egg .award .award-img { position: absolute; top: 0; left: 2.3rem; width: 4.2rem; height: 5.5rem; overflow-y: hidden; background: url(../../../img/mobile/goldEgg/gift.png) no-repeat; background-size: 100%; }
+.egg-main .center .egg .award .egg-shell { position: absolute; bottom: 0; width: 7rem; height: 5rem; }
+.egg-main .center .egg .fail { position: relative; width: 100%; height: 100%; }
+.egg-main .center .egg .fail img { position: absolute; bottom: 0.8rem; left: 1rem; width: 100%; }
+.egg-main .center .egg:nth-of-type(1) { top: 5rem; left: 5rem; }
+.egg-main .center .egg:nth-of-type(2) { top: 5rem; right: 6rem; }
+.egg-main .center .egg:nth-of-type(3) { top: 17rem; left: 2rem; }
+.egg-main .center .egg:nth-of-type(4) { top: 17rem; left: 50%; margin-left: -3.5rem; }
+.egg-main .center .egg:nth-of-type(5) { top: 17rem; right: 2rem; }
+.egg-main .center .time-left { position: absolute; bottom: -1rem; left: 50%; margin-left: -7.5rem; padding-left: 1rem; width: 15rem; height: 3.8461538462rem; line-height: 3.8461538462rem; text-align: center; background: url(../../../img/mobile/goldEgg/tip-btn.png); background-size: 100% 100%; font-size: 1.3rem; color: #f5b355; }
+.egg-main .center .time-left span { color: #fff; }
+.egg-main .bottom .b-top { width: 100%; min-height: 25rem; padding: 3rem 1.5rem 1rem; background: url(../../../img/mobile/goldEgg/curtain-center.png) no-repeat; background-size: 100% 100%; }
+.egg-main .bottom .b-top .winner-list { background: #fcc270; padding-bottom: 1rem; }
+.egg-main .bottom .b-top .winner-list .list-head { position: relative; text-align: center; height: 3rem; line-height: 3rem; font-size: 1.2rem; font-weight: bold; color: #980f11; }
+.egg-main .bottom .b-top .winner-list .list-head .list-tip { position: absolute; top: 50%; left: -0.5rem; margin-top: -1.0665236052rem; width: 7rem; height: 2.1330472103rem; line-height: 2.1330472103rem; background: url(../../../img/mobile/goldEgg/tip-rule.png); background-size: 100% 100%; color: #f99a24; }
+.egg-main .bottom .b-top .winner-list .lists { width: 90%; margin-left: 5%; border: 1px solid #a41b15; }
+.egg-main .bottom .b-top .winner-list .lists .items { width: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; color: #a41b15; font-size: 1.2rem; }
+.egg-main .bottom .b-top .winner-list .lists .items .item-left { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; padding: 0.5rem 1rem; }
+.egg-main .bottom .b-top .winner-list .lists .items .item-right { -webkit-box-flex: 2; -ms-flex: 2; flex: 2; padding: 0.5rem 1rem; }
+.egg-main .bottom .b-top .winner-list .lists .items:nth-of-type(odd) { background: #f5b355; }
+.egg-main .bottom .b-top .rule-list { background: #fcc270; margin-top: 1rem; padding-bottom: 1rem; }
+.egg-main .bottom .b-top .rule-list .list-head { position: relative; text-align: center; height: 3rem; line-height: 3rem; font-size: 1.2rem; font-weight: bold; color: #980f11; }
+.egg-main .bottom .b-top .rule-list .list-head .list-tip { position: absolute; top: 50%; left: -0.5rem; margin-top: -1.0665236052rem; width: 7rem; height: 2.1330472103rem; line-height: 2.1330472103rem; background: url(../../../img/mobile/goldEgg/tip-rule.png); background-size: 100% 100%; color: #f99a24; }
+.egg-main .bottom .b-top .rule-list .lists { width: 90%; margin-left: 5%; }
+.egg-main .bottom .b-top .rule-list .lists .items { width: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; color: #b03121; font-size: 1.2rem; line-height: 1.7rem; padding: 0.5rem 0; border-bottom: 0.5px solid rgba(220, 129, 78, 0.5); }
+.egg-main .bottom .b-bottom img { display: block; width: 100%; }
+@-webkit-keyframes shakeEgg { 0% { -webkit-transform: translateX(0); transform: translateX(0); }
+  15% { -webkit-transform: translateX(-13px) rotate(-2deg); transform: translateX(-13px) rotate(-2deg); }
+  30% { -webkit-transform: translateX(10px) rotate(1deg); transform: translateX(10px) rotate(1deg); }
+  45% { -webkit-transform: translateX(-8px) rotate(-2deg); transform: translateX(-8px) rotate(-2deg); }
+  60% { -webkit-transform: translateX(5px) rotate(1deg); transform: translateX(5px) rotate(1deg); }
+  75% { -webkit-transform: translateX(-3x) rotate(-0.5deg); transform: translateX(-3x) rotate(-0.5deg); }
+  100% { -webkit-transform: translateX(0); transform: translateX(0); } }
+@keyframes shakeEgg { 0% { -webkit-transform: translateX(0); transform: translateX(0); }
+  15% { -webkit-transform: translateX(-13px) rotate(-2deg); transform: translateX(-13px) rotate(-2deg); }
+  30% { -webkit-transform: translateX(10px) rotate(1deg); transform: translateX(10px) rotate(1deg); }
+  45% { -webkit-transform: translateX(-8px) rotate(-2deg); transform: translateX(-8px) rotate(-2deg); }
+  60% { -webkit-transform: translateX(5px) rotate(1deg); transform: translateX(5px) rotate(1deg); }
+  75% { -webkit-transform: translateX(-3x) rotate(-0.5deg); transform: translateX(-3x) rotate(-0.5deg); }
+  100% { -webkit-transform: translateX(0); transform: translateX(0); } }
+.egg-main .shakeEgg { -webkit-animation: 1s ease forwards; animation: 1s ease forwards; -webkit-animation-name: shakeEgg; animation-name: shakeEgg; }
+@-webkit-keyframes crack { 0% { height: 0; }
+  100% { height: 6rem; } }
+@keyframes crack { 0% { height: 0; }
+  100% { height: 6rem; } }
+.egg-main .crack-height { -webkit-animation: 1s ease forwards; animation: 1s ease forwards; -webkit-animation-name: crack; animation-name: crack; }

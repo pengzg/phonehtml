@@ -1,0 +1,74 @@
+<script language="javascript" type="text/javascript">
+	window.onload = function(){
+	}
+    </script>
+<!-- 搜索框 -->
+<div class="xt_shouYeDiv" ng-show="!$root.isPager">
+	<span><a href="#/index/homePage">首页</a>  > <a  style="font-size: 14px;font-weight: 100;" href="#/index/cs/csLineUserList"></a> </span>
+	<div class="xt_powerSearch" >高级<br>搜索</div>
+	<div class="xt_sySearch">
+		<input class="xt_searchInput" type='text' placeholder="请输入编码或名称" autocomplete="off">
+		<i class="xt_searchBtn" title="查找"></i>
+	</div>
+</div>
+<div class="xt_changeHtml">
+	<div class="xt_offOne clearfix">
+		<div class="xt_addBtn">
+			<div class="xt_addBtnAnNiu"><a href="#/index/cs/line/csLineUserAdd"><i class="xt_addImg"></i>新增</a></div>
+		</div>
+	</div>
+	<div class="xt_childTable">
+		<table class="table table3 table-striped table-hover table-bordered SortCss">
+			<thead>
+				<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+					<th class="colorCenter noSortCss">序号</th>
+					<th ng-class="sortFun('clu_id',true);" ng-click="clickSortFun('clu_id');">主键</th>
+					<th ng-class="sortFun('clu_orgid',true);" ng-click="clickSortFun('clu_orgid');">所属公司</th>
+					<th ng-class="sortFun('clu_lineid',true);" ng-click="clickSortFun('clu_lineid');">线路ID</th>
+					<th ng-class="sortFun('clu_userid',true);" ng-click="clickSortFun('clu_userid');">业务员ID</th>
+					<th ng-class="sortFun('clu_plan_date',true);" ng-click="clickSortFun('clu_plan_date');">计划日期</th>
+					<th ng-class="sortFun('clu_is_creat',true);" ng-click="clickSortFun('clu_is_creat');">是否生成任务 Y/N</th>
+					<th ng-class="sortFun('clu_adduserid',true);" ng-click="clickSortFun('clu_adduserid');">添加人</th>
+					<th ng-class="sortFun('clu_addtime',true);" ng-click="clickSortFun('clu_addtime');">添加日期</th>
+					<th ng-class="sortFun('clu_updateuserid',true);" ng-click="clickSortFun('clu_updateuserid');">修改人</th>
+					<th ng-class="sortFun('clu_updatetime',true);" ng-click="clickSortFun('clu_updatetime');">修改日期</th>
+					<th ng-class="sortFun('clu_dr',true);" ng-click="clickSortFun('clu_dr');">DR</th>
+					<th ng-class="sortFun('clu_ts',true);" ng-click="clickSortFun('clu_ts');">TS</th>
+					<th ng-class="sortFun('',false);">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in csLineUserList" class="" style=" height:50px">
+					<td class="colorCenter">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+					<td>{{x.clu_id}}</td>
+					<td>{{x.clu_orgid}}</td>
+					<td>{{x.clu_lineid}}</td>
+					<td>{{x.clu_userid}}</td>
+					<td>{{x.clu_plan_date}}</td>
+					<td>{{x.clu_is_creat}}</td>
+					<td>{{x.clu_adduserid}}</td>
+					<td>{{x.clu_addtime}}</td>
+					<td>{{x.clu_updateuserid}}</td>
+					<td>{{x.clu_updatetime}}</td>
+					<td>{{x.clu_dr}}</td>
+					<td>{{x.clu_ts}}</td>
+					<td class="colorCenter">
+						<a class="colorBlue" ng-click="toDetail(x.clu_id)" href="javascript:;" title="明细">明细</a>&nbsp;&nbsp;
+						<a class="edit colorBlue" ng-click="toEdit(x.clu_id)" title="修改">修改</a>&nbsp;&nbsp;
+						<a class="edit colorBlue" ng-show="pager.total>1" ng-click="toDelete(x.clu_id)" title="删除">删除</a>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+		<!-- 分页 -->
+     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+		<!--分页 -->
+	</div>
+</div>
+
+<script>
+    jQuery(document).ready(function() {
+        EditableTable.init();
+    });
+</script>

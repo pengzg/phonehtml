@@ -1,0 +1,46 @@
+.right-notes-top {
+	position: relative;
+	width: 271px;
+	height: 123px;
+	margin: 0 auto;
+	background: url(../../img/temp_security.png) no-repeat;
+}
+.right-notes-top div:first-of-type {
+	position: relative;
+    top: 47px;
+    left: -16px;
+    font-size: 18px;
+	color: #fff;
+}
+.right-notes-top div:last-of-type {
+	position: absolute;
+    left: 16px;
+    bottom: 5px;
+    font-size: 16px;
+	color: #a6a6a6;
+}
+.right-notes-bottom {
+	position: relative;
+	width: 271px;
+	height: 372px;
+	margin: 0 auto;
+	background: url(../../img/temp_receive.png) no-repeat;
+}
+.right-notes-bottom div:nth-of-type(1){
+	position: relative;
+	top: 87px;
+	color: #f9c69d;
+	font-size: 12px;
+}
+.right-notes-bottom div:nth-of-type(2){
+	position: relative;
+	top: 90px;
+	color: #f9c69d;
+	font-size: 12px;
+}
+.right-notes-bottom div:nth-of-type(3){
+	position: relative;
+	top: 100px;
+    color: #ffe2b1;
+    font-size: 16px;
+}

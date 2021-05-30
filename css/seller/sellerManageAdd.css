@@ -1,0 +1,6 @@
+.add-start-page-main { padding: 20px; }
+.add-start-page-main .content { display: flex; width: 100%; margin-bottom: 10px; }
+.add-start-page-main .content:last-of-type { margin-bottom: 0; }
+.add-start-page-main .content .content-left { flex: 3; display: inline-block; }
+.add-start-page-main .content .content-right { flex: 7; display: inline-block; }
+.add-start-page-main .content .radio_tip { position: relative; left: -17px; margin-top: 10px; }

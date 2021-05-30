@@ -1,0 +1,22 @@
+<div class="com-miss-prize-main" ng-show="comMissPrize.isShow">
+	<div class="compop-background" ng-click="!comMissPrize.disable&&comMissPrize.hide()"></div>
+	<div class="prize-content">
+		<div class="prize-top">
+			<div class="prize-name">
+				<div><span >未中奖</span></div>
+			</div>
+		</div>
+		<div class="prize-bottom">
+			<!-- 图片预加载 防止切换时闪动 -->
+			<img style="display: none;" src="../../img/mobile/common/try-again.png">
+			<img style="display: none;" src="../../img/mobile/common/try-again-active.png">
+
+			<div class="prize-btn" ng-bind="comMissPrize.btnText"
+				 ng-class="{'prize-active':bntActive}"
+				 on-touch="bntActive=true;" 
+				 on-release="bntActive=false"
+				 ng-click="comMissPrize.isShow=false;comMissPrize.callback()"></div>
+			<div class="prize-bottom-close" ng-click="!comMissPrize.disable&&comMissPrize.hide()"><i class="icon ion-ios-close-outline"></i></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,70 @@
+<div class="add-start-page-main">
+    <div class="panel panel-default">
+        <div class="panel-heading">设备信息</div>
+        <div class="panel-body">
+            <div class="content">
+                <div class="content-left">添加方式</div>
+				<div class="content-right">
+					<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+					<input class="xt_radio" name="addType" ng-init="vo.addType = 1" ng-model="vo.addType" value="1"
+						type="radio" >
+					<div class="xt_inputBackimg"></div>
+					普通</lable>
+					<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+					<input class="xt_radio" name="addType" ng-model="vo.addType" value="2"
+						type="radio" >
+					<div class="xt_inputBackimg"></div>
+					批量 </lable>
+				</div>
+			</div>
+			<div class="content">
+                <div class="content-left">设备分组</div>
+                <div class="content-right">
+	                <select ng-model="vo.me_groupid" style="width: 314px;">
+						<option ng-repeat="x in deviceGroupList" value="{{x.meg_id}}">{{x.meg_name}}</option>
+					</select>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-left">设备类型</div>
+                <div class="content-right">
+	                <select ng-model="vo.me_type" style="width: 314px;">
+						<option ng-repeat="x in deviceType" value="{{x.id}}">{{x.value}}</option>
+					</select>
+                </div>
+            </div>
+            <div class="content" ng-show="vo.addType==1">
+                <div class="content-left">设备序列号</div>
+                <div class="content-right">
+					<div class="controls">
+						<input type="number" id="me_num" class="span4" ng-model="vo.me_num"/>
+						<span class="maroon">*</span>
+					</div>
+                </div>
+            </div>
+            <div class="content" ng-show="vo.addType==2">
+                <div class="content-left">设备序列号</div>
+                <div class="content-right">
+					<div class="controls">
+						<input type="number" id="startNum" class="span4"  ng-model="vo.me_num_start"/> -
+						<input type="number" id="endNum" class="span4"  ng-model="vo.me_num_end"/>
+						<span class="maroon">*</span>
+					</div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="content-left">备注</div>
+                <div class="content-right">
+					<div class="controls">
+						<textarea rows="5" cols="50" ng-model="vo.me_remarks"></textarea>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+    	<div class="btn btn-success" ng-click="insertDevice();">提交</div>
+    	&nbsp;&nbsp;&nbsp;
+    	<div class="btn btn-default" ui-sref="index.seller.deviceOpen">返回</div>
+    </div>
+</div>

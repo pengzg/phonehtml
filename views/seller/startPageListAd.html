@@ -1,0 +1,110 @@
+<div class="starepage-m-main">
+    <div class="common-bar-top">
+        <div class="common-bar-top-t">
+            <strong class="common-bar-title">关键指标</strong>
+        </div>
+        <div class="common-bar-top-b">
+            <div class="startpage-bar">
+                <div class="startpage-first">1</div>
+                <div class="startpage-second">创建启动页广告计划
+                    <br>编辑启动页广告</div>
+            </div>
+            <div class="startpage-bar">
+                <div class="startpage-first">2</div>
+                <div class="startpage-second">编辑完成并支付
+                    <br>提交总部进行审核</div>
+            </div>
+            <div class="startpage-bar">
+                <div class="startpage-first">3</div>
+                <div class="startpage-second">审核通过后
+                    <br>设备摇出图片广告</div>
+            </div>
+            <div class="startpage-bar">
+                <div class="btn btn-success startpage-center" ui-sref="index.seller.addStartPageListAd">创建启动页广告</div>
+            </div>
+        </div>
+    </div>
+    <div class="starepage-m-bottom">
+        <table style="border-bottom: none;" class="common_table_1">
+            <thead>
+                <tr style="border-bottom: none;">
+                    <th style="width: 20%;">媒体展示</th>
+                    <th style="width: 10%;">投放策略</th>
+                    <th style="width: 10%;">投放时间</th>
+                    <th style="width: 10%;">展示量/投放量</th>
+                    <th style="width: 10%;">计费模版</th>
+                    <th style="width: 10%;">投放预算</th>
+                    <th style="width: 10%;">状态</th>
+                    <th style="width: 10%;">创建时间</th>
+                    <th style="width: 10%;">操作</th>
+                </tr>
+            </thead>
+        </table>
+        <table class="common_table_1">
+            <tbody>
+                <tr ng-repeat="x in [1,2,3,4,5,6]">
+                    <td style="width: 20%;"><img src="../../img/opening_bg2.jpg" alt="" style="width: 80px;height: 120px;"></td>
+                    <td style="width: 10%;"><a style="color: #4bcc5f;" data-toggle="modal" data-target="#myModal">详情</a></td>
+                    <td style="width: 10%;">
+                        <div>2017-10-08</div>
+                        <div>至</div>
+                        <div>2017-10-31</div>
+                    </td>
+                    <td style="width: 10%;">30/100</td>
+                    <td style="width: 10%;">单次计费</td>
+                    <td style="width: 10%;">1.00</td>
+                    <td style="width: 10%;">投放中</td>
+                    <td style="width: 10%;">2017-10-08 08:27</td>
+                    <td style="width: 10%;">
+                        <a class="common_delete" title="删除" ng-click="deleteSeller()"></a>
+                        <a class="common_offsell" title="下架" ng-click="offSell()"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+					投放策略详情
+				</h4>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 10px;">
+                    <span class="device-modal-label">分组方式:</span>
+                    <span class="device-modal-content">投放设备分组</span>
+                </div>
+                <table style="border-bottom: none;" class="common_table_1">
+		            <thead>
+		                <tr style="border-bottom: none;">
+		                    <th style="width: 50%;">分组名称</th>
+		                    <th style="width: 50%;">所属运营商</th>
+		                </tr>
+		            </thead>
+		        </table>
+		        <table class="common_table_1">
+		            <tbody>
+		                <tr ng-repeat="x in [1,2]">
+		                    <td style="width: 50%;">公交站台</td>
+		                    <td style="width: 50%;">湖北省孝感市孝南区龚平</td>
+		                </tr>
+		            </tbody>
+		        </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">我知道了
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>

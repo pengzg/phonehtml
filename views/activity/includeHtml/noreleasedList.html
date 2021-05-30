@@ -1,0 +1,299 @@
+<div class="game-container">
+	<div class="headers">
+		<!-- <h3 ng-show="mm_state == 1">取消发布活动</h3> -->
+		<h3 ng-show="mm_state == 2">未发布活动</h3>
+		<h3 ng-show="mm_state == 3">发布活动</h3>
+		<h3 ng-show="mm_state == 4">结束活动</h3>
+		<common-toolbar c-padding="15px 0;">
+			<a class="btn btn-success" ui-sref="index.activityAdd.calendarList" style="float:right"><i class="icon icon-plus"></i> 新建活动</a>
+			<div class="clearfix"></div>
+		</common-toolbar>
+		<div class="content">
+			<table class="table table3 table-hover table-bordered">
+	            <thead>
+	                <tr>
+	                	<th>活动名称</th>	    
+	                	<th>活动类型</th>            	
+	                    <th>活动状态</th>
+	                    <th>活动时间</th>
+	                    <th>奖品数量</th>
+	                    <th>已发放/剩余奖品数量</th>
+	                    <th>参与/最大参与人数</th>
+	                    <th>活动状况告警</th>
+	                    <th>传播人数</th>
+	                    <th>发布区域</th>
+	                    <th>操作</th>
+	                </tr>
+	            </thead>
+	            <tbody class="borBottom">
+	                <tr class="js_selectLine" ng-repeat="x in mmList">
+	                	<td title="">{{x.mm_name}}</td>
+	                	<td title="">{{x.mm_type_nameref}}</td>
+	                    <td class="i-c-blue">{{x.mm_state_nameref}}</td>
+	                    <td>{{x.mm_startime}}<br>{{x.mm_endtime}}</td>
+	                    <td>{{x.mm_prize_totalnum}}</td>
+	                    <td>{{x.mm_prize_totalnum-x.mm_prize_currentnum}}/{{x.mm_prize_currentnum}}</td>
+	                    <td>{{x.mm_participant_num}}/{{x.mm_participant_num_max}}</td>
+	                    <td>{{x.mm_alarm}}</td>
+	                    <td>{{x.mm_spread_num}}</td>
+	                    <td>
+	                    <a ng-show="x.mm_state == 2" ng-click="activeTab=1;showRelation(x);" title="关联区域" 
+	                    	class="i-c-black opt-copy">
+               				<i class="hz-icon hz-icon-link"></i>
+               			</a>
+               			<a  ng-click="showRelationBox(x);" title="查看区域" class="i-c-black opt-copy">
+               				<i class="hz-icon hz-icon-link"></i>
+               			</a>
+	                    </td>
+	                    <td class="td-opr" style="position: relative;width: 160px;">
+	                    	<ul class="fn-clear">
+	                    		<li>
+	                    			<a ng-if="x.mm_state == 3" ng-click="updateState(x,4)" class="i-c-red pub_link">
+	                    				<i class="hz-icon hz-icon-pub"></i>
+	                    				结束
+	                    				
+	                    			</a>
+	                    			<a ng-if="x.mm_state == 2" ng-click="updateState(x,3)" class="i-c-red pub_link">
+	                    				<i class="hz-icon hz-icon-pub"></i>
+	                    				发布
+	                    			</a>
+	                    			<!-- <a ng-if="x.mm_state == 3" ng-click="updateState(x,1)" class="i-c-red pub_link">
+	                    				<i class="hz-icon hz-icon-pub"></i>
+	                    				取消
+	                    			</a> -->
+	                    		</li>
+	                    		<li>
+	                    			<a ng-if="x.mm_state != 2" class="i-c-black opt-copy" ng-click="toActivityRecod(x);">
+	                    				<i class="hz-icon hz-icon-link"></i>
+	                    				纪录
+	                    			</a>
+	                    		</li>
+	                    		<li>
+	                    			<a ng-if="x.mm_state != 3 && x.mm_state != 4" ng-click="goEdit(x);" class="i-c-black opr_edit">
+	                    				
+	                    				<i class="hz-icon hz-icon-edit"></i>
+	                    				编辑
+	                    			</a>
+	                    		</li>
+	                    		<li>
+	                    			<a ng-click="showDetail(x);" class="i-c-black opr_edit">
+	                    				<i class="hz-icon hz-icon-edit"></i>
+	                    				查看
+	                    			</a>
+	                    		</li>
+	                    	</ul>
+	                    	<ul class="fn-clear">
+	                    		<!-- <li class="li-copy loaded">
+	                    			<a href="" class="i-c-black opt-copy">
+	                    				<i class="hz-icon hz-icon-link"></i>
+	                    				链接
+	                    			</a>
+	                    			<div class="act-link-layer">
+	                    				<h4>活动链接</h4>
+	                    				<div class="left-cont">
+	                    					<img src="../../../img/qrcode_zhoubao.png" alt="" class="qrcode">
+	                    					<div class="qrcode-bottom">
+		                    					<span>微信扫一扫</span>
+		                    					<a href="">下载</a>
+		                    				</div>
+	                    				</div>
+	                    				<div class="right-cont">
+	                    					<p>链接地址：</p>
+	                    					<div class="input-box">
+	                    						<a href="" class="mobile-url"></a>
+	                    						<div class="copy-btn" >复制</div>
+	                    					</div>
+	                    					<span href="" class="copy-tips">可将链接复制到您的公众号菜单中</span>
+	                    				</div>
+	                    			</div>
+	                    		</li> -->
+	                    		<li>
+	                    			<a ng-show="x.mm_state != 3 && x.mm_state !=4 " ng-click="deleteActivity(x)" class="i-c-black del-activity">
+	                    				<i class="hz-icon hz-icon-del"></i>
+	                    				删除
+	                    			</a>
+	                    		</li>
+	                    	</ul>
+	                    </td>
+	                </tr>	              
+	            </tbody>
+	        </table>
+	        <!-- 分页 -->
+	     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+			<!--分页 -->
+		</div>
+	</div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					设置活动资源关联
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="xt_offOne tabUl-2 clearfix" ng-init="activeTab=0">
+					<ul>
+						<li ng-class="{active:activeTab==1}" style="width: 130px;" ng-click="activeTab=1;selectedArr=[];"> 
+							<a>关联设备</a>
+						</li>
+						<li ng-class="{active:activeTab==2}" style="width: 130px;" ng-click="activeTab=2;selectedArr=[];"> 
+							<a>关联分组</a>
+						</li>
+						<!-- <li ng-class="{active:activeTab==3}" style="width: 130px;" ng-click="activeTab=3;selectedArr=[];"> 
+							<a>关联区域</a>
+						</li> -->
+						
+					</ul>
+				</div>
+				<div class="clearfix" style="max-height: 290px; overflow: auto; overflow-x: hidden; margin-top: 10px">
+					<table ng-show="activeTab==1"  class="table table2 table-striped table-hover table-bordered SortCss thHeight2">
+			            <thead >
+				           	<div class="control-group" style="margin-bottom:10px;" ng-show="activeTab==1" >
+								<input type="text" style="position: relative;top: 1px;
+								padding-top: 6px;width: 150px; height: 21px;" class="span5" 
+								placeholder="请输入设备编码" ng-model="devicePager.searchKey"/>
+								<button class="btn btn-success" style="width: 80px; height: 36px;" 
+								ng-click="queryDevice();">搜索</button>
+							</div>
+			                <tr class=" bgColor-tableTr tableMiddle zk_stockTitleTh">
+			                	<th class="colorCenter noSortCss">
+			                		<label class="zk_inputCheckbox">
+										<input type="checkbox" id="selectAll" ng-click="selectAll()" class="zk_checkbox">
+										<div class="zk_checkboxImg"></div>
+									</label>
+			                	</th>
+			                	<th class="noSortCss colorCenter" >设备分组</th>	                	
+			                    <th class="noSortCss colorCenter" >设备序列号</th>
+			                    <th class="noSortCss colorCenter" >设备类型</th>
+			                    <th class="noSortCss colorCenter" >门店</th>
+			                    <th class="noSortCss colorCenter" style="width: 200px;">门店地址</th>
+			                    <th class="noSortCss colorCenter" >联系电话</th>
+			                </tr>
+			            </thead>
+			            <tbody class="borBottom">
+			                <tr ng-repeat="x in deviceList">
+			                	<td class="colorCenter">
+			                		<label class="zk_inputCheckbox">
+										<input type="checkbox" class="zk_checkbox" ng-click="selectVal(x,$event)">
+										<div class="zk_checkboxImg"></div>
+									</label>
+			                	</td>
+			                    <td class="colorCenter">{{x.me_groupid_nameref}}</td>
+			                    <td class="colorCenter">{{x.me_num}}</td>
+			                    <td class="colorCenter">{{x.me_type_nameref}}</td>
+			                    <td class="colorCenter">{{x.me_shopid_nameref}}</td>
+			                    <td class="colorCenter">{{x.me_shopid_address}}</td>
+			                    <td class="colorCenter">234</td>
+			                </tr>
+			                
+			            </tbody>
+			        </table>
+			        <table ng-show="activeTab==2"  class="table table2 table-striped table-hover table-bordered SortCss thHeight2">
+			            <thead >
+			                <tr class=" bgColor-tableTr tableMiddle zk_stockTitleTh">
+			                	<th class="colorCenter noSortCss">
+			                		<label class="zk_inputCheckbox">
+										<input type="checkbox" id="selectAll" ng-click="selectAll()" class="zk_checkbox">
+										<div class="zk_checkboxImg"></div>
+									</label>
+			                	</th>
+			                	<th class="noSortCss colorCenter" >编号</th>	                	
+			                    <th class="noSortCss colorCenter" >分组名称</th>
+			                    
+			                </tr>
+			            </thead>
+			            <tbody class="borBottom">
+			                <tr ng-repeat="x in deviceGroupList track by $index">
+			                	<td class="colorCenter">
+			                		<label class="zk_inputCheckbox">
+										<input type="checkbox" class="zk_checkbox" ng-click="selectVal(x,$event)" >
+										<div class="zk_checkboxImg"></div>
+									</label>
+			                	</td>
+			                    <td class="colorCenter">{{$index+1}}</td>
+			                    <td class="colorCenter">{{x.meg_name}}</td>
+			                    
+			                </tr>
+			                
+			            </tbody>
+			        </table>
+			        <ul ng-show="activeTab==3"  id="treemode"  class="ztree"
+			        	
+						></ul>
+					
+				</div>
+				<!-- 分页 -->
+				<tm-pagination ng-show="activeTab==1" conf="devicePager" search-param="searchParam" ng-show="activeTab==0"></tm-pagination>
+				<tm-pagination ng-show="activeTab==2" conf="groupPager" search-param="searchParam" ng-show="activeTab==0"></tm-pagination>
+				<div ng-show="activeTab==1||activeTab==2"><br>已选：<br>
+					<span ng-repeat="x in selectedArr track by $index">{{x.name}}
+						、
+					</span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="doRelation($event);">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="width: 800px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					活动资源关联
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="xt_offOne tabUl-2 clearfix">
+					<ul>
+						<li style="width: 130px;" ng-show="reList[0].msr_type == 1"> 
+							已关联设备
+						</li>
+						<li style="width: 130px;" ng-show="reList[0].msr_type == 2"> 
+							已关联分组
+						</li>
+						<li style="width: 130px;" ng-show="reList[0].msr_type == 3"> 
+							已关联区域
+						</li>
+						
+					</ul>
+				</div>
+				
+				<div ><br>已选：<br>
+					<span ng-repeat="x in reList track by $index">{{x.msr_value_nameref}}
+					</span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+<script type="text/javascript">
+	$(function(){
+	    $(".searchItem_list a").click(function() {
+	        $(this).siblings('a').removeClass('selected');
+	        $(this).addClass('selected'); 
+	    });
+	}); 
+</script>

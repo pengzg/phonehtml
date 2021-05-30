@@ -1,0 +1,285 @@
+<style type="text/css">
+iframe {
+	width: 100% !important;
+}
+
+.WdateDiv {
+	width: 100% !important;
+}
+</style>
+<common-navigater data="[{name:'业务员'},{name:'业务员行程'}]"></common-navigater>
+<div class="xt_changeHtml"
+	style="position: relative; padding: 0; min-width: 1200px; max-height: 520px; border: 1px solid #ddd;">
+	<div class="leftDivContent">
+		<div id="div1" class="clearfix"
+			style="width: 100%; box-sizing: border-box;"></div>
+		<div class="clearfix">
+			<div class="TwoLevel-Item f14">
+				全部业务员 <font style="font-weight: initial;">(当前位置)</font>
+			</div>
+			<div class="TwoLevel-Item-List">
+				<div class="TwoLevel-Item " ng-class="{true:'TwoLevel-Item-List-Select',false:''}[searchParam.clct_userid ==x.su_id]"
+					style="font-weight: normal;" ng-repeat="x in baseUserdocList" ng-click="selectSaleman(x)" >{{x.bud_name}}</div>
+				
+			</div>
+		</div>
+	</div>
+
+<div id="leftDivContent-btn" class="leftDivContent-btn"></div>
+
+	<div id="allmap" class="rightDivContent" style="height: 520px;"></div>
+
+	<div class="rightPopContent" ng-class="{true:'rightPopContentShow',false:''}[showRightPop]">
+		<div class="btnPopRight border_box" ng-click="showRightPop=!showRightPop"></div>
+		<div class="rightPopHead">轨迹明细</div>
+		<div class="rightPopTop">已拜访 {{csLineCustTaskList.length}}家。</div>
+		<div class="rightPopItems">
+			<div ng-repeat="x in csLineCustTaskList track by $index">
+				<div class="rightPopItem" >
+					<div class="popItem1">{{x.clct_arrivetime|limitTo:5:11}}</div>
+					<div class="popItem2">
+						<div class="pointSpan"><div>{{$index+1}}</div></div>
+					</div>
+					<div class="popItem3">
+						<div><span class="popItemSpan1">{{x.clct_customerid_nameref}}</span> <span class="popItemSpan2" ng-show="false">未定位</span> <span class="popItemSpan3" style="text-overflow: ellipsis; overflow: hidden; width: 80px; white-space: nowrap; display: block;" title="{{x.bl_name}}">{{x.bl_name}}</span></div>
+						<div class="popItemDivCenter">{{x.clct_arrivetime|limitTo:5:11}} <span ng-if="x.clct_leavetime"> -- {{x.clct_leavetime|limitTo:5:11}} ( {{x.service_time}})</span></div>
+						<a class="popItemA" ng-show="false" ng-click="showUserPopClick()">总金额：0 元</a>
+					</div>
+				</div>
+				<div class="rightPopItem" >
+					<div class="popItem1">{{x.clct_leavetime|limitTo:5:11}}</div>
+					<div class="popItem21">
+						
+					</div>
+					<div class="popItem4">
+						<div>在途：{{x.clct_traveltime}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 添加用户弹窗 -->
+<div class="dialog" ng-show="showUserPop" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50px;"  ng-show="showUserPop">
+		<div class="dg-xg-js" style="width:660px;">
+			库户档案卡
+			<div class="dg-cancle" ng-click="showUserPop=false;"></div>
+		</div>
+	    <form class="form-horizontal">
+			<div class="dg-content" style=" margin:5px auto;">
+				<div>
+					<div style="float: left;"><img src="../../../../img/homePage/shop.png" style="width: 160px;height: 160px;margin: 10px 12px 10px 5px;border: 1px dashed #ddd;"></div>
+					<div style="float: left;width: 446px;margin-top: 3px;">
+						<div class="popColumnLeft floatLeft">
+							<div>客户名称：</div>
+							<div>联&ensp;系&ensp;人：</div>
+							<div>电&ensp;&ensp;&ensp;&ensp;话：</div>
+							<div>地&ensp;&ensp;&ensp;&ensp;址：</div>
+							<div>销售情况：</div>
+						</div>
+						<div class="popColumnRight floatLeft">
+							<div>好烟好酒</div>
+							<div>好烟好酒</div>
+							<div>好烟好酒</div>
+							<div>好烟好酒</div>
+							<div>总金额 65元，销售金额 130元，退货金额 65元，还货金额 0元，处理销售 0元</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="xt_offOne tabUl-2 clearfix">
+					<ul>
+						<li ng-class="{'active':showSale}" style="width: 130px;" ng-click="showSale=true;"> 
+							<a >销售信息</a>
+							<span class="badge" style=" position: absolute; top: 8px; right: 10px; z-index: 1">21</span>
+						</li>
+						<li ng-class="{'active':!showSale}" style="width: 130px;" ng-click="showSale=false;"> 
+							<a>退货信息</a>
+							<span class="badge" style=" position: absolute; top: 8px; right: 10px; z-index: 1">21</span>
+						</li>
+					</ul>
+				</div>
+				<!-- 销售信息 -->
+				<div ng-show="showSale">
+					<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-left-color: transparent;border-right-color: transparent;">
+						<thead>
+							<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+								<th class="colorCenter noSortCss">出库单号</th>
+								<th class="colorCenter noSortCss">出库仓库</th>
+								<th ng-class="sortFun('su_loginname',true);" ng-click="clickSortFun('su_loginname');">客户</th>
+								<th class="noSortCss">出库日期</th>
+								<th class="noSortCss">金额</th>
+								<th class="noSortCss">操作人</th>
+								<th class="noSortCss">备注</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in [1,2,3,4]" style=" height:30px">
+								<td class="colorCenter">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+								<td class="colorCenter">007</td>
+								<td>
+									123
+								</td>
+								<td>23</td>
+								<td>23</td>
+								<td>23</td>
+								<td>23</td>
+							</tr>
+							
+						</tbody>
+					</table>
+			     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+				</div>
+				<!-- 退货信息 -->
+				<div ng-show="!showSale">
+					<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-left-color: transparent;border-right-color: transparent;">
+						<thead>
+							<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+								<th class="colorCenter noSortCss">退货单号</th>
+								<th class="colorCenter noSortCss">退入仓库</th>
+								<th ng-class="sortFun('su_loginname',true);" ng-click="clickSortFun('su_loginname');">客户</th>
+								<th class="noSortCss">业务员</th>
+								<th class="noSortCss">退货日期</th>
+								<th class="noSortCss">金额</th>
+								<th class="noSortCss">操作人</th>
+								<th class="noSortCss">备注</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in [1,2,3,4]" style=" height:30px">
+								<td class="colorCenter">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+								<td class="colorCenter">007</td>
+								<td>
+									123
+								</td>
+								<td>23</td>
+								<td>23</td>
+								<td>23</td>
+								<td>23</td>
+								<td>23</td>
+							</tr>
+							
+						</tbody>
+					</table>
+			     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="showUserPop=false;">添加</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="showUserPop=false;">取消</div>
+				</div>
+			</div>
+	
+	</div>
+</div>
+
+<!-- 地图自定义弹窗 -->
+<div id="popContent" style="display: none;">
+	<div class="dialog" style="z-index:88;width:450px;">
+		<!-- <div class="dialog-zdc" ></div> -->
+		<!-- 弹出添加子类 -->
+		<div class="dg-xg-zh" style="z-index:999998; position: static;margin:0;width:450px;">
+			<!-- <div class="dg-xg-js" style="width:550px;background-color: #00b8d2;">
+				<div class="floatLeft title-tabs title-checked" onclick="angular.element(this).scope().changeTab(this,1)"><span>客户信息</span></div>
+				<div class="floatLeft title-tabs" onclick="angular.element(this).scope().changeTab(this,2)"><span>拜访信息</span></div>
+			</div> -->
+			<div class="xt_offOne tabUl-2 clearfix">
+			    <ul>
+			        <li class="active" style="width: 112px;" onclick="angular.element(this).scope().changeTab(this,1)">
+			            <a >客户信息</a>
+			        </li>
+			        <li class="" style="width: 112px;" onclick="angular.element(this).scope().changeTab(this,2)"> 
+			            <a >拜访信息</a>
+			        </li>
+			    </ul>
+			</div>
+		    <div style="display:flex;width:450px;background: #fff;" id="diaTab1">
+		    	<div class="border_box" style="flex: none;width: 200px;padding:10px">
+		    		<img style="width: 180px;border: 1px solid #ddd;" src="../../img/daiban-1.png" alt="" id="imgDemo">
+	    		</div>
+		    	<div class="f14" style="flex: 1;">
+		    		<div class="common-oranges" style="font-size: 16px;font-weight: bold;">188458</div>
+		    		<div style="padding: 5px;">
+		    			<span>类&ensp;&ensp;&ensp;&ensp;别：</span>
+		    			<span>半程镇</span>
+	    			</div>
+		    		<div style="padding: 5px;">
+		    			<spn>联&ensp;系&ensp;人：</spn>
+		    			<spn>李四</spn>
+		    		</div>
+		    		<div style="padding: 5px;">
+		    			<spn>电&ensp;&ensp;&ensp;&ensp;话：</spn>
+		    			<spn>13666666666</spn>
+		    		</div>
+		    		<div style="padding: 5px;border-bottom: 1px dashed #ddd;">
+		    			<span>地&ensp;&ensp;&ensp;&ensp;址：</span>
+		    			<span>s302(喜邦线)</span>
+		    		</div>
+		    		<div class="common-oranges" style="padding: 5px;">
+		    			<span>总&ensp;金&ensp;额：</span>
+		    			<span>320.00</span>
+		    		</div>
+		    		<div class="common-oranges" style="padding: 5px;">
+		    			<span>最近拜访：</span>
+		    			<span>2017-01-01 20:55:44</span>
+		    		</div>
+		    		<div style="padding: 5px;">
+		    			<span>线&ensp;&ensp;&ensp;&ensp;路：</span>
+		    			<span>大东粮油线路</span>
+		    		</div>
+		    	</div>
+		    </div>
+		    <div id="diaTab2" class="f14" style="width:450px;background: #fff;display: none;">
+				<div style="padding: 5px;">
+					<div class="clearfix" style="padding: 5px;font-weight: bold;">
+						<div class="floatLeft color-orange"><span style="font-size: 28px;">0</span>&nbsp;元</div>
+						<div class="floatRight color-green" style="font-size: 28px;">今天9:00</div>
+					</div>
+					<div class="clearfix" style="padding: 5px;">
+						<div class="floatLeft">总金额</div>
+						<div class="floatRight">今天到访</div>
+					</div>
+					<div class="clearfix" style="padding: 5px;">
+						<div class="floatLeft">平均&nbsp;<span class="color-orange">0</span>&nbsp;元/次</div>
+						<div class="floatRight">平均&nbsp;<span class="color-red">1</span>&nbsp;单/次</div>
+					</div>
+				</div>
+				<div style="display: flex;text-align: center;padding: 5px;border-top: 1px solid #ddd;border-bottom: 1px solid #ddd;">
+					<div style="flex: 1;border-right: 1px solid #ddd;">
+						<div class="color-blue"><span style="font-size: 18px;">0</span>&nbsp;元</div>
+						<div>销售额</div>
+					</div>
+					<div style="flex: 1;border-right: 1px solid #ddd;">
+						<div class="color-green"><span style="font-size: 18px;">0</span>&nbsp;元</div>
+						<div>退货额</div>
+					</div>
+					<div style="flex: 1;border-right: 1px solid #ddd;">
+						<div class="color-orange"><span style="font-size: 18px;">0</span>&nbsp;元</div>
+						<div>还货额</div>
+					</div>
+					<div style="flex: 1;">
+						<div class="color-red"><span style="font-size: 18px;">0</span>&nbsp;次</div>
+						<div>订单数</div>
+					</div>
+					
+				</div>
+				<div style="padding: 5px;">
+					<div>最近销售信息：（2015-05-05）</div>
+					<div>未进行销售</div>
+				</div>
+		    </div>
+		
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$("#leftDivContent-btn").click(function() {
+		$(".xt_changeHtml").toggleClass("enable");
+		$(".xt_changeHtml").siblings().removeClass("enable");
+	})
+</script>

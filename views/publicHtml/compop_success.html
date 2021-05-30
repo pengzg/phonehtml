@@ -1,0 +1,10 @@
+<div class="compop-background" ng-show="popSuccess.isShow" ng-click="popSuccess.hide()"></div>
+<div class="pop-success" ng-show="popSuccess.isShow" ng-class="{'pop-success-big':popSuccess.isBig}">
+	<div>
+		<div class="pop-success-top" ng-bind="popSuccess.content" ng-if="!popSuccess.isBig"></div>
+		<div class="pop-success-top" ng-if="popSuccess.isBig">
+			<div ng-repeat="x in popSuccess.content" ng-bind="x" class="align-left"></div>
+		</div>
+		<div class="pop-success-bottom" ng-click="popSuccess.hide()">确认</div>
+	</div>
+</div>

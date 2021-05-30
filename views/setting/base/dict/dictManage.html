@@ -1,0 +1,376 @@
+<!-- 搜索框 -->
+<common-navigater data="[{name:'设置'},{name:'系统设置'},{name:'字典管理'}]"></common-navigater>
+<div class="search-filter-box">
+	<div>
+		<label>关键字<span>:</span></label>
+		<input type="text" placeholder="关键字" ng-model="searchKey">
+	</div>
+
+	<div>
+		<a class="btn btn-success" style="margin-left:80px;" ng-click="doSearch()"><i class="glyphicon glyphicon-filter"></i>
+			筛选</a>
+		<a class="btn btn-default" ng-click="searchKey='';doSearch();" style="text-shadow: none !important; color: #333 !important;"><i
+			 class="icon icon-eraser"></i> 清空</a>	
+	</div>
+</div>
+<div class="xt_changeHtml" style="position: relative;z-index:2;" ng-init="showLeft=true;" ng-class="{'enable':!showLeft}">
+	<div class="treeStyle3" style="top: 20px; border: 0;height: 92%;width: 618px;">
+		
+		<div class="treeTitle">字典类型</div>
+		<div class="xt_childTable border_box" style="width: 100%;padding:3px;">
+			<table class="table table3 table-striped table-hover table-bordered SortCss">
+				<thead>
+					<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+						<th class="colorCenter noSortCss">序号</th>
+						<th class="colorCenter noSortCss">字典项编码</th>
+						<th ng-class="sortFun('bdt_name',true);" ng-click="clickSortFun('bdt_name');">字典项名称</th>
+						<th class="noSortCss">级别</th>
+					</tr>
+				</thead>
+				<tbody ng-init="dictChecked=-1">
+					<tr ng-repeat="x in dictTypeList"
+						ng-click="$parent.dictChecked=$index;selectedLeft(x.bdt_id,x.bdt_name);" 
+						ng-class="{true:'dict-manage-active'}[$parent.dictChecked==$index]"
+						class="common-tr-height">
+						<td class="colorCenter">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+						<td class="colorCenter">{{x.bdt_code}}</td>	
+						<td>{{x.bdt_name}}</td>
+						<td>{{x.bdt_isgroup_nameref}}</td>
+					</tr>
+					
+				</tbody>
+			</table>
+	     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+		</div>
+	</div>
+	
+	<div class="ztree-btn3" ng-click="showLeft=!showLeft">
+	</div>
+	
+	<div class="treeContent3">
+		<div class="table_tree xt_changeHtml" style="padding: 0;border:1px solid #ddd;border-radius: 3px;">
+			<div class="treeTitle">字典项明细</div>
+		    <div class="menu_btns" style="margin:5px;">
+		        <button type="button" class="btn btn-success btn-sm home_button_active" 
+		        style="width: 80px;" ng-click="toEdit()">添加</button>
+		        <!-- <button type="button" class="btn btn-success btn-sm" 
+		        style="width: 90px;" ng-click="toggleAll();" ng-bind="open?'折叠':'展开'"></button> -->
+		    </div>
+		    <!-- <div class="layer" style="margin:5px;">
+		        <div id="tableMain">
+		            <ul id="dataTree" class="ztree">
+		            </ul>
+		        </div>
+		    </div> -->
+		    
+		    <div class="xt_childTable border_box" style="width: 99%;padding:3px;">
+		    <table class="table table3 table-striped table-hover table-bordered SortCss" style="margin-bottom:0 !important;">
+		    	<thead>
+					<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+						<th style="width:10%;" class="colorCenter noSortCss">序号</th>
+						<th style="width:20%;" class="colorCenter noSortCss">编码</th>
+						<th style="width:35%;" class="colorCenter noSortCss">名称</th>
+						<th style="width:15%;" class="colorCenter noSortCss">状态</th>
+						<th style="width:20%;" class="colorCenter noSortCss">操作</th>
+					</tr>
+				</thead>
+		    </table>
+		    <div style="height:445px;overflow-y:auto;">
+		    	<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-top: 0;">
+					<tbody class="borderSty0">
+						<tr ng-repeat="x in dictDetailList" class="common-tr-height">
+							<td style="width:10%;" class="colorCenter">{{$index+1}}</td>
+							<td style="width:20%;" class="colorCenter">{{x.bd_code}}</td>
+							<td style="width:35%;" class="colorCenter">{{x.bd_name}}</td>
+							<td style="width:15%;" class="colorCenter">{{x.bd_status}}</td>
+							<td style="width:20%;" class="colorCenter">
+								<a class="common_btns common_edit" ng-click="toEdit(x.bd_id)" title="编辑"></a>
+								<a class="common_btns common_delete" ng-click="toDelete(x.bd_id)" title="删除"></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		    </div>
+	     	<!-- <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination> -->
+		</div>
+		</div>
+	</div>
+	
+</div>
+
+<!-- 添加编辑弹窗 -->
+
+<div class="dialog" ng-show="addPop" style="z-index:88" id="dictDialog">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:500px; margin-left: -330px; top: 50px; "  ng-show="addPop">
+		<div class="dg-xg-js" style="width:500px;">
+			{{typename}}-{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+	    <form class="form-horizontal w5c-form demo-form" role="form"
+		w5c-form-validate="role" novalidate name="validateForm">
+			<div class="dg-content" style="height: 300px; margin:0 auto;margin-left:70px">
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">编码：</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" name="bd_code"
+										ng-model="vo.bd_code" required="true">
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">名称：</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" name="bd_name"
+										ng-model="vo.bd_name" required="true">
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">排序：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text"
+										ng-model="vo.bd_order" >
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">描述：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" 
+										ng-model="vo.bd_des" >
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">状态：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<zk-control-group htmlid="bs_is_negative" ng-model="vo.bd_status"
+											data-option='[{"0":"禁用"},{"1":"启用"}]'></zk-control-group>
+						</div>
+					</div>
+				</div>
+				
+
+				
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" w5c-form-submit="editAndAdd()">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog()">取消</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 查看信息弹窗 -->
+
+<div class="dialog" ng-show="roleInfoPop" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -164px;"  ng-show="roleInfoPop">
+		<div class="dg-xg-js" style="width:660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="roleInfoPop=false;"></div>
+		</div>
+	    <form class="form-horizontal w5c-form demo-form" role="form" novalidate name="validateForm">
+			<div class="dg-content" style="height: 280px; margin:0 auto;">
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">编号：</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<span class="f14">001</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">顺序：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;" id="treeInput">
+							<span class="f14">1</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">角色名称：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">系统管理员</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">角色状态：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">启用</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">角色描述：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">系统管理相关</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">版本号：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">v2.1.0</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">创建时间：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">2017.07.09</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">删除标志位：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">有效</span>
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="roleInfoPop=false;">关闭</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 添加编辑弹窗 -->
+<div class="dialog" ng-show="roleAuthPop" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -164px;"  ng-show="roleAuthPop">
+		<div class="dg-xg-js" style="width:660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="hideAuthPop()"></div>
+		</div>
+	    <form class="form-horizontal">
+			<div class="dg-content" style="height: 280px; margin:0 auto; overflow-y: scroll;">
+				<ul id="dataTreePop" class="ztree">
+            	</ul>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="authIdx();">授权</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="hideAuthPop()">取消</div>
+				</div>
+			</div>
+	
+	</div>
+</div>
+<!-- 添加用户弹窗 -->
+<div class="dialog" ng-show="roleUserAdd" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50px;"  ng-show="roleUserAdd">
+		<div class="dg-xg-js" style="width:660px;">
+			用户添加-admin
+			<div class="dg-cancle" ng-click="hideUserAdd()"></div>
+		</div>
+	    <form class="form-horizontal">
+			<div class="dg-content" style=" margin:5px auto;">
+				<div class="role_sySearchPop">
+					<input class="xt_searchInput" ng-model="searchKey" type='text' placeholder="请输入用户名" autocomplete="off">
+					<i class="xt_searchBtn" title="查找" ng-click="doSearch()"></i>
+				</div>
+				<div class="role_sySearchPop">
+					<input class="xt_searchInput" ng-model="searchKey" type='text' placeholder="请输入登陆账号" autocomplete="off">
+					<i class="xt_searchBtn" title="查找" ng-click="doSearch()"></i>
+				</div>
+				<div class="xt_addBtn_role" ng-click = "toEdit()">
+					<div class="xt_addBtnAnNiu_role"><a href="javaScript:void(0)" ng-click="refresh()">重置搜索</a></div>
+				</div>
+				<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-left-color: transparent;border-right-color: transparent;">
+					<thead>
+						<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+							<th class="colorCenter noSortCss"><input type="checkbox" ng-model="allChecked2" ng-change="toggleAll2()"></th>
+							<th class="colorCenter noSortCss">用户名</th>
+							<th class="colorCenter noSortCss">登陆账号</th>
+							<th ng-class="sortFun('su_loginname',true);" ng-click="clickSortFun('su_loginname');">手机号</th>
+							<th class="noSortCss">邮箱</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in list2" style=" height:30px">
+							<td class="colorCenter"><input type="checkbox" ng-model="x.checked"></td>
+							<td class="colorCenter">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+							<td class="colorCenter">007</td>
+							<td>
+								123
+							</td>
+							<td>23</td>
+						</tr>
+						
+					</tbody>
+				</table>
+		     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="addUsers();">添加</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="hideUserAdd()">取消</div>
+				</div>
+			</div>
+	
+	</div>
+</div>

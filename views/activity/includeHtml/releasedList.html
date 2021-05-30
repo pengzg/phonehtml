@@ -1,0 +1,93 @@
+<div class="game-container">
+	<div class="headers">
+		<h3>已发布活动</h3>
+		<div class="content">
+			<table class="table table3 table-hover table-bordered">
+	            <thead>
+	                <tr>
+	                	<th>活动名称</th>	                	
+	                    <th>活动状态</th>
+	                    <th >活动时间</th>
+	                    <th>已发放/剩余奖品数量</th>
+	                    <th>参与/最大参与人数</th>
+	                    <th>活动状况告警</th>
+	                    <th>传播人数</th>
+	                    <th>操作</th>
+	                </tr>
+	            </thead>
+	            <tbody class="borBottom">
+	                <tr class="js_selectLine" ng-repeat="x in mmList">
+	                	<td title="">{{x.mm_name}}</td>
+	                    <td class="i-c-blue">{{x.mm_state_nameref}}</td>
+	                    <td>{{x.mm_startime}}<br>{{x.mm_endtime}}</td>
+	                    <td>{{x.mm_prize_totalnum}}/{{x.mm_prize_currentnum}}</td>
+	                    <td>{{x.mm_participant_num}}/{{x.mm_participant_num_max}}</td>
+	                    <td>{{x.mm_alarm}}</td>
+	                    <td>{{x.mm_spread_num}}</td>
+	                    <td class="td-opr" style="position: relative;width: 160px;">
+	                    	<ul class="fn-clear">
+	                    		<li>
+	                    			<a ng-click="updateState(x,4)" class="i-c-red pub_link">
+	                    				<i class="hz-icon hz-icon-pub"></i>
+	                    				取消
+	                    			</a>
+	                    		</li>
+	                    		<li>
+	                    			<a href="#/index/activityDetail/addActivityDetail" class="i-c-black opr_edit">
+	                    				<i class="hz-icon hz-icon-edit"></i>
+	                    				编辑
+	                    			</a>
+	                    		</li>
+	                    	</ul>
+	                    	<ul class="fn-clear">
+	                    		<li class="li-copy loaded">
+	                    			<a href="" class="i-c-black opt-copy">
+	                    				<i class="hz-icon hz-icon-link"></i>
+	                    				链接
+	                    			</a>
+	                    			<div class="act-link-layer">
+	                    				<h4>活动链接</h4>
+	                    				<div class="left-cont">
+	                    					<img src="../../../img/qrcode_zhoubao.png" alt="" class="qrcode">
+	                    					<div class="qrcode-bottom">
+		                    					<span>微信扫一扫</span>
+		                    					<a href="">下载</a>
+		                    				</div>
+	                    				</div>
+	                    				<div class="right-cont">
+	                    					<p>链接地址：</p>
+	                    					<div class="input-box">
+	                    						<a href="" class="mobile-url"></a>
+	                    						<div class="copy-btn">复制</div>
+	                    					</div>
+	                    					<span href="" class="copy-tips">可将链接复制到您的公众号菜单中</span>
+	                    				</div>
+	                    			</div>
+	                    		</li>
+	                    		<li>
+	                    			<a ng-click="deleteActivity(x)" class="i-c-black del-activity">
+	                    				<i class="hz-icon hz-icon-del"></i>
+	                    				删除
+	                    			</a>
+	                    		</li>
+	                    	</ul>
+	                    </td>
+	                </tr>
+	                
+	            </tbody>
+	        </table>
+	        <!-- 分页 -->
+	     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+			<!--分页 -->
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+	    $(".searchItem_list a").click(function() {
+	        $(this).siblings('a').removeClass('selected');
+	        $(this).addClass('selected'); 
+	    });
+	}); 
+</script>

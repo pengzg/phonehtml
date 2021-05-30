@@ -1,0 +1,23 @@
+.device-m-main { padding-top: 10px; }
+.device-m-main .device-m-bottom { margin: 0 auto; }
+.device-m-main .device-m-bottom .device-c-menu > div { text-align: center; margin-bottom: 10px; }
+.device-m-main .device-m-bottom .device-c-menu-b > div { text-align: center; padding: 5px 0; }
+.device-m-main .device-m-bottom .device-hover > div:hover { background: #ddd; cursor: pointer; }
+.device-m-main .device-m-bottom .device-b-left > div:nth-of-type(1), .device-m-main .device-m-bottom .device-b-left > div:nth-of-type(2) { position: relative; display: inline-block; }
+.device-m-main .device-m-bottom .device-b-left > div:nth-of-type(1) .device-b-add, .device-m-main .device-m-bottom .device-b-left > div:nth-of-type(2) .device-b-add { display: inline-block; padding: 5px 10px; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; }
+.device-m-main .device-m-bottom .device-b-left > div:nth-of-type(1) .device-b-del, .device-m-main .device-m-bottom .device-b-left > div:nth-of-type(2) .device-b-del { display: inline-block; padding: 5px 10px; border: 1px solid #ccc; border-radius: 3px; cursor: pointer; }
+.device-m-main .device-m-bottom .device-b-left > div:nth-of-type(1) .device-b-del span, .device-m-main .device-m-bottom .device-b-left > div:nth-of-type(2) .device-b-del span { color: red; }
+.device-m-main .device-m-bottom .device-b-right .device-b-toolbar > div { display: inline-block; float: right; margin: 10px 5px; }
+.device-m-main .device-m-bottom .device-b-right .device-b-toolbar > div:first-of-type { float: left; margin-left: 0; }
+.device-m-main .device-m-bottom .device-b-right .device-b-toolbar > div .device-b-toolbar-last { margin-right: 0; }
+
+.device-modal-label { display: inline-block; padding: 8px 5px; color: #717171; vertical-align: top; width: 30%; margin-left: 10%; font-weight: 600; }
+.device-modal-label span, .device-modal-label div { color: #717171; }
+
+.device-modal-content { display: inline-block; padding: 8px 5px; color: #717171; vertical-align: top; width: 50%; }
+.device-modal-content span, .device-modal-content div { color: #717171; }
+.device-modal-content input { height: 9px; }
+
+.device-modal-bottom { color: #ae0b06; margin-top: 10px; }
+
+.list-group-checked { background: #ddd; }

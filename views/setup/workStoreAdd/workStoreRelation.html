@@ -1,0 +1,110 @@
+<div class="contentHtml-new" style=" z-index: 10001; background-color: #fff;left:0;">
+
+	<div class="search-filter-box">
+    	<div>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="工作人员或者柜子名称" ng-model="searchParam.searchKey">
+			<label>工作人员<span>:</span></label>
+			<select ng-model="searchParam.msa_work_id">
+				<option value="{{x.mbw_id}}" ng-repeat="x in storeList">{{x.mbw_name}}</option>
+				
+			</select>
+        </div>
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="searchFun();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a   class="btn btn-default" ng-click="searchParam.searchKey='';searchParam.msa_work_id='';searchFun();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+        </div>
+    </div>
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;">
+	   
+		
+		<div class="row">
+        	<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0; padding: 0; margin: 0;">
+					<li class="active f14">
+						<a class="active" href="">
+ 							工作人员与柜子关联
+							<span class="badge">{{pager.total}}</span>
+						</a>
+					</li>
+					<li style="position: absolute;top: 0;right: 15px;">
+						<span class="page_actions" style="padding-left: 0; margin-left: 0;">
+							<a class="btn btn-success" ng-click="addRelation();"><i class="icon icon-plus"></i> 新增</a>
+						</span>
+					</li>
+				</ul>
+				<div class="panel panel-default" style="border: 0; border-radius: 0;">
+    				<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+      					<i class="icon icon-list"></i> 共{{pager.total}}条记录
+    				</div>
+					<!--<div class="panel-body" style="border: 1px solid #ddd;">
+						<div class="table-empty text-center">
+							<i class="icon icon-search fa-3x"></i>
+							<h4>查找不到相关记录</h4>
+						</div>
+					</div>-->
+					<table class="table table3 table-bordered table-hover">
+						<thead>
+							<tr>
+							
+							 <th>序号</th>
+                                <th>业务员</th>
+                                <th>手机号</th>
+                                <!-- <th>角色类型</th> -->
+                               <!--  <th>图片</th> -->
+                                <th>柜子编号</th>
+								<th>柜子名称</th>	
+								<th>是否在线</th>
+								<th>柜子权限</th>			
+								<th class="text-left">操作</th>								
+							</tr>
+						</thead>
+						<tbody>
+							
+							 <tr ng-repeat="x in relationList">
+								<!-- <td class="text-left">
+									<img style="height:30px;width:30px;" 
+										src="{{x.psr_product_picture?x.psr_product_picture:'img/prizedef.jpg'}}" 
+										img-err="img/prizedef.jpg"/>
+								</td>
+								<td class="text-left">
+									<p>
+										<a href="" class="f14">{{x.psr_productid_nameref}}</a>
+									</p>
+								</td> -->
+								<td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+                                <td class="text-center f14">
+                                	 <span ng-show="x.mbw_state==0" class="red" >{{x.mbw_name}}({{x.mbw_state_nameref}})</span>
+									 <span ng-show="x.mbw_state==1" >{{x.mbw_name}}</span>
+                                </td>
+                                <td class="text-center f14">{{x.mbw_mobile}}</td>
+                               <!--  <td class="text-center f14">{{x.msa_role_nameref}}</td> -->
+                                
+                               <!--  <td class="text-center f14">
+									<img ng-click="showBsPic(x);" style="height:30px;width:30px;" 
+										src="{{x.bs_def1_show?x.bs_def1_show:'img/prizedef.jpg'}}" 
+										img-err="img/prizedef.jpg"/>
+								</td> -->
+								<td class="text-center f14">{{x.msa_store_code}}</td>
+								<td class="text-center f14">{{x.msa_store_name}}</td>
+								<td>
+									<span ng-if="x.bs_onlinestatus==2">在线</span>
+									<span ng-if="x.bs_onlinestatus!=2">不在线</span>
+								</td>
+								<td class="text-center f14">{{x.msa_typenameref}}</td>										
+								<td class="text-left f14">
+								<a  class="blue" style="display: inline-block;" ng-show="x.mbw_state==1" ng-click="goEdit(x);">编辑</a> 
+								<span ng-show="x.mbw_state==1">-</span>
+								<a  class="red" style="display: inline-block;" ng-click="deleteRelation(x)">删除</a>
+								</td>													
+							</tr>
+						
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+				</div>
+	        </div>
+	    </div>
+	</div>
+</div>

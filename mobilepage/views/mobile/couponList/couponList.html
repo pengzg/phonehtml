@@ -1,0 +1,65 @@
+<ion-header-bar align-title="left" class="c-tab-main" 
+	ng-class="{1:'c-tab-checked-1',2:'c-tab-checked-2',3:'c-tab-checked-3'}[checked]" 
+	ng-init="checked=1">
+    <div class="c-tab-content">
+        <div ng-click="checked=1">全部</div>
+        <div ng-click="checked=2">未使用</div>
+        <div ng-click="checked=3">已过期</div>
+    </div>
+    <div class="c-tab-line"></div>
+</ion-header-bar>
+<ion-content overflow-scroll="false" class="coupon-main">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="do_refresher()"></ion-refresher>
+    <div class="list">
+        <a class="item coupon-green">
+            <div class="coupon-name">团购券</div>
+            <div class="coupon-content"><span>&yen;&thinsp;</span><span>20</span><span>&ensp;&ensp;限美食使用</span></div>
+            <div class="coupon-content-bottom">
+                <div>使用期限：2015.01.02~2015.06.04</div>
+                <div>未使用</div>
+            </div>
+        </a>
+        <a class="item coupon-blue">
+            <div class="coupon-name">代金券</div>
+            <div class="coupon-content"><span>&yen;&thinsp;</span><span>20</span><span>&ensp;&ensp;限美食使用</span></div>
+            <div class="coupon-content-bottom">
+                <div>使用期限：2015.01.02~2015.06.04</div>
+                <div>未使用</div>
+            </div>
+        </a>
+        <a class="item coupon-yellow">
+            <div class="coupon-name">优惠券</div>
+            <div class="coupon-content"><span>&yen;&thinsp;</span><span>20</span><span>&ensp;&ensp;限美食使用</span></div>
+            <div class="coupon-content-bottom">
+                <div>使用期限：2015.01.02~2015.06.04</div>
+                <div>未使用</div>
+            </div>
+        </a>
+        <a class="item coupon-purple">
+            <div class="coupon-name">团购券</div>
+            <div class="coupon-content"><span>&yen;&thinsp;</span><span>20</span><span>&ensp;&ensp;限美食使用</span></div>
+            <div class="coupon-content-bottom">
+                <div>使用期限：2015.01.02~2015.06.04</div>
+                <div>未使用</div>
+            </div>
+        </a>
+        <a class="item coupon-gray">
+            <div class="coupon-name">团购券</div>
+            <div class="coupon-content"><span>&yen;&thinsp;</span><span>20</span><span>&ensp;&ensp;限美食使用</span></div>
+            <div class="coupon-content-bottom">
+                <div>使用期限：2015.01.02~2015.06.04</div>
+                <div>未使用</div>
+            </div>
+            <div class="coupon-outdate"><img src="../../img/mobile/coupon/outdate.png" alt=""></div>
+        </a>
+        <a class="item coupon-pink" ng-repeat="x in items track by $index">
+            <div class="coupon-name">团购券</div>
+            <div class="coupon-content"><span>&yen;&thinsp;</span><span>20</span><span>&ensp;&ensp;限美食使用</span></div>
+            <div class="coupon-content-bottom">
+                <div>使用期限：2015.01.02~2015.06.04</div>
+                <div>未使用</div>
+            </div>
+        </a>
+    </div>
+    <ion-infinite-scroll on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+</ion-content>

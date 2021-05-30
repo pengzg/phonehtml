@@ -1,0 +1,22 @@
+<div class="poster-data-main">
+    <div class="tabUl-4 clearfix" ng-init="checkIdx=0">
+        <ul>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==0]" ng-click="checkIdx=0" ui-sref="index.posterResult.propagationAnalysis">
+                <a>传播分析</a>
+            </li>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==1]"  ng-click="checkIdx=1" ui-sref="index.posterResult.propagatingGraph">
+                <a>传播星空图</a>
+            </li>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==2]" ng-click="checkIdx=2" ui-sref="index.posterResult.promoterAnalysis">
+                <a>推广人分析</a>
+            </li>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==3]" ng-click="checkIdx=3" ui-sref="index.posterResult.scavengerAnalysis">
+                <a>扫码分析</a>
+            </li>
+        </ul>
+    </div>
+    <div class="p-content">
+        <div class="p-item" data-ui-view="">
+        </div>
+    </div>
+</div>

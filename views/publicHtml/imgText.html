@@ -1,0 +1,39 @@
+<div class="su-img-text">
+    <div class="s-list">
+        <div class="s-item" ng-repeat="x in resultData track by x.sort">
+            <div class="item-img">
+                <img ng-src="{{x.path}}" alt="">
+            </div>
+            <div class="item-text">
+                {{x.text}}
+            </div>
+            <div class="item-tool">
+                <i class="fa fa-arrow-up" ng-click="moveUp($index)"></i>
+                <i class="fa fa-arrow-down" ng-click="moveDown($index)"></i>
+                <i class="fa fa-pencil" ng-click="edit($index)"></i>
+                <i class="fa fa-trash" ng-click="del($index)"></i>
+            </div>
+        </div>
+    </div>
+    <div class="s-img" ng-click="upImage()" ng-show="showAdd">
+        <i class="fa fa-image" ng-show="!img"></i>
+        <img ng-src="{{img}}" ng-show="img">
+        <div class="img-tip">点击更换图片</div>
+    </div>
+    <div class="text" ng-show="showAdd">
+        <div class="content">
+            <textarea ng-model="text" maxlength="5000"></textarea>
+            <div class="s-page">{{text.length+'/5000'}}</div>
+        </div>
+        <div class="btns">
+            <div class="btn btn-success" ng-click="save()">确定</div>
+            <div class="btn btn-default" ng-click="cancel()">取消</div>
+        </div>
+    </div>
+    <div class="s-container" ng-class="{'editing':editing}">
+        <div class="plus-warp" ng-click="addNew()">
+            <i class="fa fa-plus"></i>
+        </div>
+    </div>
+</div>
+<div style="display:none;" id="imgTextEditor" get-ue="ue_myeditor = getUe" class="ueditor" ng-model="imgTextUe"></div>

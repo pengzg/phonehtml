@@ -1,0 +1,194 @@
+
+<div class="xt_shouYeDiv" ng-show="!$root.isPager">
+	<span><a href="#/index/homePage">首页</a><a  style="font-size: 14px;font-weight: 100;" href="#/index/line/csLineCustTaskList">>列表</a> <a style="font-size: 14px;font-weight: 100;"><span ng-if="csLineCustTaskInfo.clct_id==''||csLineCustTaskInfo.clct_id==undefined">>添加</span><span ng-if="csLineCustTaskInfo.clct_id!=''&&csLineCustTaskInfo.clct_id!=undefined">>编辑</span></a></span>
+</div>
+<form class="form-horizontal w5c-form demo-form" role="form"
+	      w5c-form-validate="" novalidate name="validateForm" >
+<div class="xt_changeHtml">
+		<div class="zk_addMain">
+			<div class="zk_baseInfoBox">
+				<h4>基本信息</h4>
+				<div class="zk_controlBox">
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>主键</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_id" 
+							ng-model="csLineCustTaskInfo.clct_id" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>考勤类型</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_type" 
+							ng-model="csLineCustTaskInfo.clct_type" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>公司</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_orgid" 
+							ng-model="csLineCustTaskInfo.clct_orgid" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>计划业务日期</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_plandate" 
+							ng-model="csLineCustTaskInfo.clct_plandate" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>客户ID</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_customerid" 
+							ng-model="csLineCustTaskInfo.clct_customerid" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>业务员id</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_userid" 
+							ng-model="csLineCustTaskInfo.clct_userid" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span></span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_arrivedate" 
+							ng-model="csLineCustTaskInfo.clct_arrivedate" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>离开日期</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_leavetime" 
+							ng-model="csLineCustTaskInfo.clct_leavetime" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>到达日期</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_arrivetime" 
+							ng-model="csLineCustTaskInfo.clct_arrivetime" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>状态 1 未到达 2 已到达</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_stats" 
+							ng-model="csLineCustTaskInfo.clct_stats" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>经度</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_longitude" 
+							ng-model="csLineCustTaskInfo.clct_longitude" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>纬度</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_latitude" 
+							ng-model="csLineCustTaskInfo.clct_latitude" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>到达地点</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_address" 
+							ng-model="csLineCustTaskInfo.clct_address" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>定位方式</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_location_type" 
+							ng-model="csLineCustTaskInfo.clct_location_type" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>定位距离</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_location_distance" 
+							ng-model="csLineCustTaskInfo.clct_location_distance" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>ts</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_ts" 
+							ng-model="csLineCustTaskInfo.clct_ts" required>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>dr</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clct_dr" 
+							ng-model="csLineCustTaskInfo.clct_dr" required>
+						</div>
+					</div>
+					<!-- 隐藏域 -->
+					<div style="display: none">
+						<input type="text" ng-model="csLineCustTaskInfo.clct_id">
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<div class="zk_saveBox">
+	<a w5c-form-submit="submit();"  class="btnStyle saveBtn">保存</a>
+	<a ng-click="cancel();" id="add-without-image" class="btnStyle falseBtn">取消</a>
+</div>
+</form>

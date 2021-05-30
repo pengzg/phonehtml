@@ -1,0 +1,815 @@
+<div class="contentHtml-new goods-main" style=" z-index: 40; background-color: #fff;left:0;">
+	
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;" ng-init="tabIdx=1">
+		 <div class="row">
+			<div class="col-sm-12 page-header">
+            	<span class="page_actions" style="padding-left: 0; margin-left: 0;">
+					<a class="btn btn-success" ng-click="goBack()"> 返回</a>
+					<!-- <a class="btn btn-success" href="#/index/product/productGrouping"><i class="icon icon-folder-close"></i> 礼品分组管理</a> -->
+				</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0;">
+					<li ng-class="{active:tabIdx==1}">
+						<a class="f14 i-c-black" ng-click="tabIdx=1">
+							<i class="glyphicon glyphicon-edit"></i>
+							 商品详情
+						</a>
+					</li>
+					<li ng-class="{active:tabIdx==2}">
+						<a class="f14 i-c-black"  ng-click="tabIdx=2">
+							<i class="icon icon-dropbox"></i>
+							 库存管理
+						</a>
+					</li>
+				</ul>
+				<div class="t-box clearfix" id="tab1" ng-show="tabIdx==1">
+					<form class="form-horizontal">
+						<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+							<div class="panel-body">
+								<h5>基本信息</h5>
+								<hr />
+								
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 商品名称
+									</label>
+									<div class="item-name">
+										<input type="text" id="pm_title" disabled maxlength="30"  class="form-control" ng-model="vo.pm_title" />
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 商品副标题
+									</label>
+									<div class="item-name">
+										<input type="text" id="pm_subtitle" disabled maxlength="30"  class="form-control" ng-model="vo.pm_subtitle" />
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 柜子展示描述
+									</label>
+									<div class="item-name">
+										<input type="text" maxlength="14" placeholder="长度<14" class="form-control" ng-model="vo.pm_def4" />
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										商品品牌
+									</label>
+									<div class="item-name">
+										<input type="text" disabled maxlength="30" placeholder="长度<30,必填" class="form-control" ng-model="vo.pm_brandid_nameref" />
+										
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 商品分类
+									</label>
+									<div class="item-name">
+										<input type="text"  disabled maxlength="30" placeholder="长度<30,必填" class="form-control" ng-model="vo.pm_categoryid_nameref" />
+										
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 排序
+									</label>
+									<div class="item-name">
+										<input type="text" disabled id="pm_sort" ng-change="numberRegFun();" maxlength="9" placeholder="数字越大越靠前" class="form-control" ng-model="vo.pm_sort" />
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 计量单位
+									</label>
+									<div class="item-name">
+									<input type="text"  disabled maxlength="30" placeholder="长度<30,必填" class="form-control" ng-model="unitVO.pur_unitid_min_nameref" />
+										
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 搜索关键字
+									</label>
+									<div class="item-name">
+										<input type="text" disabled maxlength="30" class="form-control" ng-model="vo.pm_keys" />
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 商品编码
+									</label>
+									<div class="item-name">
+										<input type="text" disabled  maxlength="20" class="form-control" ng-model="vo.pm_code" />
+									</div>
+								</div>
+								<div class="two-row-item" style="width: 100%;">
+									<label class="item-label control-label f14"style="width: 10%;">
+										 视频地址
+									</label>
+									<div class="item-name">
+										{{vo.pm_def1_show}}
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 视频封面
+									</label>
+									<div class="item-name">
+										<img src="{{vo.pm_def2_show}}" style="height: 70px;" >
+									</div>
+								</div>
+								
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 上下架
+									</label>
+									<div class="item-name" >
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px; " ng-show="vo.pm_state ==1">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio" type="radio" value="1" ng-model="vo.pm_state" name="state">
+												<div class="xt_inputBackimg"></div>上架
+											</lable>
+										</span>
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px;" ng-show="vo.pm_state ==2">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio"  type="radio" value="2" ng-model="vo.pm_state" name="state">
+												<div class="xt_inputBackimg" ></div>下架
+											</lable>
+										</span>
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 是否是内部商品
+									</label>
+									<div class="item-name">
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px; " ng-show="vo.pm_isinternal==1">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio" type="radio" value="1" ng-model="vo.pm_isinternal" name="isinternal">
+												<div class="xt_inputBackimg"></div>内部
+											</lable>
+										</span>
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px;margin-left:10px; " ng-show="vo.pm_isinternal==2">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio"  type="radio" value="2" ng-model="vo.pm_isinternal" name="isinternal">
+												<div class="xt_inputBackimg" ></div>外部
+											</lable>
+										</span>
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 配送方式
+									</label>
+									<div class="item-name">
+										<span class="radio f14 floatLeft" style="padding: 0;" ng-show="vo.pm_delivery_type_1">
+											<lable  >
+												门店自提
+											</lable>
+										</span>
+										<span class="radio f14 floatLeft" style="padding: 0;margin-left:10px; " ng-show="vo.pm_delivery_type_show">
+											<lable >
+												送货上门
+											</lable>
+										</span>
+										<span class="radio f14 floatLeft" style="padding: 0;;margin-left:10px; " ng-show="vo.pm_delivery_type_3">
+											<lable  >
+												购买水票
+											</lable>
+										</span>
+									</div>
+								</div>
+								<div class="two-row-item" ng-show="vo.pm_delivery_type_show && vo.pm_typeid!=1010">
+									<label class="item-label control-label f14">
+										 运费类型
+									</label>
+									<div class="item-name">
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px; " ng-show="vo.pm_delivery_fee_type==1">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio" type="radio" value="1" ng-model="vo.pm_delivery_fee_type" name="delivery_fee_type">
+												<div class="xt_inputBackimg"></div>固定费用
+											</lable>
+										</span>
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px;margin-left:10px; " ng-show="vo.pm_delivery_fee_type==2">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio"  type="radio" value="2" ng-model="vo.pm_delivery_fee_type" name="delivery_fee_type">
+												<div class="xt_inputBackimg" ></div>阶梯运费
+											</lable>
+										</span>
+									</div>
+								</div>
+								<div class="two-row-item" ng-show="vo.pm_delivery_fee_type==1 && vo.pm_delivery_type_show && vo.pm_typeid!=1010">
+									<label class="item-label control-label f14">
+										 运费
+									</label>
+									<div class="item-name">
+										<input type="text" disabled maxlength="10" ng-blur="change2Num();" class="form-control" ng-model="vo.pm_def3" />
+									</div>
+								</div>
+								<div class="two-row-item" ng-show="vo.pm_typeid!=1010">
+									<label class="item-label control-label f14">
+										 重量
+									</label>
+									<div class="item-name">
+										<input type="text" disabled style="width: 90px;" maxlength="10" ng-blur="change2Num();"  ng-model="vo.pm_weight" />KG
+									</div>
+								</div>
+								<!-- 团购 start -->
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 是否参加团购
+									</label>
+									<div class="item-name">
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px; ">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio" type="radio" value="Y" ng-model="vo.pm_isgroup" name="group">
+												<div class="xt_inputBackimg"></div>参加
+											</lable>
+										</span>
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px;margin-left:10px; ">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio"  type="radio" value="N" ng-model="vo.pm_isgroup" name="group">
+												<div class="xt_inputBackimg" ></div>不参加 
+											</lable>
+										</span>
+									</div>
+								</div>
+								
+								<div class="two-row-item" ng-if="vo.pm_isgroup=='Y'">
+									<label class="item-label control-label f14">
+										 有效天数
+									</label>
+									<div class="item-name">
+										<input type="text"  maxlength="30" class="form-control" ng-model="vo.pm_valid_day" />
+									</div>
+								</div>
+								<div class="two-row-item" ng-if="vo.pm_isgroup=='Y'">
+									<label class="item-label control-label f14">
+										 团购价格
+									</label>
+									<div class="item-name">
+										<input type="text" maxlength="30" class="form-control" ng-model="vo.pm_group_price" />
+									</div>
+								</div>
+								<div class="two-row-item" ng-if="vo.pm_isgroup=='Y'">
+									<label class="item-label control-label f14">
+										开团人数
+									</label>
+									<div class="item-name">
+										<input type="text" maxlength="30" class="form-control" ng-model="vo.pm_group_peopler_num" />
+									</div>
+								</div>
+								<!-- 团购 end -->
+								<!-- 奖励比例 -->
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 分润类型
+									</label>
+									<div class="item-name">
+										{{vo.pm_profit_type_nameref}}
+									</div>
+								</div>
+							    <div class="two-row-item" ng-if="vo.pm_profit_type!=3">
+									<label class="item-label control-label f14">
+										分润值
+									</label>
+									<div class="item-name">
+										<input style="width:70px;" disabled type="text" maxlength="10" ng-blur="change2Num2();" ng-model="vo.pm_profit_value" />
+										<span ng-show="vo.pm_profit_type==1" style="font-weight: bold;margin-left:3px;">%</span>
+										<span ng-show="vo.pm_profit_type==2" style="font-weight: bold;margin-left:3px;">元</span>
+									</div>
+								</div>
+								<!-- 物业 -->
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 区域合伙人分润类型
+									</label>
+									<div class="item-name">
+										{{vo.pm_property_profit_type_nameref}}
+										
+									</div>
+								</div>
+							    <div class="two-row-item" ng-if="vo.pm_property_profit_type!=3">
+									<label class="item-label control-label f14">
+										区域合伙人分润值
+									</label>
+									<div class="item-name">
+										<input style="width:70px;" type="text" maxlength="10" disabled ng-blur="change2Num2();" ng-model="vo.pm_property_profit_val" />
+										<span ng-show="vo.pm_property_profit_type==1" style="font-weight: bold;margin-left:3px;">%</span>
+										<span ng-show="vo.pm_property_profit_type==2" style="font-weight: bold;margin-left:3px;">元</span>
+									</div>
+								</div>
+								
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 支付方式
+									</label>
+									<div class="item-name">
+										<span class="radio f14 floatLeft" style="padding: 0;margin-right: 10px;" ng-repeat="x in payMethodList" ng-show="vo.payMethodArr.indexOf(x.bd_code)>-1;">
+											<lable>
+												{{x.bd_name}}
+											</lable>
+										</span>
+										
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 支付类型
+									</label>
+									<div class="item-name">
+										<span class="radio f14 floatLeft" style="padding: 0;margin-right: 10px;" ng-repeat="x in payWayList" ng-show="vo.payWayArr.indexOf(x.bd_code)>-1;">
+											<lable>
+												{{x.bd_name}}
+											</lable>
+										</span>
+										
+									</div>
+								</div>
+								<div class="two-row-item" >
+									<label class="item-label control-label f14">
+										押金
+									</label>
+									<div class="item-name">
+										<input type="text" maxlength="6" step="0.01" min="0" ng-model="vo.pm_deposit" />元
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										奖励比例
+									</label>
+									<div class="item-name">
+										<input type="text"  disabled style="width: 70px;"  maxlength="10" ng-blur="change2Num();" ng-model="vo.pm_rebate_ratio" /><span style="font-weight: bold;margin-left:3px;">%</span>
+									</div>
+								</div>
+								<div class="two-row-item" >
+									<label class="item-label control-label f14">
+										到柜配送金额
+									</label>
+									<div class="item-name">
+										<input type="text" maxlength="6" step="0.01" min="0" ng-model="vo.pm_tobox_freight" />元
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 购买柜子分钱
+									</label>
+									<div class="item-name">
+										<input type="text" maxlength="6" step="0.01" min="0" ng-model="vo.pm_buybox_profit" />元
+									</div>
+								</div>
+								<div class="two-row-item" >
+									<label class="item-label control-label f14">
+										租柜子分钱	
+									</label>
+									<div class="item-name">
+										<input type="text" maxlength="6" step="0.01" min="0" ng-model="vo.pm_rentbox_profit" />元
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										代运营分钱	
+									</label>
+									<div class="item-name">
+										<input type="text" maxlength="6" step="0.01" min="0" ng-model="vo.pm_otherbox_profit" />元
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										无柜分钱	
+									</label>
+									<div class="item-name">
+										<input type="text" style="width:70px;" maxlength="6" step="0.01" min="0" ng-model="vo.pm_virtual_amount" />元
+									</div>
+								</div>
+								<div class="two-row-item" >
+									<label class="item-label control-label f14">
+										是否需要订货
+									</label>
+									<div class="item-name">
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px; ">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio" type="radio" value="1" ng-model="vo.pm_def5" name="def5">
+												<div class="xt_inputBackimg"></div>是
+											</lable>
+										</span>
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px;margin-left:10px; ">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio"  type="radio" value="2" ng-model="vo.pm_def5" name="def5">
+												<div class="xt_inputBackimg" ></div>否
+											</lable>
+										</span>
+									</div>
+								</div>
+
+								<div class="two-row-item" >
+									<label class="item-label control-label f14">
+										水厂
+									</label>
+									<div class="item-name">
+										{{vo.pm_factoryid_nameref}}
+									</div>
+								</div>
+								<div class="two-row-item" ng-if="memberType=='7'">
+									<label class="item-label control-label f14">
+										从水厂到岸价
+									</label>
+									<div class="item-name">
+										<input type="text" style="width:70px;" maxlength="6" step="0.01" min="0" ng-model="vo.pm_def6" />元
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 简介
+									</label>
+									<div class="item-name">
+										<textarea style="width: 300px;height: 100px;" ng-model="vo.pm_instructions">{{vo.pm_instructions}}</textarea>
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 是否允许修改分润比例
+									</label>
+									<div class="item-name">
+										<span class="radio f14 floatLeft" style="padding: 0; margin-top:8px; " ng-repeat="x in changeRateList">
+											<lable  class="xt_inputRadio">
+												<input class="xt_radio" ng-model="vo.pm_profit_rate_change" type="radio" value="{{x.bd_code}}" name="p" >
+												<div class="xt_inputBackimg"></div>{{x.bd_name}}
+											</lable>
+										</span>
+										
+									</div>
+								</div>
+								
+							    <div class="two-row-item">
+									<label class="item-label control-label f14">
+										城市合伙人分润
+									</label>
+									<div class="item-name">
+										<input style="width:70px;" type="text" maxlength="10" ng-blur="change2Num2();" ng-model="vo.pm_recommend1_rate" />
+										<span style="font-weight: bold;margin-left:3px;">%</span>
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										管理员分润
+									</label>
+									<div class="item-name">
+										<input style="width:70px;" disabled type="text" maxlength="10" ng-blur="change2Num2();" ng-model="vo.pm_recommend2_rate" />
+										<span style="font-weight: bold;margin-left:3px;">%</span>
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 关联的产品
+									</label>
+									<div class="item-name" style="width:60%;">
+										<input type="text" disabled  maxlength="20" class="form-control" ng-model="vo.pm_relationid_nameref" />
+									</div>
+									<div class="item-name" style="width:20%;">
+										<a  ng-if="vo.pm_relationid" class="btn btn-success" style="margin-left:30%" ng-click="delRelation(vo);">解除关联</a>
+										<a  ng-if="!vo.pm_relationid&&vo.pm_typeid==1011" class="btn btn-success" style="margin-left:30%" ng-click="createProduct(vo);">生成水票</a>
+										<a  ng-if="!vo.pm_relationid&&vo.pm_typeid==1010" class="btn btn-success" style="margin-left:30%" ng-click="showDialog(4);">关联实物</a>
+									</div>
+								</div>
+									<!--商品规格 -->
+								<div class="clearfix"></div>   
+								<h5 class="section-header">商品规格</h5>
+								<hr />
+								<div class="clearfix" style="box-sizing: border-box;padding: 0 10px;">
+									<table class="common_table_1 table-bordered table-hover">
+										<thead>
+											<th style="width:10%"></th>
+											<th style="width:10%">主图</th>
+											<th style="width:20%">规格</th>
+											<th style="width:30%">商品编码</th>
+											<th style="width:30%">条形码</th>
+										</thead>
+										<tbody>
+											<tr ng-repeat="x in skuList track by $index">
+												<td style="width:10%">{{$index+1}}</td>
+												<td style="width:10%">
+													<div class="tab-plus" ng-click="upImage($event,2,$index)" ng-show="!x.ps_image">+</div>
+													<div class="plus-wrap" ng-show="x.ps_image" ng-click="upImage($event,2,$index)">
+														<img src="{{x.ps_image_show}}">
+														<div class="plus-change">修改</div>
+													</div>
+												</td>
+												<td style="width:20%">无</td>
+												<td style="width:30%">
+													<input type="text" placeholder="请输入商品编码" disabled ng-model="x.ps_code" style="width: 80%;">
+												</td>
+												<td style="width:30%">
+													<input type="text" placeholder="请输入条形码" disabled ng-model="x.ps_barcode" style="width: 80%;">
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div> 
+								<!-- 图片 -->
+								<div class="clearfix"></div>   
+								<h5 class="section-header">图片</h5>
+								<hr />
+								<div class="two-row-item" style="width:100%">
+									<label class="item-label control-label f14" style="padding-top: 0;width:10%;"></label>
+									<div class="item-name">
+										
+										<div style="margin-top:5px;">
+											<div style="float:left;margin:5px;" ng-repeat="x in picList track by $index"  ng-mouseenter="showTips($index)" >
+												<div class="gsGoodsImgs" style="width:100px; height:100px;border:1px solid #ddd;">
+													<img alt="" src="{{x.pp_path_show?x.pp_path_show:'img/prizedef.jpg'}}"  style="width:100px; height:100px;">												
+												</div>
+												<div ng-show="x.pp_ismain==1" style="position: absolute;background: #eee;width: 102px;height: 22px;top: 90px;text-align:center;" >封面</div>
+											</div>
+											
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div> 
+								<!-- 图文详情 -->
+								<div class="clearfix"></div>   
+								<h5 class="section-header">图文详情</h5>
+								<hr />
+								<div class="two-row-item">
+									<label class="item-label control-label f14" style="padding-top: 0;"></label>
+									<div class="col-lg-6" style="padding-left: 0;">
+										<div  style="margin-bottom:1.25rem;width:664px;height: 300px; display:inline-block; z-index:1" id="myeditor1" 
+												get-ue="ue_myeditor1 = getUe"  class="ueditor" ng-model="pi_content" ></div>
+									</div>
+								</div>  
+								<!--价格设置 -->
+								<div class="clearfix"></div>   
+								<h5>价格设置</h5>
+								<hr /> 
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 市场价
+									</label>
+									<div class="item-name">
+										<input type="text" disabled class="form-control" ng-blur="calPriceFun()" ng-model="vo.pm_market_price" />
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 参考成本价
+									</label>
+									<div class="item-name">
+										<input type="text" disabled class="form-control" ng-model="vo.pm_price" />
+									</div>
+								</div>
+								
+								<div class="clearfix"></div>   
+								<div class="clearfix" style="box-sizing: border-box;padding: 0 10px;">
+									<div class="common_table_1_title">购买规则</div>
+									<table class="common_table_1 table-bordered table-hover">
+										<thead>
+											
+											<th style="width:20%">销售价</th>
+											<th style="width:20%">起订量</th>
+											<th style="width:20%">增量</th>
+											<th style="width:20%">限定量</th>
+										</thead>
+										<tbody>
+											<tr ng-repeat="x in priceList track by $index">
+												
+												<td style="width:20%">
+													{{x.psp_price}}
+												</td>
+												<td style="width:20%">
+													<input type="text" ng-model="x.psp_min_num" disabled maxlength="10" style="width: 80%;">
+												</td>
+												<td style="width:20%">
+													<input type="text" ng-model="x.psp_add_num" disabled maxlength="10" style="width: 80%;">
+												</td>
+												<td style="width:20%">
+													<input type="text" ng-model="x.psp_max_num" disabled maxlength="10" style="width: 80%;">
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div> 
+								<br>
+								<a  class="btn btn-default" style="margin-left:10%" ng-click="goList();">返回</a>
+							<!-- 	<a  ng-if="vo.pm_relationid" class="btn btn-success" style="margin-left:30%" ng-click="delRelation(vo);">解除关联</a>
+								<a  ng-if="!vo.pm_relationid&&vo.pm_typeid==1011" class="btn btn-success" style="margin-left:30%" ng-click="createProduct(vo);">生成水票</a>
+								<a  ng-if="!vo.pm_relationid&&vo.pm_typeid==1010" class="btn btn-success" style="margin-left:30%" ng-click="showDialog(4);">关联实物</a> -->
+							
+							</div>
+						</div>
+					</form>
+				</div>
+			<div class="t-box clearfix" id="tab2" ng-show="tabIdx==2">
+					<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+						<div class="panel-body" ng-show="false">
+	    					<div class="row">
+								<div class="col-xs-4 text-center right-border" ng-show="false">
+							        <h4>当前库存</h4>
+							        <hr>
+							        <h1 class="stock_quantity">{{vo.pm_stock}}</h1>
+									<hr>
+									<a ng-click="clearStock();" class="btn btn-default">清空库存</a>
+								</div>
+								<div class="col-xs-8">
+									<!-- <h5>购买库存，购买后费用将从您的账户余额中扣除</h5>
+									<hr> -->
+									<form class="simple_form form-horizontal new_purchase">
+										
+										<div class="form-group" style="margin-top:15px;">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												<i class="form_required" title="必填">*</i>
+												 仓库
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<select class="form-control" ng-model="stockVO.storeid">
+													<option value="{{x.bs_id}}" ng-repeat="x in storeHouseList">{{x.bs_name}}</option>
+												</select>
+											</div>
+											
+											
+										</div>
+										<div class="form-group">
+											<label class="radio_buttons optional col-md-3 col-lg-2 control-label f14">操作</label>
+											<div class="col-md-9 col-lg-6" style="padding-top: 9px;">
+												<span class="radio f14" style="padding: 0; width: 100%;">
+													<lable class="xt_inputRadio" style="margin-bottom:8px">
+														<input class="xt_radio" type="radio" value="1" ng-model="stockVO.opationtype" name="type">
+														<div class="xt_inputBackimg"></div>增加
+													</lable>
+												</span>
+												<span class="radio f14" style="padding: 0; width: 100%;">
+													<lable class="xt_inputRadio" style="margin-bottom:8px">
+														<input class="xt_radio" type="radio" value="2" ng-model="stockVO.opationtype" name="type">
+														<div class="xt_inputBackimg" ></div>减少
+													</lable>
+												</span>
+												
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												<i class="form_required" title="必填">*</i>
+												 数量
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<input class="form-control f14" type="number" min="1" ng-model="stockVO.num" step="1" value="1" name="" style="height: 34px; line-height: 18px; box-sizing: border-box;">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												
+												 备注
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<input class="form-control f14" type="text" placeholder="备注最长为25个字" ng-model="stockVO.describe" maxlength="25" style="height: 34px; line-height: 18px; box-sizing: border-box;">
+											</div>
+										</div>
+										<hr>
+										<a href="" class="btn btn-success" ng-click="updateStock();">保存</a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default" style="border: 0;">
+    					<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+							  <i class="icon icon-list"></i> 共{{pager.total}}条记录 
+							  <div class="search-filter-box">
+       
+								<div>
+									<label>仓库<span>:</span></label>
+									<select ng-model="vo.storeid">
+										<option value="{{x.bs_id}}" ng-repeat="x in storeHouseList">{{x.bs_name}}</option>
+									</select>
+								</div>
+								<div>
+									<a class="btn btn-success" style="margin-left:80px;"  ng-click="pager.page =1;getStockDetail();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+								</div>
+							</div>
+	      					<!-- <button name="button" type="submit" ng-click="pager.page =1;getStockDetail();" style="margin-bottom:5px;" class="btn btn-success floatRight">
+								刷新
+							</button> -->
+	    				</div>
+	    				<!--无记录时显示-->
+	    				<!--<div class="panel-body" style="border: 1px solid #ddd;">
+							<div class="table-empty text-center">
+								<i class="icon icon-search fa-3x"></i>
+								<h4>查找不到相关记录</h4>
+							</div>
+						</div>-->
+						<table class="table table3 table-bordered table-hover" style="margin-bottom: 0;">
+							<thead>
+								<tr>
+									<th class="text-center">时间</th>
+									<th class="text-center">操作人</th>
+									<th class="text-center">仓库</th>
+									<th class="text-center">仓库编码</th>
+									<th class="text-center">类型</th>
+									<th class="text-center">数量</th>
+									<th class="text-center">备注</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in detailList">
+									<td class="text-center f14">{{x.psd_operation_time}}</td>
+									<td class="text-center f14">{{x.psd_operation_userid_nameref}}</td>
+									<td class="text-center f14">{{x.psd_storeid_nameref}}</td>
+									<td class="text-center f14">{{x.psd_storeid_code}}</td>
+									<td class="text-center red f14">
+									<span ng-if="x.psd_operation_type == 1">增加</span>
+									<span ng-if="x.psd_operation_type == 2">减少</span>
+									</td>
+									<td class="text-center red f14"><span ng-if="x.psd_operation_type == 2">-</span>{{x.psd_num}}</td>
+									<td class="text-center f14">{{x.psd_abstract}}</td>
+								</tr>
+							</tbody>
+						</table>
+						<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
+<style>
+.goods-main .two-row-item .item-label{width:20%}
+.tr-selected {
+    background:#abcdef;
+}
+</style>
+
+
+<!-- 选择优惠券关联的商品 -->
+<div class="dialog" ng-show="dialog==4" style="z-index: 500">
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index: 999998; width: 900px; margin-left: -450px; top: 5%; "
+		ng-show="dialog==4">
+		<div class="dg-xg-js" style="width: 900px;">
+			选择商品
+			<div class="dg-cancle" ng-click="dialog=0"></div>
+		</div>
+		<div class="search-filter-box" style="padding-top:0px;">
+			
+			 <div>
+				 <label>关键字<span>:</span></label>
+					<input type="text" placeholder="" ng-model="searchParam2.searchKey"> 
+					
+					<a class="btn btn-success" style="margin-left:80px;" ng-click="searchFun2();">
+						<i class="glyphicon glyphicon-filter"></i> 筛选</a>
+						<a class="btn btn-default" ng-click="clearParams2();searchFun2();" style="text-shadow: none !important; color: #333 !important;"><i
+							class="icon icon-eraser"></i> 清空</a>
+			 </div>
+	 
+	 
+			 
+		 </div>
+		<div class="setting_panel panel-default">
+			<div class="panel panel-default" style="border: 0; border-radius: 0;height:370px;overflow-y:scroll;">
+				   
+				<table class="changeColor" style="width:100%;">
+					<thead style="font-weight: bold;background:#ddd;">
+						<th>序号</th>
+						<th>编码</th>
+						<th>商品名称</th>
+						<th>商品类别</th>
+						<th>商品分类</th>
+					</thead>
+					<tbody>
+						<tr  ng-class="{'tr-selected':selectGoodsid==x.pm_id}"  ng-repeat="x in goodsList track by $index" style="border-bottom: 1px solid #eee;" ng-click="selectGoods(x);">
+							<td>{{goodsPager.rows * (goodsPager.page - 1)+ $index+1}}</td>
+							<td>{{x.pm_code}}</td>
+							<td>{{x.pm_title}}</td>
+							<td>{{x.pm_typeid_nameref}}</td>
+							<td>{{x.pm_categoryid_nameref}}</td>
+						</tr>
+					</tbody>
+					
+				</table>       
+				<tm-pagination conf="goodsPager" search-param="searchParam2"></tm-pagination>  
+			  </div>
+		</div>
+		<div>
+			<div class="btn btn-default"
+				style="margin-left: 594px; margin-bottom: 10px"
+				ng-click="dialog=0">取消</div>
+				<div class="btn btn-success"
+				style="margin-left: 69px; margin-bottom: 10px"
+				ng-click="subSelectGoods();">确定</div>
+			   
+			   
+		</div>
+
+	</div>
+</div>
+

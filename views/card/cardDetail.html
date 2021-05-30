@@ -1,0 +1,532 @@
+<div class="contentHtml card-detail" style="left: 0;">
+	
+	<div id="mainHtml" style="padding: 0;top:0;overflow:visible;">
+		<div class="headers">
+			<h3  style="font-size: 16px;margin-bottom: 0;margin-top: 0;font-weight: bold;line-height: 50px;">创建优惠券：</h3>
+			
+			<p style="font-size: 14px;margin-bottom: 22px;">
+				温馨提示：授权绑定的微信公众号需开通卡券功能才可正常使用 
+			</p>
+		</div>
+		<div class="wrapper" id="game_wrapper" style="padding: 0; margin: 0;" ng-init="checkedIdx0=0">
+			<div class="editContent" style="display: flex;">
+				<div class="previewPhone card-mobile" style="flex: none;">
+					<div class="wxTitle">
+						<div id="actName" class="layerId-1 defBgColor">卡券</div>
+					</div>
+					<div id="gameContent">
+						<div class="start_page home" id="main_page_active" ng-style="{'background-color':'#'+currentColor}">
+							<div class="ticket-wrap">
+								<img src="img/0.jpg" class="icon-ticket-logo" ng-style="{'border-color':'#'+currentColor}">
+								<p class="text-gray">公众号名称</p>
+								<p class="text-title" id="edit_ticket_title">卡券标题</p>
+								<a href="javascript: void(0);" class="btn-used" id="btn_used" ng-style="{'background-color':'#'+currentColor}">立即使用</a>
+								<p class="text-gray" style="padding: 5px 0 10px 0;" id="edit_ticket_subtitle">副标题</p>
+								<p class="text-gray ticket-detail"><span>使用条件：</span><span id="edit_ticket_use_condition">无条件</span></p>
+								<p class="text-gray ticket-detail"><span>可使用时间：</span><span id="edit_ticket_time_start">2016-12-09 12:30</span>-<span id="edit_ticket_time_end">2016-12-10 12:30</span></p>
+								<div class="ticket-detail-wrap">
+									<span>优惠券详情</span>
+									<span class="icon-right">&gt;</span>
+								</div>
+							</div>
+						</div>						
+					</div>
+				</div>
+				<div class="editDetail" ng-init="checkedIdx1=0" style="flex:1;">
+					<ul class="nav nav-tabs config-tab" id="configTab">
+						<li ng-class="{active:checkedIdx1==0}" ng-click="checkedIdx1=0"><a href="">基础设置</a></li>
+						<li ng-class="{active:checkedIdx1==1}" ng-click="checkedIdx1=1"><a href="">优惠券详情</a></li>
+						<li ng-class="{active:checkedIdx1==2}" ng-click="checkedIdx1=2"><a href="">商户介绍</a></li>
+						<li ng-class="{active:checkedIdx1==3}" ng-click="checkedIdx1=3"><a href="">功能设置</a></li> 
+					</ul>
+					<div class="tab-content config-tab-content" style="height: 614px;width: 80%;">
+						<div class="config_view" ng-show="checkedIdx1==0">
+							<form action="#" class="form-horizontal-2" id="form_activity_config">
+								<div class="control-group">
+									<label class="control-label" for="title">
+										卡券标题：
+									</label>
+									<div class="controls">
+										<input type="text" id="title" class="span4" value maxlength="50" ng-model="config.base.name" ng-disabled="isDisable"/>
+										<span class="maroon">*</span>
+										<span class="help-inline">9个字以内，描述卡券提供的优惠，如“代金券”等</span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="title">
+										卡券副标题：
+									</label>
+									<div class="controls">
+										<input type="text" id="title" class="span4" value maxlength="50" ng-model="config.base.name" ng-disabled="isDisable"/>
+										<span class="maroon">*</span>
+										<span class="help-inline">18个字以内，用于辅助说明</span>
+									</div>
+								</div>
+								<div class="control-group" ng-show="couponType==1">
+									<label class="control-label" for="title">
+										折扣额度：
+									</label>
+									<div class="controls">
+										<input type="text" id="title" class="span4" value maxlength="50" ng-model="config.base.name" ng-disabled="isDisable" /> 折
+										<span class="maroon">*</span>
+										<span class="help-inline">请填写1-9.9之间的数字，精确到小数点后1位</span>
+									</div>
+								</div>
+								<div class="control-group" ng-show="couponType==2">
+									<label class="control-label" for="title">
+										减免金额：
+									</label>
+									<div class="controls">
+										<input type="text" id="title" class="span4" value maxlength="50" ng-model="config.base.name" ng-disabled="isDisable" />
+										<span>元</span>
+									</div>
+								</div>
+								<div class="control-group" >
+									<label class="control-label">
+										 卡券颜色：
+									</label>
+									<div class="controls color-select">
+                                        <a  data-toggle="dropdown">
+                                        	<label ng-style="{'background-color':'#'+currentColor}" id="bg_color_value">&nbsp;</label>
+                                        	<i class="arrow"></i>
+                                    	</a>
+                                        <div class="color-main dropdown-menu" style="left: 150px;" ng-show="!isDisable">
+                                            <table class="color-panel">
+                                                <tbody>
+	                                                <tr>
+	                                                    <td ng-repeat="x in colorData" ng-click="changeColor(x)"><a ng-style="{'background-color':'#'+x}" href="javascript:;" id="bg_color_green1"></a></td>
+	                                                </tr>
+	                                                <tr>
+	                                                	<td ng-repeat="x in colorData2" ng-click="changeColor(x)"><a ng-style="{'background-color':'#'+x}" href="javascript:;" id="bg_color_green1"></a></td>
+	                                                </tr>
+                                            	</tbody>	
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+								</div>
+								<div class="control-group" id="joinPeopel" ng-show="false">
+									<label class="control-label" for="helpType">卡券面值：</label>
+									<div class="controls helpType_1_cont">
+										<label class="inline">
+											<input type="radio" name="kqmz" ng-value="1" ng-model="kqmz" ng-disabled="isDisable"/>
+											静态
+										</label>
+										<label class="inline" style="margin-top:7px">
+											<input type="radio" name="kqmz" ng-value="2" ng-model="kqmz" ng-disabled="isDisable" ng-change="kqmz==2?sytj=2:''"/>
+											动态面值（可应用于推广海报）
+										</label>
+										<div id="lotteryCount" class="clearfix" style="display: block;">
+											
+										</div>
+									</div>
+								</div>
+								<div class="control-group" id="joinPeopel" ng-show="false">
+									<label class="control-label" for="helpType" style="opacity: 0;">卡券面值：</label>
+									<div class="controls helpType_1_cont">
+										<input type="number" name="lotteryAddCount" class="span1 onlyNum" ng-model="c" ng-disabled="isDisable"/>
+										元
+										<span class="help-inline">(动态奖励满卡券面值自动派送优惠券)</span>
+									</div>
+								</div>
+								<div class="control-group" id="joinPeopel" >
+									<label class="control-label" for="helpType">使用条件：</label>
+									<div class="controls helpType_1_cont">
+										<label class="inline">
+											<input type="radio" name="sytj" ng-value="1" ng-model="sytj" ng-disabled="isDisable||kqmz==2"/>
+											无条件
+										</label>
+										<label class="inline" style="margin-top:7px">
+											<input type="radio" name="sytj" ng-value="2" ng-model="sytj" ng-disabled="isDisable"/>
+											满减
+										</label>
+										<div id="lotteryCount" class="clearfix" style="display: block;" ng-show="sytj==2">
+											消费
+											<input type="number" name="lotteryAddCount" class="span1 onlyNum" value="1" maxlength="2" ng-model="config.base.join_people.num" ng-disabled="isDisable"/>
+											元，抵扣
+											<input type="number" name="lotteryAddCount" class="span1 onlyNum" ng-model="c" ng-disabled="isDisable||kqmz==2" />
+											元
+										</div>
+									</div>
+								</div>
+								<div class="control-group" >
+									<label class="control-label" for="startDate">
+										有效期：
+									</label>
+									<label class="inline">
+										<input type="radio" name="validDate" ng-value="1" ng-model="validDate" ng-disabled="isDisable" /> 固定日期
+									</label>
+									<label class="inline" style="margin-top:7px">
+										<input type="radio" name="validDate" ng-value="2" ng-model="validDate" ng-disabled="isDisable" /> 领取后
+									</label>
+								</div>
+								<div class="control-group" >
+									<label class="control-label" for="startDate" style="opacity:0;"></label>
+									<div class="controls" ng-show="validDate==1">
+										<input type="text" id="activityRange" class="span4" value maxlength="50" ng-model="config.base.time" ng-disabled="isDisable"/>
+										<span class="maroon">*</span>
+										<span class="help-inline">卡券使用时间范围</span>
+									</div>
+									<div class="controls" ng-show="validDate==2">
+										<select name="awardType" class="span2" data-editable="false" ng-model="formDate" ng-options="y as y for y in arr90"
+										 value="y.bd_name">
+										</select>
+										<span> 生效，有效天数</span>
+										<select name="awardType" class="span2" data-editable="false" ng-model="endDate" ng-options="y as y for y in arr91"
+										 value="y.bd_name">
+										</select>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="control-group">
+									<label class="control-label">
+										可用时段：
+									</label>
+									<div class="controls">
+										<div class="radio f14">
+											<div class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" name="optionsRadios" value="option1" ng-model="activityTime">
+												<div class="xt_inputBackimg"></div>全部时段
+											</div>
+										</div>
+										<div class="radio f14" style="margin-top:10px;margin-left: 10px;">
+											<div class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" name="optionsRadios" value="option2" ng-model="activityTime">
+												<div class="xt_inputBackimg"></div>部分时段
+											</div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<div class="control-group" ng-show="activityTime=='option2'">
+									<label class="control-label" style="opacity: 0;">
+									</label>
+									<div class="control">
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>周一
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>周二
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>周三
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>周四
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>周五
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>周六
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>周日
+										</div>
+									</div>
+								</div>
+								<div class="control-group" ng-show="activityTime=='option2'&&timeRange.length==0">
+									<label class="control-label" style="opacity: 0;">
+									</label>
+									<div class="control">
+										<a style="float: left;line-height: 32px;margin-left: 5px;color: #459ae9;" ng-click="addTimeRange()">添加时间段</a>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="control-group" ng-show="activityTime=='option2'" ng-repeat="x in timeRange">
+									<label class="control-label" style="opacity: 0;"></label>
+									<div class="control">
+										<div style="width: 94px;border: 1px solid #ddd;float: left;">
+											<input type="text" style="border:none;width: 20px;margin-left: 10px;" ng-model="x.time1">:
+											<input type="text" style="border:none;width: 20px;margin-left: 10px;" ng-model="x.time2">
+										</div>
+										<div style="float: left;height: 34px;line-height: 28px;margin-left: 10px;margin:0 5px;">-</div>
+										<div style="width: 94px;border: 1px solid #ddd;float: left;">
+											<input type="text" style="border:none;width: 20px;margin-left: 10px;" ng-model="x.time3">:
+											<input type="text" style="border:none;width: 20px;margin-left: 10px;" ng-model="x.time4">
+										</div>
+										<div style="float: left;">
+											<a style="float: left;line-height: 32px;margin-left: 5px;color: #459ae9;"
+											 ng-click="$parent.deleteTimeRange()">删除</a>
+											<a style="float: left;line-height: 32px;margin-left: 5px;color: #459ae9;" 
+											   ng-click="$parent.addTimeRange()" 
+											   ng-show="($index+1)==$parent.timeRange.length&&$index!=1">添加</a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="config_view" ng-show="checkedIdx1==1">
+							<form action="#" class="form-horizontal-2" id="form_activity_config">
+								<div class="control-group" >
+									<label class="control-label" for="title">
+										领取限制：
+									</label>
+									<div class="controls">
+										<input type="text" id="title" class="span4" value maxlength="50" ng-model="config.base.name" ng-disabled="isDisable"/>
+										<span> 张</span>
+										<span class="help-inline">（选填）每个用户领券上限，如不填，则默认为1</span>
+									</div>
+								</div>
+								<div class="control-group" id="joinPeopel">
+									<label class="control-label" for="helpType">使用条件：</label>
+									<div class="controls helpType_1_cont">
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" ng-model="fitRange" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>适用范围
+											<span ng-show="fitRange">(至少填写一项)</span>
+										</div>
+										<div class="clearfix"></div>
+										<div style="margin-top:10px;margin-left:35px;" ng-show="fitRange">
+											<span style="display:inline-block;width: 100px;">适用商品：</span> <input type="text" ng-model="fitGoods" maxlength="15"> <span> {{fitGoods.length||0}}/15</span>
+											<div style="margin-top: 10px;">(填写本券适用的商品、类目或服务)</div>
+										</div>
+										<div style="margin-top:10px;;margin-left:35px;" ng-show="fitRange">
+											<span style="display:inline-block;width: 100px;">不适用商品：</span> <input type="text" ng-model="noFitGoods" maxlength="15"> <span> {{noFitGoods.length||0}}/15</span>
+											<div style="margin-top: 10px;">(填写本券不适用的商品、类目或服务)</div>
+										</div>
+									</div>
+								</div>
+								<div class="control-group" id="joinPeopel" >
+									<label class="control-label" for="helpType">优惠共享：</label>
+									<div class="controls helpType_1_cont">
+										<select name="awardType" 
+												class="span2" 
+												data-editable="false" 
+												ng-model="cardType" 
+												ng-options="y as y for y in ['请选择','可与其他优惠共享','不与其他优惠共享']"
+										        value="y.bd_name">
+										</select>
+										<span class="help-inline">使用条件的设置会在券上展示，请务必仔细确认。</span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="helpType">封面图片：</label>
+									<div class="controls helpType_1_cont">
+										<a ng-click="upImage()" style="color:#099fb8;" class="f14">上传图片</a>
+										<span>图片建议尺寸：850像素*350像素，大小不超过2M</span>
+										<div style="margin-top:5px;margin-left:35px;" ng-show="mp_img_show">
+											<div class="gsGoodsImgs" style="width:100px; height:100px;border:1px solid #ddd;">
+												<img alt="" ng-src="{{mp_img_show}}" style="width:100px; height:100px;">
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="control-group" >
+									<label class="control-label" for="startDate">
+										封面简介：
+									</label>
+									<div class="controls">
+										<input type="text" ng-model="postDetail" maxlength="12" placeholder="请输入封面的简介内容">
+										<span> {{postDetail.length||0}}/12</span>
+									</div>
+								</div>
+								<div class="control-group" >
+									<label class="control-label" for="startDate">
+										优惠说明：
+									</label>
+									<div class="controls" style="margin-top:7px;">
+										<span ng-show="!fitGoods&&!noFitGoods">（本行是非自定义内容，无需填写）</span>
+										<span ng-show="fitGoods"> {{'适用于'+fitGoods+';'}}</span>
+										<span ng-show="noFitGoods"> {{'不适用于'+noFitGoods+';'}}</span>
+									</div>
+								</div>
+								
+								<div class="control-group" >
+									<label class="control-label" for="title">
+										使用须知：
+									</label>
+									<div class="controls">
+										<textarea name="ruleTips" style="width: 500px;" rows="10" class="span4" id="ruleTips" placeholder="使用须知" ng-model="config.base.rule"
+										 ng-change="setPreviewToChild()" ng-disabled="isDisable" />
+									</div>
+								</div>
+								<div id="set_ruletext_box" class="control-group" >
+									<label class="control-label" for="ruleTips">
+										 图文介绍：
+									</label>
+									<div class="controls">
+										<span>图片建议尺寸：900像素 * 500像素，大小不超过2M。 至少上传1组图文，最多输入5000字</span>
+										<div class="clearfix"></div>
+										<img-text result-data="imgTextData"></img-text>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="config_view" ng-show="checkedIdx1==2">
+							<form action="#" class="form-horizontal-2" id="form_activity_config">
+								
+								<div class="control-group">
+									<label class="control-label" for="title">
+										电话：
+									</label>
+									<div class="controls">
+										<input type="text" id="title" class="span4" value maxlength="50" ng-model="config.base.name" ng-disabled="isDisable" />
+										<span class="maroon">*</span>
+										<span class="help-inline">手机或固话</span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="title">
+										商户服务：
+									</label>
+									<div class="control">
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="11" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>免费WiFi
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="2" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>可带宠物
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="3" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>免费停车
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="4" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>可外卖
+										</div>
+									</div>
+								</div>
+								<div class="control-group" style="margin-top: 10px;">
+									<div class="btn btn-default" ng-click="showEntry=true" ng-show="!showEntry">添加自定义入口</div>
+									<div class="btn btn-default" ng-click="showEntry=false" ng-show="showEntry">隐藏自定义入口</div>
+								</div>
+								<div class="control-group" ng-show="showEntry">
+									<label class="control-label" for="title">
+										入口名称：
+									</label>
+									<div class="controls">
+										<input type="text" 
+											class="span4" 
+											maxlength="5" 
+											ng-model="entryName" 
+											ng-disabled="isDisable" />
+										<span class="maroon">*</span>
+										<span class="help-inline">{{entryName.length||0}}/5</span>
+									</div>
+								</div>
+								<div class="control-group" style="margin-top: 10px;" ng-show="showEntry">
+									<label class="control-label" for="title">
+										引导语：
+									</label>
+									<div class="controls">
+										<input type="text" 
+											class="span4" 
+											maxlength="6" 
+											ng-model="entryTip" 
+											ng-disabled="isDisable" />
+										<span class="help-inline">{{entryTip.length||0}}/6</span>
+									</div>
+								</div>
+								<div class="control-group" style="margin-top: 10px;" ng-show="showEntry">
+									<label class="control-label" for="title">
+										跳转链接：
+									</label>
+									<div class="controls">
+										<input type="text" 
+											class="span4" 
+											ng-model="jumpLink" 
+											ng-disabled="isDisable"
+											placeholder="http://" />
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="config_view" ng-show="checkedIdx1==3">
+							<form action="#" class="form-horizontal-2" id="form_activity_config">
+						
+								<div class="control-group">
+									<label class="control-label" for="title">
+										库存：
+									</label>
+									<div class="controls">
+										<input type="text" id="title" class="span4" value maxlength="50" ng-model="config.base.name" ng-disabled="isDisable" />
+										<span>份</span>
+										<span class="maroon">*</span>
+										<span class="help-inline">库存只能是大于0的数字</span>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="title">
+										分享设置：
+									</label>
+									<div class="control">
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="11" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>用户可以分享领券链接
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left:5px;">
+											<input type="checkbox" value="2" class="zk_checkbox">
+											<div class="zk_checkboxImg"></div>用户领券后可转赠其他好友
+										</div>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="title">
+										核销方式：
+									</label>
+									<div class="control">
+										<label class="inline">
+											<input type="radio" name="hxfs" ng-value="1" ng-model="hxfs" ng-disabled="isDisable" /> 自助核销
+										</label>
+										<label class="inline" style="margin-top:7px">
+											<input type="radio" name="hxfs" ng-value="2" ng-model="hxfs" ng-disabled="isDisable"/> 用扫码核销
+										</label>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="title">
+										适用门店：
+									</label>
+									<div class="control">
+										<label class="inline">
+											<input type="radio" name="symd" ng-value="1" ng-model="symd" ng-disabled="isDisable" /> 全部门店适用
+										</label>
+										<label class="inline" style="margin-top:7px">
+											<input type="radio" name="symd" ng-value="2" ng-model="symd" ng-disabled="isDisable"/> 指定门店适用
+										</label>
+										<label class="inline" style="margin-top:7px">
+											<input type="radio" name="symd" ng-value="2" ng-model="symd" ng-disabled="isDisable"/> 无指定门店
+										</label>
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">
+										操作提示：
+									</label>
+									<div class="controls">
+										<input type="text" class="span4" value maxlength="16" ng-model="operateTip" ng-disabled="isDisable" />
+										<span>{{operateTip.length||0}}/16</span>
+										<span class="maroon">*</span>
+										<span class="help-inline">操作提示不能为空且长度不超过16个字</span>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="saveBottomBar fixBottombar" >
+					<div class="buttonBox">
+						<div class="btn btn-default black" style="width: 70px; text-shadow: none !important;" 
+						 ng-click="returnList();">返回</div>
+						<div ng-show="!isDisable" class="btn btn-success" 
+						style="width: 70px;" ng-click="save();">保存</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 
+<div style="display:none;" id="myeditor" get-ue="ue_myeditor = getUe" class="ueditor" ng-model="gb_content1"></div>

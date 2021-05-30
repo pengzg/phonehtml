@@ -1,0 +1,48 @@
+<div class="gift-history-main">
+    <ion-header-bar align-title="left" class="c-tab-main" ng-class="{1:'c-tab-checked-1',2:'c-tab-checked-2'}[checked]" ng-init="checked=1">
+        <div class="c-tab-content">
+            <div ng-click="checked=1;goTop()">我的礼品卡</div>
+            <div ng-click="checked=2;goTop()">收到的礼品卡</div>
+        </div>
+        <div class="c-tab-line"></div>
+    </ion-header-bar>
+    <ion-content>
+        <ion-refresher pulling-text="下拉刷新..." on-refresh="do_refresher()"></ion-refresher>
+        <div class="gift-list" ng-show="checked==1">
+            <div class="gift-item" ng-repeat="x in items track by $index" ng-click="goDetail()">
+                <div class="item-left">
+                    <img src="../../img/mobile/giftCard/pic1.png">
+                </div>
+                <div class="item-right">
+                    <div class="item-title">亲朋卡</div>
+                    <div class="item-price">
+                        <div>&yen;16.00</div>
+                        <div>
+                            <button class="button button-small button-balanced button-outline" ng-click="goSend()" ng-show="$index!=1">立即赠送</button>
+                            <span ng-show="$index==1">已送给&ensp;小明</span>
+                        </div>
+                    </div>
+                    <div class="item-time">购买时间：2017-10-22 18:22:12</div>
+                </div>
+            </div>
+        </div>
+        <div class="gift-list" ng-show="checked==2">
+            <div class="gift-item" ng-repeat="x in items track by $index" ng-click="goDetail()">
+                <div class="item-left">
+                    <img src="../../img/mobile/giftCard/pic2.png">
+                </div>
+                <div class="item-right">
+                    <div class="item-title">中秋卡</div>
+                    <div class="item-price">
+                        <div>&yen;16.00</div>
+                        <div>
+                            <span>小明赠</span>
+                        </div>
+                    </div>
+                    <div class="item-time">购买时间：2017-10-22 18:22:12</div>
+                </div>
+            </div>
+        </div>
+        <ion-infinite-scroll on-infinite="loadMore()" distance="1%" ng-if="haveMore"></ion-infinite-scroll>
+    </ion-content>
+</div>

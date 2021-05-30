@@ -1,0 +1,106 @@
+.main {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	
+	background: url(../../../img/mobile/squared/back.png) no-repeat;
+	background-size: 100%;
+}
+.game_bg {
+	position: relative;
+	width: 90vw;
+	height: 107vw;
+	margin-left: 5vw;
+	top: 50%;
+	margin-top: -53.5vw;
+
+	background: url(../../../img/mobile/squared/bg.png) no-repeat;
+	background-size: 100%;
+}
+.panel {
+	position: relative;
+	top: 22vw;
+	left: 10.7vw;
+	width: 70vw;
+	height: 70vw;
+}
+.panel-content {
+	}
+.panel-content .squared-item{
+	position: relative;
+	float: left;
+	margin:1vw;
+	width: 21.2vw;
+	height: 21.2vw;
+	text-align: center;
+	line-height: 21.2vw;
+	background: url(../../../img/mobile/squared/one.png) no-repeat;
+	background-size: 100%;
+	color: #ab6102;
+}
+.squared-item img {
+	width: 60%;
+	margin: 5% 15% 0;
+}
+.squared-item span {
+	position: absolute;
+	top: 5.6vw;
+	left: 0;
+	width: 100%;
+	font-size: 80%;
+}
+.panel-content .select{
+	background: url(../../../img/mobile/squared/one-select.png) no-repeat;
+	background-size: 100%;
+}
+.panel-content .item-center {
+	background: url(../../../img/mobile/squared/btn.png) no-repeat;
+	background-size: 100%;
+}
+.panel-content .center-select {
+	background: url(../../../img/mobile/squared/btn-select.png) no-repeat;
+	background-size: 100%;
+}
+.item-center {
+	text-align: center;
+}
+.item-center a {
+	line-height: 21.2vw;
+	font-weight: bold; 
+	font-size: 120%;
+	color: #ab6102;
+}
+.game_btns {
+	position: absolute;
+	bottom: 5vh;
+	left: 0;
+	width: 100%;
+}
+.btn-content {
+	float: left;
+	width: 50%;
+	text-align: center;
+}
+.btns {
+	display: inline-block;
+	padding: 2vw 13vw;
+	background: url(../../../img/mobile/squared/btn-down.png) no-repeat;
+	background-size: 100%;
+	color: #fff;
+}
+.color-yellow {
+	color: #fdfe50 !important;
+}
+.my-point {
+	position: absolute;
+	text-align: center;
+	width: 50vw;
+	left: 50%;
+	margin-left: -25vw;
+	top: 2vw;
+}

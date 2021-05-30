@@ -1,0 +1,128 @@
+<div class="xt_changeHtml" style="margin-bottom: 120px;">
+	<div class="addlistCenter">
+
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 试用主题：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.pa_name}}
+			</div>
+		</div>
+		<div style="min-width:900px;margin-bottom: 20px;margin-top: 25px;box-sizing:border-box;padding:0 46px;">
+			<table class="table table3" style="margin-bottom: 0 !important; border: 1px solid #dedede; ">
+				<tbody>
+					<tr class="zk_headerTrSty">
+						
+						<th style="width:50%;border-right: 1px solid #dedede;">试用商品 </th>
+						<th style="width:10%;border-right: 1px solid #dedede;">价格 </th>
+						
+					</tr>
+					<tr>
+						
+						<td style="width:50%;border-right: 1px solid #dedede;">{{vo.pa_productid_nameref}}</td>
+						<td style="width:10%;"  >{{vo.pa_market_price}}</td>	
+					
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"> 起止时间：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.pa_startdate}}至{{vo.pa_enddate}}
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"> 总份数：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.pa_total_num}}
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"> 每人限量份数：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.pa_limit_num}}
+			</div>
+		</div>
+		
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"> 已申请份数：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.pa_apply_num}}
+			</div>
+		</div>
+		
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">排序：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.pa_sort}}
+			</div>
+		</div>
+		
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">规则：</span>
+			<div class="widthAuto zk_controlInput">
+				<div  style="margin-bottom:1.25rem;width:664px;height: 300px; display:inline-block; z-index:1" id="myeditor1" 
+												get-ue="ue_myeditor1 = getUe"  class="ueditor" ng-model="vo.pa_describe" config="_simpleConfig" ></div>
+			</div>
+		</div>
+		
+		
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi width-just">发布状态：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				{{vo.pa_state_nameref}}
+			</div>
+		</div>
+		
+		
+</div>
+<div class="fixedBottom">
+	
+	<div class="btnStyle Btncolor2 BtnHover2" ><a ui-sref="index.marketing.promotionApplyList" class="btnStyle Btncolor2 BtnHover2" >返回</a></div>
+</div>
+
+
+
+
+<script>
+
+$(function(){
+  $('.droplistWrap2').hide()
+	$(document).on('click', function (ev) {
+		if ($(ev.target).parents('.SelectMulti-Container2').length) {return}
+		$('.droplistWrap2').hide()
+	})
+	
+	
+	//全选框不好使时
+	$('body').on('click', '.js_selectAll', function(){
+		var thisObj = $(this);
+		if (thisObj.is(':checked')) {
+			// $('.select').attr('checked', true); 
+			$('.js_select').prop("checked", true);
+			$('.js_selectAll').prop("checked", true);
+			
+		} else {
+			$('.js_select').attr('checked', false);
+			$('.js_selectAll').prop("checked", false);
+		}
+	});
+
+	$('body').on('click', '.js_select', function(event){
+		event.stopPropagation();
+		var thisObj = $(this);
+		if (thisObj.is(':checked')) {
+			// $('.select').attr('checked', true); 
+			// $('.select').prop("checked", true);  					 					
+		} else {
+			$('.js_selectAll').prop("checked", false);
+		}
+	});
+});
+
+function showDropList (obj){
+	$('.droplistWrap2').hide();
+	$(obj).parent().find('.droplistWrap2').toggle();
+	console.log($(obj).parent().find('.droplistWrap2'))
+};
+</script>

@@ -1,0 +1,866 @@
+<div class="contentHtml-new f14" style=" background-color: #fff;left:0;" ng-init="tabNow=0">
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;">
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0;">
+					<li ng-class="{active:tabNow==0}" ng-click="tabNow=0">
+						<a class="f14 i-c-black">
+							<i class="glyphicon glyphicon-edit"></i>
+							 基础规则
+						</a>
+					</li>
+					<li ng-class="{active:tabNow==1}" ng-click="tabNow=1">
+						<a class="f14 i-c-black">
+							<i class="icon icon-dropbox"></i>
+							 其他规则
+						</a>
+					</li>
+					<li ng-class="{active:tabNow==2}" ng-click="tabNow=2">
+						<a class="f14 i-c-black">
+							<i class="icon icon-dropbox"></i>
+							 确认创建
+						</a>
+					</li>
+				</ul>
+				<div class="t-box clearfix" id="tab1" ng-show="tabNow==0">
+					<form class="form-horizontal" style="margin-bottom: 130px;">
+						<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+							<div class="panel-body">
+								<h5>基本信息</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+										<i class="form_required" title="必填">*</i>
+										 券名称
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<input type="text" class="span4" />
+										<div class="tip-pop" ng-mouseover="isPop1=true" ng-mouseleave="isPop1=false">
+											<i class="ico-msg-s ask"></i>
+											<div class="pop-rap" ng-show="isPop1">
+												<i class="pop-arrow-out pop-arrow"></i>
+												<i class="pop-arrow-in pop-arrow"></i>
+												<div class="pop-content">
+													<div>券名称曝光示意图</div>
+													<div class="pop-imgs">
+														<img src="../../img/coupon_one.png" alt="">
+														<img src="../../img/coupon_two.png" alt="">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+										<i class="form_required" title="必填">*</i>
+									 	可用时间
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<div class="input-group">
+											<input type="text" id="activityRange1" class="span4" maxlength="50" ng-model="time"/>
+										</div>
+										<p class="tips-error f14">活动时间不能超过3个月</p>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<div class="radio f14" style="padding: 0; width: 100%;">
+											<div class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" name="optionsRadios" value="option1" ng-model="activityTime">
+												<div class="xt_inputBackimg"></div>有效期内，任意时段可用
+											</div>
+										</div>
+										<div class="radio f14" style="padding: 0; width: 100%;">
+											<div class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" name="optionsRadios" value="option2" ng-model="activityTime">
+												<div class="xt_inputBackimg"></div>有效期内，部分时段可用
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix" ng-show="activityTime=='option2'">
+									<label class="col-md-3 col-lg-2 control-label f14">
+									</label>
+									<div class="col-md-4 col-lg-5 inner-padding">
+										<div class="zk_inputCheckbox">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>周一
+										</div>
+										<div class="zk_inputCheckbox">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>周二
+										</div>
+										<div class="zk_inputCheckbox">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>周三
+										</div>
+										<div class="zk_inputCheckbox">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>周四
+										</div>
+										<div class="zk_inputCheckbox">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>周五
+										</div>
+										<div class="zk_inputCheckbox">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>周六
+										</div>
+										<div class="zk_inputCheckbox">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>周日
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix" ng-show="activityTime=='option2'" ng-repeat="x in timeRange">
+									<label class="col-md-3 col-lg-2 control-label f14"></label>
+									<div class="col-md-4 col-lg-4">
+										<div style="width: 94px;border: 1px solid #ddd;float: left;">
+											<input type="text" style="border:none;width: 20px;margin-left: 10px;" ng-model="x.time1">:
+											<input type="text" style="border:none;width: 20px;margin-left: 10px;" ng-model="x.time2">
+										</div>
+										<div style="float: left;height: 34px;line-height: 28px;margin-left: 10px;margin:0 5px;">-</div>
+										<div style="width: 94px;border: 1px solid #ddd;float: left;">
+											<input type="text" style="border:none;width: 20px;margin-left: 10px;" ng-model="x.time3">:
+											<input type="text" style="border:none;width: 20px;margin-left: 10px;" ng-model="x.time4">
+										</div>
+										<div style="float: left;">
+											<a style="float: left;line-height: 32px;margin-left: 5px;color: #459ae9;" 
+												ng-show="($index+1)==$parent.timeRange.length&&$index!=0"
+												ng-click="$parent.deleteTimeRange()" >删除</a>
+											<a style="float: left;line-height: 32px;margin-left: 5px;color: #459ae9;" 
+												ng-click="$parent.addTimeRange()" 
+												ng-show="($index+1)==$parent.timeRange.length&&$index!=2">添加</a>
+										</div>
+										<div style="clear: both;padding-top: 5px;" ng-show="($index+1)==$parent.timeRange.length">
+											<p class="help-block f14">请按照24小时制输入可用时段，最多设置3个时段</p>
+											<p class="tips-error f14">请填写有效的可用时段</p>
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										券生效时间
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<span>券在领取后</span>
+										<select ng-model="activeTime" ng-options="x for x in activeTimes"></select>
+										<span>用户需在可用时间内使用</span>
+										<p class="help-block f14">请在2017-09-15零点前完成发券，否则用户将无法领取此代金券</p>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0;">
+										<i class="form_required" title="必填">*</i>
+										营销经费
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<div class="radio f14" style="padding: 0; width: 100%;">
+											<div class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" name="marketingPrice" value="1" ng-model="marketingPrice">
+												<div class="xt_inputBackimg"></div>预充值，使用本商户号可用余额，商户订单实收不变
+											</div>
+										</div>
+										<div class="radio f14" style="padding: 0; width: 100%;">
+											<div class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" name="marketingPrice" value="2" ng-model="marketingPrice">
+												<div class="xt_inputBackimg"></div>免充值，扣减商户订单实收金额
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix" style="margin-bottom: 0;">
+									<label class="col-md-3 col-lg-2 control-label f14" style="margin-bottom: 0;padding-top: 0;">
+										<i class="form_required" title="必填">*</i>
+										可用商户
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<p class="help-block f14" style="margin-top: 0;">用户可以在可用商户的订单中使用单品代金券</p>
+									</div>
+								</div>
+								<div class="form-group clearfix" style="margin-bottom: 0;" ng-show="isThisMerchant">
+									<label class="col-md-3 col-lg-2 control-label f14" style="margin-bottom: 0;"></label>
+									<div class="col-md-9 col-lg-6">
+										<span style="float: left;line-height: 32px;margin-left: 10px;">本商户号(1229338402)</span>
+										<a style="float: left;line-height: 32px;margin-left: 10px;color: #459ae9;" ng-click="isThisMerchant=false">删除</a>
+									</div>
+								</div>
+								<div class="form-group clearfix" style="margin-bottom: 0;" ng-repeat="x in otherMerchants">
+								<label class="col-md-3 col-lg-2 control-label f14" style="margin-bottom: 0;"></label>
+									<div class="col-md-9 col-lg-6">
+										<span style="float: left;line-height: 32px;margin-left: 10px;">商户号({{x.num}})</span>
+										<a style="float: left;line-height: 32px;margin-left: 10px;color: #459ae9;" ng-click="deleteMer($index)">删除</a>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="margin-bottom: 0;">
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<a style="float: left;line-height: 32px;margin-left: 5px;color: #459ae9;" ng-show="!isThisMerchant" ng-click="isThisMerchant=true">添加本商户号</a>
+										<a style="float: left;line-height: 32px;margin-left: 10px;color: #459ae9;" ng-click="isOtherMerchant=true">添加其他商户号</a>
+									</div>
+								</div>
+								<div class="form-group clearfix" ng-show="isOtherMerchant">
+									<label class="col-md-3 col-lg-2 control-label f14" style="margin-bottom: 0;">
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<div class="input-group" style="width: 100%;">
+											<input type="text" class="span4" maxlength="50" ng-model="merchantsNum" style="width: 100%;" />
+										</div>
+									</div>
+									<div class="col-md-4 col-lg-3">
+										<a style="float: left;line-height: 32px;margin-left: 10px;color: #459ae9;" ng-click="addMer()">添加</a>
+										<a style="float: left;line-height: 32px;margin-left: 10px;color: #459ae9;" ng-click="isOtherMerchant=false">取消</a>
+									</div>
+								</div>
+								<div class="form-group clearfix" style="margin-bottom: 0;">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0;">
+										<i class="form_required" title="必填">*</i>
+										卡包功能
+									</label>
+									<div class="zk_inputCheckbox" style="margin-left: 15px;">
+									  	<input type="checkbox" ng-model="cardFunction" class="zk_checkbox" style="width: 90%;">
+									  	<div class="zk_checkboxImg"></div>允许用户将代金券插入卡包
+									</div>
+							  		<div class="tip-pop" ng-mouseover="isPop2=true" ng-mouseleave="isPop2=false">
+										<i class="ico-msg-s ask"></i>
+										<div class="pop-rap" ng-show="isPop2">
+											<i class="pop-arrow-out pop-arrow"></i>
+											<i class="pop-arrow-in pop-arrow"></i>
+											<div class="pop-content" style="width: 280px;">
+												<div class="pop-imgs">
+													<img src="../../img/card_pack.png" alt="">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group" style="margin-top: 15px;">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0;">logo设置</label>
+									<div class="col-md-4 col-lg-3">
+										<a ng-click="upImage($event)" style="color:#099fb8;" class="f14">上传图片</a>
+										<div  style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor" 
+										get-ue="ue_myeditor = getUe" ng-show="false" class="ueditor" ng-model="gb_content1"></div>
+										<div style="margin-top:5px;">
+											<div ng-repeat="x in imageList" style="float:left;margin:5px;">
+												<div class="gsGoodsImgs" style="width:100px; height:100px;border:1px solid #ddd;">
+													<img alt="" src="{{x.pathDesc}}"  style="width:100px; height:100px;">
+													<div class="gsGoodsImgsBtns" style="position:absolute;bottom:0;left:0;width:100px;background:#fff;">
+														<a class="common_btns common_stick" title="设置主封面" ng-click="setStick(x)"></a>
+														<a class="common_btns common_delete" title="删除" ng-click="deletePic($index)"></a>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>    	
+								<div ng-show="cardFunction" class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 品牌名称
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<input type="text" class="form-control" />
+									</div>
+								</div>    
+								<div ng-show="cardFunction" class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 背景颜色
+									</label>
+									<div class="color-select col-lg-6" id="bg_color_selector">
+                                        <a href="javascript:;" id="bg_color_href" ng-click="isColor=true">
+                                        	<label ng-style="{'background-color':'#'+currentColor}" id="bg_color_value">&nbsp;</label>
+                                        	<i class="arrow"></i>
+                                    	</a>
+                                        <div class="color-main" ng-show="isColor">
+                                            <table class="color-panel">
+                                                <tbody>
+	                                                <tr>
+	                                                    <td ng-repeat="x in colorData" ng-click="changeColor(x)"><a ng-style="{'background-color':'#'+x}" href="javascript:;" id="bg_color_green1"></a></td>
+	                                                </tr>
+	                                                <tr>
+	                                                	<td ng-repeat="x in colorData2" ng-click="changeColor(x)"><a ng-style="{'background-color':'#'+x}" href="javascript:;" id="bg_color_green1"></a></td>
+	                                                </tr>
+                                            	</tbody>	
+                                            </table>
+                                        </div>
+                                    </div>
+								</div> 
+								<div ng-show="cardFunction" class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										卡包跳转
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<select ng-model="activeJump" ng-options="x for x in jumpWay"></select>
+										<div class="tip-pop" ng-mouseover="isPop3=true" ng-mouseleave="isPop3=false">
+											<i class="ico-msg-s ask"></i>
+											<div class="pop-rap" ng-show="isPop3">
+												<i class="pop-arrow-out pop-arrow"></i>
+												<i class="pop-arrow-in pop-arrow"></i>
+												<div class="pop-content">
+													<div>跳转至默认页</div>
+													<div class="tips">
+														用户领取代金券并插入卡包后，在卡包内点击立即使用跳转至默认页面。适用商户：未开通微信支付刷卡的线下商户
+													</div>
+													<div class="pop-imgs">
+														<img src="../../img/jump_mode_3.png" alt="">
+													</div>
+													<div>跳转至默认页</div>
+													<div class="tips">	
+														用户领取代金券并插入卡包后，在卡包内点击立即使用可直接前往付款码，向收银员出示即可完成支付并核销代金券
+													</div>
+													<div class="tips">适用商户：已开通微信支付刷卡功能的商户</div>
+													<div class="pop-imgs">
+														<img src="../../img/jump_mode_1.png" alt="">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div> 
+								<div ng-show="cardFunction" class="form-group" style="margin-top: 10px;">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0;">详情封面</label>
+									<div class="col-md-4 col-lg-3">
+										<a ng-click="upImage($event)" style="color:#099fb8;" class="f14">上传图片</a>
+										<div  style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor" 
+										get-ue="ue_myeditor = getUe" ng-show="false" class="ueditor" ng-model="gb_content1"></div>
+										<div style="margin-top:5px;">
+											<div ng-repeat="x in imageList" style="float:left;margin:5px;">
+												<div class="gsGoodsImgs" style="width:100px; height:100px;border:1px solid #ddd;">
+													<img alt="" src="{{x.pathDesc}}"  style="width:100px; height:100px;">
+													<div class="gsGoodsImgsBtns" style="position:absolute;bottom:0;left:0;width:100px;background:#fff;">
+														<a class="common_btns common_stick" title="设置主封面" ng-click="setStick(x)"></a>
+														<a class="common_btns common_delete" title="删除" ng-click="deletePic($index)"></a>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>  
+								<div class="form-group clearfix" style="margin-top: 10px;">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 使用说明
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<textarea  rows="3" cols="80" style="width: 100%;"></textarea>
+									</div>
+								</div>
+								<h5 class="section-header">商品规则明细</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">上架至积分商城</label>
+									<div class="col-md-9 col-lg-6">
+										<table class="table table3 table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>优惠说明</th>
+													<th>优惠明细</th>
+													<th>总优惠个数</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="a-blue" ng-show="false">
+			                                        <td colspan="4">
+			                                            <a>添加</a>
+			                                        </td>
+			                                    </tr>
+												<tr>
+													<td>123</td>
+													<td>123</td>
+													<td>123</td>
+													<td class="a-blue">
+														<a ng-click="isInfoGoods=true;isInfo=false;">查看</a>
+														<a ng-click="isAddGoods=true;isInfo=true;">修改</a>
+														<a>删除</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<hr />
+								<a href="" class="btn btn-success" ng-click="tabNow=1">下一步</a>
+							</div>
+							<div class="left-tip">
+								<div>示例区：</div>
+								<div>
+									<img src="../../img/card_pack.png" alt="">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="t-box clearfix" id="tab1" ng-show="tabNow==1">
+					<form class="form-horizontal">
+						<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+							<div class="panel-body">
+								<h5>其他规则</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+										<i class="form_required" title="必填">*</i>
+										 支付模式
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<div class="zk_inputCheckbox">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>
+										  <span>公众号支付</span>
+										  <span class="tips">APP支付、PC扫码支付、公众号JS API、公众号支付</span>
+										</div>
+										<br>
+										<div class="zk_inputCheckbox">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>
+										  <span>刷卡</span>
+										  <span class="tips">小额支付</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+										<i class="form_required" title="必填">*</i>
+										 付款方式
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<div class="zk_inputCheckbox">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>
+										  零钱
+										</div>
+										<div class="zk_inputCheckbox" style="margin-left: 10px;">
+										  <input type="checkbox" value="" class="zk_checkbox">
+										  <div class="zk_checkboxImg"></div>
+										  <span>全部银行卡</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+										<i class="form_required" title="必填">*</i>
+									 	同时使用
+									</label>
+									<div class="col-md-4 col-lg-4">
+										<div class="radio f14" style="padding: 0; width: 100%;">
+											<div class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" name="sameTime" value="option1" ng-model="sameTime">
+												<div class="xt_inputBackimg"></div>用户不能同时使用本商户号创建的其他代金券，但可以享受立减和折扣
+											</div>
+										</div>
+										<div class="radio f14" style="padding: 0; width: 100%;">
+											<div class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" name="sameTime" value="option2" ng-model="sameTime">
+												<div class="xt_inputBackimg"></div>用户可以同时使用本商户号创建的其他代金券、立减和折扣
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+										<i class="form_required" title="必填">*</i>
+									 	使用方式
+									</label>
+									<div class="col-md-4 col-lg-5">
+										<div>用户提前领取代金券，微信支付订单符合券规则，代金券将自动核销。一张券仅可被核销1次</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+										<i class="form_required" title="必填">*</i>
+									 	可减价用户
+									</label>
+									<div class="col-md-4 col-lg-5">
+										<select ng-model="available">
+											<option value="1">全部</option>
+											<option value="2">指定用户</option>
+										</select>
+										<input type="text" ng-show="available==2" placeholder="请输入会员卡appid">
+										<span class="tips-error" ng-show="available==2">appid 不能为空</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+										<i class="form_required" title="必填">*</i>
+									 	订单优惠标记
+									</label>
+									<div class="col-md-4 col-lg-5">
+										<select ng-model="marker" ng-init="marker='1'">
+											<option value="1">不限制</option>
+											<option value="2">添加订单优惠标记</option>
+										</select>
+										<br>
+										<span class="tips" ng-show="marker==2">商户下单时需要传入相同的标记(goods_tag)，用户同时符合其他规则才能享受优惠</span>
+										<div ng-repeat="x in markers">
+											<span ng-bind="x"></span>
+											<a class="a-blue" ng-click="delMarker($index)">删除</a>
+										</div>
+										<div>
+											<input type="text" ng-show="marker==2" placeholder="请输入会员卡appid" ng-model="markerNew">
+											<a class="a-blue" ng-show="marker==2" ng-click="addMarker()">添加标识</a>
+										</div>
+									</div>
+								</div>
+								<hr />
+								<a href="" class="btn btn-success" ng-click="tabNow=2">下一步</a>
+								<a href="" class="btn btn-default" ng-click="tabNow=0">上一步</a>
+							</div>
+						</div>
+						</form>
+				</div>
+				<div class="t-box clearfix" id="tab1" ng-show="tabNow==2">
+					<form class="form-horizontal">
+						<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+							<div class="panel-body">
+								<h5>基本信息</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+										 券名称
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<span>满10减9</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	可用时间
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>2017-09-20至2017-09-21 任意时段可用</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	营销经费
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>预充值，使用本商户号余额</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	卡包功能
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>可添加</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	品牌名称
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>伊利</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	Logo
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<img src="../../img/0.jpg" alt="">
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	背景颜色
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<div style="width: 30px;height: 20px;background: #63b359;"></div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	卡包跳转
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>付款码</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	详情封面
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>无</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	可用商户
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span class="tips">以下商户的微信支付订单符合核销条件，可核销代金券</span>
+										<div>
+											<span>本商户号(1229338402)</span>
+											<span>本商户号(111122)</span>
+										</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	使用说明
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>无</span>
+									</div>
+								</div>
+								
+								<h5 class="section-header">商品规则明细</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14"></label>
+									<div class="col-md-9 col-lg-6">
+										<table class="table table3 table-bordered table-hover">
+											<thead>
+												<tr>
+													<th>优惠说明</th>
+													<th>优惠明细</th>
+													<th>总优惠个数</th>
+													<th>操作</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>123</td>
+													<td>123</td>
+													<td>123</td>
+													<td class="a-blue">
+														<a ng-click="isInfoGoods=true;isInfo=false;">查看</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<h5 class="section-header">其他规则</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	支付模式
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>公众号支付，刷卡</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	同时使用
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>用户不能同时使用本商户号创建的其他代金券，但可以享受立减和折扣</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	使用方式
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>用户提前领取代金券，微信支付订单符合券规则，代金券将自动核销。一张券仅可被核销1次</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	可减价用户
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>所有人</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	订单优惠标记
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>11;232;12312311</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0">
+									 	付款方式
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<span>零钱，所有银行卡</span>
+									</div>
+								</div>
+								<hr />
+								<a href="" class="btn btn-success">确认创建</a>
+									<a href="" class="btn btn-default" ng-click="tabNow=1">上一步</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
+
+<!-- 添加商品优惠弹窗 -->
+<div class="dialog" ng-show="isAddGoods" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px;top: 50%; margin-left: -330px; margin-top: -273.5px;"  ng-show="isAddGoods">
+		<div class="dg-xg-js" style="width:660px;">
+			添加商品优惠
+			<div class="dg-cancle" ng-click="hideUserAdd()"></div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;line-height: 32px;">
+				 优惠说明
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<input type="text" style="padding: 5px 10px;">
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;line-height: 32px;">
+				 优惠规则
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<span>指定商品消费满</span>
+				<input type="text" style="width: 60px;padding: 5px 10px;">
+				<span>元立减</span>
+				<input type="text" style="width: 60px;padding: 5px 10px;">
+				<span>元</span>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;line-height: 32px;">
+				 指定商品编码
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<textarea  rows="3" cols="80" style="width: 100%;"></textarea>
+				<div>
+					<span class="tips">已输入1个商品编码</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;line-height: 32px;">
+				 总优惠数
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<input type="text" style="padding: 5px 10px;">
+				<span>个</span>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;line-height: 32px;">
+				 总预算
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<span>11.00元</span>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;line-height: 32px;">
+				 用户可优惠个数
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<span>一个用户最多可领取</span>
+				<input type="text" style="width: 60px;padding: 5px 10px;">
+				<span>张券</span>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;line-height: 32px;">
+				 备注
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<textarea  rows="3" cols="80" style="width: 100%;"></textarea>
+			</div>
+		</div>
+		<div class="dg-bottom-color">
+			<div class="dg-submint">
+				<div class="btn btn-success" ng-click="next()">下一步</div>
+				<div class="btn btn-default" ng-click="cancel()">取消</div>
+			</div>
+		</div>
+	
+	</div>
+</div>
+
+<!-- 商品优惠信息弹窗 -->
+<div class="dialog" ng-show="isInfoGoods" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px;top: 50%; margin-left: -330px; margin-top: -185.5px;"  ng-show="isInfoGoods">
+		<div class="dg-xg-js" style="width:660px;">
+			添加商品优惠
+			<div class="dg-cancle" ng-click="isInfoGoods=false"></div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+				 优惠说明
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<span>1</span>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+				 优惠规则
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<span>活动单品编码任意一个或多个消费满11.00元减1.00元，1笔订单减价1次</span>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+				 指定优惠商品
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<span>纯牛奶</span>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+				 总优惠数
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<span>11</span>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+				 总预算
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<span>11.00元</span>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+				 用户可优惠个数
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<span>1</span>
+			</div>
+		</div>
+		<div class="form-group clearfix" style="margin: 10px 0;">
+			<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+				 备注
+			</label>
+			<div class="col-md-9 col-lg-7">
+				<span>123</span>
+			</div>
+		</div>
+		<div class="dg-bottom-color">
+			<div class="dg-submint">
+				<div class="btn btn-success" ng-click="sure()">确认</div>
+				<div class="btn btn-default" ng-click="previous()" ng-show="isInfo">上一步</div>
+			</div>
+		</div>
+	
+	</div>
+</div>

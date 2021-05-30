@@ -1,0 +1,205 @@
+<div class="contentHtml-new goods-main" style=" z-index: 99; background-color: #fff;left:0;">
+	
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;" ng-init="tabIdx=1">
+		 <div class="row">
+			<div class="col-sm-12 page-header">
+            	<span class="page_actions" style="padding-left: 0; margin-left: 0;">
+					<a class="btn btn-success" ng-click="goList()"> 返回</a>
+					<!-- <a class="btn btn-success" href="#/index/product/productGrouping"><i class="icon icon-folder-close"></i> 礼品分组管理</a> -->
+				</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0;">
+					<li class="active">
+						<a class="f14 i-c-black" ng-click="tabIdx=1">
+							<i class="glyphicon glyphicon-edit"></i>
+							 充值卡添加
+						</a>
+					</li>
+				</ul>
+				<div class="t-box clearfix" id="tab1" ng-show="tabIdx==1">
+					<form class="form-horizontal">
+						<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+							<div class="panel-body">
+								<h5>基本信息</h5>
+								<hr />
+							
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 商品名称
+									</label>
+									<div class="item-name">
+										<input type="text" id="pm_title" maxlength="30" placeholder="长度<30,必填" class="form-control" ng-model="vo.pm_title" />
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										商品品牌
+									</label>
+									<div class="item-name">
+										<div class="common_dropdown">
+											<div data-toggle="dropdown" style="text-align:left;">
+												<span ng-show="vo.pm_brandid_nameref">{{vo.pm_brandid_nameref}}</span>
+												<span ng-show="!vo.pm_brandid_nameref">请选择商品品牌</span>
+												<i class="icon-sort-down device-i-down"></i>
+											</div>
+											<div class="dropdown-menu" role="menu">
+												<div ng-repeat="x in brandList track by $index" ng-click="selectBrandFun(x)" style="padding-left:20px;text-align:left;border-bottom:1px solid #eee;">{{x.bd_title}}</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 商品分类
+									</label>
+									<div class="item-name">
+										<div class="common_dropdown">
+											<div data-toggle="dropdown" ng-click="showCategory=true">
+												<span ng-show="vo.pm_categoryid_nameref ">{{vo.pm_categoryid_nameref }}</span>
+												<span ng-show="!vo.pm_categoryid_nameref">请选择商品分类</span>
+												<i class="icon-sort-down device-i-down"></i>
+											</div>
+											<div class="zzc" ng-show="showCategory" ng-click="showCategory=!showCategory"></div>
+											<div class="dropdown-menu" style="display:block;z-index:9999999;" ng-show="showCategory">
+												<ul class="ztree" id="categrayList"></ul>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 排序
+									</label>
+									<div class="item-name">
+										<input type="text" id="pm_sort" ng-change="numberRegFun();" maxlength="9" placeholder="数字越大越靠前" class="form-control" ng-model="vo.pm_sort" />
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 计量单位
+									</label>
+									<div class="item-name">
+										<div class="common_dropdown">
+											<div data-toggle="dropdown">
+												<span ng-show="unitVO.pur_unitid_min_nameref">{{unitVO.pur_unitid_min_nameref}}</span>
+												<span ng-show="!unitVO.pur_unitid_min_nameref">单位</span>
+												<i class="icon-sort-down device-i-down"></i>
+											</div>
+											<div class="dropdown-menu" role="menu">
+												<div ng-repeat="x in unitList track by $index" ng-click="selectUnitFun(x)" style="padding-left:20px;text-align:left;border-bottom:1px solid #eee;">{{x.bu_name}}</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 商品编码
+									</label>
+									<div class="item-name">
+										<input type="text" placeholder="长度<20,空格分隔" maxlength="20" class="form-control" ng-model="vo.pm_code" />
+									</div>
+								</div>
+								<div class="two-row-item">
+									<label class="item-label control-label f14">
+										 上下架
+									</label>
+									<div class="item-name">
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px; ">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio" type="radio" value="1" ng-model="vo.pm_state" name="state">
+												<div class="xt_inputBackimg"></div>上架
+											</lable>
+										</span>
+										<span class="radio f14 floatLeft" style="padding: 0;margin-top:8px;margin-left:10px; ">
+											<lable class="xt_inputRadio" >
+												<input class="xt_radio"  type="radio" value="2" ng-model="vo.pm_state" name="state">
+												<div class="xt_inputBackimg" ></div>下架
+											</lable>
+										</span>
+									</div>
+								</div>
+
+								<div class="clearfix"></div>   
+								<div class="clearfix" style="box-sizing: border-box;padding: 0 10px;">
+									<div class="common_table_1_title">可选充值金额</div>
+									<table class="common_table_1 table-bordered table-hover">
+										<thead>
+											<th style="width:5%">序号</th>
+											<th style="width:13%">充值金额</th>
+											<th style="width:13%">返现类型</th>
+											<th style="width:20%">返现值</th>
+											<!-- <th style="width:20%">起订量</th>
+											<th style="width:20%">增量</th> -->
+											<th style="width:20%">操作</th>
+										</thead>
+										<tbody>
+											<tr ng-repeat="x in priceList track by $index" ng-init="index_i = $index">
+
+													<td style="width:5%; border-left: 0 !important;" class="colorCenter">
+														<span ng-if="index_i+1<priceList.length">{{index_i+1}}</span>
+														<img src="../../../../img/sele_add.png" ng-if="index_i+1 == priceList.length" style="cursor: pointer;" ng-click="addLine(1);"/>
+													</td>
+												<td style="width:13%">
+													<input type="text" ng-model="x.psp_price" ng-blur="checkPrice(x)" maxlength="10" style="width: 80%;">
+												</td>
+												<td style="width:13%">
+													<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+														<input class="xt_radio ng-pristine ng-untouched ng-valid valid" name="rebate_type{{index_i}}" ng-model="x.psp_rebate_type" value="1" type="radio">
+														<div class="xt_inputBackimg"></div>奖励金
+													</lable>
+													<!-- <lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+													<input class="xt_radio ng-pristine ng-untouched ng-valid" name="rebate_type{{index_i}}" ng-model="x.psp_rebate_type" value="2" type="radio" >
+														<div class="xt_inputBackimg" value="11"></div>返现
+													</lable> -->
+												
+												</td>
+												<!-- <td style="width:13%">
+													<input type="checkbox" ng-click="checkFun(x)" ng-checked="x.psp_is_buy=='Y'">
+												</td> -->
+												<td style="width:20%">
+													<input type="text" ng-model="x.psp_rebate_value" ng-blur="checkValue(x)" maxlength="10" style="width: 80%;">
+												</td>
+												<!-- <td style="width:20%">
+													<input type="text" ng-model="x.psp_min_num" maxlength="10" style="width: 80%;">
+												</td>
+												<td style="width:20%">
+													<input type="text" ng-model="x.psp_add_num" maxlength="10" style="width: 80%;">
+												</td> -->
+												<td style="width:20%;border-right: 0 !important;cursor: pointer;" ng-show="true" class="open colorCenter"><img src="../../../../img/shanchu.png"  ng-click="removeLine(index_i)" /></td>
+											</tr>
+										</tbody>
+									</table>
+								</div> 
+							
+								<hr />
+								<a  class="btn btn-success" style="margin-left:30%" ng-click="addProduct();">保存</a>
+								<a  class="btn btn-default" style="margin-left:10%" ng-click="goList();">返回</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
+
+<style>
+.goods-main .two-row-item .item-label{width:20%}
+.zzc{position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.5;
+    z-index:999;
+    }
+</style>

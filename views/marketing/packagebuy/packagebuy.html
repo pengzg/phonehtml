@@ -1,0 +1,86 @@
+<div class="xt_changeHtml">
+
+
+	<div class="search-filter-box">
+		<div>
+			<label>订单日期<span>:</span></label>
+			<span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()" ng-click="dateRange.chooseDate($event)">
+			日期 </span>
+			<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;" onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+			/>
+			<input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+			/>
+			<label>订单状态<span>:</span></label>
+			<select ng-model="searchParam.om_state" >
+					<option ng-repeat="x in statusList" value="{{x.bd_code}}" id="orderStatusSelect" value="{{x.bd_code}}">{{x.bd_name}}</option>
+				</select>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="订单号或者会员信息" ng-model="searchParam.searchKey">
+		</div>
+		<div>
+			
+			<label>套餐名<span>:</span></label>
+			<input type="text" placeholder="请输入套餐名或者编码" ng-model="searchParam.promotion_searchKey">
+		</div>
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;" ng-click="doSearch();"><i class="glyphicon glyphicon-filter"></i>
+				筛选</a>
+			<a class="btn btn-default" ng-click="clearInput();doSearch();" style="text-shadow: none !important; color: #333 !important;"><i
+				 class="icon icon-eraser"></i> 清空</a>
+		</div>
+	</div>
+
+	<div class="xt_childTable">
+		<table class="table table3 table-striped table-hover table-bordered SortCss" >
+			<thead>
+				<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+					<th class="colorCenter noSortCss">序号</th>
+					<th class="colorCenter noSortCss">套餐名称</th>
+					<th class="colorCenter noSortCss">下单时间</th>
+					<th class="colorCenter noSortCss">订单编号</th>
+					<th class="colorCenter noSortCss">订单类型</th>
+					<th class="colorCenter noSortCss">订单金额</th>
+					<!-- <th class="colorCenter noSortCss">下单数量</th> -->
+					<th class="colorCenter noSortCss">会员名称</th>
+					<th class="colorCenter noSortCss">会员电话</th>
+					<th class="colorCenter noSortCss">订单状态</th>
+					<th class="colorCenter noSortCss">订单备注</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in orderList" class="common-tr-height" >
+					<td class="colorCenter">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+					<td class="colorCenter">
+						{{x.orderMainVO.om_def2_nameref}}
+					</td>
+					<td class="colorCenter">{{x.orderMainVO.om_order_time}}</td>
+					<td class="colorCenter">{{x.orderMainVO.om_order_code}}</td>
+					<td class="colorCenter">{{x.orderMainVO.om_order_type_nameref}}</td>
+					<td class="colorCenter">{{x.orderMainVO.om_collect_amount}}</td>
+					<!-- <td class="colorCenter">
+						{{x.orderMainVO.om_buy_num}}
+					</td> -->
+					
+					<td class="colorCenter">
+						{{x.orderMainVO.om_memberid_nameref}}
+					</td>
+					<td class="colorCenter">
+						{{x.orderMainVO.om_member_mobile}}
+					</td>
+					<td class="colorCenter">
+						{{x.orderMainVO.om_state_nameref}}
+					</td>
+					<td class="colorCenter">
+						{{x.orderMainVO.om_remarks}}
+					</td>
+					
+				</tr>
+
+			</tbody>
+		</table>
+		
+		<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+	</div>
+</div>
+

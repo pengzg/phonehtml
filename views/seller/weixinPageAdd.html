@@ -1,0 +1,63 @@
+<div class="add-start-page-main">
+	<div class="panel panel-default">
+		<div class="panel-heading">微信页面信息</div>
+		<div class="panel-body">
+
+			<div class="content">
+				<div class="content-left">显示图片</div>
+				<div class="content-right">
+					<div class="controls" style="position: relative;">
+						<input type="text" class="span4" ng-model="vo.wsp_icon_url" /> <span
+							class="maroon">*</span>
+<!-- 							<img ng-src="{{vo.wsp_icon_url}}" style="position: absolute; top: 0; left: 350px; width: 60px; height: 60px;"> -->
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="content-left">跳转页面</div>
+				<div class="content-right">
+					<div class="controls">
+						<input type="text" class="span4" ng-model="vo.wsp_page_url" /> 
+						<span class="maroon">*</span>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="content-left">标题</div>
+				<div class="content-right">
+					<div class="controls">
+						<input type="text" class="span4" ng-model="vo.wsp_title" maxlength="6"/> 
+						<span class="">{{vo.wsp_title.length}}/6</span> 
+						<span class="maroon">*</span>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="content-left">副标题</div>
+				<div class="content-right">
+					<div class="controls">
+						<input type="text" class="span4" ng-model="vo.wsp_description" maxlength="7"/>
+						<span class="">{{vo.wsp_description.length}}/7</span> 
+						<span class="maroon">*</span>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="content-left">页面备注</div>
+				<div class="content-right">
+					<div class="controls">
+						<input type="text" class="span4" ng-model="vo.wsp_comment" maxlength="16"/>
+						<span class="">{{vo.wsp_comment.length}}/16</span> 
+						<!-- <span class="maroon">*</span> -->
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div style="margin-left: 1px; margin-bottom: 10px;">
+		<div class="btn btn-success" ng-click="addEnter();">添加</div>
+		&nbsp;&nbsp;&nbsp;
+		<div class="btn btn-default" ng-click="backList()">返回</div>
+	</div>
+</div>

@@ -1,0 +1,124 @@
+<div class="game-container">
+	<div class="search_box" style="text-align: center;margin-top: 50px;">
+		<form class="form-horizontal">
+			<div class="control-group">
+				<input type="text" style="position: relative;top: 1px;
+				padding-top: 6px;width: 550px; height: 21px;" class="span5" 
+				placeholder="请输入SN码" ng-model="searchCode"/>
+				<button class="btn btn-success" style="width: 80px; height: 36px;" 
+				ng-click="searchByCode();">搜索</button>
+			</div>
+		</form>
+		<div class="verify_step">
+			<img src="../../../img/verify_step.png" />
+			<div class="step_text">
+				<p class="step_t">SN码</p>
+				<p>核销员输入由粉丝提供的兑奖号码搜索中奖纪录</p>
+			</div>
+			<div class="step_text" style="left: 267px;">
+				<p class="step_t">校验</p>
+				<p>检查中奖信息是否对应及有效</p>
+			</div>
+			<div class="step_text" style="left: 533px;">
+				<p class="step_t">核销</p>
+				<p>校验无误后向粉丝进行减免或赠送礼品，并核销卡券</p>
+			</div>
+			<div class="prompt">
+				<p>
+					温馨提示：您也可以通过授权一位或者多位核销员进行线下扫码核销，前往
+					<a href="">核销员管理</a>
+					添加核销员
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 400px;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					中奖明细
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group clearfix" style="margin: 10px 0;">
+					<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+						活动名称:
+					</label>
+					<div class="col-md-9 col-lg-7">
+						<span ng-bind="winningData.mw_activity_name"></span>
+					</div>
+				</div>
+				<div class="form-group clearfix" style="margin: 10px 0;">
+					<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+						领取状态:
+					</label>
+					<div class="col-md-9 col-lg-7">
+						<span ng-bind="winningData.mw_state_nameref"></span>
+					</div>
+				</div>
+				<div class="form-group clearfix" style="margin: 10px 0;">
+					<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+						 中奖人：
+					</label>
+					<div class="col-md-9 col-lg-7">
+						<span ng-bind="winningData.mw_member_name"></span>
+					</div>
+				</div>
+				<div class="form-group clearfix" style="margin: 10px 0;">
+					<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+						 中奖头像：
+					</label>
+					<div class="col-md-9 col-lg-7">
+						<img ng-src="{{winningData.mw_member_mb_img}}" class="headIcon" />
+					</div>
+				</div>
+				<div class="form-group clearfix" style="margin: 10px 0;">
+					<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+						 中奖时间：
+					</label>
+					<div class="col-md-9 col-lg-7">
+						<span ng-bind="winningData.mw_winningtime"></span>
+					</div>
+				</div>
+				<div class="form-group clearfix" style="margin: 10px 0;">
+					<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+						 中奖人：
+					</label>
+					<div class="col-md-9 col-lg-7">
+						<span ng-bind="winningData.mw_member_name"></span>
+					</div>
+				</div>
+				<div class="form-group clearfix" style="margin: 10px 0;">
+					<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+						sn码：
+					</label>
+					<div class="col-md-9 col-lg-7">
+						<span ng-bind="winningData.mw_prizecode"></span>
+					</div>
+				</div>
+				<div class="form-group clearfix" style="margin: 10px 0;">
+					<label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+						 奖品名称：
+					</label>
+					<div class="col-md-9 col-lg-7">
+						<span ng-bind="winningData.mw_productname"></span>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消
+				</button>
+				<button type="button" class="btn btn-primary"  
+				ng-if="winningData.mw_state == 1" ng-click="checkWinning(winningData.mw_id);">
+					核销
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div>
+</div><!-- /.modal -->

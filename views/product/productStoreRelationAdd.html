@@ -1,0 +1,185 @@
+<div class="xt_changeHtml" style="margin-bottom: 120px;">
+	<div class="addlistCenter" style="padding-top:30px;padding-bottom:30px;">
+
+		<div class="divVertical clearfix ray5" style="margin-top: 17px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 柜子：</span>
+			<div class="widthAuto zk_controlInput">
+				<select id="storeSel" class="form-control" ng-model="storeid" ng-change="getDetail();">
+						<option value="{{x.bs_id}}" box_type="{{x.bs_box_type}}" box_num="{{x.bs_boxnum}}" ng-repeat="x in storeList">{{x.bs_name}}</option>
+						
+					</select>
+			</div>
+		</div>
+		<div style="min-width:900px;margin-bottom: 20px;margin-top: 25px;box-sizing:border-box;padding:0 46px;">
+			<table class="table table3" style="margin-bottom: 0 !important; border: 1px solid #dedede; border-bottom: 0;">
+				<tbody>
+					<tr class="zk_headerTrSty">
+						<th style="width:10%;">
+							<div class="glyphicon glyphicon-cog" ng-show="false" style="width: 15px; height: 15px; cursor: pointer"></div>
+						</th>
+						<th style="width:50%;border-right: 1px solid #dedede;">关联商品 </th>
+						
+						
+						<th style="width:10%;border-right: 1px solid #dedede;">操作 </th>
+					</tr>
+					<tr>
+						<td colspan="14" style="padding: 0; border-bottom: 0;border-top:0;">
+							<div style="padding-bottom: 2px;">
+								<table class="table table3 table-bordered" style="border: 0; margin-bottom: 0 !important;">
+									<tbody>
+										<tr ng-repeat = "i in dataList track by $index" ng-init="index_i = $index">
+											<td style="width:10%; border-left: 0 !important;" class="colorCenter">
+												<span ng-if="index_i+1<dataList.length">{{index_i+1}}</span>
+												<img src="../../../../img/sele_add.png" ng-if="(index_i+1 == dataList.length)&& (index_i+1<box_num)" style="cursor: pointer;" ng-click="addLine(1);"/>
+											</td>
+											<td style="width:50%;" class="SelectMulti-Container2 posRelative">
+												<input type="text" class="inputBorderStyle2 SelectMulti-ShowDiv2" ng-model="i.pm_title" ng-change="i.ps_id='';keySearchFun(i.pm_title,'goods');"  ng-focus="goods_type=1;showDroplist($event,getGoods,1)" style="height: 33px; line-height: 33px;">
+												<div class="droplistWrap2" style="width: 689px; left: 5px; top: 40px; overflow: hidden;">
+													<div class="clearfix">
+														<table >
+															<tr class="listItem2" style="width:683px;">
+																<td style="width:30px;line-height: 0px !important;"></td>
+																<td style="width:400px;line-height: 0px !important;">商品</td>
+																<td style="width:150px;line-height: 0px !important;">编号</td>
+																<td style="width:150px;line-height: 0px !important;">类型</td>
+																
+															</tr>
+														</table>
+													</div>
+													<div class="clearfix" style="height: 160px;overflow-y: auto;" >
+														
+														<table style="width:683px;">
+															<tr class="listItem" ng-repeat="y in goodsList" ng-click = "chooseGoods(y,index_i,1);">
+																<td style="width:30px;padding:4px !important;">
+																	{{pager1.rows * (pager1.page - 1)+ $index+1}}
+																</td>
+																<td style="width:400px;padding:4px !important;text-align: left;" title="{{y.pm_title}}">
+																	{{y.pm_title | cut:true:20:' ...'}}
+																</td>
+																
+																<td style="width:150px;padding:4px !important;">
+																	{{y.pm_code}}
+																</td>
+																<td style="width:150px;padding:4px !important;">
+																	{{y.pm_typeid_nameref}}
+																</td>
+															</tr>
+														</table>
+													</div>
+												</div>
+												<div class="droplistWrap2 zk_fanye" style="width:689px !important; top:226px !important; left:5px !important;height:25px;">
+													<a ng-click="prevPage(pager1,getGoods)"  class="m30right m20left">上一页</a>
+													<a ng-click="nextPage(pager1,getGoods)" class="m30right">下一页</a>
+													<span class="m30right">{{pager1.page}}/{{pager1.pageTotal}}</span>
+													<span>共{{pager1.total}}条</span>
+													<a ng-show="false" class="common_add_all" ng-click="addAll(goodsList,index_i)">全部添加</a>
+												</div>
+											</td>
+											<td style="width:10%;border-right: 0 !important;cursor: pointer;" ng-show="true" class="open colorCenter"><img src="../../../../img/shanchu.png"  ng-click="removeLine(index_i,1)" /></td>
+											
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+</div>
+<div class="fixedBottom">
+	<div  class="btnStyle Btncolor1 BtnHover1" ng-click="submit();">保存</div>
+
+	<div class="btnStyle Btncolor2 BtnHover2" ><a ng-click="goBack();" class="btnStyle Btncolor2 BtnHover2" >返回</a></div>
+</div>
+
+<!-- 遮挡层 -->
+<div class="dialog" ng-show="ac_showHtml.show">
+<div class="dialog-zdc" ></div>
+<!-- 遮挡层 -->
+
+<!-- 选择商品 -->
+<div class="dg-xg-zh" style="width: 620px" ng-if="ac_showHtml.warn_html == 1">
+	<div class="dg-xg-js" style="width: 620px">
+		选择商品
+		<div class="dg-cancle" ng-click="cancleBtnClick()"></div>
+	</div>
+	<div class="dg-content">
+		<div class="xt_filter floatLeft" style=" width: 370px; margin-left:10px; margin-bottom: 10px;">	
+			<input type="text" ng-model="searchParam.searchKey" placeholder="请输入关键词搜索" style="width:235px; height:20px; margin-right: 5px;">
+			<div class="btnStyle Btncolor2 BtnHover2" ng-click="queryGoodsList();">搜索</div>
+		</div>
+		<div class="xt_filter mtop16" style="display: block;">
+			<table  class="table table1 tableTh tdHover" style="max-height: 300px; overflow: auto;">
+	            <thead>
+	                <tr>
+	                	<th style="width: 15px;"><input type="checkbox" name="check_all" ng-click="checkFun('check_all');"></th>
+	                    <th class="colorCenter">商品编码</th>
+	                    <th class="colorCenter">商品国际码</th>
+	                    <th class="colorCenter" style="width: 275px">商品名称</th>
+	                </tr>
+	            </thead>
+	            <tbody class="borBottom">
+	                <tr ng-repeat="x in dataList" ng-click="checkFun(x.gp_id+'_'+$index,$event);">
+	                	<td><input type="checkbox" name="id_{{x.gp_id}}_{{$index}}"></td>
+	                    <td class="colorCenter">{{x.gb_goods_code}}</td>
+	                    <td class="colorCenter">{{x.gb_international_code}}</td>
+	                    <td class="colorCenter">{{x.gb_title}}</td>
+	                </tr>
+	               
+	            </tbody>
+	       </table>
+        	<tm-pagination conf="pager"></tm-pagination>
+		</div>
+        
+	</div>
+	<div class="dg-bottom-color" >
+		<div class="dg-submint">
+			<div class="btnStyle Btncolor1 BtnHover1" ng-click="sureBtnClick();">确定</div>
+		</div>
+	</div>
+</div>
+<!-- 选择商品 -->
+
+<script>
+
+$(function(){
+  $('.droplistWrap2').hide()
+	$(document).on('click', function (ev) {
+		if ($(ev.target).parents('.SelectMulti-Container2').length) {return}
+		$('.droplistWrap2').hide()
+	})
+
+	//全选框不好使时
+	$('body').on('click', '.js_selectAll', function(){
+		var thisObj = $(this);
+		if (thisObj.is(':checked')) {
+			// $('.select').attr('checked', true); 
+			$('.js_select').prop("checked", true);
+			$('.js_selectAll').prop("checked", true);
+			
+		} else {
+			$('.js_select').attr('checked', false);
+			$('.js_selectAll').prop("checked", false);
+		}
+	});
+
+	$('body').on('click', '.js_select', function(event){
+		event.stopPropagation();
+		var thisObj = $(this);
+		if (thisObj.is(':checked')) {
+			// $('.select').attr('checked', true); 
+			// $('.select').prop("checked", true);  					 					
+		} else {
+			$('.js_selectAll').prop("checked", false);
+		}
+	});
+});
+
+function showDropList (obj){
+	$('.droplistWrap2').hide();
+	$(obj).parent().find('.droplistWrap2').toggle();
+	console.log($(obj).parent().find('.droplistWrap2'))
+};
+</script>

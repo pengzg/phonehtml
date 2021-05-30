@@ -1,0 +1,124 @@
+<div class="xt_shouYeDiv" ng-show="!$root.isPager">
+	<span><a href="#/index/homePage">首页</a><a  style="font-size: 14px;font-weight: 100;" href="#/index/customer/csTypeList">>设置</a> <a style="font-size: 14px;font-weight: 100;"><span>>详情</span></a></span>
+</div>
+<div class="xt_changeHtml">
+		<div class="zk_addMain">
+			<div class="zk_baseInfoBox">
+				<h4>基本信息</h4>
+				<div class="zk_controlBox">
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>主键</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_id" 
+							ng-model="csTypeInfo.ct_id" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>所属公司</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_orgid" 
+							ng-model="csTypeInfo.ct_orgid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>上级父类ID</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_parentid" 
+							ng-model="csTypeInfo.ct_parentid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>客户类别编码</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_code" 
+							ng-model="csTypeInfo.ct_code" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>客户类别名称</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_name" 
+							ng-model="csTypeInfo.ct_name" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>状态</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_stats" 
+							ng-model="csTypeInfo.ct_stats" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>备注</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_remarks" 
+							ng-model="csTypeInfo.ct_remarks" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>有效标志位 1 有效 2 删除</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_dr" 
+							ng-model="csTypeInfo.ct_dr" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>更新时间</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_ts" 
+							ng-model="csTypeInfo.ct_ts" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>版本</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_version" 
+							ng-model="csTypeInfo.ct_version" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>最后修改人</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_updateuserid" 
+							ng-model="csTypeInfo.ct_updateuserid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>最后修改时间</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_updatetime" 
+							ng-model="csTypeInfo.ct_updatetime" readonly="readonly">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<div class="zk_saveBox">
+	<a ng-click="cancel();" class="btnStyle falseBtn">返回</a>
+</div>
+

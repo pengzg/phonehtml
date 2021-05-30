@@ -1,0 +1,246 @@
+.xt_offOne{line-height:34px;}
+.xt_filter{display:inline-block;}
+
+
+
+.treeStyle{ position: absolute; width: 210px; height: 94%; box-sizing: border-box; border-right: 1px solid #ddd; overflow-y: auto; overflow-x: hidden;left: 0;transition: left 1s; -moz-transition: left 1s; -webkit-transition: left 1s; -o-transition: left 1s;z-index: 8;background: #fff;border:1px solid #ddd !important; border-radius: 4px;margin-left:10px;padding-bottom: 17px;}
+.treeTitle {
+    font-size: 13px;
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    padding: 8px 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-weight: normal;
+    border-bottom: 1px solid #ddd;
+}
+.treeContent {margin-left: 210px; padding-left: 15px; box-sizing: border-box;transition: margin-left 1s; -moz-transition: margin-left 1s; -webkit-transition: margin-left 1s; -o-transition: margin-left 1s;}
+.ztree-btn {width:20px; position: absolute; height: 100%; background: #f0f0f0; left: 193px; top: 20px;padding-top:10px; cursor: pointer;background: url(../../img/fold_2.png) no-repeat;z-index: 8;transition: left 1s; -moz-transition: left 1s; -webkit-transition: left 1s; -o-transition: left 1s;background-position: 0px 10px;}
+.ztree-btn span { position: relative; top: 50%; width:8px; height: 60px; font-size: 24px; color: #fff; line-height: 6px; text-align: center; padding-top: 20px; box-sizing: border-box; margin-top: -30px; background: #ddd; display: inline-block;}
+.enable .treeStyle{ left: -220px;}
+.enable .ztree-btn {left: 10px;background: rgb(245, 245, 245)  url(../../img/unfold_2.png) 3px 3px no-repeat;z-index: 2;}
+.enable .treeContent {margin-left: 10px;}
+
+.treeStyle2{ position: absolute; width: 315px; height: 100%; padding: 5px; box-sizing: border-box; border-right: 1px solid #ddd; overflow-y: auto; overflow-x: hidden;}
+.treeContent2 {margin-left: 315px; padding-left: 15px; box-sizing: border-box;}
+.ztree-btn2 {width:8px; position: absolute; height: 100%; background: #f0f0f0; left: 323px; top: 0; cursor: pointer;}
+.ztree-btn2 span { position: relative; top: 50%; width:8px; height: 60px; font-size: 24px; color: #fff; line-height: 6px; text-align: center; padding-top: 20px; box-sizing: border-box; margin-top: -30px; background: #ddd; display: inline-block;}
+.enable2 .treeStyle2{ display: none;}
+.enable2 .ztree-btn2 {left: 0;}
+.enable2 .treeContent2 {margin-left: 0;}
+
+.treeStyle3 { position: absolute; width: 550px; height: 82%; box-sizing: border-box; border-right: 1px solid #ddd; overflow-y: auto; overflow-x: hidden;left: 0;transition: left 1s; -moz-transition: left 1s; -webkit-transition: left 1s; -o-transition: left 1s;z-index: 8;background: #fff;border:1px solid #ddd !important; border-radius: 4px;margin-left:10px;padding-bottom: 17px;}
+.treeContent3 {margin-left:586px; padding-left: 15px; box-sizing: border-box;transition: margin-left 1s; -moz-transition: margin-left 1s; -webkit-transition: margin-left 1s; -o-transition: margin-left 1s;}
+.ztree-btn3 {width:20px; position: absolute; height: 100%; background: #f0f0f0; left: 581px; top: 20px;padding-top:10px; cursor: pointer;background: url(../../img/fold_2.png) no-repeat;z-index: 8;transition: left 1s; -moz-transition: left 1s; -webkit-transition: left 1s; -o-transition: left 1s;background-position: 0px 10px;}
+.ztree-btn3 span { position: relative; top: 50%; width:8px; height: 60px; font-size: 24px; color: #fff; line-height: 6px; text-align: center; padding-top: 20px; box-sizing: border-box; margin-top: -30px; background: #ddd; display: inline-block;}
+
+.enable .treeStyle3{ left: -623px;}
+.enable .ztree-btn3 {left: 10px;background: rgb(245, 245, 245)  url(../../img/unfold_2.png) 3px 3px no-repeat;z-index: 2;}
+.enable .treeContent3 {margin-left: 10px;}
+
+.activeBaseUser {
+    font-weight: bold;
+    color: #555 !important;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-bottom: none;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+.userDocTitle {
+    display: inline-block;
+    cursor: pointer;
+    color: #337ab7;
+    padding: 5px 26px;
+    position: relative;
+    top: 4px;
+}
+.sale_inline div{
+    display: inline-block;
+}
+.btn_li_list {
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    color: #555;
+    text-align: left;
+    cursor: pointer;
+}
+.btn_li_list:nth-child(2n){
+    background: #eee;
+}
+.btn_li_list:hover {
+    background: #00b8d2;
+    color: #fff;
+}
+.btn_li_list:first-of-type{
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+}
+.pink_back {
+    background: #f9d8d5 !important;
+}
+.light_blue_back {
+    background: #d9edf7 !important;
+}
+.title-checked {
+    background: #fff;
+    color: #00b8d2 !important;
+}
+.title-tabs {
+    text-align: center;
+    text-indent: 0;
+    padding: 0 10px;
+    color: #fff;
+    cursor: pointer;
+}
+.width-just {
+    width: auto !important;
+    min-width: 111px;
+}
+.dict-manage-active {
+	background: #d9edf7 !important;
+}
+.outdate {
+	background:#f3e9e9;
+}
+.outdate td {
+	color: red;
+}
+
+.zk_stockTitleTh th { color: #555;}
+.zk_inputStyle { width: 100%; vertical-align: middle; text-align: center; box-sizing: border-box;}
+
+.zk_addBtnAnNiu { float: left;}
+.zk_addBtnAnNiu a{display: inline-block;line-height: 32px;height: 32px;width:100px;height:32px;text-align:center;background-color: #f0f0f0;color:#555;cursor:pointer; -moz-border-radius: 3px; -ms-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;}
+.zk_addBtnAnNiu a:hover{background-color:#e8eaeb;}
+
+.rightPopContent {
+    position: absolute;
+    width: 220px;
+    height: 520px;
+    right: -220px;
+    background: #fff;
+    top: 0;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-right: none;
+    transition: right 1s; 
+    -moz-transition: right 1s; 
+    -webkit-transition: right 1s; 
+    -o-transition: right 1s;
+}
+.rightPopContentShow {
+    right: 0;
+}
+.btnPopRight {
+    position: absolute;
+    left: -15px;
+    top: 44%;
+    border: 1px solid #ddd;
+    height: 80px;
+    text-align: center;
+    width: 15px;
+    background: white url(../../img/youjiantou.png) center no-repeat;
+    background-size: 6px 14px;
+    cursor: pointer;
+    border-right: none;
+}
+
+.rightPopHead {
+    padding: 10px;
+    background: #00b8d2;
+    color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+.rightPopTop {
+    padding: 10px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+.rightPopItems  {
+	height: 445px;
+	overflow-y: scroll;
+}
+.rightPopItem {
+	position: relative;
+	border-bottom: 1px solid #ddd;
+}
+.rightPopItem >div {
+	display: inline-block;
+	vertical-align: top;
+}
+.popItem1 {
+	padding: 5px;
+    width: 30px;
+}
+.popItem2 {
+    background: #00b8d2;
+    width: 10px;
+    height: 101px;
+    position: absolute;
+}
+.popItem21 {
+    background: #00b8d2;
+    width: 10px;
+    height: 28px;
+    position: absolute;
+}
+.popItem3 {
+    width: 140px;
+    height: 95px;
+    margin-left: 20px;
+    padding-top: 5px;
+}
+.popItem4 {
+    width: 140px;
+    height: 15px;
+    margin-left: 20px;
+    padding-top: 5px;
+}
+.popItemSpan1{
+	color: #FF6400;
+	font-weight: 600;
+    font-size: 16px;
+}
+.popItemSpan2 {
+	color: #f9453e;
+}
+.popItemDivCenter {
+	margin: 2px 0;
+}
+.pointSpan {
+	background: url(../../img/point.png) no-repeat;
+    background-size: 100%;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: -7px;
+    top: 4px;
+    text-align: center;
+    color: #fff;
+}
+.pointSpan div {
+	margin-top: 2px;
+}
+.popItemA {
+    color: #0591aa;
+}
+.popItemA:hover {
+     text-decoration: underline;
+}
+.popColumnLeft {
+    width: 70px;
+}
+.popColumnRight {
+    width: 370px;
+}
+.popColumnLeft >div{
+    padding: 5px;
+    text-align: right;
+}
+.popColumnRight >div {
+    padding: 5px;
+}

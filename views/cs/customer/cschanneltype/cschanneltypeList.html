@@ -1,0 +1,104 @@
+<common-navigater data="[{name:'设置'},{name:'系统设置'},{name:'渠道类型'}]"></common-navigater>
+<div class="xt_changeHtml" style="position: relative;">
+	<div class="treeStyle" style="top: 20; border: 0;">
+		<div class="treeTitle">注:客户渠道必须为两级&nbsp;</div>
+		<ul tree id="tree" ng-model="selectNode" tree-click="select();" 
+		class="ztree" data-options='{"url":"/admin/customer/csChannelTypeControl/queryCsChannelTypeTree.action"}' 
+		style="width:180px; overflow:auto;"></ul>
+	</div>
+	
+	<div id="ztree-btn" class="ztree-btn">
+	</div>
+	<div class="treeContent">
+		<div class="zk_addMain">
+			<div class="zk_baseInfoBox">
+				<h4>基本信息</h4>
+				<div class="zk_controlBox">
+					<!-- <div class="zk_controlGroup" style="width:100%">
+						<div class="zk_controlLabel">
+							<span class="f14">操作类型</span>
+							<i></i>
+						</div>
+						<div class="zk_controlRadio">
+								<lable class="xt_inputRadio"><input class="xt_radio js_edit" name="time" type="radio" ng-checked="option ==1" ng-click="chooseOpt(1);"><div class="xt_inputBackimg"></div>编辑渠道类型</lable>
+								&nbsp;&nbsp;<lable class="xt_inputRadio"><input class="xt_radio" name="time" ng-checked="option ==2" type="radio" ng-click="chooseOpt(2);"><div class="xt_inputBackimg"></div>添加渠道类型</lable>
+							<div>
+							</div>
+						</div>
+					</div> -->
+
+					<div class="zk_controlGroup" style="width:100%" ng-show="!isAdd">
+						<div class="zk_controlLabel">
+							<span class="f14">渠道类型名称</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" id="catName" placeholder="点击左侧选择渠道显示"  required ng-disabled="!isEdit">
+							<div style="margin-top:5px;">
+								<label class="labelStyle-1 f14">按住键盘的ctrl键点击取消选择</label>
+							</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="zk_controlBox">
+						<div class="zk_controlGroup" style="width:100%" ng-show="isAdd&&option!=3">
+							<div class="zk_controlLabel">
+								<span class="f14">父渠道名称</span>
+							</div>
+							<div class="zk_controlInput">
+								<input type="text" id="catName2" placeholder="点击选择左侧父节点"  required disabled="disabled">
+								<div style="margin-top:5px;">
+									<label class="labelStyle-1 f14">按住键盘的ctrl键点击取消选择</label>
+								</div>
+							</div>
+						</div>
+						<div class="zk_controlGroup" style="width:100%" ng-show="isAdd&&option==3">
+							<div class="zk_controlLabel">
+								<span class="f14">同级渠道名称</span>
+							</div>
+							<div class="zk_controlInput">
+								<input type="text" id="catName3" placeholder="点击选择左侧节点"  required disabled="disabled">
+								<div style="margin-top:5px;">
+									<label class="labelStyle-1 f14">按住键盘的ctrl键点击取消选择</label>
+								</div>
+							</div>
+						</div>
+						<div class="zk_controlGroup" style="width:100%;" ng-show="isAdd">
+							<div class="zk_controlLabel">
+								<span class="f14">渠道名称</span>
+								<i class="f14">*</i>
+							</div>
+							<div class="zk_controlInput" style="margin-top: 10px;">
+								<input type="text" id="catNameNew" placeholder="请输入汉字、字母、数字及括号"  required>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup floatLeft" style="width:100%; margin-top: 15px;">
+						<div class="zk_controlLabel">
+						</div>
+						<div class="zk_controlInput" style="width: 428px;">
+							<a ng-click="editOrAdd();" ng-show="isAdd||isEdit"  class="btnStyle saveBtn">保存</a>
+							<a ng-click="isAdd=false;isEdit=false" ng-show="isAdd||isEdit"  class="btnStyle saveBtn">取消</a>
+							<a ng-click="isAdd=true;option=3;" ng-show="!isAdd&&!isEdit" class="btnStyle saveBtn">同级新增</a>
+							<a ng-click="isAdd=true;option=2;" ng-show="!isAdd&&!isEdit" class="btnStyle saveBtn">新增</a>
+							<a ng-click="isEdit=true;option=1;" ng-show="!isAdd&&!isEdit&&selectNode.id" class="btnStyle saveBtn">编辑</a>
+							<a ng-click="toDelete();" ng-show="!isEdit&&!isAdd&&selectNode.id&&selectNode.check_Child_State==-1" class="btnStyle saveBtn">删除</a>
+
+						</div>
+					</div>
+					<!-- 隐藏域 -->
+					<div style="display: none">
+						<input type="text" ng-model="csCategoryInfo.cc_id">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$("#ztree-btn").click(function(){
+	    $(".xt_changeHtml").toggleClass("enable");
+	    $(".xt_changeHtml").siblings().removeClass("enable");"sqkxBackOfficeSystem/pop.html"
+	})
+</script>

@@ -1,0 +1,149 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">单位列表</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="search-filter-box">
+		<div>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="单位名称" ng-model="searchParam.searchKey">
+		</div>
+
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;" ng-click="doSearch()"><i class="glyphicon glyphicon-filter"></i>
+				筛选</a>
+			<a class="btn btn-default" ng-click="searchParam.searchKey='';doSearch();" style="text-shadow: none !important; color: #333 !important;"><i
+				 class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success add-btn" style="float:right;margin-right:50px;" ng-click="toEdit();"><i class="icon icon-plus"></i>新增</a>
+		</div>
+	</div>
+
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>计量单位名称</th>
+								<th>排序</th>
+								<th>状态</th>
+								
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in baseUnitList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.bu_name}}</td>
+								<td class="text-center f14">{{x.bu_seq}}</td>
+								<td class="text-center f14">{{x.bu_stats_nameref}}</td>
+							
+								<td class="text-center f14">
+									
+									<a class="common_btns common_edit" ng-click="toEdit(x.bu_id)" title="修改"></a>
+						<a class="common_btns common_delete" ng-click="toDelete(x.bu_id)" title="删除"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 遮挡层 -->
+<div class="dialog" ng-show="dialogShow">
+	<div class="dialog-zdc"></div>
+		<!-- 弹出添加计量单位框 -->
+		<div class="dg-xg-zh" style="width: 620px; margin-left: -310px; top: 50%; margin-top: -142px;" ng-show="dialogShow">
+			<div class="dg-xg-js" style="width: 620px">
+				{{dialogTitle}}
+				<div class="dg-cancle" ng-click="closeDialog()"></div>
+			</div>
+			<div class="dg-content" style="margin: 12px auto; overflow: visible;">
+				<div id="formJiLu" class="formJiLu" style="border: none">
+					<form>
+						<div>
+							<input type="hidden" ng-model="vo.bu_id">
+
+							<div class="contentGroup clearfix">
+
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14">排序序号</span> <i class="f14">*</i>
+								</div>
+								<div class="floatLeft p10left f14">
+									<input style="width: 210px;" type="number" class="js_seq"
+									 ng-model="vo.bu_seq" >
+									 值越大排序序号查询时越靠前
+								</div>
+							</div>
+
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14">计量单位名称</span> <i class="f14">*</i>
+								</div>
+
+								<div class="floatLeft p10left">
+									<input style="width: 210px;" type="text" name="bu_name"
+										ng-model="vo.bu_name" maxlength="15">
+								</div>
+							</div>
+
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14" style="line-height: 32px;">状态</span> <i class="f14">*</i>
+								</div>
+								<div class="floatLeft p10left" >
+									<zk-control-group ng-model="vo.bu_stats"
+										data-option='[{"0":"禁用"},{"1":"启用"}]'></zk-control-group>
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="createUnit();">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+		</div>
+
+</div>
+
+<script>
+$(function(){
+	$('.js_seq').bind('keydown', function(event) {
+
+		　　if (event.keyCode == "8") {
+
+		　　　　//回车执行查询
+
+		　　} else {
+				if(this.value.length>=10) return false;
+		　　}
+
+		});
+	
+	
+});
+
+</script>

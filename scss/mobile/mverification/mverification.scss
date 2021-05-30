@@ -1,0 +1,110 @@
+.mverification-main {
+	$color1: #33b3fb;
+	$color2: #fa9f33;
+
+	.top {
+		position: relative;
+		background: $color1;
+		color: #fff;
+		padding: 2rem 0;
+		.title-name {
+			margin-top: 1rem;
+			font-size: 1.8rem;
+			text-align: center;
+		}
+		.title-close {
+			position: absolute;
+			top: 0;
+			right: 1rem;
+			font-size: 3rem;
+		}
+		.title-rule {
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+			padding: 1rem;
+			i.icon {
+				font-size: 1.5rem;
+			}
+		}
+	}
+	.center {
+		position: relative;
+		top: -1rem;
+		text-align: center;
+		background: url(../../../img/mobile/personCenter/hx_bg.png) no-repeat;
+		background-size: 100% 100%;
+		.dj-qrcode {
+			padding-top: 1rem;
+		}
+		.dj-check {
+			color: red;
+		    font-size: 1.1rem;
+		    padding: 1rem;
+		}
+		.dj-num {
+			margin-top: 1rem;
+			color: #333;
+			font-size: 1.2rem;
+		}
+		.dj-tip {
+			margin-top: 0.5rem;
+			color: #999;
+			font-size: 1.3rem;
+		}
+		.dj-note {
+			margin-top: 0.5rem;
+			color: $color1;
+			font-size: 1.2rem;
+		}
+	}
+	.bottom {
+		.dj-detail {
+			margin: 0 1rem 1rem 1rem;
+			padding: 1rem;
+			font-size: 1.3rem;
+			background: $color1;
+			color: #fff;
+			border-bottom: 1px solid #ddd;
+			text-align: center;
+			border-radius: 4px;
+		}
+		.dj-content {
+			color: #666;
+			padding: 1rem;
+			font-size: 1.2rem;
+			background: #fff;
+			padding-bottom: 5rem;
+			.dj-item {
+				margin-top: 0.5rem;
+				.dj-left {
+					display: inline-block;
+				}
+				.dj-right {
+					display: inline-block;
+					margin-left: 1rem;
+				}
+			}
+		}
+	}
+	&.blue-style {
+		.top {
+			background: $color1;
+		}
+		.center {
+			.dj-note {
+				color: $color1;
+			}
+		}
+	}
+	&.yellow-style {
+		.top {
+			background: $color2;
+		}
+		.center {
+			.dj-note {
+				color: $color2;
+			}
+		}
+	}
+}

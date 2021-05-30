@@ -1,0 +1,50 @@
+.settting_qrcode {
+    width: 200px;
+    height: 200px;
+}
+
+.setting_headimg {
+    width: 40px;
+    height: 40px;
+}
+
+.barcode_container {
+	background-color: #ddd;
+	padding-bottom: 15px;
+}
+
+.barcode_content {
+    width: 350px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+}
+.barcode_head{
+	padding: 10px 0;
+}
+.barcode_content2 {
+	width: 350px;
+    margin: 0 auto;
+    background-color: #f3f3f3;
+    padding: 30px;
+}
+.barcode_label {
+	color: #8d8d8d;
+	float: left;
+	padding-left: 50px;
+}
+.barcode_logo {
+	float: left;
+}
+.barcode_meta p{
+	display: inline-block;
+	width: 150px;
+	text-align: left;
+}
+.barcode_meta p>span{
+	overflow: hidden;
+}
+.barcode_name{
+	float: left;
+	padding-left: 10px;
+}

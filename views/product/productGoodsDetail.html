@@ -1,0 +1,207 @@
+<div class="contentHtml-new" style=" z-index: 99; background-color: #fff;left: 10px;">
+	
+		<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;" ng-init="tabIdx=1">
+		 <div class="row">
+			<div class="col-sm-12 page-header">
+            	<span class="page_actions" style="padding-left: 0; margin-left: 0;">
+					<a class="btn btn-success" ng-click="goList();"> 返回列表</a>
+					<!-- <a class="btn btn-success" href="#/index/product/productGrouping"><i class="icon icon-folder-close"></i> 礼品分组管理</a> -->
+				</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0;">
+					<li  ng-class="{active:tabIdx==1}">
+						<a class="f14 i-c-black" ng-click="tabIdx=1">
+							<i class="glyphicon glyphicon-edit"></i>
+							 礼品信息
+						</a>
+					</li>
+					<li ng-class="{active:tabIdx==2}">
+						<a class="f14 i-c-black"  ng-click="tabIdx=2">
+							<i class="icon icon-dropbox"></i>
+							 库存管理
+						</a>
+					</li>
+				</ul>
+				<div class="t-box clearfix" id="tab1" ng-show="tabIdx==1">
+					<form class="form-horizontal">
+						<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+							<div class="panel-body">
+		    					<!-- <div class="alert alert-danger">
+									<a href="" class="close">×</a>
+									<p class="f14">
+										<i class="glyphicon glyphicon-warning-sign"></i>
+										 有 5 处问题导致无法提交:
+									</p>
+									<ul style="margin-left: 40px;">
+										<li class="f14">活动标题不能为空</li>
+										<li class="f14">开始时间不能为空</li>
+										<li class="f14">结束时间不能为空</li>
+										<li class="f14">结束时间日期输入无效</li>
+										<li class="f14">二维码数量必须大于 0</li>
+									</ul>
+								</div> -->
+								<h5>基本信息</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">礼品类型</label>
+									<div class="col-md-9 col-lg-6">
+										<div class="form-control-static f14">实物礼品</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 名称
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<div class="form-control-static f14">{{vo.pm_title}}</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0;">图片</label>
+									<div class="col-md-9 col-lg-6">
+										<img style="height:100px;width:100px;" ng-src="{{vo.pm_picture_show?vo.pm_picture_show:'img/prizedef.jpg'}}" alt="">
+									</div>
+								</div>    
+								<div class="form-group">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0;">图文详情</label>
+									<div class="col-md-9 col-lg-6">
+										<div  style="margin-bottom:1.25rem;width:664px;height: 300px; display:inline-block; z-index:1" id="myeditor1" 
+												get-ue="ue_myeditor1 = getUe"  class="ueditor" ng-model="vo.pm_text" ></div>
+									</div>
+								</div>    
+								<h5 class="section-header">积分商城兑换设置</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">上架至积分商城</label>
+									<div class="col-md-9 col-lg-6">
+										<div class="form-control-static f14" ng-show="vo.pm_integral_mall=='Y'">是</div>
+										<div class="form-control-static f14" ng-show="vo.pm_integral_mall=='N'">否</div>
+									</div>
+								</div>
+								<div ng-show="vo.pm_integral_mall=='Y'">
+									<!-- <div class="form-group clearfix">
+										<label class="col-md-3 col-lg-2 control-label f14">分组</label>
+										<div class="col-md-9 col-lg-6">
+											<div class="form-control-static f14">电话卡</div>
+										</div>
+									</div> -->
+									<div class="form-group clearfix">
+										<label class="col-md-3 col-lg-2 control-label f14">
+											<!-- <i class="form_required" title="必填">*</i> -->
+										 	参考价
+										</label>
+										<div class="col-md-4 col-lg-3">
+											<div class="form-control-static f14">{{vo.pm_market_price}}元</div>
+										</div>
+									</div>
+									<div class="form-group clearfix">
+										<label class="radio_buttons optional col-md-3 col-lg-2 control-label f14">支付类型</label>
+										<div class="col-md-9 col-lg-6">
+											<div class="form-control-static f14">{{vo.pm_payment_type_nameref}}</div>
+										</div>
+									</div>
+									<div class="form-group clearfix">
+										<label class="col-md-3 col-lg-2 control-label f14">
+											<!-- <i class="form_required" title="必填">*</i> -->
+										 	积分价格
+										</label>
+										<div class="col-md-4 col-lg-3">
+											<div class="form-control-static f14">{{vo.pm_integral_value}}元</div>
+										</div>
+									</div>
+								</div>
+								
+								<hr />
+								<a href="" class="btn btn-success" ng-click="goEdit();">修改</a>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="t-box clearfix" id="tab2" ng-show="tabIdx==2">
+					<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+						<div class="panel-body">
+	    					<div class="row">
+								<div class="col-xs-4 text-center right-border">
+							        <h4>当前库存</h4>
+							        <hr>
+							        <h1 class="stock_quantity">{{vo.pm_stock}}</h1>
+									<hr>
+									<a ng-click="clearStock();" class="btn btn-default">清空库存</a>
+								</div>
+								<div class="col-xs-7">
+									<h5>购买库存，购买后费用将从您的账户余额中扣除</h5>
+									<hr>
+									<form class="simple_form form-horizontal new_purchase">
+										<div class="form-group hidden purchase_type">
+											<div class="col-md-9 col-lg-6">
+												<input class="hidden form-control" type="hidden" value="GoodPurchase" name="purchase[type]" id="purchase_type">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												<i class="form_required" title="必填">*</i>
+												 数量
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<input class="form-control f14" type="number" ng-model="stock" step="1" value="1" name="" style="height: 34px; line-height: 18px; box-sizing: border-box;">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												<!-- <i class="form_required" title="必填">*</i> -->
+												 备注
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<input class="form-control f14" type="text"  ng-model="note" name="" style="height: 34px; line-height: 18px; box-sizing: border-box;">
+											</div>
+										</div>
+										<hr>
+										<div style="text-align: center;">
+											<a href="" class="btn btn-success" ng-click="updateStock();">保存</a>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default" style="border: 0;">
+    					<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+	      					<i class="icon icon-list"></i> 共{{pager.total}}条记录
+	    				</div>
+	    				<!--无记录时显示-->
+	    				<!--<div class="panel-body" style="border: 1px solid #ddd;">
+							<div class="table-empty text-center">
+								<i class="icon icon-search fa-3x"></i>
+								<h4>查找不到相关记录</h4>
+							</div>
+						</div>-->
+						<table class="table table3 table-bordered table-hover" style="margin-bottom: 0;">
+							<thead>
+								<tr>
+									<th class="text-center">时间</th>
+									<th class="text-center">操作人</th>
+									<th class="text-center">数量</th>
+									<th class="text-center">结余</th>
+									<th class="text-center">备注</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in detailList">
+									<td class="text-center f14">{{x.psd_addtime}}</td>
+									<td class="text-center f14">{{x.psd_userid_nameref}}</td>
+									<td class="text-center f14">{{x.psd_stock}}</td>
+									<td class="text-center red f14">{{x.psd_newstock}}</td>
+									<td class="text-center f14">{{x.psd_note}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

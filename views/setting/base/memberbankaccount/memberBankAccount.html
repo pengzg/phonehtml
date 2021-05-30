@@ -1,0 +1,160 @@
+<div class="setting_panel panel-default">
+    <div class="panel-heading text-left">
+        <div class="setting_nav">
+            <ul>
+                <li><a href="">列表</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="search-filter-box">
+    	<div>
+			<label>申请时间<span>:</span></label>
+            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
+            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+                <label>状态<span>:</span></label>
+			<select ng-model="searchParam.baa_apply_state" >
+					<option ng-repeat="x in statusList"  value="{{x.bd_code}}">{{x.bd_name}}</option>
+				</select>
+            <label>关键字<span>:</span></label>
+            <input type="text" placeholder="关键字" ng-model="searchParam.searchKey">
+        </div>
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearInput();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+        </div>
+    </div>
+    
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                        <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <!-- <th>头像</th> -->
+                                <th>用户名</th>
+                               
+                                <th>手机号</th>
+                                <th>持卡人</th>
+                                <th>开户行信息</th>
+                                <th>卡号</th>
+                                <th>操作</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in dataList">
+                                <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+                                <!-- <td class="text-center f14" ><img width="20" ng-src="{{x.mb_img}}" ></td> -->
+                                <td class="text-center f14">{{x.mba_member_id_nameref}}</td>
+                                <td class="text-center f14">{{x.mba_member_id_mobile}}</td>
+                                <td class="text-center f14">{{x.mba_bank_account_name}}</td>
+                                <td class="text-center f14">{{x.mba_bank_name}}</td>
+                                <td class="text-center f14">{{x.mba_bank_account_code}}</td>
+                              
+                                <td class="text-center f14">
+                                     <a  class="common_edit" title="修改" ng-click="showDialog(x)"></a>
+                                     
+                                 </td>
+                              
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+                    <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 遮挡层 -->
+<div class="dialog" ng-show="dialogShow">
+	<div class="dialog-zdc"></div>
+		<!-- 弹出添加计量参数框 -->
+		<div class="dg-xg-zh" style="width: 620px; margin-left: -310px; top: 40%; margin-top: -142px;" ng-show="dialogShow">
+			<div class="dg-xg-js" style="width: 620px">
+				{{dialogTitle}}
+				<div class="dg-cancle" ng-click="closeDialog()"></div>
+			</div>
+			<div class="dg-content" style="margin: 12px auto; overflow: visible;">
+				<div id="formJiLu" class="formJiLu" style="border: none">
+					<form>
+						<div>
+							<input type="hidden" ng-model="vo.bp_id">
+							<div class="contentGroup clearfix">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14">持卡人</span> <i class="f14">*</i>
+								</div>
+								<div class="floatLeft p10left f14">
+									<input style="width: 210px;" type="text" 
+									 ng-model="vo.mba_bank_account_name" >
+								</div>
+							</div>
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14">开户行</span> <i class="f14">*</i>
+								</div>
+
+								<div class="floatLeft p10left">
+									
+										<textarea style="width: 400px;height: 84px;" 
+										ng-model="vo.mba_bank_name">{{vo.mba_bank_name}}</textarea>
+								</div>
+							</div>
+							
+							<div class="contentGroup clearfix">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14">卡号</span> <i class="f14">*</i>
+								</div>
+								<div class="floatLeft p10left f14">
+									<input style="width: 210px;" type="text" 
+									 ng-model="vo.mba_bank_account_code" >
+								</div>
+							
+
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="doUpdate();">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+		</div>
+
+</div>
+
+
+<style>
+.tab_seleced{
+	border:1px solid #ddd;
+	border-bottom:none;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+	background-color:#5bc0de;
+	color:#fff;
+}
+</style>
+
+
+
+
+
+
+

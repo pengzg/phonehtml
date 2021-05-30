@@ -1,0 +1,82 @@
+.gift-send-main {
+	$green: #14ab12;
+	$radius: 0.4rem;
+	$gray: #555;
+	$lightGray: #999;
+	$shadow: #bbb;
+	$white: white;
+	$spacing: 1px;
+	.gift-top {
+		.gift-pic {
+			text-align: center;
+			margin: 1rem 0 0.5rem 0;
+			img {
+				width: 33.33%;
+				border-radius: $radius;
+				box-shadow: 1px 1px 1px 1px $shadow;
+			}
+		}
+		.pic-tip {
+			text-align: center;
+			color: $lightGray;
+		}
+	}
+	.gift-center {
+		.choose-friend {
+			display: flex;
+			background: $white;
+			padding: 1rem 2rem;
+			.choose-left {
+				flex: 1;
+				color: $gray;
+				letter-spacing: $spacing;
+				i {
+					position: relative;
+					top: 0.5px;
+					color: $lightGray;
+				}
+				img {
+					position: relative;
+					top: 1.5px;
+					width: 1rem;
+					height: 1rem;
+					border-radius: 0.2rem;
+				}
+			}
+			.choose-right {
+				flex: 1;
+				text-align: right;
+				color: $lightGray;
+			}
+		}
+		.wish {
+			margin-top: 1rem;
+			textarea {
+				resize: none;
+				width: 100%;
+				height: 10rem;
+				padding: 1rem 2rem;
+				color: $gray;
+				letter-spacing: $spacing;
+			}
+		}
+		.add-pic {
+			padding: 1rem;
+			button {
+				color: $lightGray;
+				letter-spacing: $spacing;
+				i {
+					position: relative;
+					top: 0.8px;
+				}
+			}
+		}
+	}
+	.gift-bottom {
+		padding: 1rem;
+		button {
+			width: 100%;
+			letter-spacing: $spacing;
+		}
+	}
+}

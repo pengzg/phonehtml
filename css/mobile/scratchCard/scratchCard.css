@@ -1,0 +1,14 @@
+.scratch-main { background: #d12140; position: relative; height: 100vh; color: #444; }
+.scratch-main .scratch-orange { color: #ffa430; }
+.scratch-main .scratch-banner1 { display: block; width: 100%; height: auto; overflow: hidden; }
+.scratch-main .scratch-ggl { position: relative; width: 85.6%; height: 90px; margin: -5px auto; background: url(../../../img/mobile/scratch/ggl.png) no-repeat center center; background-size: 100% 100%; }
+.scratch-main .scratch-canvas { position: absolute; top: 2px; left: 2.5%; width: 95%; height: 82px; line-height: 82px; text-align: center; z-index: 2; }
+.scratch-main .scratch-info { position: absolute; top: 2px; left: 2.5%; width: 95%; height: 82px; text-align: center; }
+.scratch-main .scratch-info span { display: block; font-size: 18px; }
+.scratch-main #scratch-prompt { line-height: 40px; }
+.scratch-main .scratch-btn { position: relative; width: 50%; height: 35px; line-height: 35px; background: #df412b; color: #fff; border-radius: 5px; margin: 0 auto; z-index: 1; }
+.scratch-main .scratch-guize { display: block; width: 85.6vw; height: 36.9vw; margin: 5% auto 10% auto; padding: 12vw 5vw 2vw; border-radius: 5px; background: url(../../../img/mobile/scratch/guize.png) no-repeat; background-size: 100%; }
+.scratch-main .scratch-num { width: 100%; height: 30px; line-height: 30px; text-align: center; font-size: 14px; margin-top: 5%; }
+.scratch-main #scratch-ok, .scratch-main #scratch-no { display: none; }
+.scratch-main .scratch-pop { position: fixed; left: 0; top: 0; z-index: 3; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: none; }
+.scratch-main .scratch-pop img { width: 100%; height: auto; overflow: hidden; margin: 15% auto; }

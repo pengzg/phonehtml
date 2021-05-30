@@ -1,0 +1,103 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+        <!-- <div>
+			<label>时间<span>:</span></label>
+            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
+            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <label>关键字<span>:</span></label>
+            <input type="text" placeholder="关键字" ng-model="searchParam.searchKey">
+        </div>
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="searchFun();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();searchFun();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+        </div> -->
+        
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i>刷新</a>
+        </div>
+    </div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<!-- <th style="min-width:100px;">id</th> -->
+								<th style="min-width:80px;">设备名称<br>设备编号</th>
+								
+								<th>系统版本</th>
+								<th>添加时间</th>
+								<th>查看</th>
+							
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in dataList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								
+								<!-- <td class="text-center f14">
+									{{x.otr_id}}
+								</td> -->
+								<td class="text-center f14">{{x.bae_device_name}}<br>{{x.bae_device_code}}</td>	
+								<td class="text-center f14">{{x.bae_sys_version}}</td>
+								<td class="text-center f14">{{x.bae_addtime}}</td>
+								<td class="text-center f14">
+                                    <a class="common_btns common_detail"  ng-click="showContent(x)" title="查看"></a>
+                                </td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 添加和修改弹窗 -->
+<div class="dialog" ng-show="dialogShow" style="z-index:90">
+	<div class="dialog-zdc"style="z-index:100" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:110; width:760px; margin-left: -380px; top: 40%; margin-top: -204px;height:510px;"  ng-show="dialogShow">
+		<div class="dg-xg-js" style="width:760px;">
+			{{vo.bae_device_name}}--{{vo.bae_device_code}}--{{vo.bae_sys_version}}--{{vo.bae_addtime}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+	    
+			<div class="dg-content" style="height:450px; margin-bottom:0px;margin-top:0px;margin-left:0px;overflow-y: scroll;">
+				{{vo.bae_msg}}
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+	</div>
+</div>
+

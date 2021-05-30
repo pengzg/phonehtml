@@ -1,0 +1,30 @@
+<div class="wheel-main" set-to-focus set_scope="showBackPop=true" style="background-image:url({{word_back_img}})" id="wheelPreview">
+	<div class="wheel-top-bar">
+		<div class="wheel-top-bar-bg"></div>
+		<div class="wheel-top-bar-content">
+			<span>Tom</span>刚刚抽中了<span class="red">二等奖</span>，快来试试你的运气吧！
+		</div>
+	</div>
+	<div class="wheel-top">
+		<div class="wheel-top-bg" set-to-focus set_scope="showBackPop=true" style="background-image:url({{word_bar_img}})"></div>
+		<div class="wheel-top-text">你总共还剩<b>10</b>次抽奖机会，今天还剩<b>4</b>次抽奖机会</div>
+	</div>
+	<div class="wheel-content">
+		<div class="wheel-panel" id="wheel-panel">
+			<div class="wheel-one">一等奖</div>
+			<div class="wheel-two">二等奖</div>
+			<div class="wheel-three">三等奖</div>
+			<div class="wheel-four">幸运奖</div>
+			<div class="wheel-five">欢迎再来</div>
+			<div class="wheel-six">谢谢参与</div>
+		</div>
+		<div class="wheel-pointer">
+			<div class="wheel-pointer-text">开始<br>抽奖</div>
+		</div>
+	</div>
+	<div class="wheel-bottom">
+		<div class="wheel-btn-left">活动规则</div>
+		<div class="wheel-btn-right">我的奖品</div>
+	</div>
+</div>
+<div class="game-end" ng-show="isEnd"></div>

@@ -1,0 +1,225 @@
+<div class="contentHtml-new" style="background-color: #F5F6F8;left:0;">
+    <div class="content-add-box">
+        <div class="img-box">
+            <img src="/img/coupon.png">
+
+        </div>
+        <div class="content-add-info">
+            <div class="content-item-box">
+                <div class="content-item-title">优惠码基础信息</div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>优惠码名称
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text" placeholder="最多支持10个字">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>码类型
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio">一卡一码
+                        </div>
+                        <div>
+                            <input type="radio"> 通用码
+                        </div>
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>生成方式
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio">自动生成
+                        </div>
+                        <div>
+                            <input type="radio"> 导入码库
+                        </div>
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>库存
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text"> 张
+                        </div>
+                    </div>
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>面值
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text"> 元
+                        </div>
+                    </div>
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>订单金额
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio">不限制
+                        </div>
+                        <div>
+                            <input type="radio"> 满<input type="text">元可使用
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="content-item-box">
+                <div class="content-item-title">基本规则</div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>每人可用
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio">不限制
+                        </div>
+                        <div>
+                            <input type="radio"> <input type="text">张
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>起止时间
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio">
+                            <span class=" date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+                            ng-click="dateRange.chooseDate($event)" style="width: 36px;line-height: 40px;" > 日期 </span>
+                           <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;height:17px;"
+                               onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                               />
+                           <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="height:17px;border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                               onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                               />
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label>到期提醒
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="pt10">
+                            <input type="checkbox">到期前4天提醒一次
+                        </div>
+                        <div class="tip">
+                            将会在优惠码到期前4天通知用户使用
+                        </div>
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label>分享设置
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="pt10">
+                            <input type="checkbox">允许分享优惠码
+                        </div>
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>适用范围
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio">全店商品
+                        </div>
+                        <div>
+                            <input type="radio"> 指定商品
+                        </div>
+                        <div>
+                            <input type="radio"> 指定商品不可用
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="content-item">
+                    <div>
+                        <label>限制购买
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="pt10">
+                            <input type="checkbox">仅原价购买商品时可用
+                        </div>
+                    </div>
+
+                </div>
+                <div class="content-item" style="height:130px;">
+                    <!-- textarea输入框根据自己的row来控制高度 -->
+                    <div>
+                        <label><i class="colorRed">*</i>使用说明
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <textarea name="" id="" cols="30" rows="5"></textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div style="height:50px;padding-top:10px;">
+                <a class="btn btn-success" style="margin-left:60%;" ng-click="searchFun();">
+                    确定</a>
+            </div>
+        </div>
+    </div>
+</div>

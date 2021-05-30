@@ -1,0 +1,225 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">水仓列表</a></li>
+				
+			</ul>
+		</div>
+	</div>
+		<div class="device-b-toolbar-last"
+		style="padding-left: 15px; padding-top: 20px;padding-bottom:10px;background-color:#eee; position: relative;">
+		<div class="row">
+        	<form class="form-inline filter">
+        	 	
+
+			   
+				<div class="form-group f14" style="margin-left:10px;">
+					<label>状态</label>
+					<select class="form-control" ng-model="searchParam.bb_state">
+						<option value="{{x.id}}" ng-repeat="x in stateList">{{x.name}}</option>
+						
+					</select>
+				</div>
+				<div class="form-group f14" style="margin-left:10px;">
+					<label>维修状态</label>
+					<select class="form-control" ng-model="searchParam.bb_fix_state">
+						<option value="{{x.id}}" ng-repeat="x in fixList">{{x.name}}</option>
+						
+					</select>
+				</div>
+				<div class="form-group f14" style="margin-left:10px;">
+			    	<label style="width: auto;">关键字</label>
+			    	<input class="form-control f14" placeholder="水仓号或者商品信息" type="text" ng-model="searchKey">
+			    </div>
+			    <div class="actions" style="padding-left: 52px;margin-top:10px;">
+					<a class="btn btn-success"  ng-click="doSearch();" >
+					<i class="glyphicon glyphicon-filter"></i> 筛选</a>
+					
+					
+					<a class="btn btn-default" ng-click="searchKey='';searchParam.bb_state='';searchParam.bb_fix_state='';doSearch();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+					<a class="btn btn-success floatRight" style="margin-right:100px;"  ng-click="goStoreList();" >返回</a>
+					<a ng-if="bs_id" class="btn btn-success floatRight" style="margin-right:100px;"  ng-click="addBox();" >添加格子</a>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>水仓编号</th>
+								<th>商品</th>
+								<th>仓规数量</th>
+								<th>剩余数量</th>
+								<th>状态</th>
+								<th>维修状态</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in boxList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.bb_boxcode}}</td>
+								<td class="text-center f14">
+								<span>{{x.bb_productid_nameref}}</span>
+								</td>
+								<td class="text-center f14">{{x.bb_num}}</td>
+								<td class="text-center f14">{{x.bb_left_num}}</td>
+								<td class="text-center f14">
+								<span ng-if="x.bb_state==2">满仓</span>
+								<span ng-if="x.bb_state==1">空仓</span>
+								<span ng-if="x.bb_state==3">取货中</span>
+								<span ng-if="x.bb_state==4">补货中</span>
+								</td>
+								<td class="text-center f14">
+									<span ng-if="x.bb_fix_state==2">维修中</span>
+									<span ng-if="x.bb_fix_state==1">正常</span>									
+								</td>
+								<td class="text-center f14">
+									<a class="common_btns common_edit" ng-click="toEdit(x)" title="修改"></a>
+									<a class="common_btns common_publish" ng-click="toRelation(x)" title="关联商品"></a>
+									<!-- <a class="common_btns common_active" ng-if="x.bb_state==3" ng-click="openBox(x)" title="远程开箱"></a> -->
+									<!-- <a class="common_btns common_active" ng-if="x.bb_state==3" ng-click="openBox(x)" title="远程开箱"></a> -->
+									<a class="common_btns common_detail"  ng-click="goLog(x)" title="查看开仓日志"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 添加和修改弹窗 -->
+
+<div class="dialog" ng-show="dialogShow" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -164px;"  ng-show="dialogShow">
+		<div class="dg-xg-js" style="width:660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+	    
+			<div class="dg-content" style="height: 240px; margin-bottom:0px;margin-top:0px;margin-left:0px;">
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">水仓编码</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							{{vo.bb_boxcode}}
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">状态</span>
+						</div>
+						<div class="zk_controlRadio" style=" width: 140px;">
+								<span ng-if="vo.bb_state==2">满仓</span>
+								<span ng-if="vo.bb_state==1">空仓</span>
+								<span ng-if="vo.bb_state==3">取货中</span>
+								<span ng-if="vo.bb_state==4">补货中</span>
+							<!-- <lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_stats" ng-model="vo.bb_state" value="2" type="radio" >
+								<div class="xt_inputBackimg"></div>满箱
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_stats" ng-model="vo.bb_state" value="1" type="radio" >
+								<div class="xt_inputBackimg" ></div>空箱
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_stats" ng-model="vo.bb_state" value="3" type="radio" >
+								<div class="xt_inputBackimg"></div>取货中
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_stats" ng-model="vo.bb_state" value="4" type="radio" >
+								<div class="xt_inputBackimg"></div>补货中
+							</lable> -->
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 600px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">商品</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 450px;">
+							{{vo.bb_productid_nameref}}
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">仓规数量</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="number" name="bb_num" 
+										ng-model="vo.bb_num" >
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;">
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">剩余数量</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="number" name="bb_left_num" 
+										ng-model="vo.bb_left_num">
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">维修状态</span>
+						</div>
+						<div class="zk_controlRadio" style=" width: 140px;">
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_fix_stats" ng-model="vo.bb_fix_state" value="1" type="radio" ng-checked="vo.bs_stats==1">
+								<div class="xt_inputBackimg"></div>正常
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_fix_stats" ng-model="vo.bb_fix_state" value="2" type="radio" ng-checked="vo.bs_stats==0">
+								<div class="xt_inputBackimg" value="11"></div>维修中
+							</lable>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="addcomplete(vo.bs_id,vo.bs_code);">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+	</div>
+</div>

@@ -1,0 +1,56 @@
+<div class="game-container">
+	<div class="headers">
+		<div class="control-group" style="margin-top: 10px;">
+			<div class="controls" style="margin-left: 0px;">
+				<select class="f14" name="activity"  
+				style="width: 220px; height: 36px; top: 2px; position: relative;
+				 border: 1px solid #d5d5d5;" ng-model="pager.mw_activityid"
+				 ng-options="  x.mm_id  as x.mm_name for x in activityList" value="x.mm_name">
+				</select>
+				<input class="f14" type="text" ng-model="pager.memberName" placeholder="请输入粉丝昵称" style="width: 170px; height: 21px; top: 2px; position: relative;" />
+				<input class="f14" type="text" ng-model="pager.phone" placeholder="请输入手机号码" style="width: 170px; height: 21px; top: 2px; position: relative;" />
+				<input class="f14" type="text" ng-model="pager.mw_prizecode" placeholder="请输入sn码" style="width: 170px; height: 21px; top: 2px; position: relative;" />
+				<button class="btn btn-success" style="width: 80px; height: 36px;" ng-click="searchFun();">查询</button>
+				<button class="btn btn-default black" style="width: 80px; height: 36px; text-shadow: none !important;" 
+				ng-click="reset();">重置</button>
+			</div>
+		</div>
+	</div>
+	<div class="content" style="margin-top: 15px;">
+		<table class="table table3 table-hover table-bordered ">
+            <thead>
+                <tr>
+                	<th>活动名称</th>	                	
+                    <th>头像</th>
+                    <th>粉丝昵称</th>
+                    <th>手机号码</th>
+                    <th>中奖时间</th>
+                    <th>领取状态</th>
+                    <th>领取时间</th>
+                    <th>sn码</th>
+                    <th>奖品名称</th>
+                    <th>核销员</th>
+                </tr>
+            </thead>
+            <tbody class="borBottom">
+                <tr class="js_selectLine" ng-repeat="x in winningList">
+                	<td title="" ng-bind="x.mw_activity_name"></td>
+                    <td class="i-c-blue">
+                    	<img ng-src="{{x.mw_member_mb_img}}" class="headIcon" />
+                    </td>
+                    <td ng-bind="x.mw_member_name"></td>
+                    <td ng-bind="x.mw_member_phone"></td>
+                      <td ng-bind="x.mw_winningtime"></td>
+                    <td ng-bind="x.mw_state_nameref"></td>
+                    <td ng-bind="x.mw_receivetime"></td>
+                    <td ng-bind="x.mw_prizecode"></td>
+                    <td ng-bind="x.mw_productname"></td>
+                     <td ng-bind="x.mw_grant_userid_name"></td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+		<!--分页 -->
+	</div>
+</div>

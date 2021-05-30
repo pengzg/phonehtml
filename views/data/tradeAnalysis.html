@@ -1,0 +1,288 @@
+<div class="contentHtml-new" style="background-color: #fff;left:0;">
+	
+        <div class="content-box">
+            <!-- 头部tab -->
+            <div class="head-div" style="position:relative;">
+                <div ng-show="false">
+                    <ul>
+                        <li class="active">运营视窗</li>
+                        <!-- <li>管理视窗</li> -->
+                    </ul>
+                </div>
+                <div class="select-box" style="margin-right:45%;">
+                    <select>
+                        <option>日</option>
+                        <option>周</option>
+                        <option>月</option>
+                        <option>季度</option>
+                    </select>
+                    
+                    <input type="text" class="Wdate" style="width: 85px; height: 21px; border-top-left-radius: 0; border-bottom-left-radius: 0;" 
+                                id="start_date"  onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'});$('.posRelative').removeClass('open');"
+                                 />
+                </div>
+            </div>
+            <!-- 整体看板 -->
+            <div class="module-box">
+                <div class="module-head">
+                    <div class="left-box">
+                        <span class="title">整体看板</span>
+                        <span class="time">更新时间：2018-08-13 15:32:09</span>
+                    </div>
+                    <div class="shop-box">
+                        <span class="active">全店</span>|<span>网店</span>|<span>所有门店<img src="/img/components/arrow_left.png" class="showShopList" style="transform: rotate(270deg);" /></span>
+                        <div class="shop-list" >
+                                <ul>
+                                    <li>小李门店1</li>
+                                    <li>小张门店1</li>
+                                    <li>小王门店1</li>
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+                <div class="module-content2">
+                    <div>
+                        <img style="transform:rotate(180deg);" src="/img/gd.png">
+                    </div>
+                    <div>
+                        <div class="view-item check-item">
+                            <div>支付金额</div>
+                            <div>0.00</div>
+                            <div>较前一日 <span>0.00%-</span></div>
+                            <div>较上周同期 <span>0.00%-</span></div>
+                            <input type="checkbox" name="check" value="1">
+                        </div>
+                        <div class="view-item">
+                            <div>支付订单数</div>
+                            <div>0.00</div>
+                            <div>较前一日 <span>0.00%-</span></div>
+                            <div>较上周同期 <span>0.00%-</span></div>
+                            <input type="checkbox" name="check" value="2">
+                        </div>
+                        <div class="view-item">
+                            <div>支付客户数</div>
+                            <div>0.00</div>
+                            <div>较前一日 <span>0.00%-</span></div>
+                            <div>较上周同期 <span>0.00%-</span></div>
+                            <input type="checkbox" name="check" value="3">
+                        </div>
+                        <div class="view-item">
+                            <div>客单价</div>
+                            <div>0.00</div>
+                            <div>较前一日 <span>0.00%-</span></div>
+                            <div>较上周同期 <span>0.00%-</span></div>
+                            <input type="checkbox" name="check" value="4">
+                        </div>
+                        <div class="view-item">
+                            <div>成功退款金额</div>
+                            <div>0.00</div>
+                            <div>较前一日 <span>0.00%-</span></div>
+                            <div>较上周同期 <span>0.00%-</span></div>
+                            <input type="checkbox" name="check" value="5" >
+                        </div>
+                    </div>
+                    <div>
+                        <img src="/img/gd.png">
+                    </div>
+    
+                </div>
+                <div class="check-data">
+                    <span></span>
+                    <span>重置</span>
+                    <span>已选5个</span>
+                </div>
+                <div class="bgWhite">
+                    <div id="chart-box-lines" style="width:100%;height:300px;"></div>
+                </div>	
+            </div>
+            <!-- 网站交易转化 -->
+            <div class="module-box">
+                <div class="module-head">
+                    <div class="left-box">
+                        <span class="title">网站交易转化</span>
+                        <span class="time">更新时间：2018-08-13 15:32:09</span>
+                    </div>
+                    <div class="shop-box">
+                        <span class="active">全店</span>|<span>网店</span>|<span>所有门店<img src="/img/components/arrow_left.png" class="showShopList" style="transform: rotate(270deg);" /></span>
+                        <div class="shop-list">
+                            <ul>
+                                <li>小李门店1</li>
+                                <li>小张门店1</li>
+                                <li>小王门店1</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-content4">
+                    <div>				
+                   <div class="fk-box">
+                       <div>
+                       <span> 访客数</span> 100%<br><span> 0</span>
+                       </div>
+                   </div>
+                   <div class="order-box">
+                        <div>
+                            <span> 下单客户数</span> 100%<br><span> 0</span>
+                        </div>
+                        <div>
+                            <span> 下单金额</span> 100%<br><span> 0</span>
+                        </div>
+                   </div>
+                   <div class="pay-box">
+                        <div>
+                            <span> 支付客户数</span> 100%<br><span> 0</span>
+                        </div>
+                        <div>
+                            <span> 支付金额</span> 100%<br><span> 0</span>
+                        </div>
+                        <div>
+                            <span> 客单价</span> 100%<br><span> 0</span>
+                        </div>
+                        
+                   </div>
+                   <div class="img-box">
+                       <img src="/img/zh.png">
+                   </div>
+                   <div class="zh1-box">下单转化率<br>100%</div>
+                   <div class="zh2-box">下单支付转化率<br>100%</div>
+                   <div class="zh3-box">支付转化率<br>100%</div>
+                   <div></div>
+                   <div></div>
+                   </div>
+                </div>	
+            </div>
+            <div class="module-box">
+                <div class="module-head">
+                    <div class="left-box">
+                        <span class="title">退款看板</span>
+                        <span class="time">更新时间：2018-08-13 15:32:09</span>
+                    </div>
+                    <div class="shop-box">
+                        <span class="active">全店</span>|<span>网店</span>|<span>所有门店<img src="/img/components/arrow_left.png" class="showShopList" style="transform: rotate(270deg);" /></span>
+                        <div class="shop-list">
+                            <ul>
+                                <li>小李门店1</li>
+                                <li>小张门店1</li>
+                                <li>小王门店1</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="module-content2">
+                    <div>
+                        <img style="transform:rotate(180deg);" src="/img/gd.png">
+                    </div>
+                    <div>
+                        <div class="view-item check-item">
+                            <div>成功退款金额(元)</div>
+                            <div>0.00</div>
+                            <div>较前一日 <span>0.00%-</span></div>
+                            <div>较上周同期 <span>0.00%-</span></div>
+                            <input type="checkbox" name="check" value="1">
+                        </div>
+                        <div class="view-item">
+                            <div>退款笔数</div>
+                            <div>0.00</div>
+                            <div>较前一日 <span>0.00%-</span></div>
+                            <div>较上周同期 <span>0.00%-</span></div>
+                            <input type="checkbox" name="check" value="2">
+                        </div>
+                        <div class="view-item">
+                            <div>退款率</div>
+                            <div>0.00</div>
+                            <div>较前一日 <span>0.00%-</span></div>
+                            <div>较上周同期 <span>0.00%-</span></div>
+                            <input type="checkbox" name="check" value="3">
+                        </div>
+                        <div class="view-item" style="width:152px;">
+                            <div>申请退款平均时长(小时)</div>
+                            <div>0.00</div>
+                            <div>较前一日 <span>0.00%-</span></div>
+                            <div>较上周同期 <span>0.00%-</span></div>
+                            <input type="checkbox" name="check" value="4">
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <img src="/img/gd.png">
+                    </div>
+    
+                </div>
+                <div class="check-data">
+                    <span></span>
+                    <span>重置</span>
+                    <span>已选5个</span>
+                </div>
+                <div class="bgWhite">
+                    <div id="chart-box-lines2" style="width:100%;height:300px;"></div>
+                </div>
+                <div ng-if="false">
+                    <div class="tab-box">
+                        <ul>
+                            <li  ng-class="{'active':tabSelect=='1'}" ng-click="tabSelect=1">退款商品</li>
+                            <li ng-class="{'active':tabSelect!='1'}" ng-click="tabSelect=2">退款原因</li>
+                        </ul>
+                    </div>
+                    <div style="width:100%;height:auto;background:#fff;margin-top:10px;">
+                        <table style="width:100%;" ng-if="tabSelect==1">
+                            <thead style="font-weight: bold;background:#ddd;">
+                                <th>排名</th>
+                                <th>商品</th>
+                                <th>成功退款金额(元)</th>
+                                <th>支付金额(元)</th>
+                                <th>成功退款笔数</th>
+                                <th>退款率</th>
+                                <th>退款原因/占比</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in [1,2,3,4]">
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+
+                        <table  style="width:100%;" ng-if="tabSelect!=1">
+                            <thead style="font-weight: bold;background:#ddd;">
+                                <th>排名</th>
+                                <th>原因</th>
+                                <th>成功退款金额（元）/占比</th>
+                                <th>成功退款笔数/占比</th>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="x in [1,2,3,4]">
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    
+                                </tr>
+                            </tbody>
+                         
+                        </table>
+                        <div ng-if="tabSelect ==1">
+                            <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+                        </div>
+                        <div ng-if="tabSelect != 1">
+                            <tm-pagination conf="pager2" search-param ="searchParam2"></tm-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    $(function(){
+        $(".showShopList").click(function(){
+            $(".shop-list").hide();
+            $(this).parents(".shop-box").find(".shop-list").show();
+        });
+    });
+    
+    </script>

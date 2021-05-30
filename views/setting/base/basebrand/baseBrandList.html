@@ -1,0 +1,174 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">品牌列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+		<div>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="品牌名称" ng-model="searchParam.searchKey">
+		</div>
+
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;" ng-click="doSearch()"><i class="glyphicon glyphicon-filter"></i>
+				筛选</a>
+			<a class="btn btn-default" ng-click="searchParam.searchKey='';doSearch();" style="text-shadow: none !important; color: #333 !important;"><i
+				 class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success add-btn" style="float:right;margin-right:50px;" ng-click="toEdit();"><i class="icon icon-plus"></i>新增</a>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>品牌名称</th>
+								<th>品牌简介</th>
+								<th>状态</th>
+								<th>是否前台显示</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in baseBrandList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.bd_title}}</td>
+								<td class="text-center f14">{{x.bd_intro}}</td>
+								<td class="text-center f14">{{x.stats_nameref}}</td>
+								<td class="text-center f14">{{x.bd_is_show_nameref}}</td>
+							
+								<td class="text-center f14">
+									<a class="common_btns common_edit" ng-click="toEdit(x.bd_id)" title="修改"></a>
+									<a class="common_btns common_delete" ng-click="toDelete(x.bd_id)" title="删除"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 弹窗 -->
+<div class="dialog" ng-if="dialogShow">
+	<div class="dialog-zdc"></div>	
+		<div class="dg-xg-zh" style="width: 620px; margin-left: -310px; top: 50%; margin-top: -212px;" ng-show="dialogShow">
+			<div class="dg-xg-js" style="width: 620px">
+				{{dialogTitle}}
+				<div class="dg-cancle" ng-click="closeDialog()"></div>
+			</div>
+			<div class="dg-content" style="margin: 12px auto; overflow: visible;">
+				<div id="formJiLu" class="formJiLu" style="border: none">
+					<form>
+						<div>
+							<input type="hidden" ng-model="vo.bd_id">
+
+							<div class="contentGroup clearfix">
+								<div class="zk_controlLabel">
+									<span class="f14">品牌名称</span> <i>*</i>
+								</div>
+
+								<div class="floatLeft p10left">
+									<input style="width: 226px;" type="text" name="bd_title"
+										ng-model="vo.bd_title" maxlength="20">
+								</div>
+							</div>
+
+							<div class="contentGroup clearfix"  ng-show="false">
+								<div class="contentGroup clearfix" style="width: 300px;">
+									<div class="zk_controlLabel">
+										<span class="f14">收款对应品牌</span>
+									</div>
+									<div class="zk_controlRadio" style="width: 200px;">
+										<lable class="xt_inputRadio m10right"
+											style="margin-bottom:8px"> <input class="xt_radio"
+											name="bs_type" ng-model="vo.bd_gl_brand" value="2" type="radio"
+											ng-checked="vo.bd_gl_brand==2" ng-click="delete_input()">
+										<div class="xt_inputBackimg"></div>
+										本品牌(默认	)</lable>
+										<lable class="xt_inputRadio m10right"
+											style="margin-bottom:8px"> <input class="xt_radio"
+											name="bs_type" ng-model="vo.bd_gl_brand" value="1" type="radio"
+											ng-checked="vo.bd_gl_brand==1">
+										<div class="xt_inputBackimg" value="11"></div>
+										综合品牌 </lable>
+									</div>
+								</div>
+							</div>
+
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+
+								<div class="zk_controlLabel">
+									<span class="f14">品牌简介</span> <i></i>
+								</div>
+								<div class="floatLeft p10left">
+									<input style="width: 226px;" type="text" name="bd_intro"
+										ng-model="vo.bd_intro" maxlength="20">
+								</div>
+							</div>
+							
+							<div class="contentGroup clearfix"  ng-show="false"> 
+								<div class="zk_controlGroup" style="width: 400px; height:auto">
+									<div class="zk_controlLabel">
+										<span class="f14">综合品牌</span>
+									</div>
+									<div class="zk_controlInput" style="width: 220px; height:35px; padding-left: 22px; overflow:hidden;">
+										<zk-control-group style=" height:auto" ng-model="vo.bd_is_main" htmlid="bd_is_main"
+											data-option='[{"N":"否"},{"Y":"是"}]'></zk-control-group>
+									</div>
+								</div>
+							</div>
+
+							<div class="contentGroup clearfix">
+								<div class="zk_controlGroup" style="width: 400px; height:auto">
+									<div class="zk_controlLabel">
+										<span class="f14">状态</span>
+									</div>
+									<div class="zk_controlInput" style="width: 220px; height:35px; overflow:hidden">
+										<zk-control-group ng-model="vo.status" htmlid="status"
+											data-option='[{"0":"禁用"},{"1":"启用"}]' ></zk-control-group>
+									</div>
+								</div>
+							</div>
+
+							<div class="contentGroup clearfix">
+								<div class="zk_controlGroup" style="width: 400px; height:auto">
+									<div class="zk_controlLabel">
+										<span class="f14">是否前台显示</span>
+									</div>
+									<div class="zk_controlInput" style="width: 220px; height:35px; padding-left: 22px; overflow:hidden">
+										<zk-control-group ng-model="vo.bd_is_show" htmlid="bd_is_show"
+											data-option='[{"0":"否"},{"1":"是"}]'></zk-control-group>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1"
+						ng-click="createBrand();">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+		</div>
+</div>

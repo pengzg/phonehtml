@@ -1,0 +1,56 @@
+<div class="dialog" ng-show="dialogShow" style="z-index:88">
+<div class="dialog-zdc" ></div>
+<!-- 弹出添加子类 -->
+<div class="dg-xg-zh" style="z-index:999999;width:637px;"  ng-show="dialogShow">
+	<div class="dg-xg-js" style="width:637px;">
+		{{dialogTitle}}
+		<div class="dg-cancle" ng-click="closeDialog(0)"></div>
+	</div>
+    <ng-form name="myform">
+	<div class="dg-content" style="margin-bottom:0px;margin-top:0px;">
+		<div class="zk_baseInfoBox mtop16" >
+			<div class="zk_controlGroup" style=" width: 600px;" >
+				<div class="zk_controlLabel">
+					<span>客户类别</span>
+				</div>
+				<div class="zk_controlInput" style=" width: 344px;">
+					{{customer.cd_categoryid_nameref}}
+				</div>
+			</div>				
+			<div class="zk_controlGroup" style=" width: 300px;" >
+				<div class="zk_controlLabel">
+					<span>客户名称</span>
+				</div>
+				<div class="zk_controlInput" style=" width: 150px;">
+					<input type="text" ng-maxlength="20" name="cd_name" ng-model="customer.cd_name" style=" width: 150px;" required>
+					<span class="colorRed" ng-if="myform.cd_name.$invalid" >客户名称过长</span>
+				</div>
+			</div>
+			<div class="zk_controlGroup" style=" width: 300px;">
+				<div class="zk_controlLabel">
+					<span>客户编号</span>
+				</div>
+				<div class="zk_controlInput" style=" width: 150px;">
+					<input type="text" ng-maxlength="10" name="cd_code" ng-model="goodsDetail.gp_wholesale_relation_price" ng-focus="checkFun('gp_wholesale_relation_price','focus');" ng-blur="checkFun('gp_wholesale_relation_price','blur');" style=" width: 150px;">
+					<span ng-if="myform.gp_wholesale_relation_price_flag" >输入0-9999999.99</span><span class="colorRed" ng-if="myform.gp_wholesale_relation_price_flag==false&&myform.gp_wholesale_relation_price.$invalid" >最大长度为10位</span>
+				</div>
+			</div>
+			<div class="zk_controlGroup" style=" width: 300px;">
+				<div class="zk_controlLabel">
+					<span>批发箱规数</span>
+				</div>
+				
+				<div class="zk_controlInput" style=" width: 150px;">
+					<input type="text" ng-maxlength="5" ng-pattern="/^\d/"  name="gp_carton_num" class="js_inputNum" ng-model="goodsDetail.gp_carton_num" ng-focus="checkFun('gp_carton_num','focus');" ng-blur="checkFun('gp_carton_num','blur');" style=" width: 150px;">
+					<span ng-if="myform.gp_carton_num_flag" >输入 0-99999</span><span class="colorRed" ng-if="myform.gp_carton_num_flag==false&&myform.gp_carton_num.$invalid" >最大长度为5,不能为负</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	</ng-form>
+		<div class="dg-submint" style="margin-left:410px;margin-bottom:20px;">
+			<div class="btnStyle Btncolor1 BtnHover1" ng-click="save();">确定</div>
+			<div class="btnStyle Btncolor2 BtnHover2" ng-click="cancleBtnClick(0)">取消</div>
+		</div>
+	</div>
+</div>

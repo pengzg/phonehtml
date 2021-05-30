@@ -1,0 +1,206 @@
+<div class="game-container">
+    <div class="tabUl-4 clearfix" ng-init="checkIdx=0">
+        <ul>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==0]" ng-click="checkIdx=0">
+                <a>网页核销</a>
+            </li>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==1]" ng-click="checkIdx=1">
+                <a>线下密码核销</a>
+            </li>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==2]" ng-click="checkIdx=2">
+                <a>核销记录</a>
+            </li>
+        </ul>
+    </div>
+    <div class="search_box" style="text-align: center;margin-top: 50px;" ng-show="checkIdx==0">
+        <form class="form-horizontal">
+            <div class="control-group">
+                <input type="text" style="position: relative;top: 1px;
+				padding-top: 6px;width: 550px; height: 21px;" class="span5" placeholder="请输入SN码" ng-model="searchCode" />
+                <button class="btn btn-success" style="width: 80px; height: 36px;" ng-click="searchByCode();">搜索</button>
+            </div>
+        </form>
+        <div class="verify_step">
+            <img src="../../../img/verify_step.png" />
+            <div class="step_text">
+                <p class="step_t">SN码</p>
+                <p>提示粉丝打开微信“我” - “卡包”中查看并提供SN码给核销员</p>
+            </div>
+            <div class="step_text" style="left: 267px;">
+                <p class="step_t">校验</p>
+                <p>检查中奖信息是否对应及有效</p>
+            </div>
+            <div class="step_text" style="left: 533px;">
+                <p class="step_t">核销</p>
+                <p>校验无误后向粉丝进行减免或赠送礼品，并核销卡券</p>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper" id="game_wrapper" style="padding: 0; margin: 0;" ng-show="checkIdx==1">
+        <div class="editContent" style="display: flex;">
+            <div class="previewPhone card-mobile" style="flex: none;">
+                <div class="wxTitle">
+                    <div id="actName" class="layerId-1 defBgColor">卡券</div>
+                </div>
+                <div id="gameContent">
+                    <div class="start_page home" id="main_page_active" style="background-color: #5cb85c;">
+                        <img src="img/card/hexiao.png" style="margin-top: 20px;">
+                    </div>
+                </div>
+            </div>
+            <div class="editDetail" ng-init="checkedIdx1=0" style="flex:1;">
+                <div class="tab-content config-tab-content" style="height: 614px;width: 80%;">
+                    <div class="config_view" id="panel_1">
+                        <form action="#" class="form-horizontal-2" id="form_activity_config">
+                            <div class="control-group" ng-class="{checkBorder:titleCheck}" ng-mouseleave="titleCheck=false;">
+                                <label class="control-label" for="title">
+                                    核销密码：
+                                </label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="请输入6位数字核销密码" />
+                                </div>
+                            </div>
+                            <div class="control-group" ng-class="{checkBorder:titleCheck}" ng-mouseleave="titleCheck=false;">
+                                <label class="control-label" for="title">
+                                    再次输入:
+                                </label>
+                                <div class="controls">
+                                    <input type="text" class="span4" placeholder="请再次输入6位数字核销密码" />
+                                </div>
+                            </div>
+                            <div class="control-group" ng-class="{checkBorder:titleCheck}" ng-mouseleave="titleCheck=false;">
+                                <div class="btn btn-success" style="width: 70px;margin-left: 125px;" ng-click="save();">保存</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="game-container" ng-show="checkIdx==2">
+        <div class="headers">
+            <div class="control-group" style="margin-top: 10px;">
+                <div class="controls" style="margin-left: 0px;">
+                    <input class="f14" type="text" placeholder="请输入优惠码或微信昵称 " style="width: 170px; height: 21px; top: 2px; position: relative;" />
+                    <button class="btn btn-success" style="width: 80px; height: 36px;" ng-click="searchFun();">查询</button>
+                    <button class="btn btn-default black" style="width: 80px; height: 36px; text-shadow: none !important;" ng-click="reset();">重置</button>
+                </div>
+            </div>
+        </div>
+        <div class="content" style="margin-top: 15px;">
+            <table class="table table3 table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>核销时间</th>
+                        <th>粉丝微信</th>
+                        <th>优惠码</th>
+                        <th>面值</th>
+                        <th>卡券名称</th>
+                    </tr>
+                </thead>
+                <tbody class="borBottom">
+                    <tr class="js_selectLine" ng-repeat="x in [1,2,3,4]">
+                        <td>2018-01-09 14:45</td>
+                        <td>小太阳</td>
+                        <td>01010011100</td>
+                        <td>10000.00</td>
+                        <td>代金券</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- 分页 -->
+            <tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+            <!--分页 -->
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 400px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+					中奖明细
+				</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group clearfix" style="margin: 10px 0;">
+                    <label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+                        活动名称:
+                    </label>
+                    <div class="col-md-9 col-lg-7">
+                        <span ng-bind="winningData.mw_activity_name"></span>
+                    </div>
+                </div>
+                <div class="form-group clearfix" style="margin: 10px 0;">
+                    <label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+                        领取状态:
+                    </label>
+                    <div class="col-md-9 col-lg-7">
+                        <span ng-bind="winningData.mw_state_nameref"></span>
+                    </div>
+                </div>
+                <div class="form-group clearfix" style="margin: 10px 0;">
+                    <label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+                        中奖人：
+                    </label>
+                    <div class="col-md-9 col-lg-7">
+                        <span ng-bind="winningData.mw_member_name"></span>
+                    </div>
+                </div>
+                <div class="form-group clearfix" style="margin: 10px 0;">
+                    <label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+                        中奖头像：
+                    </label>
+                    <div class="col-md-9 col-lg-7">
+                        <img ng-src="{{winningData.mw_member_mb_img}}" class="headIcon" />
+                    </div>
+                </div>
+                <div class="form-group clearfix" style="margin: 10px 0;">
+                    <label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+                        中奖时间：
+                    </label>
+                    <div class="col-md-9 col-lg-7">
+                        <span ng-bind="winningData.mw_winningtime"></span>
+                    </div>
+                </div>
+                <div class="form-group clearfix" style="margin: 10px 0;">
+                    <label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+                        中奖人：
+                    </label>
+                    <div class="col-md-9 col-lg-7">
+                        <span ng-bind="winningData.mw_member_name"></span>
+                    </div>
+                </div>
+                <div class="form-group clearfix" style="margin: 10px 0;">
+                    <label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+                        sn码：
+                    </label>
+                    <div class="col-md-9 col-lg-7">
+                        <span ng-bind="winningData.mw_prizecode"></span>
+                    </div>
+                </div>
+                <div class="form-group clearfix" style="margin: 10px 0;">
+                    <label class="col-md-3 col-lg-2 control-label f14" style="text-align: right;">
+                        奖品名称：
+                    </label>
+                    <div class="col-md-9 col-lg-7">
+                        <span ng-bind="winningData.mw_productname"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                </button>
+                <button type="button" class="btn btn-primary" ng-if="winningData.mw_state == 1" ng-click="checkWinning(winningData.mw_id);">
+                    核销
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+<!-- /.modal -->

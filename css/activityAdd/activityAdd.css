@@ -1,0 +1,74 @@
+.wrap { width: auto; position: relative; margin: 0 auto;}
+.searchCont { margin-left: 0px;}
+.searchBar { padding: 0px 28px; box-sizing: border-box; -webkit-box-sizing: border-box; color: #63676a; line-height: 45px; margin-top: 6px;}
+.searchBar label { float: left; line-height: 44px; font-size: 14px; margin: 5px 10px 0 0;}
+.searchBar .searchItem_list { margin: 5px 0 0 57px;}
+.searchBar .searchItem { float: left; width: 100px; height: 35px; background-color: #fff; text-align: center; box-sizing: border-box; -webkit-box-sizing: border-box; line-height: 35px; cursor: pointer; margin-right: 6px; margin-top: 6px; position: relative; color: #666; font-size: 14px;}
+.searchBar .searchItem .tick { position: absolute; width: 16px; height: 16px; background-image: url("../../img/icon-1.png"); background-repeat: no-repeat; background-position: center; right: 0; bottom: 0; display: none;}    
+.searchBar .searchItem.selected { border: 1px solid #323232; line-height: 33px;}
+.searchBar .searchItem.selected .tick { display: block;}
+.newgameCont { background: #f5f6f8; padding: 0px 0px 0px;  margin: 0 auto 30px; text-align: center;}
+.newgameCont .gamelist { margin: 20px 0 0 28px;}
+.newgameCont .gamelist li { margin: 0 35px 30px 0; float: left; width: 200px; background-color: #fff; border-bottom: 1px solid #c8c8c8; border-left: 1px solid #f0f0f0; border-right: 1px solid #f0f0f0; height: 430px; min-height: 405px; position: relative; overflow: hidden;}
+.newgameCont .gamelist li .gamecover { display: block; width: 100%; height: 320px;}
+.newgameCont .gamelist li .desc { margin-top: 8px; height: 34px; color: #6e6e6e; font-size: 13px; padding: 0 10px; line-height: 18px; overflow: hidden;}
+.newgameCont .gamelist li .setNow { display: block; float: none; margin: 13px auto 0;}
+.newgameCont .gamelist li .qrcode { position: absolute; top: 86px; width: 100%; height: 176px; text-align: center; z-index: 19; overflow: hidden; background: #fff; left: 200px; transition: left .3s; -moz-transition: left .3s; -webkit-transition: left .3s; -o-transition: left .3s;}
+.newgameCont .gamelist li .qrcode .code { width: 150px; height: 150px; position: absolute; left: 50%; margin-left: -75px; margin-top: 3px;text-align: center;}
+.newgameCont .gamelist li .qrcode .code canvas{ position: absolute; top:5px;left: 5px;}
+.newgameCont .gamelist li .qrcode p { position: absolute; bottom: 7px; z-index: 1000; left: 50%; margin-left: -32px; font-size: 16px;}
+.newgameCont .gamelist li .qrcodeMask { background: rgba(0,0,0,0.4);  position: absolute; width: 100%; height: 320px; left: 0; top: 0; z-index: 15; display: none;}
+.newgameCont .gamelist li:hover .qrcode { left: 0;}
+.newgameCont .gamelist li:hover .qrcodeMask { display: block;}
+
+.info { font-size: 14px; height: 3em; margin: 0 0 10px; overflow: hidden;}
+html.turbolinks-progress-bar::before { content: ''; position: fixed; top: 0; left: 0; z-index: 2000; background-color: #0076ff; height: 3px; opacity: 0.99; width: 0%; transition: width 300ms ease-out, opacity 150ms ease-in; transform: translate3d(0,0,0);}
+.iphone-frame { margin: 0px auto; display: block; width: 400px; height: 630px; background: url(../../img/iphone_head.png) no-repeat center 20px; background-color: #fff; border: solid #eee 2px; border-radius: 30px; padding: 70px 10px 20px;}
+.iphone-frame iframe#previewer { margin: 0px auto; display: block; width: 375px; height: 470px; border: solid #eee 1px;}
+
+.dialog {overflow: hidden; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 10002; -webkit-overflow-scrolling: touch; outline: 0;}
+.dialog-bg{position:fixed;top:0;left:0;right:0;bottom:0;background-color:#000;opacity: 0.5; filter:alpha(opacity=50); z-index: 10003;}
+.dialog-content {position:fixed;top:50%;left:50%; border: none; background-color: transparent; -webkit-box-shadow: none; box-shadow: none; z-index: 10004;}
+.dialog-cancle { opacity: 1; font-size: 40px; font-weight: bold; line-height: 1; text-shadow: 0 1px 0 #fff; margin-bottom: 5px; color: #fff; position: relative; padding: 0; cursor: pointer; background: transparent; border: 0; -webkit-appearance: none; float: right;}
+.iphone-frame .iphone-home-btn { margin: 0px auto; display: block; margin-top: 10px; width: 60px; height: 60px; border-radius: 50%; background-color: #eee;}
+#activity_demo .modal-dialog .modal-content img { width: 120px; margin-top: 10px; vertical-align: middle;}
+
+.well { min-height: 20px; padding: 19px; margin-bottom: 20px; background-color: #fff; border: 1px solid #ededed; border-radius: 4px; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.05); box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);}
+.progress-indicator { margin: 0; padding: 0; font-size: 100%; text-transform: uppercase; margin-bottom: 1em; display: flex; box-sizing: border-box;}
+.progress-indicator>li { list-style: none; text-align: center; width: auto; padding: 0; margin: 0; position: relative; text-overflow: ellipsis; font-size: 14px; color: #bbb; display: block; -ms-flex: 1; -webkit-flex: 1; -moz-flex: 1; flex: 1; box-sizing: border-box;}
+.progress-indicator>li:hover{color:#6e6e6e}
+.progress-indicator>li.completed { color: #65d074;}
+.progress-indicator>li .bubble { border-radius: 1000px; width: 20px; height: 20px; background-color: #bbb; display: block; margin: 0 auto 0.5em auto; border-bottom: 1px solid #888888;}
+.progress-indicator>li.completed .bubble { background-color: #65d074; color: #65d074; border-color: #247830;}
+.progress-indicator>li .bubble:before, .progress-indicator>li .bubble:after { display: block; position: absolute; top: 9px; width: 100%; height: 3px; content: ''; background-color: #bbb;}
+.progress-indicator>li.completed .bubble:before, .progress-indicator>li.completed .bubble:after { background-color: #65d074; border-color: #247830;}
+.progress-indicator>li .bubble:before { left: 0;}
+.progress-indicator>li .bubble:after { right: 0;}
+
+.alert p, .alert ul, .alert div, .alert h1, .alert h2, .alert h3, .alert h4, .alert h5, .alert h6 { margin-bottom: 10px;}
+.alert-danger li { color:#a94442; list-style-type: disc;}
+.alert-danger p { color:#a94442;}
+
+.form-group { margin-bottom: 15px; box-sizing: border-box;}
+.form-group:before, .form-group:after { content: " "; display: table;}
+.form-control-static { padding-top: 7px; padding-bottom: 7px; margin-bottom: 0; min-height: 34px;}
+.control-label { text-align: right; margin-bottom: 0; padding-top: 7px;}
+.form-control { display: block; width: 100%; height: 34px; padding: 6px 12px !important; font-size: 14px !important; line-height: 1.42857143; color: #555555; background-color: #fff; background-image: none; border: 1px solid #ccc; border-radius: 4px; -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075); box-shadow: inset 0 1px 1px rgba(0,0,0,0.075); -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; box-sizing: border-box;}
+
+.radio{width: 100%; min-height: 27px; margin-top: 0; margin-bottom: 0; padding-top: 7px; position: relative; display: block;}
+
+a.red {display: inline-block; color: #da120e; text-decoration: none;}
+a.more1 { display: block; color: #da120e; text-decoration: none;}
+a.more2 { display: none; color: #da120e; text-decoration: none;}
+.off a.more1 { display: none; color: #da120e; text-decoration: none;}
+.off a.more2 { display: block; color: #da120e; text-decoration: none;}
+a.more1:hover, a.more1:active, a.more1:focus, a.more2:hover, a.more2:active, a.more2:focus, { color: #920c09; text-decoration: none;}
+
+.fieldset { padding: 20px 0 10px 0; margin: 0; border: 0; min-width: 0;}
+.fieldset:nth-child(even) { background: #eeeeee;}
+.fieldset:nth-child(odd) { background: #fff;}
+.text-muted { color: #777777;}
+.activity-thumbnail-middle { width: 320px; max-width: 320px; max-height: 120px;}
+.alert-warning li {color: #8a6d3b; list-style-type: disc;}
+.label { display: inline; padding: .2em .6em .3em; font-size: 75%; font-weight: bold; line-height: 1; color: #fff; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: .25em;}
+.img-thumbnail { padding: 4px; line-height: 1.42857143; background-color: #FBFBFB; border: 1px solid #ddd; border-radius: 4px; -webkit-transition: all 0.2s ease-in-out; -o-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out; display: inline-block; max-width: 100%; height: auto;}

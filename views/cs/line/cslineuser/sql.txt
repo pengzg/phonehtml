@@ -1,0 +1,51 @@
+
+INSERT INTO sys_menu (sm_id,sm_name,sm_url,sm_pid,sm_typeid,sm_seq,sm_dr,sm_status,sm_version,SM_LEVEL) 
+VALUES ('csLineUser', '_管理','.csLineUserList', 'line', '1', 0,1,1,0,2);
+
+//   设置
+    .state("index.csLineUserList",{
+        url:"/cs/line/csLineUserList",
+        templateUrl:"views/cs/line/cslineuser/csLineUserList.html",
+        controller:"ctr_csLineUserList",
+        resolve:{
+            deps:["$ocLazyLoad",function($ocLazyLoad){
+                return $ocLazyLoad.load(
+                		{files:[
+                		        "css/order/orderForm.css",
+                		        "css/product/stockControl.css",
+                		        "js/controllerRoute/cs/line/cslineuser/ctr_csLineUserList.js"
+            			        ]});
+            }]
+        } 
+    })
+    .state("index.csLineUserAdd",{
+	    url:"/cs/line/csLineUserAdd?clu_id",
+	    templateUrl:"views/cs/line/cslineuser/csLineUserAdd.html",
+	    controller:"ctr_csLineUserAdd",
+	    resolve:{
+	        deps:["$ocLazyLoad",function($ocLazyLoad){
+	            return $ocLazyLoad.load(
+	            		{files:[
+	            		        "css/product/goodsCenter.css",
+	            		        "js/controllerRoute/cs/line/cslineuser/ctr_csLineUserAdd.js"
+	        			        ]});
+	        }]
+	    } 
+	})
+	
+	.state("index.csLineUserDetail",{
+	    url:"/cs/line/csLineUserDetail?clu_id",
+	    templateUrl:"views/cs/line/cslineuser/csLineUserDetail.html",
+	    controller:"ctr_csLineUserDetail",
+	    resolve:{
+	        deps:["$ocLazyLoad",function($ocLazyLoad){
+	            return $ocLazyLoad.load(
+	            		{files:[
+	            		        "css/product/goodsCenter.css",
+	            		        "js/controllerRoute/cs/line/cslineuser/ctr_csLineUserDetail.js"
+	        			        ]});
+	        }]
+	    } 
+	})
+
+

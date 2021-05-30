@@ -1,0 +1,20 @@
+.mverification-main .top { position: relative; background: #33b3fb; color: #fff; padding: 2rem 0; }
+.mverification-main .top .title-name { margin-top: 1rem; font-size: 1.8rem; text-align: center; }
+.mverification-main .top .title-close { position: absolute; top: 0; right: 1rem; font-size: 3rem; }
+.mverification-main .top .title-rule { position: absolute; top: 1rem; right: 1rem; padding: 1rem; }
+.mverification-main .top .title-rule i.icon { font-size: 1.5rem; }
+.mverification-main .center { position: relative; top: -1rem; text-align: center; background: url(../../../img/mobile/personCenter/hx_bg.png) no-repeat; background-size: 100% 100%; }
+.mverification-main .center .dj-qrcode { padding-top: 1rem; }
+.mverification-main .center .dj-check { color: red; font-size: 1.1rem; padding: 1rem; }
+.mverification-main .center .dj-num { margin-top: 1rem; color: #333; font-size: 1.2rem; }
+.mverification-main .center .dj-tip { margin-top: 0.5rem; color: #999; font-size: 1.3rem; }
+.mverification-main .center .dj-note { margin-top: 0.5rem; color: #33b3fb; font-size: 1.2rem; }
+.mverification-main .bottom .dj-detail { margin: 0 1rem 1rem 1rem; padding: 1rem; font-size: 1.3rem; background: #33b3fb; color: #fff; border-bottom: 1px solid #ddd; text-align: center; border-radius: 4px; }
+.mverification-main .bottom .dj-content { color: #666; padding: 1rem; font-size: 1.2rem; background: #fff; padding-bottom: 5rem; }
+.mverification-main .bottom .dj-content .dj-item { margin-top: 0.5rem; }
+.mverification-main .bottom .dj-content .dj-item .dj-left { display: inline-block; }
+.mverification-main .bottom .dj-content .dj-item .dj-right { display: inline-block; margin-left: 1rem; }
+.mverification-main.blue-style .top { background: #33b3fb; }
+.mverification-main.blue-style .center .dj-note { color: #33b3fb; }
+.mverification-main.yellow-style .top { background: #fa9f33; }
+.mverification-main.yellow-style .center .dj-note { color: #fa9f33; }

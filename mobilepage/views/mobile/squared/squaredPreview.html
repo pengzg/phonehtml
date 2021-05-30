@@ -1,0 +1,54 @@
+<div class="main" id="squaredPreview" set-to-focus set_scope="showBackPop=true" style="background-image:url({{word_back_img}})">
+	<div class="game_bg">
+				<div class="my-point">剩余积分：1000</div>
+		<div class="panel">
+			<div class="panel-content">
+				<div class="squared-item" ng-class="{select:active==1}">
+					<img ng-src="{{!giftList[0].mp_img_show?'../../img/mobile/squared/gift.png':giftList[0].mp_img_show}}" img-err="img/mobile/squared/gift.png" >
+					<span>{{giftList[0].mp_name}}</span>
+				</div>
+				<div class="squared-item" ng-class="{select:active==2}">
+					<img ng-src="{{!giftList[1].mp_img_show?'../../img/mobile/squared/gift.png':giftList[1].mp_img_show}}" img-err="img/mobile/squared/gift.png" >
+					<span>{{giftList[1].mp_name}}</span>
+				</div>
+				<div class="squared-item" ng-class="{select:active==3}">
+					<img ng-src="{{!giftList[2].mp_img_show?'../../img/mobile/squared/gift.png':giftList[2].mp_img_show}}" img-err="img/mobile/squared/gift.png" >
+					<span>{{giftList[2].mp_name}}</span>
+				</div>
+			</div>
+			<div class="panel-content">
+				<div class="squared-item" ng-class="{select:active==8}">
+					<img ng-src="{{!giftList[7].mp_img_show?'../../img/mobile/squared/gift.png':giftList[7].mp_img_show}}" img-err="img/mobile/squared/gift.png" >
+					<span>{{giftList[7].mp_name}}</span>
+				</div>
+				<div class="squared-item item-center" ng-class="{'center-select':btnDisable}" ng-click="start()"><a>立即抽奖</a></div>
+				<div class="squared-item" ng-class="{select:active==4}">
+					<img ng-src="{{!giftList[3].mp_img_show?'../../img/mobile/squared/gift.png':giftList[3].mp_img_show}}" img-err="img/mobile/squared/gift.png" >
+					<span>{{giftList[3].mp_name}}</span>
+				</div>
+			</div>
+			<div class="panel-content">
+				<div class="squared-item" ng-class="{select:active==7}">
+					<img ng-src="{{!giftList[6].mp_img_show?'../../img/mobile/squared/gift.png':giftList[6].mp_img_show}}" img-err="img/mobile/squared/gift.png" >
+					<span>{{giftList[6].mp_name}}</span>
+				</div>
+				<div class="squared-item" ng-class="{select:active==6}">
+					<img ng-src="{{!giftList[5].mp_img_show?'../../img/mobile/squared/gift.png':giftList[5].mp_img_show}}" img-err="img/mobile/squared/gift.png" >
+					<span>{{giftList[5].mp_name}}</span>
+				</div>
+				<div class="squared-item" ng-class="{select:active==5}">
+					<img ng-src="{{!giftList[4].mp_img_show?'../../img/mobile/squared/gift.png':giftList[4].mp_img_show}}" img-err="img/mobile/squared/gift.png" >
+					<span>{{giftList[4].mp_name}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="game_btns">
+		<div class="btn-content">
+			<a class="btns" ng-click="showTabPop()">活动规则</a>
+		</div>
+		<div class="btn-content">
+			<a class="btns color-yellow" ng-click="showTabPop(true)">我的奖品</a>					
+		</div>
+	</div>
+</div>

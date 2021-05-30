@@ -1,0 +1,27 @@
+@mixin css3($property, $value) {
+    @each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+        #{$prefix}#{$property}: $value;
+    }
+}
+@mixin cProgress($width,$height) {
+	width: $width;
+	height: $height;
+	border: 1px solid #ddd;
+	.progress-content {
+		height: 100%;
+		background: #dcad00;
+		color: #fff;
+		line-height: $height;
+		text-align: center;
+	}
+
+}
+
+$colorGray: #666;
+$colorGray2: #999;
+.color-gray {
+	color: $colorGray;
+}
+.color-light-gray {
+	color: $colorGray2;
+}

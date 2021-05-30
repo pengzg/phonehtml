@@ -1,0 +1,114 @@
+<div class="setting_panel panel-default">
+    <div class="panel-heading text-left">
+        <div class="setting_nav">
+            <ul>
+                <li><a href="">列表</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="search-filter-box">
+    	<div>
+			<label>提交时间<span>:</span></label>
+            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
+            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+                <label>来源<span>:</span></label>
+			<select ng-model="searchParam.odm_sourcetype" >
+					<option ng-repeat="x in typeList"  value="{{x.bd_code}}">{{x.bd_name}}</option>
+				</select>
+            <label>关键字<span>:</span></label>
+            <input type="text" placeholder="关键字" ng-model="searchParam.searchKey">
+        </div>
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+            <a class="btn btn-default" ng-click="clearInput();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="doExport();" >导出数据</a>
+        </div>
+    </div>
+    
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                        <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>配送单编号</th>
+                                <th>配送单类型</th>
+                                <th>添加时间</th>
+                                <th>送达时间</th>
+                                <th>配送状态</th>
+                                <th>客户名称</th>
+                                <th>客户编码</th>
+                                <th>客户电话</th>
+                                <th>收货人名称</th>
+                                <th>收货人电话</th>
+                                <th>配送地址</th>
+                               
+                                <th>配送员</th>
+                                <th>配送员电话</th>
+                                <th>商品</th>
+                                <th>数量</th>
+                                <th>备注</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in dataList">
+                                <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+                                <td class="text-center f14">{{x.odm_delivery_code}}</td>
+                                <td class="text-center f14">{{x.odm_sourcetype_nameref}}</td>
+                                <td class="text-center f14">{{x.odm_delivery_time}}</td>
+                                <td class="text-center f14">{{x.odm_sign_time}}</td>
+                                <td class="text-center f14">{{x.odm_delivery_state_nameref}}</td>
+                                <td class="text-center f14">{{x.odm_memberid_nameref}}</td>
+                                <td class="text-center f14">{{x.odm_memberid_code}}</td>
+                                <td class="text-center f14">{{x.odm_memberid_mobile}}</td>
+                                <td class="text-center f14">{{x.odm_consigneename}}</td>
+                                <td class="text-center f14">{{x.odm_consigneemobile}}</td>
+                                <td class="text-center f14">{{x.odm_consigneeaddress}}</td>
+                                <td class="text-center f14">{{x.odm_logistics_deliveryid_nameref}}</td>
+                                <td class="text-center f14">{{x.odm_logistics_deliveryid_mobile}}</td>
+                                <td class="text-center f14">{{x.odd_product_id_nameref}}</td>
+                                <td class="text-center f14">{{x.odd_product_num}}</td>
+                                <td class="text-center f14">{{x.odm_remarks}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<style>
+.tab_seleced{
+	border:1px solid #ddd;
+	border-bottom:none;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+	background-color:#5bc0de;
+	color:#fff;
+}
+</style>
+
+
+
+
+
+
+

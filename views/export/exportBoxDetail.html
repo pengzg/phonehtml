@@ -1,0 +1,107 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">柜子销售明细</a></li>
+			</ul>
+		</div>
+    </div>
+	<div class="search-filter-box">
+		<div>
+			<label>使用时间<span>:</span></label>
+            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
+            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <label>柜子<span>:</span></label>
+            <select ng-model="searchParam.storeid">
+                <option value="{{x.bs_id}}" ng-repeat="x in storeList">{{x.bs_name}}</option>
+                
+            </select>
+            <label>商品信息<span>:</span></label>
+            <input type="text" placeholder="商品信息" ng-model="searchParam.productSearchKey">
+        </div>
+        <div>
+            <label>会员名<span>:</span></label>
+            <input type="text" placeholder="会员名" ng-model="searchParam.memberNameSearchKey">
+            <label>会员手机<span>:</span></label>
+            <input type="text" placeholder="会员手机" ng-model="searchParam.memberMobileSearchKey">
+        </div>
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doExport();" >导出数据</a>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>区域</th>
+								<th style="width: 100px;">水柜</th>
+								<!-- <th>社区</th> -->
+								<th>操作时间</th>
+								<th>操作人</th>
+								<th>水票来源</th>
+								<th>销售状态</th>
+								<th>售卖商品</th>
+								<th>操作类型</th>
+								<th>金额</th>
+								<th>数量</th>
+								<th>订单编号</th>
+								<th>收入来源</th>
+								<th>原始信息</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in orderList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.owr_storeid_areanameref}}</td>
+								<td class="text-center f14">{{x.owr_storeid_nameref}}<br>{{x.owr_storeid_code}}<br>{{x.owr_storeid_address}}</td>
+								<!-- <td class="text-center f14">{{x.tm_productid_nameref}}</td> -->
+								<td class="text-center f14">{{x.owr_start_time}}至<br>{{x.owr_end_time}} </td>
+								<td class="text-center f14">{{x.owr_memberid_nameref}}<br>{{x.owr_memberid_mobile}}</td>
+								<td class="text-center f14">{{x.owr_def5_nameref}}</td>
+								<td class="text-center f14">{{x.owr_state_nameref}}</td>
+								<td class="text-center f14">{{x.owr_productid_nameref}}</td>
+								<td class="text-center f14">{{x.owr_sourcetype_nameref}}</td>
+								
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.owr_pay_amount"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.owr_num"></zk-format-num>
+								</td>
+								<td class="text-center f14"><span ng-if="x.owr_sourcetype==1">{{x.owr_sourcecode}}</span></td>
+								
+								<td class="text-center f14">{{x.owr_def1_nameref}}<br>{{x.owr_amount1}}</td>
+								
+
+								<td class="text-center f14">
+									{{x.owr_def2_nameref}}<br>{{x.owr_def3_nameref}}<br>{{x.owr_def4}}
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

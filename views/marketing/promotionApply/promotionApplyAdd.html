@@ -1,0 +1,206 @@
+<div class="xt_changeHtml" style="margin-bottom: 120px;">
+	<div class="addlistCenter">
+
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 试用主题：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.pa_name" maxlength="15" style="width:300px" placeholder="试用主题在15个字符以内"/>
+			</div>
+		</div>
+		<div style="min-width:900px;margin-bottom: 20px;margin-top: 25px;box-sizing:border-box;padding:0 46px;">
+			<table class="table table3" style="margin-bottom: 0 !important; border: 1px solid #dedede; border-bottom: 0;">
+				<tbody>
+					<tr class="zk_headerTrSty">
+						<th style="width:10%;" ng-show="false">
+							<div class="glyphicon glyphicon-cog" ng-show="false" style="width: 15px; height: 15px; cursor: pointer"></div>
+						</th>
+						<th style="width:50%;border-right: 1px solid #dedede;">试用商品 </th>
+						<th ng-show="false" style="width:10%;border-right: 1px solid #dedede;">商品编码 </th>
+						<th style="width:10%;border-right: 1px solid #dedede;">价格 </th>
+						<!-- <th style="width:10%;border-right: 1px solid #dedede;">上下架状态 </th>
+						<th style="width:10%;border-right: 1px solid #dedede;">售卖数量 </th>
+						<th style="width:10%;border-right: 1px solid #dedede;">操作 </th> -->
+					</tr>
+					<tr>
+						<td colspan="14" style="padding: 0; border-bottom: 0;border-top:0;">
+							<div style="padding-bottom: 2px;">
+								<table class="table table3 table-bordered" style="border: 0; margin-bottom: 0 !important;">
+									<tbody>
+										<tr>
+											<td style="width:50%;" class="SelectMulti-Container2 posRelative">
+												<input type="text" class="inputBorderStyle2 SelectMulti-ShowDiv2" ng-model="vo.pa_productid_nameref" ng-change="vo.pa_productid='';keySearchFun(vo.pa_productid_nameref,'goods');"  ng-focus="goods_type=1;showDroplist($event,getGoods,1)" style="height: 33px; line-height: 33px;">
+												<div class="droplistWrap2" style="width: 689px; left: 5px; top: 40px; overflow: hidden;">
+													<div class="clearfix">
+														<table >
+															<tr class="listItem2" style="width:683px;">
+																<td style="width:30px;line-height: 0px !important;"></td>
+																<td style="width:170px;line-height: 0px !important;">商品</td>
+																<td style="width:120px;line-height: 0px !important;">编号</td>
+																<td style="width:260px;line-height: 0px !important;">库存</td>
+															</tr>
+														</table>
+													</div>
+													<div class="clearfix" style="height: 160px;overflow-y: auto;" >
+														
+														<table style="width:683px;">
+															<tr class="listItem" ng-repeat="y in goodsList" ng-click = "chooseGoods(y,index_i,1);">
+																<td style="width:30px;padding:4px !important;">
+																	{{pager1.rows * (pager1.page - 1)+ $index+1}}
+																</td>
+																<td style="width:170px;padding:4px !important;">
+																	{{y.pm_title | cut:true:10:' ...'}}
+																</td>
+																
+																<td style="width:120px;padding:4px !important;">
+																	{{y.pm_code}}
+																</td>
+																<td style="width:260px;padding:4px !important;" max-length="6">
+																	{{y.ggp_stock_desc}}
+																</td>
+															</tr>
+														</table>
+													</div>
+												</div>
+												<div class="droplistWrap2 zk_fanye" style="width:689px !important; top:226px !important; left:5px !important;height:25px;">
+													<a ng-click="prevPage(pager1,getGoods)"  class="m30right m20left">上一页</a>
+													<a ng-click="nextPage(pager1,getGoods)" class="m30right">下一页</a>
+													<span class="m30right">{{pager1.page}}/{{pager1.pageTotal}}</span>
+													<span>共{{pager1.total}}条</span>
+												</div>
+											</td>
+											
+
+											
+											<td ng-show="false" style="width:10%;" ng-show="true" class="open colorCenter">{{i.pm_code}}</td>
+											<td style="width:10%;border-right: 0;" class="open colorCenter" >
+												<input type="number" min="0" class="inputBorderStyle2 SelectMulti-ShowDiv2" ng-model="vo.pa_market_price"  style="height: 33px; line-height: 33px;">
+											</td>	
+											<!-- <td style="width:10%;border-right: 0;" ng-show="true" class="open colorCenter" >
+												
+											</td>
+											<td style="width:10%;" ng-show="true" class="open colorCenter">{{i.pag_sale_num}}{{i.gg_unit_min_nameref}}</td>
+											<td style="width:10%;border-right: 0 !important;cursor: pointer;" ng-show="true" class="open colorCenter"><img src="../../../../img/shanchu.png"  ng-click="removeLine(index_i,1)" /></td> -->
+											
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 起止时间：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" class="Wdate" style="width: 200px;" id="start_time" />
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 总份数：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.pa_total_num" maxlength="5" style="width:300px" placeholder="请输入一个正整数"/>
+			</div>
+		</div>
+		
+		<!-- <div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 每人限量份数：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.pa_limit_num" maxlength="10" style="width:300px" placeholder="请输入一个正整数"/>
+			</div>
+		</div> -->
+		
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 排序：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.pa_sort" maxlength="10" style="width:300px" placeholder="数字越大越靠前"/>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i>规则：</span>
+			<div class="widthAuto zk_controlInput">
+				<div  style="margin-bottom:1.25rem;width:664px;height: 300px; display:inline-block; z-index:1" id="myeditor1" 
+												get-ue="ue_myeditor1 = getUe"  class="ueditor" ng-model="vo.pa_describe" config="_simpleConfig" ></div>
+			</div>
+		</div>
+		
+		
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi width-just">发布状态：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				<div ng-show="false">
+					<label class="m10right" >
+						<input type="radio" name="state" ng-model="vo.pa_state"  value="1" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 取消
+					</label>
+				</div>
+				<div>
+					<label class="m10right" >
+						<input type="radio"  name="state" value="2" ng-model="vo.pa_state" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 暂存
+					</label>
+				</div>
+				<div>
+					<label class="m10right" >
+						<input type="radio"  name="state" value="3" ng-model="vo.pa_state" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 发布
+					</label>
+				</div>
+				<div ng-show="false">
+					<label class="m10right" >
+						<input type="radio"  name="state" value="4" ng-model="vo.pa_state" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 停止
+					</label>
+				</div>
+			</div>
+		</div>
+		
+		
+</div>
+<div class="fixedBottom">
+	<div  class="btnStyle Btncolor1 BtnHover1" ng-click="submit();">保存</div>
+	
+	<div class="btnStyle Btncolor2 BtnHover2" ><a ui-sref="index.marketing.promotionApplyList" class="btnStyle Btncolor2 BtnHover2" >返回</a></div>
+</div>
+
+
+
+
+<script>
+
+$(function(){
+  $('.droplistWrap2').hide()
+	$(document).on('click', function (ev) {
+		if ($(ev.target).parents('.SelectMulti-Container2').length) {return}
+		$('.droplistWrap2').hide()
+	})
+	
+	
+	//全选框不好使时
+	$('body').on('click', '.js_selectAll', function(){
+		var thisObj = $(this);
+		if (thisObj.is(':checked')) {
+			// $('.select').attr('checked', true); 
+			$('.js_select').prop("checked", true);
+			$('.js_selectAll').prop("checked", true);
+			
+		} else {
+			$('.js_select').attr('checked', false);
+			$('.js_selectAll').prop("checked", false);
+		}
+	});
+
+	$('body').on('click', '.js_select', function(event){
+		event.stopPropagation();
+		var thisObj = $(this);
+		if (thisObj.is(':checked')) {
+			// $('.select').attr('checked', true); 
+			// $('.select').prop("checked", true);  					 					
+		} else {
+			$('.js_selectAll').prop("checked", false);
+		}
+	});
+});
+
+function showDropList (obj){
+	$('.droplistWrap2').hide();
+	$(obj).parent().find('.droplistWrap2').toggle();
+	console.log($(obj).parent().find('.droplistWrap2'))
+};
+</script>

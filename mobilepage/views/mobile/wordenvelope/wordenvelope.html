@@ -1,0 +1,35 @@
+<div>
+	<div class="word_banner">
+		<img src="../../img/mobile/banner.png"
+			ng-style="{height:'{{bannerHeight?bannerHeight:&quot;14rem&quot;}}'}">
+	</div>
+	<div class="word_view_main">
+		<div class="word_logo">
+			<img class="border-box" src="../../img/mobile/logo2.png" alt="">
+		</div>
+		<div class="word_note_top">
+			<div>社区盒子给您发了一个红包</div>
+			<div>祝您生活美满，磕家欢乐</div>
+		</div>
+		<div class="word_btn_group">
+			<div class="word_btn_title">口令红包</div>
+			<div class="word_input" ng-show="!hasDraw">
+				<div class="word_input_p">
+					<input class="border-box" type="text" ng-model="word" placeholder="请输入口令">
+				</div>
+			</div>
+			<div class="word_btn" ng-click="draw()" ng-bind="hasDraw?'领取奖励':'开始抽奖'"></div>
+			<div class="word_btn_tip">温馨提示：复制该口令 黏贴于公众号输入即可获得红包05:00分钟后红包未兑换，红包将被回收</div>
+		</div>
+		<div class="word_bottom border-box" ng-style="{bottom:$root.isBottomTab?'3.4rem':'0'}">
+			<div class="word_bottom_first" ng-click="showTabPop()">- 活动规则 -</div>
+			<div class="word_bottom_last">已有<span class="red">{{10}}</span>人参加游戏</div>
+		</div>
+		<div class="word_awardPop" ng-show="isAward">
+			<div class="word_awardPop_img"><img src="../../img/mobile/getAward2.png" alt=""></div>
+			<div class="word_money">100元微信红包</div>
+		</div>
+		<div class="compop-background" ng-show="isAward" ng-click="isAward=false;"></div>
+	</div>
+</div>
+<div class="game-end" ng-show="false"></div>

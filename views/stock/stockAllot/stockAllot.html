@@ -1,0 +1,211 @@
+<div class="xt_changeHtml">
+	<div class="xt_offOne tabUl-2 clearfix" ng-show="false">
+		<ul>
+			<li ng-class="{'active':searchParam.ppm_state==''}" style="width: 95px;" ng-click="searchParam.ppm_state='';searchFun();"><a>全部</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">6</span></li>
+			<li ng-class="{'active':searchParam.ppm_state==3}" style="width: 115px;" ng-click="searchParam.ppm_state=3;searchFun();"><a>进行中</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">6</span></li>
+			<li ng-class="{'active':searchParam.ppm_state==2}" style="width: 95px;" class="" ng-click="searchParam.ppm_state=2;searchFun();"><a>暂存</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">2</span></li>
+			<li ng-class="{'active':searchParam.ppm_state==1}" style="width: 124px;" class="" ng-click="searchParam.ppm_state=1;searchFun();"><a>取消发布</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">2</span></li>
+			<li ng-class="{'active':searchParam.ppm_state==4}" style="width: 124px;" class="" ng-click="searchParam.ppm_state=4;searchFun();"><a>已结束</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">2</span></li>
+			<li style="float: right;" ng-show="false">
+				<div ng-class="{true:'switch-block',false:'switch-lines'}[showInForm]" ng-click="showInForm=!showInForm"></div>
+			</li>
+		</ul>
+	</div>
+	<div class="search-filter-box">
+		<div>
+			<label>单据日期<span>:</span></label>
+			<span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()" ng-click="dateRange.chooseDate($event)">
+				日期 </span>
+			<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;" onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+			/>
+			<input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+			/>
+			<label>仓库<span>:</span></label>
+			<select ng-model="searchParam.eim_storeid">
+				<option value="{{x.bs_id}}" ng-repeat="x in storeList">{{x.bs_name}}</option>
+				
+			</select>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="单据信息" ng-model="searchParam.searchKey">
+		</div>
+		<div>
+			<label>操作类型<span>:</span></label>
+            <select ng-model="searchParam.eim_stock_type">
+				<option value="{{x.bd_code}}" ng-repeat="x in stockTypeList">{{x.bd_name}}</option>
+				
+			</select>
+		</div>
+
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;" ng-click="searchFun();"><i class="glyphicon glyphicon-filter"></i>
+				筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();searchFun();" style="text-shadow: none !important; color: #333 !important;"><i
+				 class="icon icon-eraser"></i> 清空</a>
+		</div>
+	</div>
+
+
+	<div class="xt_childTable" ng-show="false">
+		<table class="table table3 table-striped table-hover table-bordered SortCss">
+			<thead>
+				<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+					<th class="colorCenter noSortCss">入库单号</th>
+					<th class="colorCenter noSortCss">单据日期</th>
+					<th class="colorCenter noSortCss">出库仓库</th>
+					<th class="colorCenter noSortCss">入库仓库</th>
+					<th class="colorCenter noSortCss">操作时间</th>
+					<th class="colorCenter noSortCss">操作人</th>
+					<th class="colorCenter noSortCss">审核状态</th>
+					<th class="colorCenter noSortCss">备注</th>
+					<th class="colorCenter noSortCss">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="x in erpList" class="common-tr-height">
+
+					<td class="colorCenter">{{x.eim_code}}</td>
+					<td class="colorCenter">{{x.eim_billdate}}</td>
+					<td class="colorCenter">{{x.eim_storeid_nameref}}</td>
+					<td class="colorCenter">{{x.eim_other_storeid_nameref}}</td>
+					<td class="colorCenter">{{x.eim_add_time}}</td>
+					<td class="colorCenter">{{x.eim_operator_nameref}}</td>
+					<td class="colorCenter">{{x.eim_stats_nameref}}</td>
+					<td class="colorCenter">{{x.eim_note}}</td>
+					<td class="colorCenter">
+						<a class="common_btns common_detail" ng-click="goDetail(x)" title="详情"></a>
+					</td>
+
+				</tr>
+
+			</tbody>
+		</table>
+		<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+	</div>
+
+	<div class="order-list-new">
+		<div class="order-head">
+			<div style="width:30%;">商品信息</div>
+			<div style="width:15%;">价格信息</div>
+			<div style="width:15%;">仓库</div>
+			<div style="width:15%;">操作人</div>
+			<div style="width:15%;">操作</div>
+		</div>
+		<div class="order-item-new" ng-repeat=" x in erpList">
+			<div class="order-main-info"  stop-propagation>
+				<div>
+					<span>单号：{{x.eim_code}}</span>
+					<span>时间：{{x.eim_billdate}}</span>
+					<span>添加时间：{{x.eim_add_time}}</span>
+					<span>总数量：{{x.eim_totalnum}}</span>
+					<span>总金额：{{x.eim_totalamount}}</span>
+					<span>备注：{{x.eim_note}}</span>
+
+				</div>
+
+			</div>
+
+			<table class="order-detail-list">
+				<tr ng-repeat=" y in x.itemVOList track by $index">
+					<td style="width:30%;text-align:left;">
+						<div>
+							<img src="{{y.eii_goods_picture}}">
+						</div>
+						<div style="height:60px;padding-top:15px;">
+							<span>{{y.eii_goods_name}}</span><br/>
+							
+						</div>
+
+
+					</td>
+					<td style="width:15%;text-align:left;">
+						<span>单价：{{y.eii_goods_price}}</span><br/>
+						<span>数量：{{y.eii_goods_quantity}}</span><br/>
+						<span>小计：{{y.eii_goods_amount}}</span><br/>
+						<!-- <span>地址：{{x.orderMainVO.om_consignee_address}}</span> -->
+					</td>
+					<td style="width:15%;text-align:center;" rowspan="{{x.itemVOList.length}}"  ng-if="$index==0">
+						<span>出库仓库：{{x.eim_storeid_nameref}}</span><br/>
+						<span>入库仓库：{{x.eim_other_storeid_nameref}}</span><br/>
+						<span>团队：{{x.eim_agentsale_id_nameref}}</span><br/>
+					</td>
+					<td style="width:15%;" rowspan="{{x.itemVOList.length}}" ng-if="$index==0">
+						<span>申请人:{{x.eim_operator_nameref}}</span><br/>
+						<span title="{{x.eim_comments}}">{{x.eim_stats_nameref}}</span><br/>
+						<span ng-if="x.eim_stats!=1">审核人:{{x.eim_auditorid_nameref}}</span>
+						
+
+					</td>
+					<td style="width:15%;" rowspan="{{x.itemVOList.length}}" ng-if="$index==0">
+						<a class="common_btns common_detail" ng-click="goDetail(x)" title="详情"></a>
+					</td>
+				</tr>
+			</table>
+
+		</div>
+		<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+	</div>
+</div>
+<!-- 查看用户订单弹窗 -->
+<div class="dialog" ng-if="dialog==2" style="z-index: 88">
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index: 1000; width: 900px; margin-left: -450px; top: 10%; " ng-show="dialog">
+		<div class="dg-xg-js" style="width: 900px;">
+			单据详情
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		<div class="setting_panel panel-default">
+			<div class="panel panel-default" style="border: 0; border-radius: 0;height:370px;overflow-y:scroll;">
+				<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+					<div>出库仓库：{{vo.eim_storeid_nameref}} &nbsp;&nbsp;入库仓库：{{vo.eim_other_storeid_nameref}} </div>
+					<div>单据时间：{{vo.eim_billdate}}&nbsp;&nbsp;单据编码：{{vo.eim_code}}</div>
+					<div>操作人：{{vo.eim_operator_nameref}}&nbsp;&nbsp;总数量：{{vo.eim_totalnum}}&nbsp;&nbsp;总金额：{{vo.eim_totalamount}}元</div>
+					<div>备注：{{vo.eim_note}}</div>
+				</div>
+
+				<table class="table table3 table-bordered table-hover user_table">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>商品图片</th>
+							<th>商品名</th>
+							<th>商品编码</th>
+							<th>数量</th>
+							<th>单价</th>
+							<th>小计</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in vo.itemVOList track by $index">
+							<td>{{$index+1}}
+								</th>
+								<td><img style="width:50px;height:50px;" src="{{x.eii_goods_picture}}"> </td>
+								<td>{{x.eii_goods_name}}</td>
+								<td>{{x.eii_goods_code}}</td>
+								<td>{{x.eii_goods_quantity}}</td>
+								<td>{{x.eii_goods_price}}</td>
+								<td>{{x.eii_goods_amount}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<ul id="viewer">
+					<li><img ng-click="startViewer();" src="{{x.picturepath}}" ng-repeat="x in vo.picList" style="height: 80px;border:1px solid #ddd;margin:10px;"
+						 data-original="{{x.picturepath}}"></li>
+				</ul>
+			</div>
+		</div>
+		<!-- <div>
+			<div class="btn btn-default"
+				style="margin-left: 594px; margin-bottom: 10px"
+				ng-click="closeDialog()">关闭</div>
+		</div>
+ -->
+
+	</div>
+</div>

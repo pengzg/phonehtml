@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" ng-app="appIndex" ng-style="{'font-size':'{{$root.fontSize}}'}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>社区盒子营销平台</title>
+    
+    <link rel="stylesheet" href="css/mobile/base.css">
+    <link rel="stylesheet" href="css/mobile/common/directive.css">
+    <link rel="stylesheet" href="css/fonts/style.css">
+    <link rel="stylesheet" href="lib/ionic/ionic.min.css">
+    <link rel="stylesheet" href="css/mobile/loaders.css">
+    <link rel="stylesheet" href="css/mobile/fonts/iconfont.css">
+
+    <script src="lib/jquery/jquery-1.8.3.min.js"></script>
+    <script src="lib/jquery-rotate/jQueryRotate.js"></script>
+    <!-- 微信 js  -->
+    <script src="lib/weixin/jweixin-1.0.0.js" type="text/javascript" ></script>
+    <script src="angular/angular.js"></script>
+    <script src="angular/angular-ui-router.js"></script>
+    <script src="angular/ocLazyLoad.min.js"></script>
+
+    <!-- ionic -->
+    <script src="lib/ionic/ionic.bundle.js"></script>
+    <!-- fastclick -->
+    <script src="lib/fastclick/fastclick.js"></script>
+
+    <!-- jquery.qrcode -->
+    <script type="text/javascript" src="util/jquery-qrcode/jquery.qrcode.min.js"></script>
+
+    <!-- noscroll 依赖jquery -->
+    <script type="text/javascript" src="util/noscroll/noscroll.js"></script>
+
+    <script src="js/angularjs/app-mobile.js"></script>
+    <script src="js/factory/common.factory.js"></script>
+    <script src="js/factory/httpFactory.js"></script>
+    <script src="js/factory/messageFactory.js"></script>
+    <script src="js/angularjs/app.run-mobile.js"></script>
+    <script src="js/directive/common.directive.js"></script>
+    <script src="js/directive/mobile.directive.js"></script>
+    <script src="js/angularjs/oclazyload.config.js"></script>
+    <script src="js/angularjs/router.config.mobile.js"></script>
+    <script src="js/angularjs/router.config.mobile.preview.js"></script>
+   
+</head>
+<body>
+    <div data-ui-view=""></div>
+     <div class="common-tabs" ng-show="$root.isBottomTab">
+        <div class="tabs-item" ng-click="$root.goHome()">
+            <div class="tabs-t">
+                <i class="iconfont-marketing" ng-class="{true:'iconm-shouye',false:'iconm-shouye-xianxing'}[$root.tabsCheck==0]"></i>
+            </div>
+            <div class="tabs-b">
+                <span>首页</span>
+            </div>
+        </div>
+        <div class="tabs-item" ng-click="$root.goGame()" ng-show="$root.hasGame">
+            <div class="tabs-t">
+                <i class="iconfont-marketing" ng-class="{true:'iconm-liwu',false:'iconm-liwu-xianxing'}[$root.tabsCheck==1]"></i>
+            </div>
+            <div class="tabs-b">
+                <span>活动</span>
+            </div>
+        </div>
+        <div class="tabs-item" ng-click="$root.goMine()">
+            <div class="tabs-t">
+                <i class="iconfont-marketing" ng-class="{true:'iconm-yonghu',false:'iconm-yonghu-xianxing'}[$root.tabsCheck==2]"></i>
+            </div>
+            <div class="tabs-b">
+                <span>我的</span>
+            </div>
+        </div>
+    </div>
+    <compop></compop>
+    <compop-prize></compop-prize>
+    <compop-fail></compop-fail>
+    <tabpop></tabpop>
+    <tabpoppre></tabpoppre>
+    <tabpopnew></tabpopnew>
+    <compopsuccess></compopsuccess>
+    <common-loading></common-loading>  
+    <com-get-prize></com-get-prize>
+    <com-miss-prize></com-miss-prize>
+    <com-share></com-share>
+    <load-animation ng-show="$root.isLoadAnimationShow"></load-animation>  
+    
+</body>
+</html>

@@ -1,0 +1,124 @@
+<div class="xt_shouYeDiv" ng-show="!$root.isPager">
+	<span><a href="#/index/homePage">首页</a><a  style="font-size: 14px;font-weight: 100;" href="#/index/line/csLineUserList">>设置</a> <a style="font-size: 14px;font-weight: 100;"><span>>详情</span></a></span>
+</div>
+<div class="xt_changeHtml">
+		<div class="zk_addMain">
+			<div class="zk_baseInfoBox">
+				<h4>基本信息</h4>
+				<div class="zk_controlBox">
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>主键</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_id" 
+							ng-model="csLineUserInfo.clu_id" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>所属公司</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_orgid" 
+							ng-model="csLineUserInfo.clu_orgid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>线路ID</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_lineid" 
+							ng-model="csLineUserInfo.clu_lineid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>业务员ID</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_userid" 
+							ng-model="csLineUserInfo.clu_userid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>计划日期</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_plan_date" 
+							ng-model="csLineUserInfo.clu_plan_date" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>是否生成任务 Y/N</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_is_creat" 
+							ng-model="csLineUserInfo.clu_is_creat" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>添加人</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_adduserid" 
+							ng-model="csLineUserInfo.clu_adduserid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>添加日期</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_addtime" 
+							ng-model="csLineUserInfo.clu_addtime" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>修改人</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_updateuserid" 
+							ng-model="csLineUserInfo.clu_updateuserid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>修改日期</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_updatetime" 
+							ng-model="csLineUserInfo.clu_updatetime" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>DR</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_dr" 
+							ng-model="csLineUserInfo.clu_dr" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>TS</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="clu_ts" 
+							ng-model="csLineUserInfo.clu_ts" readonly="readonly">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<div class="zk_saveBox">
+	<a ng-click="cancel();" class="btnStyle falseBtn">返回</a>
+</div>
+

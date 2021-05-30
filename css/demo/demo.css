@@ -1,0 +1,34 @@
+a { text-decoration: none;}
+.navbar-default .navbar-brand { color: #fff;}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus { color: #e6e6e6; background-color: transparent;}
+.navbar-brand img { margin-top: -5px; margin-left: 10px; height: 30px; width: auto; display: inline-block; vertical-align: middle;}
+.action_demo{ position: relative; margin: 0px auto; max-width: 640px; min-width: 320px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.42857143; color: #333333; background-color: #F5F5F5;}
+.navbar { position: relative; min-height: 44px; margin-bottom: 0px; border: 1px solid transparent;}
+.navbar:before, .navbar:after { content: " "; display: table;}
+.navbar-static-top { z-index: 1000; border-width: 0 0 1px; border-radius: 0;}
+.navbar-default { background-color: #27AE60; border-color: #145b32;}
+.container-fluid { margin-right: auto; margin-left: auto;}
+.container-fluid:before, .container-fluid:after { content: " "; display: table;}
+.navbar-header{ float: left; margin-right: 0; margin-left: 0;}
+.navbar-header:before, .navbar-header:after { content: " "; display: table;}
+.navbar-brand { float: left; padding: 12px 5px; font-size: 16px; line-height: 20px; height: 44px; color: #fff; margin-left: -5px; box-sizing: border-box;}
+.navbar-header:after { clear: both;}
+.activity { background-color: #D50A0E; color: #FFFFFF; text-align: center;}
+.subscribe_page .frame { height: 310px; padding-top: 20px; background: url(../../img/red_pack2_frame.png) no-repeat center top; background-size: contain;}
+.activity .frame { position: relative; width: 320px; margin: 0 auto;}
+.activity .activity_banner { width: 100%; margin-bottom: 35px;}
+.subscribe_page .frame h1, .subscribe_page .frame h3 { font-family: inherit; font-weight: 500; line-height: 1.1;}
+.subscribe_page .frame h3 {color: #EAC787; font-size: 24px; margin-top: 20px; margin-bottom: 10px;}
+.subscribe_page .frame h1 {    margin-top: 20px; color: #F2E1B0; font-size: 36px;}
+.tab-content .tab-pane h5 { font-size: 14px; margin-top: 10px; margin-bottom: 10px;}
+.subscribe_page .frame .receive_award_area { position: absolute; top: 135px; width: 320px; margin: 0 auto;}
+.subscribe_page .frame .receive_award_area .qr_code_img { width: 100px; vertical-align: middle;}
+.subscribe_page .frame .receive_award_area p { margin: 5px auto; font-size: 14px; color: #EAC787;}
+.activity .activity_info { margin: 10px; padding: 10px; background-color: rgba(0,0,0,0.1); border-radius: 10px; text-align: left;}
+.activity .activity_info .activity_info_tabs { border: none; background-color: transparent; border-spacing: 10px 0px; padding: 0; margin: 0;}
+.activity .activity_info .activity_info_tabs li { background-color: #fff; opacity: 0.4; border: none; border-radius: 8px; display: table-cell; width: 1%; line-height: 36px; text-align: center;}
+.activity .activity_info .activity_info_tabs li.active { opacity: 1;}
+.activity .activity_info .activity_info_tabs li a { background-color: transparent; border: none; color: #555;}
+.tab-content>.tab-pane { display: block; height: auto; overflow-y: hidden;}
+.footer { padding: 20px 0px; color: #777777;}
+.text-center { text-align: center;}

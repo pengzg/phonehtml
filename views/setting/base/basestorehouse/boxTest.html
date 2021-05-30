@@ -1,0 +1,68 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">柜子列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+        <div>
+                <label>数据id<span>:</span></label>
+                <input type="text" ng-model="otr_id" placeholder="数据id">
+        </div>
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="changeState(2);" >成功</a>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="changeState(3);" >失败</a>
+        </div>
+       
+        
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i>刷新</a>
+        </div>
+    </div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th style="min-width:100px;">id</th>
+								<th style="min-width:80px;">柜子名称<br>柜子编号</th>
+								
+								<th>添加时间</th>
+							
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in baseStorehouseList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								
+								<td class="text-center f14">
+									{{x.otr_id}}
+								</td>
+								<td class="text-center f14">{{x.otr_storeid_nameref}}<br>{{x.otr_storecode}}</td>
+								
+								
+								
+								<td class="text-center f14">{{x.otr_addtime}}</td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

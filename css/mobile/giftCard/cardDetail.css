@@ -1,0 +1,9 @@
+.card-detail-main .card-top { text-align: center; padding: 1rem 1.5rem; }
+.card-detail-main .card-top img { width: 100%; border-radius: 1rem; }
+.card-detail-main .card-center { text-align: center; }
+.card-detail-main .card-center .money-left span:first-of-type { color: #444; font-size: 1.2rem; }
+.card-detail-main .card-center .money-left span:last-of-type { color: #a94641; }
+.card-detail-main .card-center .use-now { margin-top: 2rem; margin-bottom: 2rem; }
+.card-detail-main .card-center .use-now button { width: 50%; }
+.card-detail-main .card-bottom span { color: #444; }
+.card-detail-main .card-bottom .color-gray { color: #999; }

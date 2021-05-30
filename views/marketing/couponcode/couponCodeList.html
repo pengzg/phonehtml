@@ -1,0 +1,56 @@
+<div class="contentHtml-new" style="background-color: #F5F6F8;left:0;">
+
+    <div class="tab-box">
+        <ul>
+            <li ng-class="{'active':tabSelect=='1'}" ng-click="tabSelect=1">所有优惠码</li>
+            <li ng-class="{'active':tabSelect=='2'}" ng-click="tabSelect=2">未开始</li>
+            <li ng-class="{'active':tabSelect=='3'}" ng-click="tabSelect=3">进行中</li>
+            <li ng-class="{'active':tabSelect=='4'}" ng-click="tabSelect=4">已结束</li>
+        </ul>
+    </div>
+
+    <div class="content-box-6">
+            <a class="btn btn-success"  ng-click="goAdd();">
+                    新建优惠码</a>
+
+           <span style="float:right;">
+               <input type="search"> <a class="btn btn-success"  ng-click="searchFun();">
+                    <i class="glyphicon glyphicon-filter"></i> 搜索</a>
+           </span>         
+    </div>
+
+    <div>
+        <table class="changeColor" style="width:100%;">
+            <thead style="font-weight: bold;background:#ddd;">
+                <th>优惠码名称</th>
+                <th>类型</th>
+                <th>价值(元)</th>
+                <th>领取限制</th>
+                <th>有效期</th>
+                <th>领取人/次</th>
+                <th>已使用</th>
+                <th>领取率/使用率</th>
+                <th>操作</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in [1,2,3,4]" style="border-bottom: 1px solid #eee;">
+                    <td>1</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td><span ng-click="goCouponData();" style="color:#38f;">0</span>/2</td>
+                    <td>3</td>
+
+                    <td>3</td>
+                    <td>
+                        <a class="common_btns common_detail" ng-click="goCouponData();"></a>
+                        <a class="common_btns common_detail" ng-click="goDetail()" title="详情"></a>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+        <tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="landing" ng-style="{height:'{{totalHeight}}'}">
+    <div class="landing-left">
+        <div style="margin-top:40px;margin-left: 113px;">
+            <img src="../../img/login/logo.png" style="height: 50px;">
+            <span style="margin-left: 5px;font-size: 18px;font-weight: bold;">北京上水石科技有限公司</span>
+        </div>
+        <div class="landing-left-title">
+            <span>上水石管理平台</span>
+        </div>
+    </div>
+    <div class="landing-page" ng-init="isAccount=true">
+        <div class="landing-page-top">
+            <span>登录</span>
+        </div>
+        <div ng-show="false">
+            <ul class="landing-tab-ul">
+                <li class="landing-tab-li" ng-class="{'landing-acitve':!isAccount}" ng-click="isAccount=false"><a>快速登录</a></li>
+                <li class="landing-tab-li" ng-class="{'landing-acitve':isAccount}" ng-click="isAccount=true"><a>账号密码登录</a></li>
+            </ul>
+        </div>
+        <div class="landing-head" ng-show="isAccount" ng-init="isFocusDiv=0">            
+            <label class="land-div-input tt " ng-class="{'land-div-acitve':isFocusDiv==1}"><input autocomplete="off" name="name" id="loginName" value="" class="landing-user input_focus" ng-model="loginInfo.loginName" type="text" placeholder="请输入用户名" style="width: 318px;left:0;height: 43px;" ng-focus="isFocusDiv=1" ng-blur="isFocusDiv=0"></label>
+            <label class="land-div-input tt "  ng-class="{'land-div-acitve':isFocusDiv==2}"><input    class="landing-password  input_focus" id="passWord" ng-model="loginInfo.passWord" type="password" placeholder="请输入密码" style="width: 318px;left:0;height: 43px;" ng-focus="isFocusDiv=2" ng-blur="isFocusDiv=0"></label>
+            
+            <label class="jigsaw" id="jigsaw" style="margin-bottom: 23px;">
+                <canvas width="300" height="90" class="jigsaw_img_white" id="jigsaw_img_white" />
+                <canvas  width="300" height="90" style="position: relative;left:5px;" id="jigsaw_img"/>
+            </label>
+            <label class="land-div-input tt " >
+                 <div id="slider" draggable="false">
+                    <div class="drag_bg"></div>
+                    <div class="drag_text" onselectstart="return false;" unselectable="on">拖动滑块验证登录</div>
+                    <div class="handler handler_bg"></div>
+                </div>
+                </label>
+             <div class="forgetpassword" ng-click="show_loading('body')" ng-show="false">忘记密码？</div> 
+        </div>
+        <div class="landing-head" ng-show="!isAccount">
+            <div class="landing-code">
+                <img src="../../img/login/img_code.png" alt="">
+            </div>
+            <div style="text-align: center;">手机扫码，安全登录</div>
+            <div style="text-align: center;">使用<span style="color:#13bacf;">社区盒子App</span>扫描二维码</div>
+        </div>
+    </div>
+        
+    </div>
+
+<div ng-include="'pop.html'"></div>
+
+
+
+

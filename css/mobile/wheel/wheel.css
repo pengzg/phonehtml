@@ -1,0 +1,152 @@
+.wheel-main {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	
+	background: url(../../../img/mobile/wheel/bg.png) no-repeat;
+	background-size: 100%;
+}
+.wheel-panel {
+	position: absolute;
+	top: 18rem;
+	left: 50%;
+
+	width: 20rem;
+	height: 20rem;
+	margin-left: -10rem;
+
+	background: url(../../../img/mobile/wheel/wheel_panel.png);
+	background-size: 100%;
+	color: #fff;
+	font-size: 1.2rem;
+
+}
+.wheel-panel >div {
+	position: absolute;
+	left: 50%;
+
+	width: 5rem;
+	height: 10rem;
+	margin-left: -2.5rem;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box; /* Firefox */
+	-webkit-box-sizing:border-box; /* Safari */
+	text-align: center;
+	padding-top: 2rem;
+	transform-origin: 50% 100%;
+
+}
+.wheel-one{
+	transform: rotate(-4deg);
+}
+.wheel-two{
+	transform: rotate(-64deg);
+}
+.wheel-three{
+	transform: rotate(-128deg);
+}
+.wheel-four{
+	transform: rotate(-188deg);
+}
+.wheel-five{
+	transform: rotate(-248deg);
+}
+.wheel-six{
+	transform: rotate(-304deg);
+}
+
+.wheel-pointer {
+	position: absolute;
+	top: 24rem;
+	left: 50%;
+
+	width: 8rem;
+	height: 8rem;
+	margin-left: -3.9rem;
+
+	background: url(../../../img/mobile/wheel/wheel_pointer.png);
+	background-size: 100%;
+	text-align: center;
+}
+.wheel-pointer-text {
+	margin-top: 2.5rem;
+	color: #a9542a;
+	font-weight: bold;
+}
+.wheel-top-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 1.5rem;
+	padding: 0rem;
+	text-align: center;
+	color: #fff;
+}
+.wheel-top-bar-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #000;
+	opacity: 0.4;
+}
+.wheel-top-bar-content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.wheel-top {
+	position: absolute;
+	top: 2rem;
+	width: 100%;
+}
+.wheel-top-bg {
+	position: relative;
+	width: 100%;
+	height: 7rem;
+	background: url(../../../img/mobile/wheel/wheel_title.png);
+	background-size: 100%;
+	background-position: center;
+}
+.wheel-top-text {
+	position: relative;
+	margin-top: 4rem;
+	width: 100%;
+	color: #fff;
+	text-align: center;
+}
+.wheel-bottom {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 6rem;
+}
+.wheel-btn-left {
+	position: relative;
+	float: left;
+	margin-left: 3rem;
+	padding: 0.8rem 1rem;
+	background: #46b3ed;
+	color: #fff;
+	border-radius: 1rem;
+}
+.wheel-btn-right {
+	position: relative;
+	float: right;
+	margin-right: 3rem;
+	padding: 0.8rem 1rem;
+	background: #ffc843;
+	color: #fff;
+	border-radius: 1rem;
+}

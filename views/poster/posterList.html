@@ -1,0 +1,208 @@
+<div class="game-container">
+	<div class="su-header">
+        <h3>海报累计数量（4/500）</h3>
+        <div class="warn">
+            <p>温馨提示：1、同一时间只允许一个活动处于运行状态（未开始/进行中）</p>
+            <p style="padding-left: 65px;">2、进行中的活动请时刻关注剩余金额、剩余海报、剩余短信数量，以便及时充值或暂停海报安全涨粉；</p>
+            <p style="padding-left: 65px;">3、进行中的活动请留意“数据统计”->“提现失败”菜单信息，及时处理失败记录；</p>
+        </div>
+    </div>
+    <div style="margin-top: 15px;text-align: right;">
+        <div class="btn btn-success" ui-sref="index.posterTypeList">
+            <i class="fa fa-plus"></i>
+            新建海报
+        </div>
+    </div>
+	<div class="content" style="margin-top: 15px;">
+		<table class="table table3 table-hover table-bordered su-table">
+            <thead>
+                <tr>
+                	<th>活动名称</th>              	
+                    <th>状态</th>
+                    <th>时间</th>
+                    <th>海报生成次数</th>
+                    <th>海报扫描次数</th>
+                    <th>奖励类型</th>
+                    <th>累计派发红包</th>
+                    <th>累计派发优惠券</th>
+                    <th>累计派发积分</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody class="borBottom">
+                <tr class="js_selectLine" ng-repeat="x in flyerList">
+                	<td>{{x.mf_name}}</td>
+                    <td>{{x.mf_state_nameref}}</td>
+                    <td>
+                    	<div>{{x.mf_starttime}}</div>
+                    	<div>{{x.mf_endtime}}</div>
+                    </td>
+                    <td>
+                        <div>{{x.mf_grant_num}}</div>
+                        <div>剩余海报：{{x.mf_flyer_num-x.mf_grant_num}}</div>
+                    </td>
+                    <td>7</td>
+                    <td>{{x.mf_spread_type_nameref}}</td>
+                    <td>
+                    	<div ng-show="x.mf_spread_type==2||x.mf_spread_type==3">--</div>
+                        <div ng-show="x.mf_spread_type==1">8.00</div>
+                        <div ng-show="x.mf_spread_type==1">预派余额：2.00元</div>
+                    </td>
+                    <td>{{x.mf_grant_card_num}}</td>
+                    <td><div ng-show="x.mf_spread_type==1||x.mf_spread_type==2">--</div></td>
+                    <td class="edit" style="max-width: 80px;">
+                    	<a class="red" ng-click="goEdit()">
+                    		<i class="fa fa-pencil" ></i>
+                    		编辑
+                    	</a>
+                        <a class="red" ng-click="stop()">
+                            <i class="fa fa-stop-circle" ></i>
+                            停止
+                        </a>
+                    	<a class="red" ng-click="preview()">
+                    		<i class="fa fa-eye" ></i>
+                    		预览
+                    	</a>
+                        <a class="red" ng-click="del()">
+                            <i class="fa fa-plus-circle" ></i>
+                            追加金额
+                        </a>
+                        <a class="red" ng-click="pause()">
+                            <i class="fa fa-pause-circle-o" ></i>
+                            暂停海报
+                        </a>
+                        <a class="red" ng-click="goData()">
+                            <i class="fa fa-bar-chart" ></i>
+                            数据统计
+                        </a>
+                        <a class="red" ng-click="goResult()">
+                            <i class="fa fa-line-chart" ></i>
+                            效果评估
+                        </a>
+                        <a class="red" ng-click="del()">
+                            <i class="fa fa-eye" ></i>
+                            活动信息
+                        </a>
+                    	
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+		<!--分页 -->
+	</div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    海报预览
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="poster-preview">
+                    <div class="p-left">
+                        <img class="poster-img" src="img/opening_bg2.jpg">
+                    </div>
+                    <div class="p-center">
+                        <div class="qrcode">
+                            <div class="qrcode-img" id="qrcodeImg"></div>
+                            <div>微信扫一扫分享</div>
+                            <div class="download" title="下载">
+                                <i class="fa fa-download"></i>
+                            </div>
+                        </div>
+                        <div class="input">
+                            <input type="text" value="https://www.baidu....">
+                            <div>复制</div>
+                        </div>
+                        <div class="to-edit" ng-click="goEditModal()">
+                            <i class="fa fa-edit"></i>
+                            <span>进入编辑</span>
+                        </div>
+                    </div>
+                    <div class="p-right">
+                        <div class="title">分享样式</div>
+                        <div class="style-pre">
+                            <div class="wechat">
+                                <i class="fa fa-wechat"></i>
+                            </div>
+                            <div class="message">
+                                <div class="message-title">年货节促销专题#分享人昵称#</div>
+                                <div class="content">   
+                                    这是我制作的H5微传单，快打开看看！
+                                    <img class="head" src="img/0.jpg">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="style-bottom">
+                            <div class="section">
+                                <div class="head">
+                                    <img src="img/0.jpg">
+                                    <div>更改图片</div>
+                                </div>
+                                <div class="right-content">
+                                    <div>
+                                        <input type="checkbox" name="">
+                                        <span>使用分享人头像</span>
+                                        <div>
+                                            最佳尺寸：200*200.jpg/png/gif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="controls share-txt-controls" style="width: 385px;">
+                                <div class="share-txt-box j-share-txt-box">
+                                    <div class="share-txt-header">
+                                        <div class="share-txt-titel">标题</div>
+                                        <div class="share-txt-insert">
+                                            <span></span>
+                                            插入
+                                            <ul class="hide2">
+                                                <li class="j-insert-tag" ng-click="addNick()">分享人昵称</li>
+                                                <li class="j-insert-tag" ng-click="addTimes()">访问次数</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="share-txt-content j-share-txt-content j-share-title-content" 
+                                        contenteditable="true" ng-model="titleData">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="controls share-txt-controls" style="width: 385px;">
+                                <div class="share-txt-box j-share-txt-box">
+                                    <div class="share-txt-header">
+                                        <div class="share-txt-titel">描述</div>
+                                        <div class="share-txt-insert">
+                                            <span></span>
+                                            插入
+                                            <ul class="hide2">
+                                                <li class="j-insert-tag" ng-click="addNick2()">分享人昵称</li>
+                                                <li class="j-insert-tag" ng-click="addTimes2()">访问次数</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="share-txt-content j-share-txt-content j-share-title-content" 
+                                        contenteditable="true" ng-model="contentData">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

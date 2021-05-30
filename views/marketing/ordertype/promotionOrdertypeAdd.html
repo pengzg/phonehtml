@@ -1,0 +1,157 @@
+<div class="xt_changeHtml" style="margin-bottom: 120px;">
+	<div class="addlistCenter">
+
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 促销主题：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.ppm_name" maxlength="15" style="width:300px" placeholder="促销主题在30个字符以内"/>
+			</div>
+		</div>
+		
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi width-just">订单类型：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+			<!-- 	<div >
+					<label class="m10right" >
+						<input type="radio" name="ordertype" value="1" ng-model="vo.ppm_def4"   class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 水票订单
+					</label>
+				</div>
+				<div>
+					<label class="m10right" >
+						<input type="radio"  name="ordertype" value="2" ng-model="vo.ppm_def4" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 送水订单
+					</label>
+				</div> -->
+				<div>
+					<label class="m10right" >
+						<input type="radio"  name="ordertype" value="3" ng-model="vo.ppm_def4" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 取水订单
+					</label>
+				</div>
+			<!-- 	<div >
+					<label class="m10right" >
+						<input type="radio"  name="ordertype" value="4" ng-model="vo.ppm_def4" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 充值订单
+					</label>
+				</div> -->
+			</div>
+		</div>
+		
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 促销时间：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" class="Wdate" style="width: 200px;" id="start_time" />
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 优惠：</span>
+			<div class="widthAuto zk_controlInput">
+					<input type="number"   ng-model="vo.ppm_def5" ng-blur="checkPrice(vo);"  step="0.01" min="0" style="width:80px;">&nbsp;&nbsp;&nbsp;元
+			</div>
+		</div>
+
+
+		
+		
+		
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi width-just">发布状态：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				<div ng-show="false">
+					<label class="m10right" >
+						<input type="radio" name="state" ng-model="vo.ppm_state"  value="1" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 取消
+					</label>
+				</div>
+				<div>
+					<label class="m10right" >
+						<input type="radio"  name="state" value="2" ng-model="vo.ppm_state" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 暂存
+					</label>
+				</div>
+				<div>
+					<label class="m10right" >
+						<input type="radio"  name="state" value="3" ng-model="vo.ppm_state" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 发布
+					</label>
+				</div>
+				<div ng-show="false">
+					<label class="m10right" >
+						<input type="radio"  name="state" value="4" ng-model="vo.ppm_state" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 停止
+					</label>
+				</div>
+			</div>
+		</div>
+		
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi width-just">区域：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				<div>
+					<label class="m10right" >
+						<input type="radio" ng-model="vo.ppm_range"  value="1" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 全区域
+					</label>
+				</div>
+				<div ng-show="false">
+					<label class="m10right" >
+						<input type="radio"  value="2" ng-model="vo.ppm_range" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;"/> 以下区域
+					</label>
+				</div>
+				
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" ng-show="vo.pa_area_type==2">
+			<span class="xt_bzWenZi width-just">区域选择</span>
+			<div style="margin-left:116px">
+			<div id="treeDemo" class="ztree">
+								
+			</div>
+			</div>
+			
+		</div>
+
+</div>
+<div class="fixedBottom">
+	<div ng-if="!vo.pa_id"  class="btnStyle Btncolor1 BtnHover1" ng-click="submit();">保存</div>
+	<div ng-if="vo.pa_id&&(publish_stat==2||publish_stat==1)"  class="btnStyle Btncolor1 BtnHover1" 
+	ng-click="submit();">保存</div>
+	<div class="btnStyle Btncolor2 BtnHover2" ><a ui-sref="index.marketing.promotionOrdertype" class="btnStyle Btncolor2 BtnHover2" >返回</a></div>
+</div>
+
+
+
+
+<script>
+
+$(function(){
+  $('.droplistWrap2').hide()
+	$(document).on('click', function (ev) {
+		if ($(ev.target).parents('.SelectMulti-Container2').length) {return}
+		$('.droplistWrap2').hide()
+	})
+
+	//全选框不好使时
+	$('body').on('click', '.js_selectAll', function(){
+		var thisObj = $(this);
+		if (thisObj.is(':checked')) {
+			// $('.select').attr('checked', true); 
+			$('.js_select').prop("checked", true);
+			$('.js_selectAll').prop("checked", true);
+			
+		} else {
+			$('.js_select').attr('checked', false);
+			$('.js_selectAll').prop("checked", false);
+		}
+	});
+
+	$('body').on('click', '.js_select', function(event){
+		event.stopPropagation();
+		var thisObj = $(this);
+		if (thisObj.is(':checked')) {
+			// $('.select').attr('checked', true); 
+			// $('.select').prop("checked", true);  					 					
+		} else {
+			$('.js_selectAll').prop("checked", false);
+		}
+	});
+});
+
+function showDropList (obj){
+	$('.droplistWrap2').hide();
+	$(obj).parent().find('.droplistWrap2').toggle();
+	console.log($(obj).parent().find('.droplistWrap2'))
+};
+</script>

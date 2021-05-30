@@ -1,0 +1,303 @@
+<div class="contentHtml-new" style=" z-index: 10001; background-color: #fff;left:0;">
+	
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;">
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0;">
+					<li class="active">
+						<a class="f14 i-c-black" href="#tab1">
+							<i class="glyphicon glyphicon-edit"></i>
+							 礼品信息
+						</a>
+					</li>
+					<li>
+						<a class="f14 i-c-black" href="#tab2">
+							<i class="icon icon-dropbox"></i>
+							 库存管理
+						</a>
+					</li>
+				</ul>
+				<div class="t-box clearfix" id="tab1" style="display: block;">
+					<form class="form-horizontal">
+						<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+							<div class="panel-body">
+		    					<div class="alert alert-danger">
+									<a href="" class="close">×</a>
+									<p class="f14">
+										<i class="glyphicon glyphicon-warning-sign"></i>
+										 有 5 处问题导致无法提交:
+									</p>
+									<ul style="margin-left: 40px;">
+										<li class="f14">活动标题不能为空</li>
+										<li class="f14">开始时间不能为空</li>
+										<li class="f14">结束时间不能为空</li>
+										<li class="f14">结束时间日期输入无效</li>
+										<li class="f14">二维码数量必须大于 0</li>
+									</ul>
+								</div>
+								<h5>活动设置</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">礼品类型</label>
+									<div class="col-md-9 col-lg-6">
+										<div class="form-control-static f14">微信红包(代发)</div>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<abbr title="必填">*</abbr>
+										 名称
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<input type="text" class="form-control" />
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<abbr title="必填">*</abbr>
+									 	红包金额
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<div class="input-group">
+											<input type="number" class="form-control" style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;" />
+											<span class="input-group-addon" style="border-left: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">个</span>
+										</div>
+										<p class="help-block f14">微信红包金额为 1.00 至 200.00 元中间，可以精确到分</p>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<abbr title="必填">*</abbr>
+										祝福语
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<textarea class="form-control"></textarea>
+										<p class="help-block f14">用户收到红包时展示。需少于20个汉字，含标点符号</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 col-lg-2 control-label f14">图片</label>
+									<div class="col-md-9 col-lg-6">
+										<div id="image-picker">
+											<div class="row images" style=" margin-left: -10px;">
+												<div class="image-item">
+													<div class="thumbnail">
+														<img height="60" src="../../img/20160707.png" alt="">
+														<a class="image-del red" href="javascript:;"><i class="glyphicon glyphicon-remove-sign fa-lg"></i></a>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix addPicBtn">
+												<input type="file" class="fileBtn"/>
+												<a href="" class="btn btn-success">
+													<i class="glyphicon glyphicon-plus"></i>
+													 添加图片
+												</a>
+											</div>
+										</div>
+										<p class="help-block f14">尺寸：400 x 400px，格式：png，jpg</p>
+									</div>
+								</div>    
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">图文详情</label>
+									<div class="col-md-9 col-lg-6 f14">
+										此处是编辑器
+									</div>
+								</div>
+								<h5 class="section-header">积分商城兑换设置</h5>
+								<hr />
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">上架至积分商城</label>
+									<div class="col-md-9 col-lg-6">
+										<div>
+											<label>
+												<div class="toggle btn btn-default btn-sm" style="width: 45px; height: 30px;padding:0 5px;">
+													<input type="checkbox" class="boolean optional" />
+													<div class="toggle-group">
+														<label class="btn btn-success btn-sm toggle-on">是</label>
+														<label class="btn btn-default btn-sm active toggle-off">否</label>
+														<span class="toggle-handle btn btn-default btn-sm"></span>
+													</div>
+												</div>
+											</label>
+										</div>
+										<p class="help-block f14">上架的礼品将在积分商城展示，供用户兑换；如仅作为活动奖品发放，请勿上架礼品</p>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">分组</label>
+									<div class="col-md-9 col-lg-6">
+										<div class="input-group" style="width: 100%;">
+											<select class="form-control" name="" style="width: 100%;">
+												<option value="">分组</option>
+												<option selected="selected" value="">推荐礼品</option>
+												<option value="">其他</option>
+											</select>
+										</div>
+										<p class="help-block f14">为礼品设置分组，在积分商城页面可以选择显示特定分组的礼品</p>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<abbr title="必填">*</abbr>
+									 	参考价
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<div class="input-group">
+											<input type="number" class="form-control" style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;" />
+											<span class="input-group-addon" style="border-left: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">元</span>
+										</div>
+										<p class="help-block f14">礼品的市场参考价，仅用于显示，不作为交易价格</p>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="radio_buttons optional col-md-3 col-lg-2 control-label f14">支付类型</label>
+									<div class="col-md-9 col-lg-6" style="padding-top: 9px;">
+										<span class="radio f14" style="padding: 0; width: 100%;">
+											<lable class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" >
+												<div class="xt_inputBackimg"=></div>仅限积分支付
+											</lable>
+										</span>
+										<span class="radio f14" style="padding: 0; width: 100%;">
+											<lable class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" >
+												<div class="xt_inputBackimg" ></div>仅限现金支付
+											</lable>
+										</span>
+										<span class="radio f14" style="padding: 0; width: 100%;">
+											<lable class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" >
+												<div class="xt_inputBackimg" ></div>积分+现金
+											</lable>
+										</span>
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<abbr title="必填">*</abbr>
+									 	积分价格
+									</label>
+									<div class="col-md-4 col-lg-3">
+										<div class="input-group">
+											<input type="number" class="form-control" style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;" />
+											<span class="input-group-addon" style="border-left: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">元</span>
+										</div>
+										<p class="help-block f14">建议积分价值为：1 积分 = 0.1 元</p>
+									</div>
+								</div>
+								<hr />
+								<a href="" class="btn btn-success">创建礼品</a>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="t-box clearfix" id="tab2" style="display: none;">
+					<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+						<div class="panel-body">
+	    					<div class="row">
+								<div class="col-xs-4 text-center">
+							        <h4>当前库存</h4>
+							        <hr>
+							        <h1 class="stock_quantity">0</h1>
+									<hr>
+								</div>
+								<div class="col-xs-8 left-border">
+									<h5>购买库存，购买后费用将从您的账户余额中扣除</h5>
+									<hr>
+									<form class="simple_form form-horizontal new_purchase">
+										<div class="form-group hidden purchase_type">
+											<div class="col-md-9 col-lg-6">
+												<input class="hidden form-control" type="hidden" value="GoodPurchase" name="purchase[type]" id="purchase_type">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14" style="line-height: 32px;">资金余额</label>
+											<div class="col-md-9 col-lg-6">
+												<div class="form-control-static f14" style="line-height: 32px;">
+													0.00 元
+													<a class="btn btn-success btn-sm" href="">充值</a>
+	    										</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">采购单价</label>
+											<div class="col-md-9 col-lg-6">
+											    <div class="form-control-static f14">
+											      10.00 元
+											    </div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												<abbr title="必填">*</abbr>
+												 数量
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<input class="form-control f14" type="number" step="1" value="1" name="" style="height: 34px; line-height: 18px; box-sizing: border-box;">
+											</div>
+										</div>
+										<hr>
+										<a href="" class="btn btn-success">提交购买</a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default" style="border: 0;">
+    					<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+	      					<i class="icon icon-list"></i> 共4条记录
+	    				</div>
+	    				<!--无记录时显示-->
+	    				<!--<div class="panel-body" style="border: 1px solid #ddd;">
+							<div class="table-empty text-center">
+								<i class="icon icon-search fa-3x"></i>
+								<h4>查找不到相关记录</h4>
+							</div>
+						</div>-->
+						<table class="table table3 table-bordered table-hover" style="margin-bottom: 0;">
+							<thead>
+								<tr>
+									<th class="text-left">名称</th>
+									<th class="text-left">类型</th>
+									<th class="text-left">数量</th>
+									<th class="text-left">库存</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="text-left f14">微信红包</td>
+									<td class="text-left f14">购买</td>
+									<td class="text-left f14">10</td>
+									<td class="text-left red f14">10</td>
+								</tr>
+								<tr>
+									<td class="text-left f14">微信红包</td>
+									<td class="text-left f14">购买</td>
+									<td class="text-left f14">10</td>
+									<td class="text-left red f14">10</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".nav-tabs li").click(function() {
+			$(".nav-tabs li").removeClass("active");
+			$(this).addClass("active");
+			$(".t-box").hide();
+			var activeTab = $(this).find("a").attr("href");
+			$(activeTab).fadeIn();
+			return false;
+		});
+		$(".toggle").click(function() {
+			$(this).toggleClass("off");
+			$(this).siblings().removeClass("off");
+		})
+	});
+</script>

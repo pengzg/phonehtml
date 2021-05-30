@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="./bootstrap.min.css" rel="stylesheet">
+  <link href="dist/ez-confirm.min.css" rel="stylesheet">
+
+  <script type="text/javascript" src="./angular.min.js"></script>
+
+   <script type="text/javascript" src="./ui-bootstrap-tpls.min.js"></script>
+
+  <script src="./ez-focus.min.js"></script>
+  <script src="src/ez-confirm.js"></script>
+  <script src="dist/ez-confirm-tpl.js"></script>
+
+  <script type="text/javascript">
+    angular.module('myApp', ['ui.bootstrap', 'ez.confirm'])
+
+    angular.module('myApp', ['ui.bootstrap', 'ez.confirm', 'ez.focus'])
+
+    .controller('myCtrl', ['$scope', 'EzConfirm', function($scope, EzConfirm)  {
+
+      $scope.remove = function() {
+        EzConfirm.create().then(function() {
+          alert('confirmed');
+        }, function() {
+          alert('declined');
+        });
+      };
+
+      $scope.delete = function() {
+        EzConfirm.create(
+        	{heading: 'Confirm Delete', 
+        	text: 'Are you sure you want to Delete?'
+        	}).then(function() {
+          alert('delete confirmed');
+        }, function() {
+          alert('delete cancelled');
+        });
+      };
+      
+    }]);
+  </script>
+
+</head>
+
+<body ng-app="myApp">
+  <div ng-controller="myCtrl">
+    <h3>Default confirm</h3>
+    <a class="btn btn-large btn-danger" ng-click="remove()">Delete</a>
+    <h3>Custom confirm</h3>
+    <a class="btn btn-large btn-danger" ng-click="delete()">Delete</a>
+  </div>
+</body>
+
+</html>

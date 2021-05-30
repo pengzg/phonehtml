@@ -1,0 +1,39 @@
+<ion-content>
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="onRefresh()"></ion-refresher>
+    <div class="seller-video-main">
+        <div class="top-video">
+            <video class="video-source" 
+            	poster="img/mobile/sellerPage/poster.jpg" 
+            	controls="controls" 
+            	tabindex="-1" 
+            	preload="" 
+            	src="video/mobile/sellerPage/video-fan.mp4" 
+            	webkit-playsinline="true" 
+            	playsinline="true" 
+            	x-webkit-airplay="allow" 
+            	x5-video-player-type="h5" 
+            	x5-video-player-fullscreen="true" 
+            	x5-video-orientation="portraint" 
+            	style="object-fit:fill">
+                <img src="img/mobile/sellerPage/poster.jpg" alt="">
+            </video>
+            <div class="clearfix"></div>
+        </div>
+        <div class="seller-list" ng-show="false">
+            <div class="seller-item" ng-repeat="x in [1,2,3,4]" ng-click="goMap()">
+            	<div class="item-t">
+            		<div class="item-l">
+    		            华联超市
+    	        	</div>
+    	        	<div class="item-c">
+    		            距离：100m
+    	        	</div>
+    	        	<div class="item-r">
+    		            <i class="ion-ios-location"></i>
+    	        	</div>
+            	</div>
+                <div class="item-b">朝阳区12号1123</div>
+            </div>
+        </div>
+    </div>
+</ion-content>

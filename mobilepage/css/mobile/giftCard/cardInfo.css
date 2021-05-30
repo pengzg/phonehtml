@@ -1,0 +1,8 @@
+.card-info-main { padding: 2rem; }
+.card-info-main .info-top { color: #444; padding: 1rem; padding-left: 0; padding-bottom: 0.4rem; border-bottom: 1px solid #ddd; font-size: 1.2rem; }
+.card-info-main .info-tel { display: -webkit-box; display: -ms-flexbox; display: flex; margin-top: 1rem; margin-bottom: 1rem; }
+.card-info-main .info-tel .tel-left { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; color: #999; }
+.card-info-main .info-tel .tel-right { -webkit-box-flex: 3; -ms-flex: 3; flex: 3; color: #14ab12; }
+.card-info-main .info-note { display: -webkit-box; display: -ms-flexbox; display: flex; }
+.card-info-main .info-note .note-left { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; color: #999; }
+.card-info-main .info-note .note-right { -webkit-box-flex: 3; -ms-flex: 3; flex: 3; color: #444; }

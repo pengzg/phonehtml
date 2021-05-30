@@ -1,0 +1,43 @@
+<div id="second-sidebar">
+	<p class="nav_header">风格</p>
+	<ul ng-init="selectIndex=0">
+		<li ng-repeat="x in ['全部','电商风格','通用涨粉','品牌宣传']" ng-click="$parent.selectIndex=$index" ng-class="{true: 'selected', false: ''}[$parent.selectIndex == $index]"><a href="">{{x}}</a></li>
+	</ul>
+</div>
+<div class="contentHtml">
+	<div class="wrap">
+		<div class="searchCont">
+			<div class="searchBar clearfix">
+				<label>筛选：</label>
+				<div class="searchItem_list">
+					<a class="searchItem selected">
+						全部
+						<div class="tick"></div>
+					</a>
+					<a class="searchItem">
+						11月新款
+						<div class="tick"></div>
+					</a>
+					<a class="searchItem">
+						12月新款
+						<div class="tick"></div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="searchResult newgameCont">
+			<ul class="gamelist clearfix">
+				<li ng-repeat="x in marketingTemplateList" ng-mouseenter="makeQrCode($index,'/dist/#/poster')">
+					<img ng-src="img/opening_bg2.jpg" alt="" class="gamecover">
+					<p class="desc" title="{{x.mt_name}}">风格1</p>
+					<a ng-click = "createFun(x);" class="setNow">立即创建</a>
+					<div class="qrcode">
+						<div id="qrcode{{$index}}" class="code"></div>
+						<p>扫码体验</p>
+					</div>
+					<div class="qrcodeMask"></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,281 @@
+<div class="setting_panel panel-default">
+    <div class="panel-heading text-left">
+        <div class="setting_nav">
+            <ul>
+                <li>
+                	<a href="">{{ms_name}}-工作人员列表</a>
+                	
+                <div class="btn btn-default" style="position:absolute;right: 30px;top:8px;" ng-click="backList()">返回</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="t-input-group clearfix" style=" margin-left: 15px;margin-top: 20px">
+			<div class="floatLeft">
+				<span class="input-group-addon date_check_main" style="width: 55px; height: 20px; line-height: 20px;border-top-right-radius:0;border-bottom-right-radius:0;" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+						> 结束日期 </span>
+					<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="padding:7px 6px;width: 125px; height: 18px; margin-left:-4px;border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;"
+							onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+							ng-model="startdate"/>
+					<input id="end_date" autocomplete="off"  type="text" class="Wdate" style="padding:7px 6px;width: 125px; height: 18px; margin-left:-4px;border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;"
+							onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+							ng-model="enddate"/>
+			</div>
+			<div class="floatLeft">
+				<input type="text" ng-model="searchKey" style="padding:7px 6px;height: 18px;width:153px;margin-left: 4px;"  placeholder="请输入姓名或手机号"> 
+				<div class="btn btn-success" ng-click="doSearch();" style="vertical-align:top;">查询</div>
+			</div>
+			<div class="btn btn-success floatRight" style="margin-right: 100px"  ng-click="toEdit();">新增</div>
+	</div>
+    
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                        <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>姓名</th>
+                                <th>手机号</th>
+                                <th>角色类型</th>
+                                <th>配送员</th>
+                                <!-- <th>登录密码</th> -->
+                                <th>有效起始时间</th>
+                                <th>有效结束时间</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in workUserList">
+                                <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+                                <td class="text-center f14">{{x.mbw_name}}</td>
+                                <td class="text-center f14">{{x.mbw_mobile}}</td>
+                                <td class="text-center f14">{{x.mbw_role_nameref}}</td>
+                                <td class="text-center f14">{{x.mbw_role_nameref}}
+									<span ng-if="x.mbw_isdelivery=='Y'">是</span>
+									<span ng-if="x.mbw_isdelivery=='N'">否</span>
+								</td>
+                                <!-- <td class="text-center f14">{{x.mbw_pwd}}</td> -->
+                                <td class="text-center f14">{{x.mbw_statdate}}</td>
+                                <td class="text-center f14">{{x.mbw_enddate}}</td>
+                                <td class="text-center f14">{{x.mbw_state_nameref}}</td>
+                                <td class="text-center f14">
+                                   <!--  <a class="red" style="display: inline-block;" class="common_offsell" ng-click="getDetail(x.mb_id)" title="查看">查看</a>  -->
+                                    <a class="common_offsell" title="详情" ng-click="toEdit(x.mbw_id);"></a>
+                                    <div  style="display: inline-block;position: relative;">
+										<a ng-if="x.mbw_state == '1'" class="common_btns common_band" ng-click="changeStatus(x.mbw_id,'禁用')" title="禁用"></a>
+										<a ng-if="x.mbw_state == '0'" class="common_btns common_active" ng-click="changeStatus(x.mbw_id,'启用')" title="启用"></a>
+									</div>
+									<a  stlyle="color:#7b8aa1;" ng-click="resetPwd(x.mbw_id);">重置密码</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--工作人员新增和修改弹出框  -->
+<div class="dialog" ng-show="dialogShow" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<div class="dg-xg-zh" style="z-index:1000; width:608px;height:450px;margin-left: -369px; top:80px;" ng-show="dialogShow">
+		<div class="dg-xg-js" style="width:608px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		<div class="clearfix" style="padding: 0 10px; box-sizing: border-box;">
+		    <form class="form-horizontal w5c-form demo-form" role="form" w5c-form-validate="vmm" novalidate name="validateForm">
+				<div class="dg-content" style="width: 100%; margin-bottom:10px;margin-top:30px;" >
+					<div class="tab-panel" style="height:320px">
+						<div class="panel panel-default" style="border:0;box-shadow:none;">
+								<div class="panel-content-box">
+									<div style="width:100%">
+										<div class="clearfix">
+											<div class="input-group-addon-su">
+												<span class="colorRed mr5">*</span>注册类型：
+											</div>
+											<div class="input-group-su has-delete" >
+												<input type="text" class="dropdown" data-toggle="dropdown" name="mbw_role_nameref"  ng-model="vo.mbw_role_nameref" required="true">
+												<input ng-show="false" type="text" ng-model="vo.mbw_role">
+												<div class="droplistWrap" style="width: 212px; top: 35px;">
+													<div class="droplist">
+														<span class="listItem" ng-repeat="x in roleList" ng-click="chooseRegisterType(x)">{{x.bd_name}}</span>
+													</div>
+												</div>
+											</div>
+											<div class="input-group-btn-su" ng-click="deleteInput(1)"><img src="img/shanchu.png"></div>
+										</div>
+										<!-- <div class="clearfix mt10">
+											<div class="input-group-addon-su">
+												<span class="colorRed mr5">*</span>所属服务商：
+											</div>
+											<div class="input-group-su has-delete" >
+												<input type="text" class="dropdown" data-toggle="dropdown"  ng-model="vo.mbw_shopid_nameref" required="true"
+												ng-keyup="doSearchMsShop()">
+												<input ng-show="false" type="text" ng-model="vo.mbw_shopid">
+												<div class="droplistWrap" style="width: 212px;top: 35px;height: 150px;">
+													<div class="droplist">
+														<span class="listItem" ng-repeat="x in memberShopList" ng-click="selectedMemberShop(x.ms_id,x.ms_name)">{{x.ms_name}}</span>
+													</div>
+												</div>
+												<div class="droplistWrap zk_fanye" style="height: 28px;top: 184px;width: 212px;" stop-propagation>
+													<a ng-click="prevPage(pager1,queryMemberShopList)" class="m5right m6left">上一页</a>
+													<a ng-click="nextPage(pager1,queryMemberShopList)" class="m5right">下一页</a>
+													<span class="m5right ng-binding">{{pager1.page}}/{{pager1.pageTotal}}</span>
+													<span class="ng-binding">共{{pager1.total}}条</span>
+												</div>
+											</div>
+											<div class="input-group-btn-su" ng-click="deleteInput(2)"><img src="img/shanchu.png"></div>
+										</div> -->
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>手机号：</div>
+											<div class="input-group-su su-single">
+												<input type="text" ng-disabled="!vo.isShow" name="mobile" ng-model="vo.mbw_mobile" ng-change="checkMobile(vo.mbw_mobile)" maxlength="11" required="true" >
+											</div>
+										</div>
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>姓名：</div>
+											<div class="input-group-su su-single">
+												<input type="text" ng-model="vo.mbw_name" readonly="true" required="true">
+											</div>
+										</div>
+										<div ng-show="vo.isShow" class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>登录密码：</div>
+											<div class="input-group-su su-single">
+												<input type="text" name="passwords" ng-model="vo.mbw_pwd" required="true">
+											</div>
+										</div>
+										<div class="clearfix">
+											<div class="input-group-addon-su">
+												上级主管：
+											</div>
+											<div class="input-group-su has-delete" >
+												<input type="text" class="dropdown" data-toggle="dropdown" name="mbw_leader_workid_nameref"  ng-model="vo.mbw_leader_workid_nameref" required="true">
+												<input ng-show="false" type="text" ng-model="vo.mbw_leader_workid">
+												<div class="droplistWrap" style="width: 212px; top: 35px;">
+													<div class="droplist">
+														<span class="listItem" ng-repeat="x in workUserList" ng-click="chooseleader(x)">{{x.mbw_name}}</span>
+													</div>
+												</div>
+											</div>
+											<div class="input-group-btn-su" ng-click="deleteInput(2)"><img src="img/shanchu.png"></div>
+										</div>
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">状态：</div>
+											<div class="input-group-su su-radio-wrap">
+												<div class="zk_controlRadio" style=" width: 200px;">
+													<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+														<input class="xt_radio ng-pristine ng-untouched ng-valid valid" name="mbw_state" ng-model="vo.mbw_state" value="1" type="radio" ng-checked="vo.mbw_state==1" checked="checked">
+														<div class="xt_inputBackimg"></div>启用
+													</lable>
+													<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+													<input class="xt_radio ng-pristine ng-untouched ng-valid" name="mbw_state" ng-model="vo.mbw_state" value="0" type="radio" ng-checked="vo.mbw_state==0">
+														<div class="xt_inputBackimg" value="11"></div>禁用
+													</lable>
+												</div>
+											</div>
+										</div>
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">是否是配送员：</div>
+											<div class="input-group-su su-radio-wrap">
+												<div class="zk_controlRadio" style=" width: 200px;">
+													<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+														<input class="xt_radio ng-pristine ng-untouched ng-valid valid" name="mbw_isdelivery" ng-model="vo.mbw_isdelivery" value="Y" type="radio"  >
+														<div class="xt_inputBackimg"></div>是
+													</lable>
+													<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+													<input class="xt_radio ng-pristine ng-untouched ng-valid" name="mbw_isdelivery" ng-model="vo.mbw_isdelivery" value="N" type="radio" >
+														<div class="xt_inputBackimg" value="N"></div>否
+													</lable>
+												</div>
+											</div>
+										</div>
+										
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>有效时间：</div>
+											<div class="input-group-su-date">
+												<input type="text" name="validetime" class="Wdate" id="start_time"/>
+											</div>
+										</div>
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5"></span>工厂：</div>
+											<div class="input-group-su-date">
+												<select ng-model="vo.mbw_factoryid">
+													<option ng-repeat="x in factoryList" value="{{x.bf_id}}">{{x.bf_name}}</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+						</div>
+					</div> 
+						
+				</div>
+				<div class="dg-submint" style=" width:100%; text-align: center; margin-bottom:20px;">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="savaEdit(vo.mbw_id)">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- 重置密码弹框 -->
+<div class="dialog" ng-show="editPwddialogShow">
+	<div class="dialog-zdc"></div>
+
+	<form class="form-horizontal w5c-form demo-form" role="form"
+		w5c-form-validate="vm" novalidate name="validateForm1">
+		<div class="dg-xg-zh" style="width: 620px; height:160px; margin-left: -310px; top: 50%; margin-top:-125px;" ng-show="editPwddialogShow">
+			<div class="dg-xg-js" style="width: 620px">
+				重置密码
+				<div class="dg-cancle" ng-click="closeDialogPwd()"></div>
+			</div>
+			<div class="dg-content" style="margin: 12px auto; height:80px;overflow: visible;">
+				<div id="formJiLu" class="" style="border: none;height:80px;margin-top:10px;">
+					<form>
+						<div>
+							<div class="contentGroup clearfix">
+								<div class="zk_controlLabel">
+									<span class="f14">新密码</span> <i>*</i>
+								</div>
+
+								<div class="floatLeft p10left f14">
+									<input style="width: 226px;" type="text" name="password"  ng-maxlength="10"  ng-minlength="6"
+										ng-model="passWord" required="">
+										（ 请输入新密码6~10位）
+								</div>
+							</div>
+							
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" w5c-form-submit="modifyPwdComplete();">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialogPwd();">取消</div>
+				</div>
+			</div>
+		</div>
+
+	</form>
+</div>
+
+
+

@@ -1,0 +1,51 @@
+<div class="contentHtml-new" style="background-color: #F5F6F8;left:0;">
+
+    <div class="tab-box">
+        <ul>
+            <li ng-class="{'active':tabSelect=='1'}" ng-click="tabSelect=1">所有优惠码</li>
+            <li ng-class="{'active':tabSelect=='2'}" ng-click="tabSelect=2">未开始</li>
+            <li ng-class="{'active':tabSelect=='3'}" ng-click="tabSelect=3">进行中</li>
+            <li ng-class="{'active':tabSelect=='4'}" ng-click="goCouponList();">已结束</li>
+        </ul>
+    </div>
+
+    <div class="content-title-box" style="background:#fff;">
+       <span class="colorRed">优惠码1111</span>  | <span style="margin-left:10px;">+码库</span>
+    </div>
+
+
+    <div>
+        <table class="changeColor" style="width:100%;">
+            <thead style="font-weight: bold;background:#ddd;">
+                <th></th>
+                <th>优惠码</th>
+                <th>面额(元)</th>
+                <th>创建时间</th>
+                <th>领取时间</th>
+                <th>领取人</th>
+                <th>使用时间</th>
+                <th>订单详情</th>
+                <th>状态</th>
+               
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in [1,2,3,4]" style="border-bottom: 1px solid #eee;">
+                    <td><input type="checkbox"></td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+
+                    <td>3</td>
+                    <td>
+                        状态
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+        <tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+    </div>
+</div>

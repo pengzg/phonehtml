@@ -1,0 +1,21 @@
+<div class="pop-tab-main" ng-show="tabPop.isTabPop">
+	<div class="pop-tab-note" ng-class="{'pop-tab-active':!tabPop.isTabTwo}" ng-click="!tabPop.disable?tabPop.isTabTwo=false:''"></div>
+	<div class="pop-tab-reward" ng-class="{'pop-tab-active':tabPop.isTabTwo}" ng-click="tabPop.tab2Click()"></div>
+	<div class="pop-tab-close" ng-click="!tabPop.disable?tabPop.isTabPop=false:''"></div>
+	<div class="pop-tab-content-note border-box" ng-show="!tabPop.isTabTwo">
+		<div ng-repeat="x in tabPop.noteData">
+			<div class="note-title">{{x.title}}</div>
+			<div class="note-content">
+				<div ng-repeat="y in x.content track by $index">{{y}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="pop-tab-content border-box" ng-show="tabPop.isTabTwo">
+		<div ng-repeat="x in tabPop.awardData">
+			<div>{{x.level}}</div>
+			<div>{{x.content}}</div>
+			<div>{{x.status}}</div>
+		</div>
+	</div>
+</div>
+<div class="compop-background" ng-show="tabPop.isTabPop" ng-click="!tabPop.disable?tabPop.isTabPop=false:''"></div>

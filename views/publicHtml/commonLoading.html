@@ -1,0 +1,24 @@
+<div class="com-loading" ng-show="$root.comLoading.isShow">
+	<div class="jump" ng-click="$root.comLoading.hide()">
+		<span ng-bind="$root.comLoading.time" class="small"></span>
+		<span class="small">秒</span>
+		<span>跳过</span>
+	</div>
+	<div>
+		<img style="width: 100%;max-height: 80vh;" ng-src="{{$root.comLoading.img}}" alt="">
+	</div>
+	<div class="com-loading-pic">
+		<!-- <ion-spinner icon="ios"></ion-spinner> -->
+		<ion-spinner icon="bubbles" class="loadign-spinner-gray"></ion-spinner>
+	</div>
+	<div class="com-loading-content">
+		<div class="loading-top">
+			<span class="red" ng-bind="$root.comLoading.content[0]">社区快线</span>
+			<span class="loading-black" ng-bind="$root.comLoading.content[1]">正在努力准备</span>
+			<span class="red" ng-bind="$root.comLoading.content[2]">现金红包</span>
+		</div>
+		<div class="loading-bottom">
+			<span class="loading-gray" ng-bind="$root.comLoading.content[3]">请同意获取地理位置，领取福利</span>
+		</div>
+	</div>
+</div>

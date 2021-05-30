@@ -1,0 +1,12 @@
+.img_small_76 {
+	width: 76px;
+	height: auto;
+}
+
+.wechat_table {
+	margin: 0 !important;
+}
+
+.wechat_tr_last {
+	border-bottom: 1px solid #dddddd;
+}

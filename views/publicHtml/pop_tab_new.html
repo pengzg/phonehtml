@@ -1,0 +1,21 @@
+<div class="pop-tab-main" ng-show="tabPop3.isTabPop" id="scorllContentMain">
+	<div class="pop-tab-note" ng-class="{'pop-tab-active':!tabPop3.isTabTwo}" ng-click="tabPop3.isTabTwo=false"></div>
+	<div class="pop-tab-reward" ng-class="{'pop-tab-active':tabPop3.isTabTwo}" ng-click="tabPop3.showTab2()"></div>
+	<div class="pop-tab-close" ng-click="tabPop3.isTabPop=false"></div>
+	<div class="pop-tab-content-note border-box canscroll" ng-show="!tabPop3.isTabTwo">
+		<div ng-repeat="x in tabPop3.noteData">
+			<div class="note-title">{{x.title}}</div>
+			<div class="note-content">
+				<div ng-repeat="y in x.content track by $index">{{y}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="pop-tab-content border-box canscroll" ng-show="tabPop3.isTabTwo">
+		<div ng-repeat="x in tabPop3.awardData">
+			<div>{{x.level}}:{{x.content}}</div>
+			<div>{{x.time}}<div class="button button-energized button-small tabpop-btn" ng-click="tabPop3.prizeCallback(x)" ng-show="x.mw_state==1">去领取</div></div>
+			<div>{{x.status}}</div>
+		</div>
+	</div>
+</div>
+<div class="compop-background" ng-show="tabPop3.isTabPop" ng-click="tabPop3.isTabPop=false"></div>

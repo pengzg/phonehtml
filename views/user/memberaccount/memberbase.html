@@ -1,0 +1,387 @@
+<div class="setting_panel panel-default">
+    <div class="panel-heading text-left">
+        <div class="setting_nav">
+            <ul>
+                <li><a href="">会员列表</a></li>
+            </ul>
+        </div>
+    </div>
+
+	
+	<div class="search-filter-box">
+		<div>
+			<label>结束时间<span>:</span></label>
+			<span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+					ng-click="dateRange.chooseDate($event)" > 日期 </span>
+			<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+				onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+				/>
+			<input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+				onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+                
+            
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="请输入姓名或手机号" ng-model="searchParam.searchKey">
+			
+		</div>
+		<div>
+            <label>推广人<span>:</span></label>
+			<input type="text" placeholder="推广人信息" ng-model="searchParam.spreadSearchKey">
+			<label>合伙人<span>:</span></label>
+			<input type="text" placeholder="合伙人信息" ng-model="searchParam.partnerSearchKey">
+			<label>管理员<span>:</span></label>
+			<input type="text" placeholder="合伙人信息" ng-model="searchParam.agentSearchKey">
+        </div>
+		
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();doSearch();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success add-btn" style="float:right;"  ng-click="toEdit();"><i class="icon icon-plus"></i>数据调整</a>
+		</div>
+	</div>
+
+
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                        <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>头像</th>
+                                <th>用户信息</th>                           
+                                <th>注册信息</th>
+								<!-- <th>推广码</th> -->
+                                <th>合伙人关系</th>
+                                <th>分润关系</th>
+								<th>最后购买/登录时间</th>
+								<th>下单次数/金额</th>
+								<!-- <th>客户数</th> -->
+								<!-- <th>真实姓名</th>
+								<th>真实手机号</th>
+								<th>身份证号</th>
+                                <th>身份证正面</th>
+                                <th>身份证背面</th>
+                                <th>身份证持证</th> -->
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in userList">
+                                <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+                                <td class="text-center f14" ><img width="20" ng-src="{{x.mb_img}}" ></td>
+                                <td class="text-center f14">{{x.mb_name}}<br>{{x.mb_mobile}}<br>{{x.mb_followtime}}</td>
+                                <td class="text-center f14">{{x.mb_city_nameref}}<br>{{x.mb_communityid_nameref}}<br>{{x.mb_spreaduserid_nameref}}</td>
+								<!-- <td class="text-center f14">
+                                    <image style="height:100px;width:100px;" src="{{x.mb_spreadcode_show}}" />
+								</td> -->
+                                <td class="text-center f14">{{x.mb_agenttype_sale_nameref}}<br>{{x.mb_partner_first_nameref}}<br>{{x.mb_partner_second_nameref}}</td>
+                                <td class="text-center f14">{{x.mb_firstspread_nameref}}<br>{{x.mb_secondspread_nameref}}<br>{{x.mb_agentid_sale_nameref}}</td>
+                                <td class="text-center f14">{{x.mb_last_buy_time}}<br>{{x.mb_lastlogintime}}</td>
+								<td class="text-center f14">{{x.mb_ordernum}}/{{x.mb_orderamount}}</td>
+								<!-- <td class="text-center f14">{{x.mb_customernum}}</td> -->
+								<!-- <td class="text-center f14">{{x.mb_member_name}}</td>
+								<td class="text-center f14">{{x.mb_member_mobile}}</td>
+								<td class="text-center f14">{{x.mb_idcard}}</td>
+                                <td class="text-center f14">
+                                    <img src="{{x.mb_idcard_front}}" style="height: 100px;">
+                                </td>
+                                <td class="text-center f14">
+                                    <img src="{{x.mb_idcard_back}}" style="height: 100px;">
+                                </td>
+                                <td class="text-center f14">
+                                    <img src="{{x.mb_idcard_hold}}" style="height: 100px;">
+                                </td> -->
+                                <td class="text-center f14">
+									<a  class="common_btns common_edit"  ng-click="showUpBox(x)" title="编辑"></a><br>
+									<a  ng-if="x.mb_isagent_sale != 'Y'"  title="关联合伙人" ng-click="showSelectPartner(x,1);">关联合伙人</a><br>
+									<a  ng-if="x.mb_isagent_sale != 'Y'"  title="升级为合伙人" ng-click="showSelectPartner(x,2);">升级为合伙人</a><br>
+									<a  ng-if="x.mb_isagent_sale != 'Y'&&x.mb_agenttype_sale == '1'"  title="设为管理员" ng-click="updateSetPartnerLevel(x,3);">设为管理员</a>
+									<a  ng-if="x.mb_agenttype_sale == '2'"  title="设为管理员" ng-click="updateSetPartnerToAgent(x,3);">设为管理员</a>
+								</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--工作人员新增和修改弹出框  -->
+<div class="dialog" ng-show="dialogShow" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<div class="dg-xg-zh" style="z-index:1000; width:780px;height:550px;margin-left: -369px; top:80px;" ng-show="dialogShow">
+		<div class="dg-xg-js" style="width:608px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		<div class="clearfix" style="padding: 0 10px; box-sizing: border-box;">
+		    <form class="form-horizontal w5c-form demo-form" role="form" w5c-form-validate="vmm" novalidate name="validateForm">
+				<div class="dg-content" style="width: 100%; margin-bottom:10px;margin-top:30px;" >
+					<div class="tab-panel" style="height:400px">
+						<div class="panel panel-default" style="border:0;box-shadow:none;">
+								<div class="panel-content-box">
+									<div style="width:100%">
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+												<span class="colorRed mr5">*</span>所属服务商：
+											</div>
+											<div class="input-group-su has-delete" >
+												<input type="text" class="dropdown" data-toggle="dropdown"  ng-model="vo.shopname" required="true"
+												ng-keyup="doSearchMsShop()">
+												<input ng-show="false" type="text" ng-model="vo.shopid">
+												<div class="droplistWrap" style="width: 212px;top: 35px;height: 150px;">
+													<div class="droplist">
+														<span class="listItem" ng-repeat="x in memberShopList" ng-click="selectedMemberShop(x.ms_id,x.ms_name)">{{x.ms_name}}</span>
+													</div>
+												</div>
+												<div class="droplistWrap zk_fanye" style="height: 28px;top: 184px;width: 212px;" stop-propagation>
+													<a ng-click="prevPage(pager1,queryMemberShopList)" class="m5right m6left">上一页</a>
+													<a ng-click="nextPage(pager1,queryMemberShopList)" class="m5right">下一页</a>
+													<span class="m5right ng-binding">{{pager1.page}}/{{pager1.pageTotal}}</span>
+													<span class="ng-binding">共{{pager1.total}}条</span>
+												</div>
+											</div>
+											<div class="input-group-btn-su" ng-click="deleteInput(2)"><img src="img/shanchu.png"></div>
+                                        </div>
+                                        
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>注册开始日期
+											</div>
+											<div class="input-group-su-date">
+												<input id="queryStartdate" type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                                                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                                                    />
+											</div>
+                                        </div>
+                                        
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>注册结束日期</div>
+											<div class="input-group-su-date">
+												<input id="queryEnddate" type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                                                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                                                    />
+											</div>
+										</div>
+										
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>调整后日期</div>
+											<div class="input-group-su-date">
+												<input id="startdate" type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                                                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                                                    />
+											</div>
+                                        </div>
+                                        <!--
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>水柜子编号</div>
+											<div class="input-group-su-date">
+												<input type="text" placeholder="水柜子编号" ng-model="vo.storecode" required>
+											</div>
+                                        </div>
+										-->
+                                        
+										<div class="clearfix mt10">
+											<div class="input-group-addon-su">
+											<span class="colorRed mr5">*</span>每天人数</div>
+											<div class="zk_controlInput" >
+												<input placeholder="每天人数" ng-model="vo.membernum"  type="number" max="90000" min="1" required >
+											</div>
+										</div>
+										<div class="clearfix mt10">
+												<div class="input-group-addon-su">
+												<span class="colorRed mr5"></span>调整会员总数</div>
+												<div class="zk_controlInput" >
+													<input placeholder="调整会员总数量" ng-model="vo.membertotal"  type="number" max="90000" min="1" >
+												</div>
+										</div>
+										<div class="clearfix mt10">
+												<div class="input-group-addon-su">
+												<span class="color mr5"></span>城市</div>
+												<div class="input-group-su-date">
+													<input type="text" placeholder="会员注册地址" ng-model="vo.city">
+												</div>
+											</div>
+									</div>
+								</div>
+						</div>
+					</div> 
+						
+				</div>
+				<div class="dg-submint" style=" width:100%; text-align: center; margin-bottom:20px;">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="savaEdit()">确定</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<!-- 查看信息弹窗 -->
+<div class="dialog" ng-show="upBox" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -230px;"  ng-show="upBox">
+		<div class="dg-xg-js" style="width:660px;">
+			修改用户的类型
+			<div class="dg-cancle" ng-click="closeUpbox()"></div>
+		</div>
+	    <form class="form-horizontal w5c-form demo-form" role="form" novalidate name="validateForm">
+			<div class="dg-content" style="height: 280px; margin:0 auto;">
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">用户编号：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<span class="f14">{{userVo.mb_code}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">用户名称：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{userVo.mb_name}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 600px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">用户类型</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 550px;">
+							
+								<span ng-repeat="x in usertypeList" style="width: 100px;">
+									<label class="m10right">
+
+										<input type="radio" name="type" value="{{x.bd_code}}" ng-model="userVo.mb_usertype" class="widthAuto ant-checkboxStyle"
+											style="margin-top: -2px;" /> {{x.bd_name}}
+									</label>
+								</span>
+								
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 600px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">用户账期</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 550px;">
+							
+								<span style="width: 100px;">
+									<label class="m10right">
+
+										<input type="radio" name="account_period" value="1" ng-model="userVo.mb_is_account_period" class="widthAuto ant-checkboxStyle"
+											style="margin-top: -2px;" /> 是
+									
+									</label>
+								</span>
+								<span style="width: 100px;">
+									<label class="m10right">
+
+										
+										<input type="radio" name="account_period" value="2" ng-model="userVo.mb_is_account_period" class="widthAuto ant-checkboxStyle"
+											style="margin-top: -2px;" /> 不是
+									</label>
+								</span>
+								
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				
+				<div class="dg-submint">
+					<div class="btn-default btnStyle Btncolor2 BtnHover2" ng-click="saveUsertype()">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeUpbox()">关闭</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- 查看用户订单弹窗 -->
+<div class="dialog" ng-show="dialog==3" style="z-index: 88">
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index: 999998; width: 900px; margin-left: -450px; top: 10%; "
+		ng-show="dialog">
+		<div class="dg-xg-js" style="width: 900px;">
+			{{dialogTitle3}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		<div class="setting_panel panel-default">
+			<div class="panel panel-default" style="border: 0; border-radius: 0;height:370px;overflow-y:scroll;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                                              
+                        <div class="search-filter-box">
+                            <div>
+                                <label>用户信息<span>:</span></label>
+                                <input type="text" placeholder="请输入姓名或手机号" ng-model="agentSearchParam.searchKey">
+                                <a class="btn btn-success" style="margin-left:80px;"  ng-click="agentPager.page =1;queryAgentList();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+                            </div>
+                        </div> 
+                    
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>用户名</th>
+                                <th>电话</th>
+                                <th>注册时间</th>
+                                <th>合伙人类型</th>
+                                <th>合伙人上级</th>
+                                <th>合伙人团队</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in agentList">
+                                <td class="text-center f14">{{agentPager.rows * (agentPager.page - 1)+ $index+1}}</td>
+                                <td class="text-center f14">{{x.mb_name}}</td>
+                                <td class="text-center f14">{{x.mb_mobile}}</td>
+                                <td class="text-center f14">{{x.mb_followtime}}</td>
+                               
+                                <td class="text-center f14">{{x.mb_agenttype_sale_nameref}}</td>
+                                <td class="text-center f14">{{x.mb_firstspread_nameref}}</td>
+                                <td class="text-center f14">{{x.mb_agentid_sale_nameref}}</td>
+                                
+                                <td>
+                                	<a class="common_publish" title="绑定" ng-click="bindAgent(x);"></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+              </div>
+              <tm-pagination conf="agentPager" search-param ="agentSearchParam"></tm-pagination>
+		</div>
+		<!-- <div>
+			<div class="btn btn-default"
+				style="margin-left: 594px; margin-bottom: 10px"
+				ng-click="closeDialog()">关闭</div>
+		</div>
+ -->
+
+	</div>
+</div>

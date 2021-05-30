@@ -1,0 +1,24 @@
+<div class="pop-video-main" ng-class="{'show-in':$root.videoPop.isShow}">
+	<div class="closed-btn" ng-click="$root.videoPop.hide()"><i class="ion-ios-close-outline"></i></div>
+    <div class="top-video">
+		<div class="video-title" ng-bind="$root.videoPop.title"></div>
+        <video class="video-source" 
+        	poster="img/mobile/sellerPage/poster.jpg" 
+        	controls="controls" 
+        	tabindex="-1" 
+        	preload="" 
+        	src="video/mobile/sellerPage/video-fan.mp4" 
+        	webkit-playsinline="true" 
+        	playsinline="true" 
+        	x-webkit-airplay="allow" 
+        	x5-video-player-type="h5" 
+        	x5-video-player-fullscreen="true" 
+        	x5-video-orientation="portraint" 
+        	style="object-fit:fill"
+            id="videoPop">
+            <img src="img/mobile/sellerPage/poster.jpg" alt="">
+        </video>
+        <div class="clearfix"></div>
+        <div class="bottom-btn"><div class="go-prize" ng-click="$root.videoPop.hide()">去抽奖</div></div>
+    </div>
+</div>

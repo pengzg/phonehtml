@@ -1,0 +1,215 @@
+
+<div class="xt_shouYeDiv" ng-show="!$root.isPager">
+	<span><a href="#/index/homePage">首页</a><a  style="font-size: 14px;font-weight: 100;" href="#/index/customer/csTypeList">>列表</a> <a style="font-size: 14px;font-weight: 100;"><span ng-if="csTypeInfo.ct_id==''||csTypeInfo.ct_id==undefined">>添加</span><span ng-if="csTypeInfo.ct_id!=''&&csTypeInfo.ct_id!=undefined">>编辑</span></a></span>
+</div>
+<div class="xt_changeHtml">
+	<ng-form name="myform">
+		<div class="zk_addMain">
+			<div class="zk_baseInfoBox">
+				<h4>基本信息</h4>
+				<div class="zk_controlBox">
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>主键</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_id" 
+							ng-focus="checkFun('ct_id','focus');" 
+							ng-blur="checkFun('ct_id','blur');" 
+							ng-model="csTypeInfo.ct_id" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_id_flag">（请输入主键）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_id_flag==false&&myform.ct_id.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>所属公司</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_orgid" 
+							ng-focus="checkFun('ct_orgid','focus');" 
+							ng-blur="checkFun('ct_orgid','blur');" 
+							ng-model="csTypeInfo.ct_orgid" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_orgid_flag">（请输入所属公司）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_orgid_flag==false&&myform.ct_orgid.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>上级父类ID</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_parentid" 
+							ng-focus="checkFun('ct_parentid','focus');" 
+							ng-blur="checkFun('ct_parentid','blur');" 
+							ng-model="csTypeInfo.ct_parentid" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_parentid_flag">（请输入上级父类ID）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_parentid_flag==false&&myform.ct_parentid.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>客户类别编码</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_code" 
+							ng-focus="checkFun('ct_code','focus');" 
+							ng-blur="checkFun('ct_code','blur');" 
+							ng-model="csTypeInfo.ct_code" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_code_flag">（请输入客户类别编码）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_code_flag==false&&myform.ct_code.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>客户类别名称</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_name" 
+							ng-focus="checkFun('ct_name','focus');" 
+							ng-blur="checkFun('ct_name','blur');" 
+							ng-model="csTypeInfo.ct_name" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_name_flag">（请输入客户类别名称）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_name_flag==false&&myform.ct_name.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>状态</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_stats" 
+							ng-focus="checkFun('ct_stats','focus');" 
+							ng-blur="checkFun('ct_stats','blur');" 
+							ng-model="csTypeInfo.ct_stats" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_stats_flag">（请输入状态）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_stats_flag==false&&myform.ct_stats.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>备注</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_remarks" 
+							ng-focus="checkFun('ct_remarks','focus');" 
+							ng-blur="checkFun('ct_remarks','blur');" 
+							ng-model="csTypeInfo.ct_remarks" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_remarks_flag">（请输入备注）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_remarks_flag==false&&myform.ct_remarks.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>有效标志位 1 有效 2 删除</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_dr" 
+							ng-focus="checkFun('ct_dr','focus');" 
+							ng-blur="checkFun('ct_dr','blur');" 
+							ng-model="csTypeInfo.ct_dr" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_dr_flag">（请输入有效标志位 1 有效 2 删除）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_dr_flag==false&&myform.ct_dr.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>更新时间</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_ts" 
+							ng-focus="checkFun('ct_ts','focus');" 
+							ng-blur="checkFun('ct_ts','blur');" 
+							ng-model="csTypeInfo.ct_ts" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_ts_flag">（请输入更新时间）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_ts_flag==false&&myform.ct_ts.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>版本</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_version" 
+							ng-focus="checkFun('ct_version','focus');" 
+							ng-blur="checkFun('ct_version','blur');" 
+							ng-model="csTypeInfo.ct_version" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_version_flag">（请输入版本）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_version_flag==false&&myform.ct_version.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>最后修改人</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_updateuserid" 
+							ng-focus="checkFun('ct_updateuserid','focus');" 
+							ng-blur="checkFun('ct_updateuserid','blur');" 
+							ng-model="csTypeInfo.ct_updateuserid" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_updateuserid_flag">（请输入最后修改人）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_updateuserid_flag==false&&myform.ct_updateuserid.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>最后修改时间</span>
+							<i>*</i>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="ct_updatetime" 
+							ng-focus="checkFun('ct_updatetime','focus');" 
+							ng-blur="checkFun('ct_updatetime','blur');" 
+							ng-model="csTypeInfo.ct_updatetime" required>
+							<div>
+								<label class="labelStyle-1" ng-if="myform.ct_updatetime_flag">（请输入最后修改时间）</label>
+								<label class="labelStyle-1" style="color: red" ng-if="myform.ct_updatetime_flag==false&&myform.ct_updatetime.$invalid">（您的输入不合法）</label>
+							</div>
+						</div>
+					</div>
+					<!-- 隐藏域 -->
+					<div style="display: none">
+						<input type="text" ng-model="csTypeInfo.ct_id">
+					</div>
+				</div>
+			</div>
+		</div>
+	</ng-form>
+</div>
+<div class="zk_saveBox">
+	<a ng-click="submit();"  class="btnStyle saveBtn">保存</a>
+	<a ng-click="cancel();" id="add-without-image" class="btnStyle falseBtn">取消</a>
+</div>

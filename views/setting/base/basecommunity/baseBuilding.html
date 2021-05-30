@@ -1,0 +1,338 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">{{communityVO.bcm_name}} 单元楼信息</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+		<div>
+			<label>类型<span>:</span></label>
+			<select ng-model="searchParam.bbd_type">
+				<option value="">全部</option>
+				<option value="1">楼栋</option>
+				<option value="2">单元</option>
+				<option value="3">楼门</option>
+			</select>
+			<select ng-model="searchParam.bbd_is_register">
+				<option value="">是否绑定会员</option>
+				<option value="1">已绑定</option>
+				<option value="2">未绑定</option>
+			</select>
+			<input type="text" ng-model="searchParam.searchKey" placeholder="查询绑定会员名">
+			<label>关键字<span>:</span></label>
+			<input type="text" ng-model="searchParam.mb_nickname" placeholder="名称">
+		</div>
+		<div>
+			<label>楼门查询<span>:</span></label>
+			<input type="text" ng-model="searchParam.bbd_buildingname" placeholder="楼栋">
+			<input type="text" ng-model="searchParam.bbd_unitname" placeholder="单元">
+			<input type="text" ng-model="searchParam.bbd_doorname" placeholder="楼门">
+		</div>
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;" ng-click="doSearch();"><i
+					class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();doSearch();"
+				style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-default" ng-click="goCommunityList();">返回</a>
+			<a class="btn btn-success add-btn" style="float:right;margin-right:50px;" ng-click="addInit();"><i
+					class="icon icon-plus"></i>初始化数据</a>
+			<a class="btn btn-success add-btn" style="float:right;margin-right:50px;" ng-click="addBuilding();"><i
+					class="icon icon-plus"></i>新增楼栋</a>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default" style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>类型</th>
+								<th ng-class="sortFun('bbd_name',true);" ng-click="clickSortFun('bbd_name');"
+									style="min-width:80px;">名称</th>
+								<!-- <th>编码</th> -->
+								<th>楼栋</th>
+								<th>单元</th>
+								<th>是否绑定</th>
+								<th>绑定会员</th>
+								<!-- 	<th>启用状态</th> -->
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in communityList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14"><span ng-if="x.bbd_type==1">楼栋</span><span
+										ng-if="x.bbd_type==2">单元</span>
+									<span ng-if="x.bbd_type==3">楼门</span>
+								</td>
+								<td class="text-center f14">{{x.bbd_name}}</td>
+								<!-- 	<td class="text-center f14">{{x.bbd_code}}</td> -->
+								<td class="text-center f14">{{x.bbd_buildingname}}</td>
+								<td>{{x.bbd_unitname}}</td>
+								<td> <span ng-if="x.bbd_is_register==1">是 时间：{{x.bbd_register_time}}</span><span
+										ng-if="x.bbd_is_register==2">否</span></td>
+								<td>{{x.bbd_memberid_nameref}}</td>
+								<td class="text-center f14" style="position: relative;">
+									<a ng-if="x.bbd_type==1" class="common_btns common_add" ng-click="addUnit(x)"
+										title="添加单元"></a>
+									<a class="common_btns common_delete" ng-click="toDelete(x)" title="删除"></a>
+
+									<a ng-if="x.bbd_is_register==1 "  class="common_btns common_delete" ng-click="toRemove(x)" title="清空绑定人"></a>
+
+									<a class="common_btns common_edit" ng-click="toEdit(x)" title="修改"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- 添加和修改弹窗 -->
+<div class="dialog" ng-show="dialogShow" style="z-index:90">
+	<div class="dialog-zdc" style="z-index:100"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index:110; width:480px; margin-left: -380px; top: 40%; margin-top: -204px;height:380px;"
+		ng-show="dialogShow">
+		<div class="dg-xg-js" style="width:480px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		<div class="dg-content"
+			style="height: 330px; margin-bottom:0px;margin-top:0px;margin-left:0px;overflow: scroll;">
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 300px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;">名称</span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 150px;">
+						<input type="text"" step=" 1" min="1" style="width: 150px;" name="bbd_name"
+							ng-model="vo.bbd_name" maxlength="15">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="dg-bottom-color">
+			<div class="dg-submint">
+				<div class="btnStyle Btncolor1 BtnHover1" ng-click="save();">保存</div>
+				<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 初始化弹窗 -->
+<div class="dialog" ng-show="showInit" style="z-index:90">
+	<div class="dialog-zdc" style="z-index:100"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index:110; width:480px; margin-left: -380px; top: 40%; margin-top: -204px;height:380px;"
+		ng-show="showInit">
+		<div class="dg-xg-js" style="width:480px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeInitDialog()"></div>
+		</div>
+		<div class="dg-content"
+			style="height: 330px; margin-bottom:0px;margin-top:0px;margin-left:0px;overflow: scroll;">
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 300px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;">楼栋数</span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 150px;">
+						<input type="number" step="1" min="1" style="width: 150px;" name="buildingNum"
+							ng-model="vo.buildingNum" maxlength="15">
+					</div>
+				</div>
+			</div>
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 400px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;">单元数</span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 300px;">
+						<input style="width: 100px;" type="number" step="1" min="1" name="unitNum" ng-model="vo.unitNum"
+							maxlength="10">
+					</div>
+				</div>
+			</div>
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 300px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;">楼层数</span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 150px;">
+						<input style="width: 50px;" type="number" step="1" min="1" ng-model="vo.floorNum">
+					</div>
+				</div>
+			</div>
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 300px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;">每层户数</span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 150px;">
+						<input style="width: 50px;" type="number" step="1" min="1" ng-model="vo.doorNum">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="dg-bottom-color">
+			<div class="dg-submint">
+				<div class="btnStyle Btncolor1 BtnHover1" ng-click="saveInit();">保存</div>
+				<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeInitDialog();">取消</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 添加楼栋弹窗 -->
+<div class="dialog" ng-show="showBuilding" style="z-index:90">
+	<div class="dialog-zdc" style="z-index:100"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index:110; width:480px; margin-left: -380px; top: 40%; margin-top: -204px;height:380px;"
+		ng-show="showBuilding">
+		<div class="dg-xg-js" style="width:480px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeBuildingDialog()"></div>
+		</div>
+		<div class="dg-content"
+			style="height: 330px; margin-bottom:0px;margin-top:0px;margin-left:0px;overflow: scroll;">
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 300px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;">楼栋数</span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 150px;">
+						<input type="number" step="1" min="1" style="width: 150px;" name="buildingNum"
+							ng-model="vo.buildingNum" maxlength="15">
+					</div>
+				</div>
+			</div>
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 400px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;">楼栋名</span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 300px;">
+						<input style="width: 100px;" type="text" name="buildingName" ng-model="vo.buildingName"
+							maxlength="40">
+					</div>
+				</div>
+			</div>
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 400px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;"></span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 300px;">
+						如不输入楼栋名，系统默认生成名1号楼、2号楼，输入则为"楼栋名+序号"
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="dg-bottom-color">
+			<div class="dg-submint">
+				<div class="btnStyle Btncolor1 BtnHover1" ng-click="saveBuilding();">保存</div>
+				<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeBuildingDialog();">取消</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 添加单元弹窗 -->
+<div class="dialog" ng-show="showUnit" style="z-index:90">
+	<div class="dialog-zdc" style="z-index:100"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index:110; width:480px; margin-left: -380px; top: 40%; margin-top: -204px;height:380px;"
+		ng-show="showUnit">
+		<div class="dg-xg-js" style="width:480px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeUnitDialog()"></div>
+		</div>
+		<div class="dg-content"
+			style="height: 330px; margin-bottom:0px;margin-top:0px;margin-left:0px;overflow: scroll;">
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 400px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;">单元数</span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 300px;">
+						<input style="width: 100px;" type="number" step="1" min="1" name="unitNum" ng-model="vo.unitNum"
+							maxlength="10">
+					</div>
+				</div>
+			</div>
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 300px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;">楼层数</span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 150px;">
+						<input style="width: 50px;" type="number" step="1" min="1" ng-model="vo.floorNum">
+					</div>
+				</div>
+			</div>
+			<div class="zk_baseInfoBox mtop16">
+				<div class="zk_controlGroup" style=" width: 300px;">
+					<div class="zk_controlLabel">
+						<span class="f14" style="line-height: 32px;">每层户数</span>
+						<i class="f14">*</i>
+					</div>
+					<div class="zk_controlInput" style=" width: 150px;">
+						<input style="width: 50px;" type="number" step="1" min="1" ng-model="vo.doorNum">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="dg-bottom-color">
+			<div class="dg-submint">
+				<div class="btnStyle Btncolor1 BtnHover1" ng-click="saveUnit();">保存</div>
+				<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeUnitDialog();">取消</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function () {
+		$(".show_qrcode").on("mouseover mouseout", function (event) {
+
+			if (event.type == "mouseover") {
+				alert(111111111);
+			} else if (event.type == "mouseout") {
+				$(this).parents("td").find("div").hide();
+			}
+		})
+	});
+</script>

@@ -1,0 +1,117 @@
+<div class="game-container">
+	<div class="headers">
+		<h3>微信卡券列表：</h3>
+		
+		<p style="font-size: 14px;margin-bottom: 22px;">
+			温馨提示：粉丝领取优惠券后，可在微信"我"-"卡包"中查看，可通过优惠码进行核销
+			<a class="btn btn-success" style="float: right; width: 100px; margin-top: -7px;"
+			 ng-click="add();">新增卡券</a>
+		</p>
+	</div>
+	<div class="content" style="margin-top: 15px;">
+		<table class="table table3 table-hover table-bordered">
+            <thead>
+                <tr>
+                	<th>卡券名称</th>	                	
+                    <th>面值</th>
+                    <th>卡券类型</th>
+                    <th>使用时间</th>
+                    <th>已派发数量</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody class="borBottom">
+                <tr class="js_selectLine" ng-repeat="x in [1,2,3,4]">
+                	<td>代金券</td>
+                    <td>11.00</td>
+                    <td>静态券</td>
+                    <td>
+                    	<div>2018-01-09</div>
+                    	<div>2018-01-14</div>
+                    </td>
+                    <td>2/20</td>
+                    <td>进行中</td>
+                    <td>
+                    	<a class="red displayIn-Block" ng-click="detail()">
+                    		<i class="icon-list-alt" ></i>
+                    		投放
+                    	</a>
+                    	<a class="red displayIn-Block" ng-click="detail()">
+                    		<i class="icon-list-alt" ></i>
+                    		查看详情
+                    	</a>
+                    	<a class="red displayIn-Block" style="margin-left:12px;" ng-click="del()">
+                    		<i class="icon-trash" ></i>
+                    		删除
+                    	</a>
+                    	
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+		<!--分页 -->
+	</div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					选择卡券类型
+				</h4>
+			</div>
+			<div class="modal-body">
+				
+				<div class="f14">
+					<div class="xt_inputRadio" style="margin-bottom:8px">
+						<input class="xt_radio" type="radio" name="couponType" value="1" ng-model="couponType">
+						<div class="xt_inputBackimg"></div>折扣券
+					</div>
+					<span style="font-size: 13px;color:#999;"> (折扣券说明)</span>
+				</div>
+		
+				<div class="f14">
+					<div class="xt_inputRadio" style="margin-bottom:8px">
+						<input class="xt_radio" type="radio" name="couponType" value="2" ng-model="couponType">
+						<div class="xt_inputBackimg"></div>代金券
+					</div>
+					<span style="font-size: 13px;color:#999;"> (代金券说明)</span>
+				</div>
+			
+				<div class="f14">
+					<div class="xt_inputRadio" style="margin-bottom:8px">
+						<input class="xt_radio" type="radio" name="couponType" value="3" ng-model="couponType">
+						<div class="xt_inputBackimg"></div>兑换券
+					</div>
+					<span style="font-size: 13px;color:#999;"> (兑换券说明)</span>
+				</div>
+			
+				<div class="f14">
+					<div class="xt_inputRadio" style="margin-bottom:8px">
+						<input class="xt_radio" type="radio" name="couponType" value="4" ng-model="couponType">
+						<div class="xt_inputBackimg"></div>团购券
+					</div>
+					<span style="font-size: 13px;color:#999;"> (团购券说明)</span>
+				</div>
+				
+				<div class="clearfix"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="goAdd()">确定
+				</button>
+
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>

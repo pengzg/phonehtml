@@ -1,0 +1,69 @@
+<div class="xt_changeHtml" style="margin-bottom: 120px;">
+        <div class="addlistCenter" style="padding-top: 30px;padding-bottom: 204px;">
+            
+            
+            <div class="divVertical clearfix ray5" >
+                <span class="xt_bzWenZi width-just"> <i class="colorRed">*</i>名称：</span>
+                <div class="widthAuto zk_controlInput">
+                    <input type="text"  ng-model="vo.pcr_title" style="width:200px;" />
+                </div>
+            </div>
+            
+                <div class="divVertical clearfix ray5" style="margin-top: 25px;">
+                    <span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 套餐：</span>
+                    <div class="widthAuto zk_controlInput">
+                        <span ng-show="vo.pcr_id">{{vo.pcr_promotionid_nameref}}</span>
+                        <select ng-show="!vo.pcr_id" ng-model="vo.pcr_promotionid">
+                            <option value="{{x.ppm_id}}" ng-repeat="x in ppmList">{{x.ppm_name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="divVertical clearfix ray5" style="margin-top: 25px;">
+                    <span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 兑换有效期：</span>
+                    <div class="widthAuto zk_controlInput">
+                        <input type="text" class="Wdate" style="width: 200px;" id="start_time" />
+                    </div>
+                </div>
+                <div class="divVertical clearfix ray5" >
+                    <span class="xt_bzWenZi width-just"> <i class="colorRed">*</i>兑换码数量：</span>
+                    <div class="widthAuto zk_controlInput">
+                        <span ng-show="vo.pcr_id">{{vo.pcr_total_num}}</span>
+                        <input ng-show="!vo.pcr_id" type="number" maxlength="10" min="1"  ng-model="vo.pcr_total_num" style="width:50px;" />张
+                    </div>
+                </div>
+                
+            
+    
+        
+        
+            
+            
+            
+        </div>
+        <div class="fixedBottom">
+            <div class="btnStyle Btncolor1 BtnHover1" ng-click="submit();">保存</div>
+            <div class="btnStyle Btncolor2 BtnHover2" ng-click="goBack();"><a class="btnStyle Btncolor2 BtnHover2">返回</a></div>
+        </div>
+    </div>
+    
+            <script>
+    
+                $(function () {
+                    $('.droplistWrap2').hide()
+                    $(document).on('click', function (ev) {
+                        if ($(ev.target).parents('.SelectMulti-Container2').length) { return }
+                        $('.droplistWrap2').hide()
+                    })
+    
+                    
+    
+                    
+                });
+    
+                function showDropList(obj) {
+                    $('.droplistWrap2').hide();
+                    $(obj).parent().find('.droplistWrap2').toggle();
+                    console.log($(obj).parent().find('.droplistWrap2'))
+                };
+            </script>
+    

@@ -1,0 +1,78 @@
+<div class="setting_panel panel-default">
+    <div class="panel-heading text-left">
+        <div class="setting_nav">
+            <ul>
+                <li><a href="">编辑管理员</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body" ng-init="showpass=false">
+        <div class="col-sm-10 admin_col">
+            <form novalidate="novalidate" class="simple_form form-horizontal edit_account" accept-charset="UTF-8" method="post">
+                <div class="form-group email required disabled" ng-show="!showpass">
+                    <label class="email required col-md-3 col-lg-2 setting_label" for="account_email">
+                        <!-- <abbr title="必填">*</abbr> -->
+                        邮箱</label>
+                    <div class="col-md-9 col-lg-6">
+                        <input class="string email required disabled form-control" disabled="disabled" type="email" name="account[email]">
+                    </div>
+                </div>
+                <div class="form-group string required" ng-show="!showpass">
+                    <label class="string required col-md-3 col-lg-2 setting_label" for="account_name">
+                        <!-- <abbr title="必填">*</abbr> -->
+                        姓名</label>
+                    <div class="col-md-9 col-lg-6">
+                        <input class="string required form-control" placeholder="真实姓名" type="text" value="张杰" name="account[name]">
+                    </div>
+                </div>
+                <div class="form-group tel required" ng-show="!showpass">
+                    <label class="tel required col-md-3 col-lg-2 setting_label" for="account_phone">
+                        <!-- <abbr title="必填">*</abbr> -->
+                        电话</label>
+                    <div class="col-md-9 col-lg-6">
+                        <input class="string tel required form-control" placeholder="联系电话" type="tel" value="18501309203" name="account[phone]">
+                    </div>
+                </div>
+                <div class="form-group tel required" ng-show="showpass">
+                    <label class="tel required col-md-3 col-lg-2 setting_label" for="account_phone">
+                        <!-- <abbr title="必填">*</abbr> -->
+                        原密码</label>
+                    <div class="col-md-9 col-lg-6">
+                        <input class="string tel required form-control" placeholder="请输入原密码" type="password" value="" name="account[phone]">
+                    </div>
+                </div>
+                <div class="form-group tel required" ng-show="showpass">
+                    <label class="tel required col-md-3 col-lg-2 setting_label" for="account_phone">
+                        <!-- <abbr title="必填">*</abbr> -->
+                        新密码</label>
+                    <div class="col-md-9 col-lg-6">
+                        <input class="string tel required form-control" placeholder="请输入新密码" type="password" value="" name="account[phone]">
+                    </div>
+                </div>
+                <div class="form-group tel required" ng-show="showpass">
+                    <label class="tel required col-md-3 col-lg-2 setting_label" for="account_phone">
+                        <!-- <abbr title="必填">*</abbr> -->
+                        确认新密码</label>
+                    <div class="col-md-9 col-lg-6">
+                        <input class="string tel required form-control" placeholder="请再次输入新密码" type="password" value="" name="account[phone]">
+                    </div>
+                </div>
+                <!-- <hr>
+                <input type="submit" name="commit" value="保存" class="setting_btn btn-primary"> -->
+            </form>
+        </div>
+        <div class="col-sm-2 toolbar">
+            <div class="list-group f14">
+                <a class="list-group-item" ng-class="{'active':!showpass}" href="" ng-click="showpass=false">
+                    <i class="fa fa-edit"></i> 修改帐号
+                </a>
+                <a class="list-group-item" ng-class="{'active':showpass}" href="" ng-click="showpass=true">
+                    <i class="fa fa-key"></i> 修改密码
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer text-right">
+        <a class="setting_btn btn-success" href="">保存</a>
+    </div>
+</div>

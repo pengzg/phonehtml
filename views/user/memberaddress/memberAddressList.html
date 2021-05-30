@@ -1,0 +1,208 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">用户地址列表</a></li>
+			</ul>
+		</div>
+	</div>
+
+    <div class="search-filter-box">
+		<div>
+			<label>注册时间<span>:</span></label>
+			<span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+					ng-click="dateRange.chooseDate($event)" > 日期 </span>
+			<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+				onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+				/>
+			<input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+				onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+				/>
+			<label>服务商<span>:</span></label>
+			<select ng-model="searchParam.ma_shopid">
+				<option value="{{x.ms_id}}" ng-repeat="x in servicerShop">{{x.ms_name}}</option>
+			</select>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="请输入姓名或手机号" ng-model="searchParam.searchKey">
+		</div>
+		
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="searchFun();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();searchFun();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+		</div>
+	</div>
+
+
+
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>头像</th>
+								<th>用户名</th>
+								<th>电话</th>
+								<th>定位地址</th>
+								<th>地址</th>
+								<th>区域</th>
+								<!-- <th>审核状态</th> -->
+								<th>所属服务商</th>
+								<th>添加时间</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in maList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14"><img width="20"
+									ng-src="{{x.ma_memberid_image}}"></td>
+								<td class="text-center f14">{{x.ma_name}}</td>
+								<td class="text-center f14">{{x.ma_mobile}}</td>
+								<td class="text-center f14">{{x.ma_mapaddress}}</td>
+								<td class="text-center f14">{{x.ma_address}}</td>
+								<td class="text-center f14">{{x.ma_communityid_citycode_nameref}}</td>
+								<!-- <td class="text-center f14">{{x.ma_checkstate_nameref}}</td> -->
+								<td class="text-center f14">{{x.ma_shopid_nameref}}</td>
+								<td class="text-center f14">{{x.ma_addtime}}</td>
+								<td class="text-center f14">
+									<!--  <a class="red" style="display: inline-block;" class="common_offsell" ng-click="getDetail(x.mb_id)" title="查看">查看</a>  -->
+									<a class="common_edit" title="详情"
+									ng-click="getDetail(x.ma_id);"></a>
+									<div style="display: inline-block; position: relative;">
+										<a ng-if="x.mb_state == '1'" class="common_btns common_band"
+											ng-click="changeStatus(x.mb_id,'禁用')" title="禁用"></a> <a
+											ng-if="x.mb_state == '0'" class="common_btns common_active"
+											ng-click="changeStatus(x.mb_id,'启用')" title="启用"></a>
+										<a class="common_relate" title="关联服务商"  ng-click="showDialog(x)"></a>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 用户详情 -->
+<div class="dialog" ng-show="dialog" style="z-index: 88">
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index: 999998; width: 660px; margin-left: -330px; top: 55%; margin-top: -230px;"
+		ng-show="dialog">
+		<div class="dg-xg-js" style="width: 660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closrDetailDialog()"></div>
+		</div>
+		<div class="setting_panel panel-default">
+			<div class="panel-body">
+				<table class="table table-loose table-hover">
+					<tbody>
+						<tr >
+							<td>用户名</td>
+							<td>{{vo.ma_name}}</td>
+						</tr>
+						<tr>
+							<td>电话</td>
+							<td>{{vo.ma_mobile}}</td>
+						</tr>
+						<tr>
+							<td>定位地址</td>
+							<td>{{vo.ma_mapaddress}}</td>
+						</tr>
+						<tr>
+							<td>详细地址</td>
+							<td>{{vo.ma_address}}</td>
+						</tr>
+						<tr>
+							<td>添加时间</td>
+							<td>{{vo.ma_addtime}}</td>
+						</tr>
+						
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div>
+			<div class="btn btn-default"
+				style="margin-left: 594px; margin-bottom: 10px"
+				ng-click="closrDetailDialog()">返回</div>
+		</div>
+	</div>
+</div>
+
+<!-- 关联服务商水站弹框 -->
+<div class="dialog" ng-show="servicerPop" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:684px; margin-left: -330px; top: 50%;margin-top: -276px;"  ng-show="servicerPop">
+		<div class="dg-xg-js" style="width:684px;">
+			{{userName}}-{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		
+	    <form class="form-horizontal">
+			<div class="dg-content" style=" margin:5px auto;height: 450px;overflow-y: scroll;">
+				<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-left-color: transparent;border-right-color: transparent;">
+					<thead>
+						<tr>
+							<div class="xt_sySearch" style="margin-top: 10px;margin-bottom: 10px;">
+								<input class="xt_searchInput" ng-model="searchKeyEqp" type='text' placeholder="请输入服务商名称" 
+									autocomplete="off" ng-enter="doSearchEqp()">
+								<i class="btn btn-success" ng-click="doSearchEqp()" style="position: relative;top: -1px;padding: 5px 12px 6px;margin-left: 10px;">查找</i>
+							</div>
+						</tr> 
+						<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh" style="top:-10px;">
+							<th class="colorCenter noSortCss" style="width:10px">
+								<!-- <input id="selectedAllEqp" ng-click="selectedAllEqp()" 
+								ng-checked="isChecked == true" type="checkbox" class="checkbox"  style="margin-left:5px"> -->
+							</th>
+							<th class="colorCenter noSortCss">序号</th>
+							<th class="colorCenter noSortCss">服务商名称</th>
+							<th class="colorCenter noSortCss">服务范围</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in shopList" style=" height:30px">
+							<td class="colorCenter">
+							<input type="radio"   style="margin-left:5px;"
+							   ng-click="selectedShop()" ng-checked="x.ms_id==shopid"
+							   name = "shop" ms_id="{{x.ms_id}}" ></td>
+							   <td style="vertical-align: middle !important; min-width: 10px;">{{pagerShop.rows * (pagerShop.page - 1)+ $index+1}}</td>
+							  <td class="colorCenter">{{x.ms_name}}</td>
+							  <td class="colorCenter">{{x.ms_service_content}}</td>
+						</tr>
+						
+					</tbody>
+					
+				</table>
+				<tm-pagination conf="pagerShop" search-param ="searchParamShop"></tm-pagination>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div style="position: relative;margin-left:5px;margin-top:10px;margin-bottom:20px;text-align:left;">
+						<span style="color:#E55548">关联服务商</span>
+						-{{servicerName}}
+					</div>
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="saveAssociated()">关联</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog()">关闭</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

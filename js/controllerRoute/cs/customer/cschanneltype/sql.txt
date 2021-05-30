@@ -1,0 +1,51 @@
+
+INSERT INTO sys_menu (sm_id,sm_name,sm_url,sm_pid,sm_typeid,sm_seq,sm_dr,sm_status,sm_version,SM_LEVEL) 
+VALUES ('csChannelType', '_管理','.csChannelTypeList', 'customer', '1', 0,1,1,0,3);
+
+//   设置
+    .state("index.csChannelTypeList",{
+        url:"/cs/csChannelTypeList",
+        templateUrl:"views/cs/customer/cschanneltype/csChannelTypeList.html",
+        controller:"ctr_csChannelTypeList",
+        resolve:{
+            deps:["$ocLazyLoad",function($ocLazyLoad){
+                return $ocLazyLoad.load(
+                		{files:[
+                		        "css/order/orderForm.css",
+                		        "css/product/stockControl.css",
+                		        "js/controllerRoute/cs/customer/cschanneltype/ctr_csChannelTypeList.js"
+            			        ]});
+            }]
+        } 
+    })
+    .state("index.csChannelTypeAdd",{
+	    url:"/cs/csChannelTypeAdd?cct_id",
+	    templateUrl:"views/cs/customer/cschanneltype/csChannelTypeAdd.html",
+	    controller:"ctr_csChannelTypeAdd",
+	    resolve:{
+	        deps:["$ocLazyLoad",function($ocLazyLoad){
+	            return $ocLazyLoad.load(
+	            		{files:[
+	            		        "css/product/goodsCenter.css",
+	            		        "js/controllerRoute/cs/customer/cschanneltype/ctr_csChannelTypeAdd.js"
+	        			        ]});
+	        }]
+	    } 
+	})
+	
+	.state("index.csChannelTypeDetail",{
+	    url:"/cs/csChannelTypeDetail?cct_id",
+	    templateUrl:"views/cs/customer/cschanneltype/csChannelTypeDetail.html",
+	    controller:"ctr_csChannelTypeDetail",
+	    resolve:{
+	        deps:["$ocLazyLoad",function($ocLazyLoad){
+	            return $ocLazyLoad.load(
+	            		{files:[
+	            		        "css/product/goodsCenter.css",
+	            		        "js/controllerRoute/cs/customer/cschanneltype/ctr_csChannelTypeDetail.js"
+	        			        ]});
+	        }]
+	    } 
+	})
+
+

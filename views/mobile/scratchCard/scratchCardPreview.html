@@ -1,0 +1,31 @@
+<div class="scratch-main" id="scratchCardPreview" ng-show="!isEnd">
+	<img src="../../img/mobile/scratch/scratch.png" class="scratch-banner1" set-to-focus set_scope="showBackPop=true" id="scratch-img"/>
+	<div class="scratch-ggl" id="scratch-top">
+	    <div class="scratch-info" id="scratch-prize">
+	        <span id="scratch-prompt"></span>
+	        <span class="scratch-btn" id="scratch-ok" ng-click="isShare=true">领取奖品</span>
+	        <span class="scratch-btn" id="scratch-no">再来一次</span>
+	    </div>
+	    <canvas id="scratch-c1" class="scratch-canvas"></canvas>
+	</div>
+	<div class="scratch-num">
+	    您还有<span class="scratch-num1"></span>次刮卡机会
+	</div>
+	<div class="scratch-guize" >
+		<i class="ion-star scratch-orange"></i>&nbsp;1.每人有三次刮奖机会<br>
+		<i class="ion-star scratch-orange"></i>&nbsp;2.购买一次商品，增加一次刮奖机会
+	</div>
+	<!-- 遮罩层1抽奖次数已经用完-->
+	<div class="scratch-pop scratch-pop1">
+	    <img src="../../img/mobile/scratch/pop1.png" />
+	</div>
+	<div class="scratch-pop scratch-pop2">
+	    <img src="../../img/mobile/scratch/pop2.png" id="scratch-pop2" />
+	</div>
+	<div class="share" ng-show="isShare">
+		<img src="../../img/mobile/scratch/share1.png" class="s1">
+		<img src="../../img/mobile/scratch/share2.png" class="s2">
+		<img src="../../img/mobile/scratch/share3.png" class="s3" ng-click="isShare=false">
+	</div>
+</div>
+<div class="game-end" ng-show="isEnd"></div>

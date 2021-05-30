@@ -1,0 +1,35 @@
+<div id="wordenvelopePreview">
+	<div class="word_banner">
+		<img src="../../img/mobile/banner.png"
+			ng-style="{height:'{{bannerHeight?bannerHeight:&quot;14rem&quot;}}'}" id="word_banner">
+	</div>
+	<div class="word_view_main" set-to-focus set_scope="showBackPop=true" style="background-image:url({{word_back_img}})" id="word_view_main">
+		<div class="word_logo">
+			<img class="border-box" src="../../img/mobile/logo2.png" alt="" id="word_logo" set-to-focus set_scope="showLogoPop=true">
+		</div>
+		<div class="word_note_top">
+			<div><span set-to-focus="set_seller_name_box" set_scope="checkedIdx1=0" ng-bind="set_seller_name_box">社区盒子</span>给您发了一个红包</div>
+			<div set-to-focus="set_bless_box" set_scope="checkedIdx1=0" ng-bind="set_bless_box">祝您生活美满，磕家欢乐</div>
+		</div>
+		<div class="word_btn_group">
+			<div class="word_btn_title">口令红包</div>
+			<div class="word_input" ng-show="!hasDraw">
+				<div class="word_input_p">
+					<input class="border-box" type="text" ng-model="word" placeholder="请输入口令">
+				</div>
+			</div>
+			<div class="word_btn" ng-bind="hasDraw?'领取奖励':'开始抽奖'"></div>
+			<div class="word_btn_tip" set-to-focus="set_bless_note" set_scope="checkedIdx1=0">温馨提示：<span ng-bind="bless_note"></span></div>
+		</div>
+		<div class="word_bottom border-box">
+			<div class="word_bottom_first">- 活动规则 -</div>
+			<div class="word_bottom_last">已有<span class="red">{{10}}</span>人参加游戏</div>
+		</div>
+		<div class="word_awardPop" ng-show="isAward">
+			<div class="word_awardPop_img"><img src="../../img/mobile/getAward2.png" alt=""></div>
+			<div class="word_money">100元微信红包</div>
+		</div>
+		<div class="compop-background" ng-show="isAward"></div>
+	</div>
+</div>
+<div class="game-end" ng-show="isEnd"></div>

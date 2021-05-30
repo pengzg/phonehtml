@@ -1,0 +1,134 @@
+@import "../../util";
+.coupon-main {
+    background: #f0f0f0; // $color1: #56af00;
+    // $color2: #56ae00;
+    // $img: "green.png";
+    @mixin coupon-common($color1, $color2, $img) {
+        $width: 90vw;
+        position: relative;
+        width: $width;
+        height: $width/2.44;
+        margin: 5vw;
+        background: url(../../../img/mobile/coupon/#{$img}) no-repeat;
+        background-size: 100%;
+        border: none;
+        .coupon-name {
+            position: absolute;
+            top: 15%;
+            right: 10%;
+            color: $color1;
+            font-size: 1.6rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .coupon-content {
+            position: absolute;
+            top: 30%;
+            right: 10%;
+            span {
+                color: #fff;
+                &:nth-of-type(1) {
+                    font-size: 2.2rem;
+                }
+                &:nth-of-type(2) {
+                    font-size: 3.6rem;
+                }
+                &:last-of-type {
+                    color: $color2;
+                }
+            }
+        }
+        .coupon-content-bottom {
+            position: absolute;
+            bottom: 5%;
+            left: 5%;
+            right: 10%;
+            font-size: 0.9rem;
+            color: #666;
+            div:first-of-type {
+                float: left;
+            }
+            div:last-of-type {
+                float: right;
+            }
+        }
+        .coupon-outdate {
+            position: absolute;
+            top: 7%;
+            right: 15%;
+            img {
+                width: 6rem;
+            }
+        }
+    }
+    .coupon-green {
+        $color1: #56af00;
+        $color2: #56ae00;
+        $img: "green.png";
+        @include coupon-common($color1, $color2, $img);
+    }
+    .coupon-blue {
+        $color1: #308cab;
+        $color2: #308cab;
+        $img: "blue.png";
+        @include coupon-common($color1, $color2, $img);
+    }
+    .coupon-pink {
+        $color1: #e0687e;
+        $color2: #e0687e;
+        $img: "pink.png";
+        @include coupon-common($color1, $color2, $img);
+    }
+    .coupon-yellow {
+        $color1: #d0950b;
+        $color2: #d0950b;
+        $img: "yellow.png";
+        @include coupon-common($color1, $color2, $img);
+    }
+    .coupon-purple {
+        $color1: #ca5aca;
+        $color2: #ca5aca;
+        $img: "purple.png";
+        @include coupon-common($color1, $color2, $img);
+    }
+    .coupon-gray {
+        $color1: #b4b4b4;
+        $color2: #b4b4b4;
+        $img: "gray.png";
+        @include coupon-common($color1, $color2, $img);
+    }
+}
+
+.c-tab-main {
+    .c-tab-content {
+        width: 100%;
+        div {
+            text-align: center;
+            float: left;
+            width: 33.33%;
+            font-size: 1rem;
+            line-height: 2.3rem;
+            color: #666;
+        }
+    }
+    .c-tab-line {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 33.33%;
+        border-bottom: 2px solid #62accd;
+        @include css3(transition, left 0.3s);
+    }
+}
+@for $i from 1 through 3 {
+    .c-tab-checked-#{$i} {
+    	.c-tab-content {
+    		div:nth-of-type(#{$i}) {
+				color: #62accd;
+    		}
+    	}
+    	.c-tab-line{
+        	left: 33.33%*($i - 1);
+        }
+	}
+}

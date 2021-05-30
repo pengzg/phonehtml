@@ -1,0 +1,97 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">取水记录</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+		<div>
+			<label>取水日期<span>:</span></label>
+			<span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0"
+				onblur="dateRangeUtil.hideDateSelect()" ng-click="dateRange.chooseDate($event)"> 日期 </span>
+			<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+				onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" />
+			<input id="end_date" autocomplete="off"  type="text" class="Wdate"
+				style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+				onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" />
+
+			<label>取水类型<span>:</span></label>
+			<select ng-model="searchParam.owr_sourcetype">
+				<option ng-repeat="x in buyList" value="{{x.bd_code}}">{{x.bd_name}}</option>
+			</select>
+			<label>取水状态<span>:</span></label>
+			<select ng-model="searchParam.owr_state">
+				<option ng-repeat="x in useStateList" value="{{x.bd_code}}">{{x.bd_name}}</option>
+			</select>
+		</div>
+		<div>
+
+			<label>柜子<span>:</span></label>
+			<select ng-model="searchParam.owr_storeid">
+				<option value="{{x.bs_id}}" ng-repeat="x in storeList">{{x.bs_name}}</option>
+
+			</select>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="商品名称，会员" ng-model="searchParam.searchKey">
+		</div>
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;" ng-click="doSearch();"><i
+					class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearInput();doSearch();"
+				style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default" style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>会员名称</th>
+								<th>商品名称</th>
+								<th>柜子</th>
+								<th>箱号</th>
+								<th>取水类型</th>
+								<th>数量</th>
+								<th>支付金额</th>
+								<th>取水状态</th>
+								<th>取水时间</th>
+								<th>时间</th>
+								<!-- <th>操作</th> -->
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in ticketList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.owr_memberid_nameref}}</td>
+								<td class="text-center f14">{{x.owr_productid_nameref}}</td>
+								<td class="text-center f14">名称：{{x.owr_storeid_nameref}}<br>编号：{{x.owr_storecode}}</td>
+								<td class="text-center f14">{{x.owr_boxcode}}</td>
+								<td class="text-center f14">{{x.owr_sourcetype_nameref}}</td>
+								<td class="text-center f14">{{x.owr_num}}</td>
+								<td class="text-center f14">{{x.owr_pay_amount}}</td>
+								<td class="text-center f14">{{x.owr_state_nameref}}</td>
+								<td class="text-center f14">{{x.owr_start_time}}<br>—{{x.owr_end_time}}</td>
+								<td class="text-center f14">{{x.owr_ts}}</td>
+								<!-- <td class="text-center f14">
+									<a class="common_detail" title="查看核销记录" ng-click="goTicketV(x);"></a>
+								</td> -->
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

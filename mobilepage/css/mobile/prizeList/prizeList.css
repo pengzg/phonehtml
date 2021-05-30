@@ -1,0 +1,6 @@
+.prize-main .box-center { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; position: absolute; top: 0; right: 5%; height: 100%; width: 27%; }
+.prize-main .list .item.activated { background-color: #fff; }
+.prize-main .list .item-state-img { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; }
+.prize-main .list .item-state-img img { width: 5rem; }
+.prize-main .list .item-state-btn { -webkit-box-flex: 1; -ms-flex: 1; flex: 1; text-align: right; }
+.prize-main .list .item-state-btn i { font-size: 2rem; color: #ddd; }

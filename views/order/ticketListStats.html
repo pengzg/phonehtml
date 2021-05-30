@@ -1,0 +1,175 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">水票列表</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="xt_offOne tabUl-2 clearfix" ng-if="false">
+		<ul>
+			<li ng-class="{'active':tab=='1'}" style="width: 115px;" ng-click="tab='1';searchFun();"><a>水票增加</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">6</span></li>
+			<li ng-class="{'active':tab=='2'}" style="width: 115px;" ng-click="tab='2';searchFun2();"><a>水票使用</a>
+				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">6</span></li>
+			
+		</ul>
+	</div>
+	<div ng-show="tab=='1'">
+		<div class="search-filter-box">
+			<div ng-if="false">
+				<label>日期<span>:</span></label>
+				<span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+					ng-click="dateRange.chooseDate($event)" > 日期 </span>
+				<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+					onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+					/>
+				<input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+					onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+					/>
+			</div>
+		
+			<div>
+				<label>关键字<span>:</span></label>
+				<input type="text" placeholder="商品名称，会员" ng-model="searchParam.searchKey">
+				<label>购买类型<span>:</span></label>
+				<select ng-model="searchParam.tm_buy_type" >
+					<option ng-repeat="x in buyList" value="{{x.bd_code}}">{{x.bd_name}}</option>
+				</select>
+				<label>使用状态<span>:</span></label>
+				<select ng-model="searchParam.tm_use_state" >
+					<option ng-repeat="x in useStateList" value="{{x.bd_code}}">{{x.bd_name}}</option>
+				</select>
+			</div>
+			<div>
+				<a class="btn btn-success" style="margin-left:80px;"  ng-click="searchFun();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+				<a class="btn btn-default" ng-click="clearParams();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+				<a class="btn btn-success" style="margin-left:80px;"  ng-click="doExport();" >导出数据</a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="panel panel-default"
+						style="border: 0; border-radius: 0;">
+						<div class="panel-heading f14"
+							style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+							<i class="icon icon-list"></i> 共{{pager.total}}条记录
+						</div>
+
+						<table class="table table3 table-bordered table-hover user_table">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>会员</th>
+									<th>会员编码</th>
+									<th>会员电话</th>
+									<th>商品名称</th>
+									<th>总数</th>
+									<th>总金额</th>
+									
+									
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in ticketList">
+									<td class="text-center f14">{{pager.rows * (pager.page -
+										1)+ $index+1}}</td>
+										<td class="text-center f14">{{x.tm_memberid_nameref}}</td>
+										<td class="text-center f14">{{x.tm_memberid_code}}</td>
+										<td class="text-center f14">{{x.tm_memberid_mobile}}</td>
+									<td class="text-center f14">{{x.tm_productid_nameref}}</td>
+									<td class="text-center f14">{{x.ticketNum}}</td>
+									<td class="text-center f14">{{x.ticketAmount}}</td>
+									
+									
+								</tr>
+							</tbody>
+						</table>
+						<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-show="tab=='2'">
+		<div class="search-filter-box">
+			<div>
+				<label>使用日期<span>:</span></label>
+				<span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+					ng-click="dateRange.chooseDate($event)" > 日期 </span>
+				<input id="start_date_v" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+					onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+					/>
+				<input id="end_date_v" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+					onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+					/>
+			</div>
+			
+			<div>
+				<label>关键字<span>:</span></label>
+				<input type="text" placeholder="商品名称，会员" ng-model="searchParam2.searchKey">
+				
+			</div>
+			<div>
+				<a class="btn btn-success" style="margin-left:80px;"  ng-click="searchFun2();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+				<a class="btn btn-default" ng-click="clearParams();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+				<a class="btn btn-success" style="margin-left:80px;"  ng-click="doExportV();" >导出数据</a>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="panel panel-default"
+						style="border: 0; border-radius: 0;">
+						<div class="panel-heading f14"
+							style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+							<i class="icon icon-list"></i> 共{{pager2.total}}条记录
+						</div>
+
+						<table class="table table3 table-bordered table-hover user_table">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>日期</th>
+									<th>会员名称</th>
+									<th>使用时间</th>
+									<th>使用类型</th>
+									<th>商品名称</th>
+									<th>数量</th>
+									<th>原价</th>
+									<th>价格</th>
+									<th>价值</th>
+									<th>受赠人</th>
+									<th>柜号</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in ticketVList">
+									<td class="text-center f14">{{pager2.rows * (pager2.page -
+										1)+ $index+1}}</td>
+									<td class="text-center f14">{{x.tv_verification_time}}</td>
+									<td class="text-center f14">{{x.tv_memberid_nameref}}</td>
+									<td class="text-center f14">{{x.tv_verification_time}}</td>
+									<td class="text-center f14">{{x.tv_verification_type_nameref}}</td>
+									<td class="text-center f14">{{x.tm_productid_nameref}}</td>
+									<td class="text-center f14">{{x.tv_verification_num}}</td>
+									<td class="text-center f14">{{x.tm_pay_price}}</td>
+									<td class="text-center f14">{{x.tm_pay_price}}</td>
+									<td class="text-center f14">{{x.tm_amount1}}</td>
+									<td class="text-center f14">{{x.tv_def3_nameref}}</td>
+									<td class="text-center f14">{{x.tv_def4_code}}</td>
+									
+								</tr>
+							</tbody>
+						</table>
+						<tm-pagination conf="pager2" search-param="searchParam2"></tm-pagination>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

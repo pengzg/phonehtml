@@ -1,0 +1,322 @@
+
+<div class="setting_panel panel-default">
+	<div class="device-b-toolbar-last"
+		style="padding-left: 15px; padding-top: 20px;padding-bottom:10px;background-color:#eee; position: relative;">
+		<div class="row">
+        	<form class="form-inline filter">
+			    <div class="actions" style="padding-left: 12px;">
+					<div class="floatLeft btns-item">
+				        <button type="button" class="btn btn-success btn-sm home_button_active" style="width: 90px;" ng-click="toEdit();">添加</button>
+			    	</div>
+			    	<div class="floatLeft  btns-item" style="margin-left: 50px">
+				        <button type="button" class="btn btn-success btn-sm home_button_active" style="width: 90px;" ng-click="toggleAll();" ng-bind="open?'展开':'折叠'"></button>
+			    	</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="table_tree xt_changeHtml" style="margin-top: 25px;">
+	<div class="layer baseMenuZtree">
+        <div id="tableMain">
+            <ul id="dataTree" class="ztree"></ul>
+        </div>
+    </div>
+    </div>
+</div>
+
+<!-- 查看信息弹窗 -->
+<div class="dialog" ng-show="menuInfoPop" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -230px;" 
+	 ng-show="menuInfoPop">
+		<div class="dg-xg-js" style="width:660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeViewDialog()"></div>
+		</div>
+	    <form class="form-horizontal w5c-form demo-form" role="form" novalidate name="validateForm">
+			<div class="dg-content" style="height: 280px; margin:0 auto;">
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">菜单名称：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<span class="f14">{{vo.sm_name}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">上级菜单：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;" id="treeInput">
+							<span class="f14">{{vo.sm_pid_nameref}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">菜单类型：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sm_typeid_nameref}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">序号：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sm_seq}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">图标：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sm_iconcls}}</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">状态：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sm_status_nameref}}</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">所属系统：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sm_systemid_nameref}}</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">描述：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sm_description}}</span>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeViewDialog()">关闭</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- 添加和修改弹窗 -->
+
+<div class="dialog" ng-show="popAdd" style="z-index:88" id="baseMenuDialog">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -236px;" 
+	 ng-show="popAdd">
+		<div class="dg-xg-js" style="width:660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+	    <form class="form-horizontal w5c-form demo-form" role="form"
+		w5c-form-validate="menu" novalidate name="validateForm">
+			<div class="dg-content" style="height: 280px; margin-bottom:0px;margin-top:0px;margin-left:0px;overflow:visible;">
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">菜单名称</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" name="sm_name" maxlength="10"
+										ng-model="vo.sm_name" required="true">
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">上级菜单</span>
+						</div>
+						<div class="zk_controlInput common-drop-main" style=" width: 190px;" id="treeInput">
+							<input style="width: 150px;" type="text" name="bs_code"
+										ng-model="vo.sm_pid_nameref"   onclick="showCommonDropList(this)"
+										ng-click="clickAllMenu()" readonly="readonly">
+							<input style="width: 150px;" type="text" name="bs_code"
+										ng-model="vo.sm_pid"   ng-show="false" >
+							<div class="common-drop-list" style="width: 174px;height: 180px;background-color: white;position: absolute;border:1px solid #2ca1b3;overflow-y: scroll;z-index: 1;display: none;" id="dataTreePopDiv">
+								<ul id="dataTreePop" class="ztree" >
+					            </ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup SelectMulti-Container2" style=" width: 300px;position: relative;" >
+						<div class="zk_controlLabel">
+							<span class="f14">菜单类型</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" name="sm_typeid_nameref" maxlength="10"
+										ng-model="vo.sm_typeid_nameref"
+										onclick="showDropList(this);"
+										id="menuType"
+										readonly="readonly">
+							<input style="width: 150px;" type="text" name="sm_typeid" maxlength="10"
+										ng-model="vo.sm_typeid" ng-show="false"
+										readonly="readonly">
+						</div>
+						<div>
+							<div class="droplistWrap2" style="width: 176px; top: 32px; left: 100px;">
+								<div class="droplist" style="height: auto;">
+									<span class="listItem" ng-repeat="x in data_list"
+									 ng-click="selectedMenuType(x.id,x.name)">{{x.name}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">序号</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" name="sm_seq"
+										ng-model="vo.sm_seq"  >
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">图标</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" name="sm_iconcls"
+										ng-model="vo.sm_iconcls"  >
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">描述</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" name="sm_description"
+										ng-model="vo.sm_description"  maxlength="10">
+						</div>
+					</div>
+				</div>
+
+				<!-- <div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup SelectMulti-Container2" style=" width: 300px;position: relative;" >
+						<div class="zk_controlLabel">
+							<span class="f14">所属系统</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" name="sm_systemid_nameref"
+										ng-model="vo.sm_systemid_nameref"  
+										onclick="showDropList(this);" readonly="readonly">
+							<input style="width: 150px;" type="text" name="sm_systemid"
+										ng-model="vo.sm_systemid"  ng-show="false">			
+						</div>
+						<div>
+							<div class="droplistWrap2" style="width: 176px;top: 32px;left: 100px;">
+								<div class="droplist" style="height: auto;">
+									<span class="listItem" ng-repeat="x in systemList" ng-click="addSelectedSystem(x.ss_code,x.ss_name)">{{x.ss_name}}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">地址</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" name="sm_url"
+										ng-model="vo.sm_url"  maxlength="200">
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">状态</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<zk-control-group htmlid="bs_is_negative" ng-model="vo.sm_status"
+											data-option='[{"0":"禁用"},{"1":"开启"}]'></zk-control-group>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" w5c-form-submit="createAndSave()">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog()">取消</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(function() {
+	$(document).on('click', function(ev) {
+		if ($(ev.target).parents('.SelectMulti-Container2').length) {
+			return
+		}
+		$('.droplistWrap2').hide();
+	})
+});
+	$("#ztree-btn").click(function(){
+	    $(".xt_changeHtml").toggleClass("enable");
+	    $(".xt_changeHtml").siblings().removeClass("enable");"sqkxBackOfficeSystem/pop.html"
+	})
+function showCommonDropList (obj){
+	$('.common-drop-list').hide();
+	$(obj).closest('.common-drop-main').find('.common-drop-list').toggle();
+};
+function showDropList (obj){
+	$('.droplistWrap2').hide();
+	$(obj).closest('.SelectMulti-Container2').find('.droplistWrap2').toggle();
+};
+</script>

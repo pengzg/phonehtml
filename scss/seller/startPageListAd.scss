@@ -1,0 +1,26 @@
+.starepage-m-main {
+	padding-top: 10px;
+	.starepage-m-bottom {
+		width: 95%;
+		margin: 0 auto;
+		margin-top: 20px;
+	}
+	.startpage-bar {
+		div {
+			display: inline-block;
+			text-align: left;
+		}
+		.startpage-first{
+			font-size: 40px ;
+		    font-weight: 600 ;
+		    margin-right: 20px;
+		}
+		.startpage-second{
+			font-size: 18px ;
+			font-weight: 500 ;
+		}
+		.startpage-center {
+			margin-top: 10px;
+		}
+	}
+}

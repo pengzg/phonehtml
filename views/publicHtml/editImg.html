@@ -1,0 +1,15 @@
+<div class="edit-comp" 
+	 ng-style="imgdata.style">
+		<img ng-src="{{imgdata.path}}" style="width:100%;height:100%;" draggable="false">
+		<div class="top-b"></div>
+		<div class="right-b"></div>
+		<div class="bottom-b"></div>
+		<div class="left-b"></div>
+		<div class="top-left-b"></div>
+		<div class="top-right-b"></div>
+		<div class="bottom-left-b"></div>
+		<div class="bottom-right-b"></div>
+		<a class="recover" ng-show="showRecover" ng-click="recover()"></a>
+		<a class="reset-img" ng-show="showChange" ng-click="changePath()">更换</a>
+		<a class="reset-img-code" ng-show="showChangeCode" ng-click="changeCode()">自定</a>
+</div>

@@ -1,0 +1,51 @@
+.light-yellow {
+	color: #fbdba5;
+}
+.yellow {
+	color: #f8e30b;
+}
+.font-big {
+	font-size: 400%;
+}
+.font-middle {
+	font-size: 150%;
+}
+.font-blod {
+	font-weight: bold;
+}
+
+.cash-main {
+	width: 100%;
+	height: 100vh;
+	background: url(../../../img/mobile/getCash/bg.png) no-repeat;
+	background-size: 100%;
+}
+.cash-top {
+	position: relative;
+	top: 30%;
+}
+.cash-top div {
+	text-align: center;
+}
+.cash-center {
+	position: relative;
+	top: 35%;
+}
+.cash-bottom {
+	position: absolute;
+	bottom: 5%;
+	left: 50%;
+	width: 20%;
+	margin-left: -10%;
+	text-align: center;
+	background: #f25c58;
+    color: #ffed87;
+    border-radius: 0.8rem;
+
+}
+.cash-center div {
+	text-align: center;
+}
+.cash-btn img {
+	width: 70%;
+}

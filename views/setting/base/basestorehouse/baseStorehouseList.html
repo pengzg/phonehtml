@@ -1,0 +1,280 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">仓库列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+		<div>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="仓库名或其他信息" ng-model="searchKey">
+		</div>
+		
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="searchKey='';doSearch();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success add-btn" style="float:right;margin-right:50px;" ng-click="toEdit();"><i class="icon icon-plus"></i>新增</a>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>仓库编号/车号</th>
+								<th>仓库名称</th>
+								<th>仓库类型</th>
+								<th>车长</th>
+								<th>吨位</th>
+								<th>允许负库存</th>
+								<th>虚拟库存</th>
+								<th>管理员</th>
+								
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in baseStorehouseList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.bs_code}}</td>
+								<td class="text-center f14">{{x.bs_name}}</td>
+								<td class="text-center f14">{{x.bs_type_nameref}}</td>
+								<td class="text-center f14">{{x.bs_length}}</td>
+								<td class="text-center f14">{{x.bs_tonnage}}</td>
+								<td class="text-center f14">{{x.bs_is_negative_nameref}}</td>
+								<td class="text-center f14">{{x.bs_is_virtual_nameref}}</td>
+								<td class="text-center f14">{{x.bs_agentsale_id_nameref}}</td>
+								<td class="text-center f14">
+									<a class="common_btns common_edit" ng-click="toEdit(x.bs_id,x.bs_type)" title="修改"></a>
+									<!-- <a class="common_btns common_delete" ng-show="pager.total>=1" ng-click="toDelete(x.bs_id)" title="删除"></a> -->
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 添加和修改弹窗 -->
+
+<div class="dialog" ng-show="dialogShow" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -164px;"  ng-show="dialogShow">
+		<div class="dg-xg-js" style="width:660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+	    
+			<div class="dg-content" style="height: 290px; margin-bottom:0px;margin-top:0px;margin-left:0px;overflow-y: scroll;">
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">仓库名称</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" name="bs_name" 
+										ng-model="vo.bs_name" maxlength="30">
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">仓库编码/车号</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" name="bs_code"
+										ng-model="vo.bs_code"  maxlength="10">
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">联系人</span>
+							
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" 
+										ng-model="vo.bs_manager" maxlength="30">
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">联系电话</span>
+							
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text"  
+										ng-model="vo.bs_phone" maxlength="30">
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 600px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">仓库地址</span>
+							<!-- <i class="f14">*</i> -->
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 450px;" type="text" name="bs_address" 
+										ng-model="vo.bs_address" maxlength="200">
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">状态</span>
+						</div>
+						<div class="zk_controlRadio" style=" width: 140px;">
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_stats" ng-model="vo.bs_stats" value="1" type="radio" ng-checked="vo.bs_stats==1">
+								<div class="xt_inputBackimg"></div>启用
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_stats" ng-model="vo.bs_stats" value="0" type="radio" ng-checked="vo.bs_stats==0">
+								<div class="xt_inputBackimg" value="11"></div>禁用
+							</lable>
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">仓库类型</span>
+						</div>
+						<div class="zk_controlRadio" style=" width: 160px;">
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_type" ng-model="vo.bs_type" value="1" type="radio" ng-checked="vo.bs_type==1"
+								ng-click="delete_input()">
+								<div class="xt_inputBackimg"></div>主仓库
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_type" ng-model="vo.bs_type" value="2" type="radio" ng-checked="vo.bs_type==2">
+								<div class="xt_inputBackimg" value="11"></div>车仓库
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_type" ng-model="vo.bs_type" value="3" type="radio" ng-checked="vo.bs_type==3">
+								<div class="xt_inputBackimg" value="11"></div>备件库
+							</lable>
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" ng-show="false">
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel" style="width: 110px">
+							<span class="f14" style="line-height: 32px;">是否计入总库存</span>
+						</div>
+						<div class="zk_controlRadio" style=" width: 140px;">
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_stock_status" ng-model="vo.bs_stock_status" value="Y" type="radio" ng-checked="vo.bs_stock_status==1">
+								<div class="xt_inputBackimg"></div>是
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_stock_status" ng-model="vo.bs_stock_status" value="N" type="radio" ng-checked="vo.bs_stock_status==2">
+								<div class="xt_inputBackimg"></div>否
+							</lable>
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" ng-show = "vo.bs_type==2">
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">车长</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 200px;">
+							<input style="width: 150px;" type="text" name="bs_length"
+										ng-model="vo.bs_length" ng-pattern="/^[0-9]*.?[0-9]?$/" maxlength='3'> 米 
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" ng-show = "vo.bs_type==2">
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">吨位</span>
+							
+						</div>
+						<div class="zk_controlInput" style=" width: 200px;">
+							<input style="width: 150px;" type="text" name="bs_tonnage" 
+										ng-model="vo.bs_tonnage" ng-pattern="/^[0-9]*.?[0-9]?$/" maxlength='3'> 吨
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">允许负库存</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<zk-control-group htmlid="bs_is_negative" ng-model="vo.bs_is_negative"
+											data-option='[{"0":"否"},{"1":"是"}]'></zk-control-group>
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" ng-show = "vo.bs_type==2">
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">虚拟库存</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<zk-control-group htmlid="bs_is_virtual" ng-model="vo.bs_is_virtual"
+											data-option='[{"0":"否"},{"1":"是"}]'></zk-control-group>
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">排序</span>
+							
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text"  
+										ng-model="vo.bs_sort" maxlength="10">
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 700px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">管理员</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlRadio" style=" width: 262px;margin-top: 0px;">
+							<select ng-model="vo.bs_agentsale_id">
+								<option ng-repeat="x in agentSaleList" value="{{x.ba_id}}" >{{x.ba_name}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="addcomplete(vo.bs_id,vo.bs_code);">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+	</div>
+</div>

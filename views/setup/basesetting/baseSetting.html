@@ -1,0 +1,131 @@
+<div class="xt_changeHtml">
+	<div class="zk_addMain long-label" style="width: 1000px;">
+		<div class="zk_baseInfoBox" style="margin-bottom: 96px;">
+			<div class="zk_controlBox">
+				<div class="widthAuto zk_controlGroup divMargin f14">
+					<div class="zk_controlLabel">
+						<span>出库审核：</span>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<zk-control-group ng-model="vo.outStock" htmlid="ad"
+								data-option='[{"N":"无需审核"},{"Y":"需审核"}]'></zk-control-group>
+					</div>
+				</div>
+			</div>
+			<div class="zk_controlBox">
+				<div class="widthAuto zk_controlGroup divMargin f14">
+					<div class="zk_controlLabel">
+						<span>出库审核为同一人：</span>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<zk-control-group ng-model="vo.outStockUser" htmlid="ad2"
+								data-option='[{"N":"不允许"},{"Y":"允许"}]'></zk-control-group>
+					</div>
+				</div>
+			</div>
+
+			<div class="zk_controlBox">
+				<div class="widthAuto zk_controlGroup divMargin f14">
+					<div class="zk_controlLabel">
+						<span>入库审核：</span>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<zk-control-group ng-model="vo.inStock" htmlid="ad3"
+								data-option='[{"N":"无需审核"},{"Y":"需审核"}]'></zk-control-group>
+					</div>
+				</div>
+			</div>
+			<div class="zk_controlBox">
+				<div class="widthAuto zk_controlGroup divMargin f14">
+					<div class="zk_controlLabel">
+						<span>入库审核为同一人：</span>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<zk-control-group ng-model="vo.inStockUser" htmlid="ad4"
+								data-option='[{"N":"不允许"},{"Y":"允许"}]'></zk-control-group>
+					</div>
+				</div>
+			</div>
+			
+			<div class="zk_controlBox">
+				<div class="widthAuto zk_controlGroup divMargin f14">
+					<div class="zk_controlLabel">
+						<span>库到车调拨：</span>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<zk-control-group ng-model="vo.alloctStock" htmlid="ad5"
+								data-option='[{"N":"无需审核"},{"Y":"需审核"}]'></zk-control-group>
+					</div>
+				</div>
+			</div>
+			<div class="zk_controlBox">
+				<div class="widthAuto zk_controlGroup divMargin f14">
+					<div class="zk_controlLabel">
+						<span>审核(库到车)为同一人：</span>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<zk-control-group ng-model="vo.alloctStockUser" htmlid="ad6"
+								data-option='[{"N":"不允许"},{"Y":"允许"}]'></zk-control-group>
+					</div>
+				</div>
+			</div>
+			<div class="zk_controlBox">
+				<div class="widthAuto zk_controlGroup divMargin f14">
+					<div class="zk_controlLabel">
+						<span>车到库调拨：</span>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<zk-control-group ng-model="vo.alloctStockCK" htmlid="ad7"
+								data-option='[{"N":"无需审核"},{"Y":"需审核"}]'></zk-control-group>
+					</div>
+				</div>
+			</div>
+			<div class="zk_controlBox">
+				<div class="widthAuto zk_controlGroup divMargin f14">
+					<div class="zk_controlLabel">
+						<span>审核(车到库)为同一人：</span>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<zk-control-group ng-model="vo.alloctStockCKUser" htmlid="ad8"
+								data-option='[{"N":"不允许"},{"Y":"允许"}]'></zk-control-group>
+					</div>
+				</div>
+			</div>
+			<div class="zk_controlBox" style="width: 100%;">
+				<div class="widthAuto zk_controlGroup divMargin f14">
+					<div class="zk_controlLabel">
+						<span>订单通知手机号：</span>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<input type="text" ng-model="vo.phone1" style="width: 550px;">
+					</div>
+				</div>
+			</div>
+			<div class="zk_controlBox" style="width: 100%;">
+				<div class="widthAuto zk_controlGroup divMargin f14">
+					<div class="zk_controlLabel">
+						<span>提现通知手机号：</span>
+					</div>
+					<div class="widthAuto zk_controlInput">
+						<input type="text" ng-model="vo.phone2" style="width: 550px;">
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div> 
+</div>
+<div class="zk_saveBox">
+	<a ng-click="save();" class="btnStyle saveBtn">保存</a>
+</div>
+<style>
+ .widthAuto .zk_controlLabel{
+	 width: 154px;
+ }
+ .zk_baseInfoBox .zk_controlBox{
+	 width: 48%;
+ }
+ .zk_baseInfoBox .zk_controlBox .zk_controlGroup{ 
+	 width: 272px;
+ }
+</style>

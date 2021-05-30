@@ -1,0 +1,40 @@
+<div class="gift-send-main">
+	<div class="gift-top">
+		<div class="gift-pic">
+			<img src="../../img/mobile/giftCard/pic1.png">
+		</div>
+		<div class="pic-tip">
+			亲朋卡
+		</div>
+	</div>
+	<div class="gift-center">
+		<div class="choose-friend">
+			<div class="choose-left">
+				<i class="icon ion-person"></i>
+				<img src="../../img/mobile/personCenter/head.jpg" ng-show="false">
+				<span>
+					请选择一个朋友
+				</span>
+			</div>
+			<div class="choose-right">
+				<i class="icon ion-ios-arrow-forward"></i>
+			</div>
+		</div>
+		<div class="wish">
+			<textarea placeholder="请填入祝福语"></textarea>
+		</div>
+		<div class="add-pic">
+			<button class="button button-small button-light" ng-click="upload()">
+				<i class="icon ion-android-add"></i>
+				&nbsp;
+				<span>添加图片或视频</span>
+			</button>
+			<input type="file" ng-show="false" id="fileInput">
+		</div>
+	</div>
+	<div class="gift-bottom">
+		<button class="button button-balanced btn-bottom" ng-click="send()">
+			  赠送
+		</button>
+	</div>
+</div>

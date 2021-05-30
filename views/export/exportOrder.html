@@ -1,0 +1,95 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">订单报表</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+		<div>
+			<label>订单日期<span>:</span></label>
+            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
+            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+				/>
+			<label>订单类型<span>:</span></label>
+			<select ng-model="searchParam.om_order_type" >
+				<option ng-repeat="x in orderTypeList" value="{{x.bd_code}}" >{{x.bd_name}}</option>
+			</select>	
+
+            <label>商品信息<span>:</span></label>
+            <input type="text" placeholder="商品信息" ng-model="searchParam.productSearchKey">
+        </div>
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doExport();" >导出数据</a>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>订单类型</th>
+								<th>商品</th>
+								<th>商品总金额</th>
+								<th>销售数量</th>
+								<th>销售总金额</th>
+								<th>余额金额</th>
+								<th>奖励金额</th>
+								<th>优惠券金额</th>
+								<th>实付金额</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in orderList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.om_order_type_nameref}}</td>
+								<td class="text-center f14">{{x.od_product_id_nameref}}
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.od_product_price_total"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+										<zk-format-num ng-model="x.od_product_num_total"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+										<zk-format-num ng-model="x.od_sale_price_total"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.od_amount1_total"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.od_amount2_total"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.od_coupon_amount_total"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.od_amount3_total"></zk-format-num>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

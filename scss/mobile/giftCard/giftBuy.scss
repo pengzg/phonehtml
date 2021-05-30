@@ -1,0 +1,147 @@
+.gift-buy-main {
+	$green: #14ab12;
+	$radius: 0.4rem;
+	$gray: #444;
+	.gift-top {
+		text-align: center;
+		padding: 1rem 1.5rem;
+		img {
+			width: 100%;
+			border-radius: 1rem;
+		}
+	}
+	.gift-center {
+		padding: 0 1.5rem 8rem 1.5rem;
+		.center-tip {
+			margin: 1rem 0; 
+			letter-spacing: 1px;
+			color: $gray;
+		}
+		.center-list {
+			.center-item {
+				float: left;
+				width: 33.33%;
+				margin-bottom: 1rem;
+				&:nth-of-type(3n+1) {
+					padding-right: .7rem;
+				}
+				&:nth-of-type(3n+2) {
+					padding: 0 .35rem;
+				}
+				&:nth-of-type(3n) {
+					padding-left: .7rem;
+				}
+				img {
+					width: 100%;
+					border-radius: $radius;
+				}
+				&.center-active{
+					img {
+						box-shadow: 0 0 0.5px 2px $green;
+					}
+				}
+			}
+		}
+		.center-tip-tow {
+			margin: 0 0 1rem 0; 
+			letter-spacing: 1px;
+			color: $gray;
+		}
+		.center-list-money {
+			.center-item {
+				display: flex;
+				border: 1px solid #ddd;
+				border-radius: $radius;
+				padding: 0.5rem;
+				margin-bottom: 0.5rem;
+				color: $gray;
+				.item-left {
+					flex: 1;
+					.item-l-t {
+						font-size: 1.2rem;
+						padding: 0.5rem;
+					}
+					.item-l-b {
+						font-size: 0.8rem;
+						padding: 0.3rem 0.5rem;
+					}
+				}
+				.item-right {
+					flex: 1;
+					text-align: right;
+					margin: auto 1rem;
+					font-size: 1.5rem;
+					color: $green;
+					.item-hide {
+						display: none;
+					}
+					i {
+						padding: 0 1rem;
+					}
+				}
+				&.item-active {
+					color: $green;
+					border-color: $green;
+					.item-right {
+						.item-hide {
+							display: inline;
+							
+						}
+					}
+				}
+			}
+		}
+	}
+	.gift-bottom {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: #fff;
+		box-shadow: 0 0 1px #ddd;
+		text-align: center;
+		.gift-total {
+			text-align: center;
+			padding: 0.5rem 0;
+			.total-top {
+				color: #aaa;
+				font-size: 0.8rem;
+			}
+			.total-bottom {
+				color: $gray;
+				font-size: 1.2rem;
+			}
+		}
+		.gift-btns {
+			display: flex;
+			.btn-bottom {
+				width: 90%;
+				margin: 0.5rem auto;
+				text-align: center;
+				border-radius: $radius;
+				color: #fff;
+				font-size: 1.2rem;
+				letter-spacing: 1px;
+			}
+			.btns-left {
+				flex: 1;
+			}
+			.btns-right {
+				flex: 1;
+			}
+		}
+	}
+	.button.button-my-red:hover {
+	    color: #fff;
+	    text-decoration: none;
+	}
+	.button.button-my-red.activated {
+	    border-color: #a2a2a2;
+	    background-color: #b1474b;
+	}
+	.button.button-my-red {
+	    border-color: transparent;
+	    background-color: #f23030;
+	    color: #fff;
+	}
+}

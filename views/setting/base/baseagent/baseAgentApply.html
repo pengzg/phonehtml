@@ -1,0 +1,152 @@
+<div class="setting_panel panel-default">
+    <div class="panel-heading text-left">
+        <div class="setting_nav">
+            <ul>
+                <li><a href="">列表</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="search-filter-box">
+    	<div>
+			<label>申请时间<span>:</span></label>
+            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
+            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+                <label>状态<span>:</span></label>
+			<select ng-model="searchParam.baa_apply_state" >
+					<option ng-repeat="x in statusList"  value="{{x.bd_code}}">{{x.bd_name}}</option>
+				</select>
+            <label>关键字<span>:</span></label>
+            <input type="text" placeholder="关键字" ng-model="searchParam.searchKey">
+        </div>
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearInput();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+        </div>
+    </div>
+    
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                        <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <!-- <th>头像</th> -->
+                                <th>用户名</th>
+                                <th>真实姓名</th>
+                                <th>手机号</th>
+                                <!-- <th>内容</th> -->
+                                <th>身份证号</th>
+                                <th>身份证正面</th>
+                                <th>身份证背面</th>
+                                <th>身份证持证</th>
+                                <th>是否是邀请页面</th>
+                                <th>邀请人</th>
+                                <th>审核状态</th>
+                                <th>审核内容</th>
+                                <th>操作</th>
+                               
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in dataList">
+                                <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+                                <!-- <td class="text-center f14" ><img width="20" ng-src="{{x.mb_img}}" ></td> -->
+                                <td class="text-center f14">{{x.baa_memberid_nameref}}<br>{{x.baa_memberid_code}}<br>{{x.baa_addtime}}</td>
+                                <td class="text-center f14">{{x.baa_name}}</td>
+                                <td class="text-center f14">{{x.baa_member_mobile}}</td>
+                                <!-- <td class="text-center f14">{{x.baa_comment}}</td> -->
+                                <td class="text-center f14">{{x.baa_idcard}}</td>
+                                <td class="text-center f14">
+                                    <img src="{{x.baa_idcard_front}}" style="height: 100px;"><br>
+                                    <a target="_blank" href="{{x.baa_idcard_front}}">查看原图</a>
+                                </td>
+                                <td class="text-center f14">
+                                    <img src="{{x.baa_idcard_back}}" style="height: 100px;"><br>
+                                    <a target="_blank" href="{{x.baa_idcard_back}}">查看原图</a>
+                                </td>
+                                <td class="text-center f14">
+                                    <img src="{{x.baa_idcard_hold}}" style="height: 100px;"><br>
+                                    <a target="_blank" href="{{x.baa_idcard_hold}}">查看原图</a>
+                                </td>        
+                                <td class="text-center f14">
+                                    <span ng-if="x.baa_def1==1">是</span>
+                                    <span ng-if="x.baa_def1!=1">否</span>
+                                </td>
+                                <td class="text-center f14">{{x.baa_def2_nameref}}</td>
+                                <td class="text-center f14">{{x.baa_checkstate_nameref}}</td>
+                                <td class="text-center f14">{{x.baa_checkcomment}}</td>
+                                <td class="text-center f14">
+                                     <a ng-if="x.baa_checkstate==1" class="common_edit" title="审核" ng-click="showCheckBox(x)"></a>
+                                     
+                                 </td>
+                              
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+                    <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 添加备注弹窗 -->
+<div class="dialog" ng-show="checkBoxShow" style="z-index:88">
+	<div class="dialog-zdc"></div>
+	<div class="dg-xg-zh" style="z-index:1000; width:608px;height:360px;margin-left: -369px; top:80px;" ng-show="checkBoxShow">
+		<div class="dg-xg-js" style="width:608px;">
+			审核
+			<div class="dg-cancle" ng-click="checkBoxShow=false"></div>
+		</div>
+		<div class="clearfix" style="padding: 0 10px; box-sizing: border-box;">
+			<form class="form-horizontal">
+				<div class="dg-content" style="width: 100%; margin-bottom:10px;margin-top:30px;">
+					<div>
+						<textarea name="comment" id="comment" cols="30" rows="10" maxlength="150" style="width:100%;height:200px;"></textarea>
+					</div>
+					<div style="text-align:right;">
+						<span>审核意见最多支持150字</span>
+					</div>
+				</div>
+				<div class="dg-submint" style=" width:100%; text-align: center; margin-bottom:20px;">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="updateCheckstate(2);">审核通过</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="updateCheckstate(3)">审核不通过</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<style>
+.tab_seleced{
+	border:1px solid #ddd;
+	border-bottom:none;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+	background-color:#5bc0de;
+	color:#fff;
+}
+</style>
+
+
+
+
+
+
+

@@ -1,0 +1,114 @@
+<div class="xt_changeHtml" style="margin-bottom: 50px;">
+	<div class="addlistCenter">
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi">单据类型：</span>
+			<div class="widthAuto zk_controlInput">
+				<span>{{vo.eim_type_nameref}}</span>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi">单据编号：</span>
+			<div class="widthAuto zk_controlInput">
+				<span>{{vo.eim_code}}</span>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" ng-if="vo.eim_type==101" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"> 入库仓库：</span>
+			<div class="widthAuto zk_controlInput">
+				<span>{{vo.eim_storeid_nameref}}</span>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" ng-if="vo.eim_type==201" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"> 出库仓库：</span>
+			<div class="widthAuto zk_controlInput">
+				<span>{{vo.eim_storeid_nameref}}</span>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" ng-if="vo.eim_type==201" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"> 入库仓库：</span>
+			<div class="widthAuto zk_controlInput">
+				<span>{{vo.eim_other_storeid_nameref}}</span>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"> 单据日期：</span>
+			<div class="widthAuto zk_controlInput">
+				<span>{{vo.eim_billdate}}</span>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"> 商品总数：</span>
+			<div class="widthAuto zk_controlInput">
+				<span>{{vo.eim_totalnum}}</span>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"> 总金额：</span>
+			<div class="widthAuto zk_controlInput">
+				<span>{{vo.eim_totalamount}}</span>
+			</div>
+		</div>
+
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi">操作时间：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.eim_add_time}}
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi">操作人：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.eim_operator_nameref}}
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi">备注：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.eim_note}}
+			</div>
+		</div>
+		<div style="min-width:900px;margin-bottom: 20px;margin-top: 25px;box-sizing:border-box;padding:0 46px;">
+			<table class="table table3 table-bordered" style="margin-bottom: 0 !important; border: 1px solid #dedede; border-bottom: 0;">
+				<tbody>
+					<tr class="zk_headerTrSty">
+						<th>
+							序号
+						</th>
+						<th >图片 </th>
+						<th >商品 </th>
+						<th>商品编码</th>
+						<th>商品数量</th>
+						<th>商品单价</th>
+						<th>商品小计</th>
+					</tr>
+					<tr ng-repeat="x in vo.itemVOList track by $index">
+						<td >
+							{{$index+1}}
+							</th>
+							<td><img style="width:50px;height:50px;" src="{{x.eii_goods_picture}}"> </td>
+							<td>
+								{{x.eii_goods_name}}
+							</td>
+							<td>{{x.eii_goods_code}}</td>
+							<td>{{x.eii_goods_quantity}}</td>
+							<td>{{x.eii_goods_price}}</td>
+							<td>{{x.eii_goods_amount}}</td>
+
+					</tr>
+				</tbody>
+			</table>
+			<div>
+				<!-- <img src="{{x.picturepath}}" ng-repeat="x in vo.picList" style="height: 80px;border:1px solid #ddd;margin:10px;" > -->
+				<ul id="viewer">
+					<li><img ng-click="startViewer();" src="{{x.picturepath}}" ng-repeat="x in vo.picList" style="height: 80px;border:1px solid #ddd;margin:10px;"
+						 data-original="{{x.picturepath}}" ></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<style>
+		.divVertical .xt_bzWenZi {
+			width: 125px;
+		}
+	</style>

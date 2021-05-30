@@ -1,0 +1,26 @@
+<div class="poster-data-main">
+    <div class="tabUl-4 clearfix" ng-init="checkIdx=0">
+        <ul>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==0]" ng-click="checkIdx=0" ui-sref="index.posterData.costEvaluate">
+                <a>成本评估</a>
+            </li>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==1]" ng-click="checkIdx=1" ui-sref="index.posterData.rewardDetail">
+                <a>派发奖励明细</a>
+            </li>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==2]" ng-click="checkIdx=2" ui-sref="index.posterData.cashDetail">
+                <a>提现红包明细</a>
+            </li>
+            <li style="width: 185px;" ng-class="{true:'active'}[checkIdx==3]" ng-click="checkIdx=3" ui-sref="index.posterData.clearDetail">
+                <a>清算红包明细</a>
+            </li>
+        </ul>
+    </div>
+    <div class="text-tips-wrap" id="view_active_info" style="display: block;">
+        <p class="text-title" id="page_active_title">春节推广</p>
+        <p class="text" id="page_active_time">2018-01-15 16:50:13 至 2018-01-18 11:03:22</p>
+    </div>
+    <div class="p-content">
+        <div class="p-item" data-ui-view="">
+        </div>
+    </div>
+</div>

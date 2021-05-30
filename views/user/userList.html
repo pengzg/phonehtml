@@ -1,0 +1,339 @@
+<div class="setting_panel panel-default">
+    <div class="panel-heading text-left">
+        <div class="setting_nav">
+            <ul>
+                <li><a href="">会员列表</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="search-filter-box">
+    	<div>
+			<label>注册时间<span>:</span></label>
+            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
+            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <label>关键字<span>:</span></label>
+            <input type="text" placeholder="请输入姓名或手机号" ng-model="searchParam.searchKey">
+            
+        </div>
+        <div>
+            <label>推广人<span>:</span></label>
+			<input type="text" placeholder="推广人信息" ng-model="searchParam.spreadSearchKey">
+            <label>类型<span>:</span></label>
+			<select ng-model="searchParam.mbAgenttypeStr" >
+					<option value="">全部</option>
+					<option value="4">社区合伙人</option>
+					<option value="5">城市合伙人</option>
+				</select>
+        </div>
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="searchFun();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();searchFun();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="doExport();" >导出数据</a>
+        </div>
+    </div>
+    
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                        <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>头像</th>
+                                <th>用户信息</th>
+                                <th>客户类型</th>
+                                <th>注册时间</th>
+                                <!-- <th>用户类型</th> -->
+                                <th>城市</th>
+                                <th>社区</th>
+                                <th>推广人</th>
+                                <th>推广码</th>
+                                <th>履约合伙人类型</th>
+                                <!-- <th>最后登录日期</th> -->
+                                <th>销售合伙人类型</th>
+                                <th>合伙人关系</th>
+                                <th>分润关系</th>
+                                <th>推广客户</th>
+                                <th>推广合伙人</th>
+                                <th>最后购买时间</th>
+                                <th>下单次数/金额</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in userList">
+                                <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+                                <td class="text-center f14" ><img width="20" ng-src="{{x.mb_img}}" ></td>
+                                <td class="text-center f14">{{x.mb_name}}<br>{{x.mb_mobile}}<br>{{x.mb_code}}</td>
+                                <td class="text-center f14">{{x.mb_type_nameref}}</td>
+                                <td class="text-center f14">{{x.mb_followtime}}</td>
+                               <!--  <td class="text-center f14">{{x.mb_usertype_nameref}}</td> -->
+                                <td class="text-center f14">{{x.mb_city_nameref}}</td>
+                                <td class="text-center f14">{{x.mb_communityid_nameref}}</td>
+                                <td class="text-center f14">{{x.mb_spreaduserid_nameref}}</td>
+                                <td class="text-center f14">
+                                    
+                                    <image style="height:100px;width:100px;" src="{{x.mb_spreadcode_show}}" />
+                                </td>
+                                <td class="text-center f14">{{x.mb_agenttype_nameref}}</td>
+                                <td class="text-center f14">{{x.mb_agenttype_sale_nameref}}</td>
+                                <td class="text-center f14">{{x.mb_agenttype_sale_nameref}}<br>{{x.mb_partner_first_nameref}}<br>{{x.mb_partner_second_nameref}}</td>
+                                <td class="text-center f14">{{x.mb_firstspread_nameref}}<br>{{x.mb_secondspread_nameref}}<br>{{x.mb_agentid_sale_nameref}}</td>
+                                <td class="text-center f14"><image ng-if="x.mb_spreadcode_show&&x.mb_agenttype_sale==2" style="height: 90px;width:90px;" src="{{x.mb_spreadcode_show}}"></td>
+                                    <td class="text-center f14"><image ng-if="x.mb_partner_second!=x.mb_partner_top&&x.mb_agenttype_sale!=1" style="height: 90px;width:90px;" src="{{x.mb_partner_qrcode_show}}"></td>
+                                <!-- <td class="text-center f14">{{x.mb_lastlogintime}}</td> -->
+                                <td class="text-center f14">{{x.mb_last_buy_time}}</td>
+                                <td class="text-center f14">{{x.mb_ordernum}}/{{x.mb_orderamount}}</td>
+                                <td class="text-center f14">
+                                   <!--  <a class="red" style="display: inline-block;" class="common_offsell" ng-click="getDetail(x.mb_id)" title="查看">查看</a>  -->
+                                    <a class="common_edit" title="详情" ng-click="getDetail(x.mb_id);"></a>
+                                    <a class="common_publish" title="清除推广码" ng-click="updateClearQrcode(x);"></a>
+                                    <!-- <a class="common_publish" title="设为管理员" ng-click="updateSetPartnerLevel(x,3);"></a> -->
+                                    <a class="common_publish" title="更新推荐人" ng-click="showSelectSpread(x,3);"></a>
+                                    <a class="common_detail" title="查看订单" ng-click="viewOrder(x);"></a>
+                                    <a class="common_detail" title="查看余额" ng-click="viewYe(x);"></a>
+                                    <div  style="display: inline-block;position: relative;">
+										<a ng-if="x.mb_state == '1'" class="common_btns common_band" ng-click="changeStatus(x.mb_id,'禁用')" title="禁用"></a>
+										<a ng-if="x.mb_state == '0'" class="common_btns common_active" ng-click="changeStatus(x.mb_id,'启用')" title="启用"></a>
+									</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 用户详情 -->
+<div class="dialog" ng-show="dialog==1" style="z-index: 88">
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index: 999998; width: 660px; margin-left: -330px; top: 50%; margin-top: -200px;"
+		ng-show="dialog">
+		<div class="dg-xg-js" style="width: 660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		<div class="setting_panel panel-default">
+			<div class="panel-body">
+				<table class="table table-loose table-hover">
+					<tbody>
+						<!-- <tr label="OpenID">
+                    <td>OpenID</td>
+                    <td>{{vo.mb_openid}}</td>
+                </tr> -->
+						<tr>
+							<td>昵称</td>
+							<td>{{vo.mb_nickname}}</td>
+						</tr>
+						<tr>
+							<td>头像</td>
+							<td><img width="50" ng-src="{{vo.mb_img}}"></td>
+						</tr>
+						<tr>
+							<td>性别</td>
+							<td>{{vo.mb_sex_nameref}}</td>
+						</tr>
+						<tr>
+							<td>城市</td>
+							<td>{{vo.mb_city_nameref}}</td>
+						</tr>
+						<tr>
+							<td>姓名</td>
+							<td>{{vo.mb_name}}</td>
+						</tr>
+						<tr>
+							<td>手机号</td>
+							<td><input ng-model="vo.mb_mobile" ></td>
+						</tr>
+						<!--  <tr>
+                    <td>微信号</td>
+                    <td>{{vo.mb_uuid}}</td>
+                </tr>
+                <tr>
+                    <td>身份证号</td>
+                    <td>{{vo.mb_idnumber}}</td>
+                </tr> -->
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div>
+            <div class="btn btn-default"
+				style="margin-left: 594px; margin-bottom: 10px"
+				ng-click="updateMobile()">确定</div>
+			<div class="btn btn-default"
+				style="margin-left: 594px; margin-bottom: 10px"
+				ng-click="closeDialog()">返回</div>
+		</div>
+
+
+	</div>
+</div>
+
+<!-- 查看用户订单弹窗 -->
+<div class="dialog" ng-show="dialog==2" style="z-index: 88">
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index: 999998; width: 900px; margin-left: -450px; top: 10%; "
+		ng-show="dialog">
+		<div class="dg-xg-js" style="width: 900px;">
+			{{dialogTitle2}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		<div class="setting_panel panel-default">
+			<div class="panel panel-default" style="border: 0; border-radius: 0;height:370px;overflow-y:scroll;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                                              
+                        <!-- <a class="btn btn-default" style="margin-right:15px;" ng-class="{'btn-info':x.type_id==searchParam_order.om_order_type}" ng-repeat="x in orderTypeList" ng-click="chooseType(x)">{{x.name}}</a> -->
+                        <a class="btn" ng-class="{'tab_seleced':x.type_id==searchParam_order.om_order_type}" ng-repeat="x in orderTypeList" ng-click="chooseType(x)">{{x.name}}</a>
+                    
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>下单时间</th>
+                                <th>订单号</th>
+                                <th>订单类型</th>
+                                <th>订单状态</th>
+                                <th>支付类型</th>
+                                <th>订单金额</th>
+                                <th>收货人电话</th>
+                                <th>备注</th>
+                                <th>查看详情</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in orderList">
+                                <td class="text-center f14">{{orderPager.rows * (orderPager.page - 1)+ $index+1}}</td>
+                                <td class="text-center f14">{{x.orderMainVO.om_order_time}}</td>
+                                <td class="text-center f14">{{x.orderMainVO.om_order_code}}</td>
+                                <td class="text-center f14">
+                                	<span ng-if="x.orderMainVO.om_order_type ==1">水票订单</span>
+                                	<span ng-if="x.orderMainVO.om_order_type ==2">送水订单</span>
+                                	<span ng-if="x.orderMainVO.om_order_type ==3">取水订单</span>
+                                </td>
+                                <td class="text-center f14">{{x.orderMainVO.om_state_nameref}}</td>
+                                <td class="text-center f14">{{x.orderMainVO.om_pay_type_nameref}}</td>
+                                <td class="text-center f14">{{x.orderMainVO.om_settlement_amount | currency:'￥'}}</td>
+                                <td class="text-center f14">{{x.orderMainVO.om_consignee_mobile}}</td>
+                                <td class="text-center f14" title="{{x.orderMainVO.om_remarks}}">{{x.om_remarks | cut:true:5:' ...'}}</td>
+                                <td>
+                                	<a class="common_detail" title="查看详情" target="_blank" ng-click="goOrderDetail(x.orderMainVO);"></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+              </div>
+              <tm-pagination conf="orderPager" search-param ="searchParam"></tm-pagination>
+		</div>
+		<!-- <div>
+			<div class="btn btn-default"
+				style="margin-left: 594px; margin-bottom: 10px"
+				ng-click="closeDialog()">关闭</div>
+		</div>
+ -->
+
+	</div>
+</div>
+
+<!-- 查看用户订单弹窗 -->
+<div class="dialog" ng-show="dialog==3" style="z-index: 88">
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh"
+		style="z-index: 999998; width: 900px; margin-left: -450px; top: 10%; "
+		ng-show="dialog">
+		<div class="dg-xg-js" style="width: 900px;">
+			{{dialogTitle3}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+		<div class="setting_panel panel-default">
+			<div class="panel panel-default" style="border: 0; border-radius: 0;height:370px;overflow-y:scroll;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                                              
+                        <div class="search-filter-box">
+                            <div>
+                                <label>用户信息<span>:</span></label>
+                                <input type="text" placeholder="请输入姓名或手机号" ng-model="spreadSearchParam.searchKey">
+                                <a class="btn btn-success" style="margin-left:80px;"  ng-click="spreadPager.page =1;querySpreadList();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+                            </div>
+                        </div> 
+                    
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>用户名</th>
+                                <th>电话</th>
+                                <th>注册时间</th>
+                                <th>用户编码</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in spreadList">
+                                <td class="text-center f14">{{spreadPager.rows * (spreadPager.page - 1)+ $index+1}}</td>
+                                <td class="text-center f14">{{x.mb_name}}</td>
+                                <td class="text-center f14">{{x.mb_mobile}}</td>
+                                <td class="text-center f14">{{x.mb_followtime}}</td>
+                                <td class="text-center f14">{{x.mb_code}}</td>
+                                <td>
+                                	<a class="common_publish" title="绑定" ng-click="updateUserSpread(x);"></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>                    
+              </div>
+              <tm-pagination conf="spreadPager" search-param ="spreadSearchParam"></tm-pagination>
+		</div>
+		<!-- <div>
+			<div class="btn btn-default"
+				style="margin-left: 594px; margin-bottom: 10px"
+				ng-click="closeDialog()">关闭</div>
+		</div>
+ -->
+
+	</div>
+</div>
+
+<style>
+.tab_seleced{
+	border:1px solid #ddd;
+	border-bottom:none;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+	background-color:#5bc0de;
+	color:#fff;
+}
+</style>
+
+
+
+
+
+
+

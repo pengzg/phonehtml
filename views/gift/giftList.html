@@ -1,0 +1,150 @@
+<div class="contentHtml-new" style=" z-index: 10001; background-color: #fff;left:0;">
+	
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;">
+	    <div class="row">
+			<div class="col-sm-12 page-header">
+            	<span class="page_actions" style="padding-left: 0; margin-left: 0;">
+					<a class="btn btn-success" href="#/index/gift/giftType"><i class="icon icon-plus"></i> 新建礼品</a>
+					<a class="btn btn-success" href="#/index/gift/giftGrouping"><i class="icon icon-folder-close"></i> 礼品分组管理</a>
+				</span>
+			</div>
+		</div>
+		<div class="row page_toolbar">
+        	<form class="form-inline filter">
+			    <div class="form-group f14">
+			    	<label>搜索</label>
+			    	<input class="form-control f14" placeholder="SKU或名称" type="text">
+			    </div>
+			    <div class="form-group f14">
+			    	<label>上架状态</label>
+			    	<select class="form-control" name="">
+			    		<option value="">全部状态</option>
+						<option value="">已上架</option>
+						<option value="">已下架</option>
+			    	</select>
+			    </div>
+				<div class="form-group f14">
+					<label>类型</label>
+					<select class="form-control" name="">
+						<option value="">全部类型</option>
+						<option value="">实物礼品</option>
+						<option value="">卡密票券</option>
+						<option value="">微信红包(自发)</option>
+						<option value="">虚拟礼品</option>
+						<option value="">微信卡券</option>
+						<option value="">小额红包</option>
+						<option value="">话费</option>
+						<option value="">积分</option>
+						<option value="">微信红包(代发)</option>
+					</select>
+				</div>
+			    <div class="actions">
+					<button name="button" type="submit" class="btn btn-success">
+						<i class="glyphicon glyphicon-filter"></i> 筛选
+					</button>
+					<a class="btn btn-default" href="" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+				</div>
+			</form>
+		</div>
+		<div class="row">
+        	<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0; padding: 0; margin: 0;">
+					<li class="active f14">
+						<a class="active" href="">
+ 							礼品
+							<span class="badge">4</span>
+						</a>
+					</li>
+				</ul>
+				<div class="panel panel-default" style="border: 0; border-radius: 0;">
+    				<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+      					<i class="icon icon-list"></i> 共4条记录
+    				</div>
+					<!--<div class="panel-body" style="border: 1px solid #ddd;">
+						<div class="table-empty text-center">
+							<i class="icon icon-search fa-3x"></i>
+							<h4>查找不到相关记录</h4>
+						</div>
+					</div>-->
+					<table class="table table3 table-bordered table-hover">
+						<thead>
+							<tr>
+								<th class="text-left">图片</th>
+								<th class="text-left">名称</th>
+								<th class="text-left">类型</th>
+								<th class="text-left">库存</th>
+								<th class="text-left">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="text-left"><img height="60" src="../../../img/20160707.png" alt="" /></td>
+								<td class="text-left">
+									<p>
+										<a href="" class="f14">微信红包</a>
+									</p>
+									<p class="text-muted f14"> 金额：2.00 元 </p>
+								</td>
+								<td class="text-left f14">微信红包(代发)</td>
+								<td class="text-left red f14">0</td>
+								<td class="text-left f14">
+									<a href="#/index/gift/giftDetail" class="blue" style="display: inline-block;">查看</a>
+									 - 
+									<a href="" class="red" style="display: inline-block;" ng-click="deleteGift()">删除</a>
+								</td>	
+							</tr>
+							<tr>
+								<td class="text-left"><img height="60" src="../../../img/20160707.png" alt="" /></td>
+								<td class="text-left">
+									<p>
+										<a href="" class="f14">电视机</a>
+									</p>
+									<p class="text-muted f14"> 金额：2.00 元 </p>
+								</td>
+								<td class="text-left f14">实物礼品</td>
+								<td class="text-left red f14">0</td>
+								<td class="text-left f14">
+									<a ui-sref="index.giftGoodsDetail" class="blue" style="display: inline-block;">查看</a>
+									 - 
+									<a href="" class="red" style="display: inline-block;" ng-click="deleteGift()">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-left"><img height="60" src="../../../img/20160707.png" alt="" /></td>
+								<td class="text-left">
+									<p>
+										<a href="" class="f14">100元代金券</a>
+									</p>
+									<p class="text-muted f14"> 金额：2.00 元 </p>
+								</td>
+								<td class="text-left f14">代金券</td>
+								<td class="text-left red f14">0</td>
+								<td class="text-left f14">
+									<a ui-sref="index.product.couponDetail" class="blue" style="display: inline-block;">查看</a>
+									 - 
+									<a href="" class="red" style="display: inline-block;" ng-click="deleteGift()">删除</a>
+								</td>
+							</tr>
+							<tr>
+								<td class="text-left"><img height="60" src="../../../img/20160707.png" alt="" /></td>
+								<td class="text-left">
+									<p>
+										<a href="" class="f14">100积分</a>
+									</p>
+									<p class="text-muted f14"> 金额：2.00 元 </p>
+								</td>
+								<td class="text-left f14">积分</td>
+								<td class="text-left red f14">0</td>
+								<td class="text-left f14">
+									<a ui-sref="index.giftPointDetail" class="blue" style="display: inline-block;">查看</a>
+									 - 
+									<a href="" class="red" style="display: inline-block;" ng-click="deleteGift()">删除</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+	        </div>
+	    </div>
+	</div>
+</div>

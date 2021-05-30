@@ -1,0 +1,40 @@
+ <common-navigater data="[{name:'系统管理'},{name:'基础管理'},{name:'城市管理'}]"></common-navigater>
+
+<div class="setting_panel panel-default">
+	<div class="device-b-toolbar-last"
+		style="padding-left: 15px; padding-top: 20px;padding-bottom:10px;background-color:#eee; position: relative;">
+		<div class="row">
+        	<form class="form-inline filter">
+			    <div class="actions" style="padding-left: 12px;">
+					<a class="btn btn-default" ng-click="updateStateOn()" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i>批量启用</a>
+					<a class="btn btn-default" ng-click="queryBanStore();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i>批量禁用</a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="table_tree xt_changeHtml" style="margin-top: 25px;">
+	<div class="layer baseMenuZtree">
+        <div id="tableMain">
+            <ul id="dataTree" class="ztree"></ul>
+        </div>
+    </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(function() {
+	$(document).on('click', function(ev) {
+		if ($(ev.target).parents('.SelectMulti-Container2').length) {
+			return
+		}
+		$('.droplistWrap2').hide();
+	})
+});
+	$("#ztree-btn").click(function(){
+	    $(".xt_changeHtml").toggleClass("enable");
+	    $(".xt_changeHtml").siblings().removeClass("enable");"sqkxBackOfficeSystem/pop.html"
+	})
+	function showDropList(obj) {
+		$('.droplistWrap2').hide();
+		$(obj).parent().find('.droplistWrap2').toggle();
+	};
+</script>

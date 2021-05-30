@@ -1,0 +1,302 @@
+<div class="contentHtml-new" style=" z-index: 10001; background-color: #fff;">
+	
+	<div class="panel-body" style="margin-top: 55px; box-sizing: border-box;">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="well">
+					<ul class="progress-indicator">
+						<li class="completed">
+							<span class="bubble"></span>
+							1.设置活动
+						</li>
+						<li class="">
+							<span class="bubble"></span>
+							2.设置奖项
+						</li>
+						<li class="">
+							<span class="bubble"></span>
+							3.设置活动页面
+						</li>
+						<li class="">
+							<span class="bubble"></span>
+							4.确认创建活动
+						</li>
+						<li class="">
+							<span class="bubble"></span>
+							5.完成
+						</li>
+					</ul>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="alert alert-danger">
+							<a href="" class="close">×</a>
+							<p class="f14">
+								<i class="glyphicon glyphicon-warning-sign"></i>
+								 有 5 处问题导致无法提交:
+							</p>
+							<ul style="margin-left: 40px;">
+								<li class="f14">活动标题不能为空</li>
+								<li class="f14">开始时间不能为空</li>
+								<li class="f14">结束时间不能为空</li>
+								<li class="f14">结束时间日期输入无效</li>
+								<li class="f14">二维码数量必须大于 0</li>
+							</ul>
+						</div>
+						<h5>活动设置</h5>
+						<hr />
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">活动类型</label>
+							<div class="col-md-9 col-lg-6">
+								<div class="form-control-static f14">一物一码活动</div>
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">
+								<abbr title="必填">*</abbr>
+								 互动类型
+							</label>
+							<div class="col-md-9 col-lg-6">
+								<div class="form-control-static f14">扫码送红包</div>
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">
+								<abbr title="必填">*</abbr>
+								 活动标题
+							</label>
+							<div class="col-md-9 col-lg-6">
+								<input type="text" class="form-control" />
+								<span class="help-block f14">不能为空</span>
+								<span class="help-block f14">最多10个字符</span>
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">
+								<abbr title="必填">*</abbr>
+								 开始时间
+							</label>
+							<div class="col-md-4 col-lg-3">
+								<div class="input-group">
+									<input type="text" class="Wdate" style=" width: 250px; height: 34px; box-sizing: border-box;" id="start_date"  onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"/>
+								</div>
+								<span class="help-block f14">不能为空</span>
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">
+								<abbr title="必填">*</abbr>
+								 结束时间
+							</label>
+							<div class="col-md-4 col-lg-3">
+								<div class="input-group">
+									<input type="text" class="Wdate" style=" width: 250px; height: 34px; box-sizing: border-box;" id="start_date"  onFocus="WdatePicker({dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"/>
+								</div>
+								<span class="help-block f14">不能为空</span>
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">备注</label>
+							<div class="col-md-9 col-lg-6">
+								<textarea class="form-control"></textarea>
+								<p class="help-block f14">用于内部备注，不在活动页面显示。</p>
+							</div>
+						</div>
+						<h5 class="section-header">参与规则设置</h5>
+						<hr />
+						<div class="form-group clearfix">
+							<label class="radio_buttons optional col-md-3 col-lg-2 control-label f14">参与次数规则</label>
+							<div class="col-md-9 col-lg-6">
+								<span class="radio f14">
+									<lable class="xt_inputRadio" style="margin-bottom:8px">
+										<input class="xt_radio" type="radio" >
+										<div class="xt_inputBackimg"=></div>不限制参与次数
+									</lable>
+								</span>
+								<span class="radio f14">
+									<lable class="xt_inputRadio" style="margin-bottom:8px">
+										<input class="xt_radio" type="radio" >
+										<div class="xt_inputBackimg" ></div>1个用户只能参与1次
+									</lable>
+								</span>
+								<span class="radio f14">
+									<lable class="xt_inputRadio" style="margin-bottom:8px">
+										<input class="xt_radio" type="radio" >
+										<div class="xt_inputBackimg" ></div>1个用户1天只能参与1次
+									</lable>
+								</span>
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">要求关注公众号</label>
+							<div class="col-md-9 col-lg-6">
+								<div>
+									<label>
+										<div class="toggle btn btn-default off btn-sm" style="width: 45px; height: 30px;">
+											<input type="checkbox" class="boolean optional" />
+											<div class="toggle-group">
+												<label class="btn btn-success btn-sm toggle-on">是</label>
+												<label class="btn btn-default btn-sm active toggle-off">否</label>
+												<span class="toggle-handle btn btn-default btn-sm"></span>
+											</div>
+										</div>
+									</label>
+								</div>
+								<p class="help-block f14">设置此项后，如果用户尚未关注公众号会要求用户先关注，关注后才可领取奖品</p>
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">要求填写姓名</label>
+							<div class="col-md-9 col-lg-6">
+								<div>
+									<label>
+										<div class="toggle btn btn-default off btn-sm" style="width: 45px; height: 30px;">
+											<input type="checkbox" class="boolean optional" />
+											<div class="toggle-group">
+												<label class="btn btn-success btn-sm toggle-on">是</label>
+												<label class="btn btn-default btn-sm active toggle-off">否</label>
+												<span class="toggle-handle btn btn-default btn-sm"></span>
+											</div>
+										</div>
+									</label>
+								</div>
+								<p class="help-block f14">用户需填写姓名才可领奖</p>
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">要求填写手机号</label>
+							<div class="col-md-9 col-lg-6">
+								<div>
+									<label>
+										<div class="toggle btn btn-default off btn-sm" style="width: 45px; height: 30px;">
+											<input type="checkbox" class="boolean optional" />
+											<div class="toggle-group">
+												<label class="btn btn-success btn-sm toggle-on">是</label>
+												<label class="btn btn-default btn-sm active toggle-off">否</label>
+												<span class="toggle-handle btn btn-default btn-sm"></span>
+											</div>
+										</div>
+									</label>
+								</div>
+								<p class="help-block f14">用户需填写手机号才可领奖</p>
+							</div>
+						</div>
+						<div class="row form-group clearfix">
+							<div class="col-md-2 text-right">
+								<p class="clickDiv">
+									<a href="" class="more1 f14">
+										更多规则
+										<i class="glyphicon glyphicon-chevron-up"></i>
+									</a>
+									<a href="" class="more2 f14">
+										更多规则
+										<i class="glyphicon glyphicon-chevron-down"></i>
+									</a>
+								</p>
+							</div>
+						</div>
+						<div class="collapse in clearfix">
+							<div class="form-group clearfix">
+								<label class="col-md-3 col-lg-2 control-label f14">要求填写个人微信号</label>
+								<div class="col-md-9 col-lg-6">
+									<div>
+										<label>
+											<div class="toggle btn btn-default off btn-sm" style="width: 45px; height: 30px;">
+												<input type="checkbox" class="boolean optional" />
+												<div class="toggle-group">
+													<label class="btn btn-success btn-sm toggle-on">是</label>
+													<label class="btn btn-default btn-sm active toggle-off">否</label>
+													<span class="toggle-handle btn btn-default btn-sm"></span>
+												</div>
+											</div>
+										</label>
+									</div>
+									<p class="help-block f14">用户需填写个人微信号才可领奖</p>
+								</div>
+							</div>
+							<div class="form-group clearfix">
+								<label class="col-md-3 col-lg-2 control-label f14">要求填写身份证号码</label>
+								<div class="col-md-9 col-lg-6">
+									<div>
+										<label>
+											<div class="toggle btn btn-default btn-sm" style="width: 45px; height: 30px;">
+												<input type="checkbox" class="boolean optional" />
+												<div class="toggle-group">
+													<label class="btn btn-success btn-sm toggle-on">是</label>
+													<label class="btn btn-default btn-sm active toggle-off">否</label>
+													<span class="toggle-handle btn btn-default btn-sm"></span>
+												</div>
+											</div>
+										</label>
+									</div>
+									<p class="help-block f14">用户需填写身份证号才可领奖</p>
+								</div>
+							</div>
+							<div class="form-group clearfix">
+								<label class="col-md-3 col-lg-2 control-label f14">其他</label>
+								<div class="col-md-9 col-lg-6">
+									<div>
+										<label>
+											<div class="toggle btn btn-default off btn-sm" style="width: 45px; height: 30px;">
+												<input type="checkbox" class="boolean optional" />
+												<div class="toggle-group">
+													<label class="btn btn-success btn-sm toggle-on">是</label>
+													<label class="btn btn-default btn-sm active toggle-off">否</label>
+													<span class="toggle-handle btn btn-default btn-sm"></span>
+												</div>
+											</div>
+										</label>
+									</div>
+									<p class="help-block f14">用户需填写定义的条件才可领奖</p>
+								</div>
+							</div>
+						</div>
+						<h5 class="section-header">二维码设置</h5>
+						<hr />
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">账户二维码余额</label>
+							<div class="col-md-9 col-lg-6">
+								<p class="lead">
+									<strong class="text-success">27</strong>
+								</p>
+							</div>
+						</div>
+						<div class="form-group clearfix">
+							<label class="col-md-3 col-lg-2 control-label f14">
+								<abbr title="必填">*</abbr>
+							 	二维码数量
+							</label>
+							<div class="col-md-4 col-lg-3">
+								<div class="input-group">
+									<input type="number" class="form-control" style="border-top-right-radius: 0 !important; border-bottom-right-radius: 0 !important;" />
+									<span class="input-group-addon" style="border-left: 0; border-top-left-radius: 0; border-bottom-left-radius: 0;">个</span>
+								</div>
+								<span class="help-block f14">必须大于 0</span>
+								<p class="help-block f14">本次活动计划生成的总二维码数量</p>
+							</div>
+						</div>
+						<hr />
+						<a href="#/index/activityAdd/newActivity/prizeEdit" class="btn btn-success">保存，并下一步</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+	    $(".toggle").click(function() {
+			$(this).toggleClass("off");
+			$(this).siblings().removeClass("off");
+		})
+	    $(".clickDiv").click(function() {
+			$(this).toggleClass("off");
+			$(this).siblings().removeClass("off");
+		})
+	    $(".clickDiv").click(function() {
+			$(".collapse").toggleClass("in");
+			$(".collapse").siblings().removeClass("in");
+		})
+	});	
+</script>

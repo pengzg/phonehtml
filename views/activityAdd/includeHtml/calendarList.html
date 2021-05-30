@@ -1,0 +1,34 @@
+<div class="wrap">
+	<div class="searchCont">
+		<div class="searchBar clearfix">
+			<label>筛选：</label>
+			<div class="searchItem_list">
+				<a href="" class="searchItem" ng-click="selectActivityType(null,'all');" ng-class="{true: 'selected', false: ''}[selectIndex == 'all']">全部<div class="tick"></div></a>
+				<a ng-repeat="x in activityTypeList" ng-click="selectActivityType(x,$index);" ng-class="{true: 'selected', false: ''}[selectIndex == $index]" class="searchItem">{{x.mat_name}}<div class="tick"></div></a>
+			</div>
+		</div>
+	</div>
+	<div class="searchResult newgameCont">
+		<ul class="gamelist clearfix">
+			<li ng-repeat="x in marketingTemplateList" ng-mouseenter="makeQrCode($index,x.mt_qcode_address)">
+				<img ng-src="{{x.mt_background_address_nameref}}" alt="" class="gamecover">
+				<p class="desc" title="{{x.mt_name}}">{{x.mt_name}}</p>
+				<a ng-click = "createFun(x);" class="setNow">立即创建</a>
+				<div class="qrcode">
+					<div id="qrcode{{$index}}" class="code"></div>
+					<p>扫码体验</p>
+				</div>
+				<div class="qrcodeMask"></div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function(){
+	    $(".searchItem_list a").click(function() {
+	        $(this).siblings('a').removeClass('selected');
+	        $(this).addClass('selected'); 
+	    });
+	}); 
+</script>

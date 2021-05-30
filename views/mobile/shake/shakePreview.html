@@ -1,0 +1,39 @@
+<div class="shake-main" id="shakePreview">
+    <div class="game-top">
+        <div class="game-top-left">
+            <div class="game-top-left-img">
+                <img img-err="img/mobile/personCenter/head.png" ng-src="{{sessioninfo.mb_img?sessioninfo.mb_img:'img/mobile/personCenter/head.png'}}" alt="">
+            </div>
+            <div class="game-top-person-name">
+                <span>李小明</span>
+            </div>
+        </div>
+        <div class="game-top-right">
+            <img src="img/mobile/squared/shop.png" alt="">
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="game-content">
+        <div class="begin-tips">
+            <div class="begin-circle">
+                <img class="a-wobble" src="img/mobile/shake/shake_begin_shake.png"/>
+            </div>
+        </div>
+    </div>
+    <div class="game_btns" ng-style="{bottom:$root.isBottomTab?'5rem':'1.5rem'}">
+        <div class="game_tip">演示小店欢迎您！</div>
+        <div class="btn-content">
+            <a class="btns" ng-click="showTabPop()">活动规则</a>
+        </div>
+        <div class="btn-content">
+            <a class="btns color-yellow" ng-click="showTabPop(true)">我的奖品</a>
+        </div>
+    </div>
+</div>
+<div id="popContent" style="display: none;">
+    <div class="pop-main">
+        <img src="img/mobile/shake/prize_default.png"/>
+        <div class="pop-detail">查看详情</div>
+    </div>
+</div>
+<div class="game-end" ng-show="isEnd"></div>

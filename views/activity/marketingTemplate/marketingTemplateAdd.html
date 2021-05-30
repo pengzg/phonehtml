@@ -1,0 +1,232 @@
+<div class="contentHtml-new" style=" z-index: 99; background-color: #fff;left:0;">
+	
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;" ng-init="tabIdx=1">
+		 <div class="row">
+			<div class="col-sm-12 page-header">
+            	<span class="page_actions" style="padding-left: 0; margin-left: 0;">
+					<a class="btn btn-success" ng-click="goList();"> 返回列表</a>
+					<!-- <a class="btn btn-success" href="#/index/product/productGrouping"><i class="icon icon-folder-close"></i> 礼品分组管理</a> -->
+				</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0;">
+					<li  ng-class="{active:tabIdx==1}">
+						<a class="f14 i-c-black" ng-click="tabIdx=1">
+							<i class="glyphicon glyphicon-edit"></i>
+							 模板详情
+						</a>
+					</li>
+					<!-- <li ng-class="{active:tabIdx==2}">
+						<a class="f14 i-c-black"  ng-click="tabIdx=2">
+							<i class="icon icon-dropbox"></i>
+							 库存管理
+						</a>
+					</li> -->
+				</ul>
+				<div class="t-box clearfix" id="tab1" ng-show="tabIdx==1">
+					<form class="form-horizontal">
+						<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+							<div class="panel-body">
+								<h5>基本信息</h5>
+								<hr />
+								
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 编码
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<input type="text" class="form-control" ng-model="vo.mt_code" />
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 名称
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<input type="text" class="form-control" ng-model="vo.mt_name" />
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<!-- <i class="form_required" title="必填">*</i> -->
+										 描述
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<input type="text" class="form-control" ng-model="vo.mt_describe" />
+									</div>
+								</div>
+								<div class="form-group clearfix">
+									<label class="radio_buttons optional col-md-3 col-lg-2 control-label f14">分类</label>
+									<div class="col-md-9 col-lg-6" style="padding-top: 9px;">
+										<span class="radio f14" style="padding: 0; width: 100%;">
+											<lable class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" value="1" ng-model="vo.mat_category" name="cateogry" ng-change="vo.mt_activity_type=''">
+												<div class="xt_inputBackimg"=></div>活动
+											</lable>
+										</span>
+										<span class="radio f14" style="padding: 0; width: 100%;">
+											<lable class="xt_inputRadio" style="margin-bottom:8px">
+												<input class="xt_radio" type="radio" value="2" ng-model="vo.mat_category" name="category" ng-change="vo.mt_activity_type=''">
+												<div class="xt_inputBackimg" ></div>海报
+											</lable>
+										</span>
+										
+									</div>
+								</div>
+								<div class="form-group clearfix" ng-if="vo.mat_category==1">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 类型
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<!-- <select class="form-control" ng-model="vo.mt_activity_type" >
+											<option value="{{x.mat_id}}" ng-repeat="x in typeList">{{x.mat_name}}</option>
+											
+										</select> -->
+										<select class="form-control" ng-model="vo.mt_activity_type" ng-options="type.mat_id as type.mat_name group by type.mat_parentid_nameref for type in typeList" >
+											
+											
+										</select>
+									</div>
+								</div>
+								<div class="form-group clearfix" ng-if="vo.mat_category==2">
+									<label class="col-md-3 col-lg-2 control-label f14">
+										<i class="form_required" title="必填">*</i>
+										 类型
+									</label>
+									<div class="col-md-9 col-lg-6">
+										<!-- <select class="form-control" ng-model="vo.mt_activity_type" >
+											<option value="{{x.mat_id}}" ng-repeat="x in typeList">{{x.mat_name}}</option>
+											
+										</select> -->
+										<select class="form-control" ng-model="vo.mt_activity_type" ng-options="type.mat_id as type.mat_name  for type in typeList2" >
+											
+											
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-md-3 col-lg-2 control-label f14" style="padding-top: 0;">背景图片</label>
+									<div class="col-md-9 col-lg-6">
+										<a ng-click="upImage($event)" style="color:#099fb8;" class="f14">上传图片</a>&nbsp;&nbsp;&nbsp;建议尺寸 : 250*400
+										<div  style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor" 
+										get-ue="ue_myeditor = getUe" ng-show="false" class="ueditor" ng-model="gb_content1"></div>
+										<div style="margin-top:5px;">
+											<div style="float:left;margin:5px;">
+												<div class="gsGoodsImgs" style="width:100px; height:160px;border:1px solid #ddd;">
+													<img alt="" src="{{vo.mt_background_address_nameref?vo.mt_background_address_nameref:'img/prizedef.jpg'}}"  style="width:100px; height:160px;">
+												</div>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>    
+								<div class="form-group clearfix">
+										<label class="radio_buttons optional col-md-3 col-lg-2 control-label f14">是否启用</label>
+										<div class="col-md-9 col-lg-6" style="padding-top: 9px;">
+											<span class="radio f14" style="padding: 0; width: 100%;">
+												<lable class="xt_inputRadio" style="margin-bottom:8px">
+													<input class="xt_radio" type="radio" value="1" ng-model="vo.mt_stats" name="state">
+													<div class="xt_inputBackimg"=></div>启用
+												</lable>
+											</span>
+											<span class="radio f14" style="padding: 0; width: 100%;">
+												<lable class="xt_inputRadio" style="margin-bottom:8px">
+													<input class="xt_radio" type="radio" value="0" ng-model="vo.mt_stats" name="state">
+													<div class="xt_inputBackimg" ></div>禁用
+												</lable>
+											</span>
+											
+										</div>
+									</div>
+								<hr />
+								<a  class="btn btn-success" ng-click="saveMt();">保存</a>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="t-box clearfix" id="tab2" ng-show="tabIdx==2">
+					<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+						<div class="panel-body">
+	    					<div class="row">
+								<div class="col-xs-4 text-center">
+							        <h4>当前库存</h4>
+							        <hr>
+							        <h1 class="stock_quantity">0</h1>
+									<hr>
+								</div>
+								<div class="col-xs-8 left-border">
+									<h5>购买库存，购买后费用将从您的账户余额中扣除</h5>
+									<hr>
+									<form class="simple_form form-horizontal new_purchase">
+										<div class="form-group hidden purchase_type">
+											<div class="col-md-9 col-lg-6">
+												<input class="hidden form-control" type="hidden" value="GoodPurchase" name="purchase[type]" id="purchase_type">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												<i class="form_required" title="必填">*</i>
+												 数量
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<input class="form-control f14" type="number" step="1" value="1" name="" style="height: 34px; line-height: 18px; box-sizing: border-box;">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												<!-- <i class="form_required" title="必填">*</i> -->
+												 备注
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<input class="form-control f14" type="number" step="1" value="1" name="" style="height: 34px; line-height: 18px; box-sizing: border-box;">
+											</div>
+										</div>
+										<hr>
+										<a href="" class="btn btn-success">提交购买</a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default" style="border: 0;">
+    					<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+	      					<i class="icon icon-list"></i> 共4条记录
+	    				</div>
+	    				<!--无记录时显示-->
+	    				<!--<div class="panel-body" style="border: 1px solid #ddd;">
+							<div class="table-empty text-center">
+								<i class="icon icon-search fa-3x"></i>
+								<h4>查找不到相关记录</h4>
+							</div>
+						</div>-->
+						<table class="table table3 table-bordered table-hover" style="margin-bottom: 0;">
+							<thead>
+								<tr>
+									<th class="text-left">时间</th>
+									<th class="text-left">操作类型</th>
+									<th class="text-left">数量</th>
+									<th class="text-left">结余</th>
+									<th class="text-left">备注</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in [1,2]">
+									<td class="text-left f14">2017-05-06 17:33:55</td>
+									<td class="text-left f14">管理员操作</td>
+									<td class="text-left f14">10</td>
+									<td class="text-left red f14">10</td>
+									<td class="text-left f14">无</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>

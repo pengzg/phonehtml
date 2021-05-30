@@ -1,0 +1,49 @@
+.gift-card-main {
+	background: #f9f9f9;
+	.gift-top {
+		img {
+			width: 100%;
+		}
+	}
+	.gift-center {
+		padding: 1rem;
+		.gift-tips {
+			font-size: 1.1rem;
+			font-weight: 600;
+			color: #444;
+			margin-bottom: 1rem;
+			letter-spacing: 1px;
+		}
+		.gift-list {
+			.gift-item {
+				float: left;
+				width: calc(50% - 0.5rem);
+				background: #fff;
+				$borderRadius: 8px;
+				border-radius: $borderRadius;
+				margin-bottom: 1rem;
+				box-shadow: 1px 1px 1px #aaa;
+				&:nth-of-type(odd){
+					margin-right: 1rem;
+				}
+				.item-top {
+					img {
+						width: 100%;
+						border-radius: $borderRadius;
+						border-bottom-left-radius: 0;
+						border-bottom-right-radius: 0;
+					}
+				}
+				.item-bottom {
+					text-align: center;
+					font-weight: 600;
+				}
+			}
+		}
+	}
+	.gift-bottom {
+		text-align: center;
+		color: #829df8;
+		padding-bottom: 2rem;
+	}
+}

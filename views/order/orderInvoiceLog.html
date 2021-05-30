@@ -1,0 +1,481 @@
+<div class="contentHtml-new" style="background-color: #fff;left:0;">
+	<div class="search-filter-box">
+		<div>
+			<label>订单日期<span>:</span></label>
+			<span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()" ng-click="dateRange.chooseDate($event)">
+			日期 </span>
+			<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;" onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+			/>
+			<input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;" onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+			/>
+			<label>申请状态<span>:</span></label>
+			<select ng-model="searchParam.oil_invoice_state" >
+					<option ng-repeat="x in statusList" value="{{x.bd_code}}" id="invoiceStatusSelect" value="{{x.bd_code}}">{{x.bd_name}}</option>
+				</select>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="订单号或者会员信息" ng-model="searchParam.searchKey">
+		</div>
+
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;" ng-click="doSearch();"><i class="glyphicon glyphicon-filter"></i>
+				筛选</a>
+			<a class="btn btn-default" ng-click="clearInput();doSearch();" style="text-shadow: none !important; color: #333 !important;"><i
+				 class="icon icon-eraser"></i> 清空</a>
+		</div>
+	</div>
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;">
+		
+		<div class="row page_toolbar div-inline" ng-show="flase&&selectItem.length>0">
+			<div style="font-size:0;" ng-click="selectAllClick()">
+				<img src="img/2016-11-29-01.png" alt="">
+			</div>
+			<div class="ml20" style="border-right:1px solid #aaa;padding-right: 20px;">已选择<span style="color:#5cb85c;">{{selectItem.length}}</span>项</div>
+			<div class="ml20 hover-green">
+				<i class="fa fa-get-pocket"></i>
+				<span>订单审核</span>
+			</div>
+			<div class="ml20 hover-green">
+				<i class="fa fa-dollar"></i>
+				<span>财务审核</span>
+			</div>
+			<div class="ml20 hover-green">
+				<i class="fa fa-truck"></i>
+				<span>出库审核</span>
+			</div>
+			<div class="ml20 hover-green">
+				<i class="fa fa-truck"></i>
+				<span>发货确认</span>
+			</div>
+			<div class="ml20 hover-green">
+				<i class="fa fa-get-pocket"></i>
+				<span>订单审核</span>
+			</div>
+			<div class="ml20 hover-green">
+				<i class="fa fa-arrow-circle-right"></i>
+				<span>导出</span>
+			</div>
+			<div class="ml20 hover-green">
+				<i class="fa fa-trash"></i>
+				<span>删除</span>
+			</div>
+		</div>
+		<div class="row" ng-init="activeTab=0">
+			<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0; padding: 0; margin: 0;">
+					<li class="f14" ng-class="{'active':activeTab==0}" ng-click="chooseTab(0)">
+						<a class="active black">
+							全部
+							<span class="badge"></span>
+						</a>
+					</li>
+					
+				</ul>
+				<div class="panel panel-default" style="border: 0; border-radius: 0;">
+					<div class="t-box clearfix">
+						<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+							<i class="icon icon-list"></i> 共{{pager.total}}条记录
+							<div class="pull-right" ng-show="false">
+								<a class="btn btn-success btn-xs" href="">导出 Excel</a>
+							</div>
+						</div>
+					
+						<div class="order-list-new">
+							<div class="order-head">
+								<div style="width:30%;">商品信息</div>
+								<div style="width:15%;">数量</div>
+								<div style="width:15%;">金额</div>
+								<div style="width:15%;">订单编号
+								</div>
+								<div style="width:15%;">操作</div>
+							</div>
+							<div class="order-item-new"  ng-repeat=" x in orderList">
+								<div class="order-main-info" ng-click="showItem(x)" style="height: 120px;" stop-propagation>
+									<div style="width: 22%;">
+										<div>申请时间：{{x.oil_addtime}}</div>
+										<div>公司名称：{{x.oil_memberid_nameref}}</div>
+										<div>开票金额：{{x.oil_amount}}</div>
+										
+									</div>
+                                    <div style="width: 22%;">
+										<div>收件人：{{x.oil_receive_name}}</div>
+										<div>电话：{{x.oil_receive_mobile}}</div>
+										<div style="font-size:10px;">地址：{{x.oil_receive_address}}</div>
+										
+									</div>
+									<div style="width: 25%;">
+										<div>开票公司：{{x.oil_companyname}}</div>
+										<div>开票税号：{{x.oil_taxcode}}</div>
+										<div>邮箱地址：{{x.oil_member_email}}</div>
+										
+										
+									</div>
+									<div style="width: 25%;">
+										<div>开票状态：{{x.oil_invoice_state_nameref}}</div>
+										<div ng-if="x.oil_invoice_state==3">开票时间：{{x.oil_invoice_time}}</div>
+										<a ng-if="x.oil_invoice_state==1" class="btn btn-success btn-xs" ng-click="changeInvoiceState(x,3)">开票</a>
+									</div>
+								</div>
+
+								<table class="order-detail-list">
+									<tr ng-repeat=" y in x.orderDetailList track by $index">
+										<td style="width:30%;text-align:left;">
+											<span>{{y.od_product_id_nameref}}</span>
+										</td>
+										<td style="width:15%;text-align:left;"  >
+											<span>{{y.od_product_num_total}}</span>
+										</td>
+										<td style="width:15%;" >
+											<span>{{y.od_amount3_total}}</span><br/>
+										</td>
+										<td style="width:15%;" >
+											<span>{{y.om_order_code}}</span><br/>
+											<span>{{y.om_invoice_state_nameref}}</span>
+										</td>
+										<td style="width:15%;" >
+											<a ng-click="goOrderDetail(y.om_id,y.om_order_code);" class="red" style="display: inline-block;">查看</a>
+										</td>
+									</tr>
+								</table>
+
+							</div>
+
+						</div>
+						<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="right-pop" style="height: 400px;overflow: scroll;">
+		<div class="pop-close-btn" ng-click="hideItem()"></div>
+		<div class="xt_offOne tabUl-2 clearfix" style="margin-bottom:0;">
+			<ul ng-init="order_tab=1">
+				<li ng-class="{'active':order_tab==1}" ng-click="changeTab('1')" style="position:relative;top:3px;margin-bottom:2px;margin-left:10px;"><a>订单详情</a></li>
+				<li ng-class="{'active':order_tab==2}" ng-show="vo.orderVO.om_order_type=='2'" ng-click="changeTab('2')" style="position:relative;top:3px;margin-bottom:2px;"><a>出库发货记录</a></li>
+				<li ng-class="{'active':order_tab==3}" ng-click="changeTab('3')" style="position:relative;top:3px;margin-bottom:2px;"><a>收款记录</a></li>
+			</ul>
+		</div>
+		<div ng-show="order_tab==1" style="padding: 10px;background:#fff;">
+			<div>
+				<span style="font-size:20px;color:#f96b6b;">{{vo.orderVO.om_state_nameref}}</span>
+				<span style="margin-left:20px;">订单编号: </span>
+				<span>{{vo.orderVO.om_order_code}}</span>
+				<!-- <a style="color:#fff;background:#03a9f3;">代下单</a> -->
+				<span style="margin-left:20px;">客户名称:</span>
+				<span>{{vo.orderVO.om_memberid_nameref}}</span>
+				<!-- <span>[普通]</span> -->
+				<span style="margin-left:20px;" ng-if="vo.orderVO.om_logistics_deliveryid_nameref">业务员:</span>
+				<span>{{vo.orderVO.om_logistics_deliveryid_nameref}}</span>
+				<span style="margin-left:20px;">支付方式:</span>
+				<span>{{vo.orderVO.om_pay_type_nameref}}</span>
+			</div>
+			<table class="table table3 table-bordered table-hover mt10">
+				<thead>
+					<tr>
+						<th class="text-left">序号</th>
+						<th class="text-left">图片</th>
+						<th class="text-left">名称</th>
+						<th class="text-left">规格</th>
+						<th class="text-left">数量</th>
+						<th class="text-left">单位</th>
+						<th class="text-left">单价</th>
+						<th class="text-left">金额小计</th>
+						<!-- <th class="text-center">备注</th> -->
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in vo.list">
+						<td class="text-left f14">{{$index+1}}</td>
+						<td class="text-left">
+							<img style="height:30px;width:30px;" src="{{x.od_product_pic?x.od_product_pic:'img/prizedef.jpg'}}" img-err="img/prizedef.jpg"
+							/>
+						</td>
+						<td class="text-left">{{x.od_product_name}}</td>
+						<td class="text-left">{{x.od_product_id_nameref}}</td>
+						<td class="text-left">{{x.od_product_num}}</td>
+						<td class="text-left">{{x.od_unitname}}</td>
+						<td class="text-right">{{x.od_sale_price | currency:'￥'}}</td>
+						<td class="text-right">{{x.od_settlement_amount | currency:'￥'}}</td>
+						<!-- <td class="text-center"><a class="fa fa-plus" ng-click="addRemarks(1,x.od_id);"></a></td> -->
+					</tr>
+					<tr>
+						<td class="text-left f14">合计</td>
+						<td class="text-left"></td>
+						<td class="text-left"></td>
+						<td class="text-left"></td>
+						<td class="text-left">{{vo.orderVO.om_ordernum}}</td>
+						<td class="text-left"></td>
+						<td class="text-left"></td>
+						<td class="text-right">{{vo.orderVO.om_product_amount | currency:'￥'}}</td>
+						<!-- <td class="text-left"></td> -->
+					</tr>
+					<tr>
+						<td colspan="9" class="text-right">
+							<span>商品金额 : <span class="red">{{vo.orderVO.om_product_amount | currency:'￥'}}</span></span>
+							<span ng-show="vo.orderVO.om_pay_way!=4">&nbsp;&nbsp;&nbsp;&nbsp;运费 : <span class="red">{{vo.orderVO.om_freight_amount | currency:'￥'}}</span></span>
+							<span ng-show="vo.orderVO.om_coupon_amount>0">&nbsp;&nbsp;&nbsp;&nbsp;优惠券 : <span class="red">-{{vo.orderVO.om_coupon_amount | currency:'￥'}}</span></span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;订单金额 : <span class="red">{{vo.orderVO.om_settlement_amount | currency:'￥'}}</span></span>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="9" class="text-right">
+							<span ng-show="vo.orderVO.om_pay_type!=5">&nbsp;&nbsp;&nbsp;&nbsp;余额: <span class="red">{{vo.orderVO.om_balance_amount | currency:'￥'}}</span></span>
+							<span ng-show="vo.orderVO.om_pay_type!=5">&nbsp;&nbsp;&nbsp;&nbsp;奖励余额: <span class="red">{{vo.orderVO.om_water_drop_amount | currency:'￥'}}</span></span>
+							<span ng-show="vo.orderVO.om_pay_type==5&&vo.orderVO.om_pay_way!=4">&nbsp;&nbsp;&nbsp;&nbsp;水票抵扣: <span class="red">-{{vo.orderVO.om_product_amount | currency:'￥'}}</span></span>
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;实付金额 : <span class="red">{{vo.orderVO.om_collect_amount | currency:'￥'}}</span></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="f14">
+				<label style="color:#444;width:80px;">收货信息</label>
+				<span>客户名称:</span>
+				<span>{{vo.orderVO.om_memberid_nameref}}</span>
+
+				<span class="ml20">收货人:</span>
+				<span>{{vo.orderVO.om_consignee_name}}</span>
+
+				<span class="ml20">联系方式:</span>
+				<span>{{vo.orderVO.om_consignee_mobile}}</span>
+
+				<span class="ml20">收货地址:</span>
+				<span>{{vo.orderVO.om_consignee_address}}</span>
+				
+			</div>
+			<!-- <div class="f14 mtop10">
+			<label style="color:#444;width:80px;">交货日期</label>
+			<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="width: 125px; height: 15px; margin-left:-4px;border-top-left-radius: 0 !important; border-bottom-left-radius: 0 !important;"
+								onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+								ng-model="startdate"/>
+		</div> -->
+			<!-- <div class="f14 mtop10">
+			<label style="color:#444;width:80px;">制单人</label>
+			<span>张涛</span>
+		</div> -->
+			<div class="f14 mtop10">
+				<label style="color:#444;width:80px;">备注说明</label>
+				<span ng-if="vo.orderVO.om_remarks">{{vo.orderVO.om_remarks}}</span>
+				<span ng-if="!vo.orderVO.om_remarks">无</span>
+				<a class="fa fa-edit" ng-click="addRemarks(2,om_id)"></a>
+			</div>
+			<div class="f14 mtop15" ng-click="showLogs=!showLogs">
+				<label style="color:#444;width:80px;">操作日志</label>
+				<a class="fa fa-chevron-down" ng-show="!showLogs"></a>
+				<a class="fa fa-chevron-up" ng-show="showLogs"></a>
+			</div>
+			<table class="table table3 table-bordered table-hover mt10" ng-show="showLogs">
+				<thead>
+					<tr>
+						<!-- <th class="text-left">公司名称</th> -->
+						<th class="text-left">操作人</th>
+						<th class="text-left">时间</th>
+						<th class="text-left">操作类别</th>
+						<th class="text-left">操作日志</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in logList">
+						<!-- <td class="text-left">{{x.ol_orgid_nameref}}</td> -->
+						<td class="text-left">{{x.ol_memberid_nameref}}</td>
+						<td class="text-left">{{x.ol_addtime}}</td>
+						<td class="text-left">{{x.ol_type_nameref}}</td>
+						<td class="text-left">{{x.ol_remarks}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div ng-show="order_tab==2" ng-init="showList=true;showList2=true" style="padding: 10px;background:#fff;">
+			<div>
+				<span style="font-size:20px;color:#f96b6b;">{{vo.orderVO.om_delivery_state_nameref}}</span>
+				<span style="margin-left:20px;">订单编号: </span>
+				<span>{{vo.orderVO.om_order_code}}</span>
+				<!-- <a style="color:#fff;background:#03a9f3;">代下单</a> -->
+				<span class="ml20">{{vo.orderVO.om_memberid_nameref}}</span>
+				<!-- <span>[普通]</span> -->
+				<span style="margin-left:20px;">收货信息:</span>
+				<span>{{vo.orderVO.om_memberid_nameref}}，{{vo.orderVO.om_consignee_name}}， {{vo.orderVO.om_consignee_mobile}}，{{vo.orderVO.om_consignee_address}}
+				</span>
+			</div>
+			<div style="padding:10px;background:#fff;border: 1px solid #ddd;cursor:pointer;margin-top:10px;" ng-click="showList=!showList"
+			 ng-show="vo.orderVO.om_ordernum != vo.orderVO.om_delivernum">
+				<i class="fa fa-list-alt"></i>
+				<span> 待出库商品清单 </span>
+				<a class="fa fa-angle-down" ng-show="!showList"></a>
+				<a class="fa fa-angle-up" ng-show="showList"></a>
+				<!-- <div class="btn btn-sm btn-success" style="float:right;margin-top:-6px;" ng-show="vo.orderVO.om_state == '3'||vo.orderVO.om_state == '4'||vo.orderVO.om_state == '5'||vo.orderVO.om_state == '6'"
+				 stop-propagation ng-click="showDeliveryDialog()">发货出库</div> -->
+				 <div class="btn btn-sm btn-success" style="float:right;margin-top:-6px;" stop-propagation ng-show="vo.orderVO.om_businesstype==1&&(vo.orderVO.om_delivery_type == '4'||vo.orderVO.om_state == '3'||vo.orderVO.om_state == '4'||vo.orderVO.om_state == '5'||vo.orderVO.om_state == '6')"  ng-click="showDeliveryDialog()">发货出库</div>
+				<div class="btn btn-sm btn-success" style="float:right;margin-top:-6px;" stop-propagation ng-show="vo.orderVO.om_businesstype==2&&vo.orderVO.om_group_state==2&&(vo.orderVO.om_delivery_type == '4'||vo.orderVO.om_state == '3'||vo.orderVO.om_state == '4'||vo.orderVO.om_state == '5'||vo.orderVO.om_state == '6')" ng-click="showDeliveryDialog()">发货出库</div>
+			</div>
+			<div style="padding:10px;background:#fff;border: 1px solid #ddd;border-bottom:0;border-top:0;position:relative;" ng-show="showList && (vo.orderVO.om_ordernum != vo.orderVO.om_delivernum)">
+				<span>出库仓库:</span>
+				<span data-toggle="dropdown" style="cursor:pointer;color:red;">{{bs_name}}</span>
+				<a class="fa fa-angle-down drop-show" data-toggle="dropdown"></a>
+				<a class="fa fa-angle-up drop-hide" data-toggle="dropdown"></a>
+				<div class="droplistWrap dropdown-menu" style="width: 212px;top: 35px;height: 150px;">
+					<div class="droplist">
+						<span ng-repeat="x in houseList" class="listItem" ng-click="chooseHouse(x.bs_id,x.bs_name)">{{x.bs_name}}</span>
+					</div>
+				</div>
+				<input type="checkbox" id="showMoreThanOne" ng-model="showMoreThanOne" style="margin-left:10px;">
+				<label for="showMoreThanOne">仅显示库存大于0的商品</label>
+				<span style="float:right;margin-right:10px;">本次出库数设为0表示此商品暂不出库</span>
+			</div>
+			<table class="table table3 table-bordered table-hover" ng-show="showList && (vo.orderVO.om_ordernum != vo.orderVO.om_delivernum)">
+				<thead>
+					<tr>
+						<th class="text-left">序号</th>
+						<!-- <th class="text-left">主图</th> -->
+						<th class="text-left">商品名称</th>
+						<th class="text-left">商品编码</th>
+						<th class="text-left">库存数量（默认仓）</th>
+						<th class="text-left">订购数</th>
+						<th class="text-left">已出库数</th>
+						<th class="text-left">本次出库数</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in dckGoodsList" ng-show="!showMoreThanOne||x.pss_stocknum>0">
+						<td class="text-left">{{$index+1}}</td>
+						<!-- <td class="text-left"><img src="{{x.od_product_pic}}" style="width:40px;height:40px;"></td> -->
+						<td class="text-left">{{x.od_product_name}}</td>
+						<td class="text-left">{{x.od_product_code}}</td>
+						<td class="text-left">{{x.pss_stocknum}}</td>
+						<td class="text-left">{{x.od_product_num}}</td>
+						<td class="text-left">{{x.od_delivery_num}}</td>
+						<td class="text-left"><input ng-show="x.od_product_num>x.od_delivery_num" ng-change="outNumChange(x);" ng-model="x.outNum"
+							 type="text" style="width:40px;">{{x.od_unitname}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="padding:10px;background:#fff;border: 1px solid #ddd;cursor:pointer;margin-top:10px;" ng-click="showList2=!showList2">
+				<i class="fa fa-list-alt"></i>
+				<span> 出库/发货记录 </span>
+				<a class="fa fa-angle-down" ng-show="!showList2"></a>
+				<a class="fa fa-angle-up" ng-show="showList2"></a>
+			</div>
+			<div ng-repeat="x in deliveryList" ng-show="showList2">
+				<table class="table table3 table-bordered table-hover" style="margin-top:-1px;margin-bottom:0;">
+					<thead>
+						<tr>
+							<th class="text-left"></th>
+							<!-- <th class="text-left">主图</th> -->
+							<th class="text-left">商品名称</th>
+							<th class="text-left">商品编码</th>
+							<th class="text-left">本次出库数</th>
+							<!-- <th class="text-left">配送员</th> -->
+							<!-- <th class="text-left">配送金额</th> -->
+							<th class="text-left">出库仓库</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="y in x.list">
+							<td class="text-left">{{$index+1}}</td>
+							<!-- <td class="text-left"><img src="" style="width:40px;height:40px;"></td> -->
+							<td class="text-left">{{y.odd_product_name}}</td>
+							<td class="text-left">{{y.odd_product_code}}</td>
+							<td class="text-left">{{y.odd_product_num}}</td>
+							<!-- <td class="text-left">{{}}</td> -->
+							<!-- <td class="text-right">{{y.odd_settlement_amount}}</td> -->
+							<td class="text-left">{{x.odmVO.odm_storeid_nameref}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<div style="border: 1px solid #ddd;border-top:0;padding: 10px;">
+					<div class="mt10">
+						<span style="width: 100px;display:inline-block;">编号：</span>
+						<span style="color: #666;">{{x.odmVO.odm_delivery_code}}</span>
+					</div>
+					<div class="mt10">
+						<span style="width: 100px;display:inline-block;">状态：</span>
+						<span style="color: #666;">{{x.odmVO.odm_delivery_state_nameref}}</span>
+					</div>
+					<!-- <div class="mt10">
+					<span style="width: 100px;display:inline-block;">备注：</span>
+					<span style="color: #666;">{{x.odmVO.odm_logistics_remarks}}</span>
+				</div> -->
+					<div class="mt10">
+						<span style="width: 100px;display:inline-block;">配货时间：</span>
+						<span style="color: #666;">{{x.odmVO.odm_delivery_time}}</span>
+					</div>
+					<div class="mt10">
+						<span style="width: 100px;display:inline-block;">配送人：</span>
+						<span style="color: #666;">{{x.odmVO.odm_logistics_deliveryid_nameref}}</span>
+					</div>
+					<div class="mt10">
+						<span style="width: 100px;display:inline-block;">配送金额：</span>
+						<span style="color: #666;">{{x.odmVO.odm_product_amount | currency:'￥'}}</span>
+					</div>
+					<div class="mt10">
+						<span style="width: 100px;display:inline-block;">配送费用：</span>
+						<span style="color: #666;">{{x.odmVO.odm_freight_amount | currency:'￥'}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="order_tab==3" style="padding: 10px;background:#fff;">
+			<div style="padding:10px;">
+				<span>订单号:</span>
+				<span>{{vo.orderVO.om_order_code}}</span>
+				<div ng-show="false" class="btn btn-sm btn-success" style="float:right;margin-top: -6px;" ng-click="addBill();">添加收款记录</div>
+			</div>
+			<div style="padding:10px;">
+				<span>订单金额:</span>
+				<span>{{vo.orderVO.om_settlement_amount | currency:'￥'}}</span>
+				<span>支付状态:</span>
+				<span style="font-size:20px;color:#f96b6b;">{{vo.orderVO.om_pay_state_nameref}}</span>
+			</div>
+			<table class="table table3 table-bordered table-hover">
+				<thead>
+					<tr>
+						<th class="text-left">支付流水号</th>
+						<th class="text-left">付款金额</th>
+						<th class="text-left">支付方式</th>
+						<th class="text-left">状态</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in billList" ng-if="x.grb_bill_type==1">
+						<td class="text-left">{{x.grb_bill_code}}</td>
+						<td class="text-right">{{x.grb_total_amount | currency:'￥'}}</td>
+						<td class="text-left">{{x.grb_pay_type_nameref}}</td>
+						<td class="text-left">{{x.grb_state_nameref}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div style="padding:10px;">
+				<span>退款确认</span>
+			</div>
+			<table class="table table3 table-bordered table-hover">
+				<thead>
+					<tr>
+						<th class="text-left">退款流水号</th>
+						<th class="text-left">退款金额</th>
+						<th class="text-left">退款方式</th>
+						<th class="text-left">状态</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in billList" ng-if="x.grb_bill_type==2">
+						<td class="text-left">{{x.grb_bill_code}}</td>
+						<td class="text-right">{{x.grb_total_amount | currency:'￥'}}</td>
+						<td class="text-left">{{x.grb_pay_type_nameref}}</td>
+						<td class="text-left">{{x.grb_state_nameref}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<style>
+.order-main-info{}
+.order-main-info>div{
+	display: inline-block;
+	vertical-align: top;
+	width: 30%;
+	
+}
+</style>

@@ -1,0 +1,81 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">赠送列表</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+		<div>
+			<label>日期<span>:</span></label>
+            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
+            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <label>关键字<span>:</span></label>
+            <input type="text" placeholder="用户信息，订单编号" ng-model="searchParam.searchKey">
+        </div>
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doExport();" >导出数据</a>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>赠送人</th>
+								<th>订单编号</th>
+								<th>水票</th>
+								<th>赠送时间</th>
+								<th>数量</th>
+								<th>原始来源</th>
+								<th>价值</th>
+								<th>受赠人</th>
+								<th>接收时间</th>
+								<th>接收状态</th>
+							
+								
+								<!-- <th>操作</th> -->
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in dataList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.mg_memberid_nameref}}</td>
+								<td class="text-center f14">{{x.mg_def3}}</td>
+								<td class="text-center f14">{{x.mg_giftid_title}}</td>
+								<td class="text-center f14">{{x.mg_addtime}}</td>
+								<td class="text-center f14">{{x.mg_gift_num}}</td>
+								<td class="text-center f14">{{x.mg_def1_nameref}}</td>
+								<td class="text-center f14">{{x.mg_def2}}</td>
+								<td class="text-center f14">{{x.mg_friend_memberid_nameref}}</td>
+								<td class="text-center f14">{{x.mg_receipt_time}}</td>
+								<td class="text-center f14">{{x.mg_state_nameref}}</td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

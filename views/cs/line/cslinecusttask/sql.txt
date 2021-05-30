@@ -1,0 +1,51 @@
+
+INSERT INTO sys_menu (sm_id,sm_name,sm_url,sm_pid,sm_typeid,sm_seq,sm_dr,sm_status,sm_version,SM_LEVEL) 
+VALUES ('csLineCustTask', '_管理','.csLineCustTaskList', 'line', '1', 0,1,1,0,2);
+
+//   设置
+    .state("index.csLineCustTaskList",{
+        url:"/cs/line/csLineCustTaskList",
+        templateUrl:"views/cs/line/cslinecusttask/csLineCustTaskList.html",
+        controller:"ctr_csLineCustTaskList",
+        resolve:{
+            deps:["$ocLazyLoad",function($ocLazyLoad){
+                return $ocLazyLoad.load(
+                		{files:[
+                		        "css/order/orderForm.css",
+                		        "css/product/stockControl.css",
+                		        "js/controllerRoute/cs/line/cslinecusttask/ctr_csLineCustTaskList.js"
+            			        ]});
+            }]
+        } 
+    })
+    .state("index.csLineCustTaskAdd",{
+	    url:"/cs/line/csLineCustTaskAdd?clct_id",
+	    templateUrl:"views/cs/line/cslinecusttask/csLineCustTaskAdd.html",
+	    controller:"ctr_csLineCustTaskAdd",
+	    resolve:{
+	        deps:["$ocLazyLoad",function($ocLazyLoad){
+	            return $ocLazyLoad.load(
+	            		{files:[
+	            		        "css/product/goodsCenter.css",
+	            		        "js/controllerRoute/cs/line/cslinecusttask/ctr_csLineCustTaskAdd.js"
+	        			        ]});
+	        }]
+	    } 
+	})
+	
+	.state("index.csLineCustTaskDetail",{
+	    url:"/cs/line/csLineCustTaskDetail?clct_id",
+	    templateUrl:"views/cs/line/cslinecusttask/csLineCustTaskDetail.html",
+	    controller:"ctr_csLineCustTaskDetail",
+	    resolve:{
+	        deps:["$ocLazyLoad",function($ocLazyLoad){
+	            return $ocLazyLoad.load(
+	            		{files:[
+	            		        "css/product/goodsCenter.css",
+	            		        "js/controllerRoute/cs/line/cslinecusttask/ctr_csLineCustTaskDetail.js"
+	        			        ]});
+	        }]
+	    } 
+	})
+
+

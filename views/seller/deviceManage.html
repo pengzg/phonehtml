@@ -1,0 +1,311 @@
+<div class="device-m-main" ng-init="shrink=false;" ng-class="{enable:shrink}">
+	<!-- <div class="common-bar-top">
+		<div class="common-bar-top-t">
+			<strong class="common-bar-title">数据指标</strong>
+		</div>
+		<div class="common-bar-top-b">
+			<div>
+				<div class="div-first">本月/累计激活</div>
+				<div class="div-second">5/35</div>
+			</div>
+			<div>
+				<div class="div-first">本月/累计采购</div>
+				<div class="div-second">0/200</div>
+			</div>
+			<div>
+				<div class="div-first">激活码/普通设备库存</div>
+				<div class="div-second">8/158</div>
+			</div>
+		</div>
+	</div> -->
+	<div class="device-m-bottom">
+		<table width="100%">
+			<tbody>
+				<tr>
+					<td class="shrink5" ng-init="checkidx==-1">
+						<div style="width: 193px;" class="shrinkBody2">
+							<div class="device-b-left">
+								<div ng-style="{visibility:!shrink?'visible':'hidden'}">
+									<div data-toggle="dropdown" class="device-b-add">
+										<span>新建分组</span>
+										<i class="icon-sort-down device-i-down"></i>
+									</div>
+									<div class="dropdown-menu device-c-menu" role="menu">
+										<div>请输入分组名称</div>
+										<div><input type="text" ng-model="group.meg_name" ng-click="stopPro($event)"></div>
+										<div>
+											<div class="btn btn-success" ng-click = "insertGroup();">提交</div>
+											<div class="btn btn-default">取消</div>
+										</div>
+									</div>
+								</div>
+								<div ng-style="{visibility:!shrink?'visible':'hidden'}">
+									<div  data-toggle="dropdown" class="device-b-del">
+										<span>删除分组</span>
+										<i class="icon-sort-down device-i-down"></i>
+									</div>
+									<div class="dropdown-menu device-c-menu-b device-hover" role="menu">
+										<div ng-repeat="x in deviceGroupList" ng-show="x.meg_name != '全部分组'" ng-click="delDeviceGroup(x);">{{x.meg_name}}</div>
+										
+									</div>
+								</div>
+								<div class="panel panel-default" style="position: relative;margin-top: 10px;margin-left: 10px;">
+									<div class="panel-heading">设备分组</div>
+									<div class="list-group-body2" style="height: 457px;">
+										<div class="list-group-item " style="border-radius: 0;" 
+											ng-repeat="x in deviceGroupList" 
+											ng-bind="x.meg_name" 
+											ng-click="selectedGroup(x.meg_id)" 
+											ng-class="{true:'list-group-checked'}[$parent.checkidx==$index]">
+										</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+						<a id="shrinkBtn2" class="shrinkBtn2" style="cursor: pointer; display: inline-block;height: 90%; height: calc(100% - 62px);top: 62px;right: 17px;" ng-click="shrink=!shrink"></a>
+					</td>
+					<td>
+						<div class="device-b-right" style="max-width:900px">
+							<div class="device-b-toolbar">
+								<!-- <div class="btn btn-success">批量设置激活返利</div> -->
+								<div class="device-b-toolbar-last" style="position: absolute;margin-left:12px;height:30px;">
+									<input style="height:16px" type="text" ng-model="searchParam.searchKey" placeholder="输入设备号查询">
+									<div class="btn btn-success" ng-click="searchFun();">查询</div>
+								</div>
+								<div class="common_dropdown" style="float: left;" ng-click="getShopList()">
+									<div data-toggle="dropdown">
+										<span ng-bind="shop_nameref">门店名称</span>
+										<i class="icon-sort-down device-i-down"></i>
+									</div>
+									<div class="dropdown-menu" role="menu">
+										<div ng-repeat="x in msShopList" ng-click="chooseShop(x)">{{x.ms_name}}</div>
+										
+									</div>
+								</div>
+								<div class="common_dropdown" style="float: left;">
+									<div data-toggle="dropdown">
+										<span ng-bind="isOpen_nameref">开启状态</span>
+										<i class="icon-sort-down device-i-down"></i>
+									</div>
+									<div class="dropdown-menu" role="menu">
+										<div ng-repeat="x in openList" ng-click="chooseOpenStatus(x)">{{x.name}}</div>
+										
+									</div>
+								</div>
+								<div class="common_dropdown" style="float: left;">
+									<div data-toggle="dropdown">
+										<span ng-bind="type_nameref">设备类型</span>
+										<i class="icon-sort-down device-i-down"></i>
+									</div>
+									<div class="dropdown-menu" role="menu">
+										<div ng-repeat="x in deviceTypeList" ng-click="chooseDevicetype(x)">{{x.bd_name}}</div>
+										
+									</div>
+								</div>
+								<div class="common_dropdown" style="float: left;">
+									<div data-toggle="dropdown">
+										<span>{{state_nameref}}</span>
+										<i class="icon-sort-down device-i-down"></i>
+									</div>
+									<div class="dropdown-menu" role="menu">
+										<div ng-repeat="x in stateList" ng-click="chooseState(x);">{{x.bd_name}}</div>
+										
+									</div>
+								</div>
+								<div class="clearfix"></div>
+								<div class="btn btn-success" ui-sref="index.seller.deviceManageAdd">添加设备</div>
+								<div class="btn btn-success" data-toggle="modal" data-target="#openDevice">开通设备</div>
+							</div>
+							<table style="border-bottom: none;" class="common_table_1">
+								<thead>
+									<tr style="border-bottom: none;">
+										<th ng-class="sortFun('',false);" style="vertical-align: middle !important; min-width: 30px;">序号</th>
+										<th style="width: 9%;">设备序列号</th>
+										<th style="width: 9%;">设备类型</th>
+										<th style="width: 9%;">激活状态</th>
+										<th style="width: 9%;">开启状态</th>
+										<th style="width: 9%;">所在分组</th>
+										<th style="width: 9%;">自定义设置</th>
+										<th style="width: 16%;">门店名称</th>
+										<th style="width: 16%;">门店地址</th>
+										<th style="width: 14%;">操作</th>
+									</tr>
+								</thead>
+							</table>
+							<table class="common_table_1">
+								<tbody>
+									<tr ng-repeat="x in meList">
+										<td style="vertical-align: middle !important; min-width: 30px;">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+										<td style="width: 9%;"><a data-toggle="modal" ng-click="queryDeviceDetail(x.me_id);" data-target="#deviceInfo">{{x.me_num}}</a></td>
+										<td style="width: 9%;">{{x.me_type_nameref}}</td>
+										<td style="width: 9%;">{{x.me_state_nameref}}</td>
+										<td style="width: 9%;">{{x.me_isopen}}</td>
+										<td style="width: 9%;">{{x.me_groupid_nameref}}</td>
+										<td style="width: 9%;"></td>
+										<td style="width: 16%;">{{x.me_shopid_nameref}}</td>
+										<td style="width: 16%;">{{x.me_shopid_address}}</td>
+										<td style="width: 14%;">
+											<div  style="display: inline-block;position: relative;">
+												<a ng-if="x.me_state == '1'" class="common_btns common_band" ng-click="changeStatus(x.me_id,'禁用')" title="禁用"></a>
+												<a ng-if="x.me_state == '2'" class="common_btns common_active" ng-click="changeStatus(x.me_id,'激活')" title="激活"></a>
+											</div>
+											<div style="display: inline-block;position: relative;">
+												<a class="common_relate" title="关联" data-toggle="dropdown" aria-expanded="true"></a>
+												<ul class="dropdown-menu zk_fenye_ul" role="menu" style="height: 250px;overflow: auto; left: -165px;top:-200px">
+													<li ng-repeat="y in shopList" ng-click="doRel(x,y.ms_id);">{{y.ms_name}}</li>
+													
+												</ul>
+											</div>
+											<a class="common_setting" title="设置" data-toggle="modal" data-target="#myModal"></a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<div>
+		</div>
+	</div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					设置激活返利
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<div class="device-modal-label">设备序列号</div>
+					<div class="device-modal-content">201706187100</div>
+				</div>
+				<div>
+					<div class="device-modal-label">激活补贴</div>
+					<div class="device-modal-content">
+						<span>服务商平台</span>
+						<input type="number">
+						<span>元</span>
+						<div>激活码拥有者 100 元</div>
+					</div>
+				</div>
+				<div>
+					<div class="device-modal-label">红包分成</div>
+					<div class="device-modal-content">
+						<span>服务商平台</span>
+						<input type="number">
+						<span>%</span>
+						<div>激活码拥有者 20%</div>
+						<div>设备拥有者 20 %</div>
+					</div>
+				</div>
+				<div>
+					<div class="device-modal-label">备注:</div>
+					<div class="device-modal-content">
+						<input type="text">
+					</div>
+				</div>
+				<div class="device-modal-bottom">注意：设备激活返利设置只能针对未激活设备进行设置，且只能设置一次，设置成功无法修改，请谨慎操作！</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="deviceInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					设备信息
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div>
+					<div class="device-modal-label">设备序列号</div>
+					<div class="device-modal-content">{{deviceDetail.me_num}}</div>
+				</div>
+				<div>
+					<div class="device-modal-label">UUID</div>
+					<div class="device-modal-content">{{deviceDetail.me_uuid}}</div>
+				</div>
+				<div>
+					<div class="device-modal-label">Major</div>
+					<div class="device-modal-content">{{deviceDetail.me_major}}</div>
+				</div>
+				<div>
+					<div class="device-modal-label">Minor</div>
+					<div class="device-modal-content">{{deviceDetail.me_minor}}</div>
+				</div>
+				<div>
+					<div class="device-modal-label">备注:</div>
+					<div class="device-modal-content">
+						{{deviceDetail.me_remarks}}
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+				</div>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="openDevice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					开通设备
+				</h4>
+			</div>
+			<div class="modal-body" ng-init="openDeviceInfo = {}">
+				<div>
+					<div class="device-modal-label">设备序列号（起）:</div>
+					<div class="device-modal-content">
+						<input type="number" id="meNumStart" ng-model="openDeviceInfo.me_num_start">
+					</div>
+				</div>
+				<div>
+					<div class="device-modal-label">设备序列号（止）:</div>
+					<div class="device-modal-content">
+						<input type="number" id="meNumEnd" ng-model="openDeviceInfo.me_num_end">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="openApplyDevice();">
+					提交更改
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>

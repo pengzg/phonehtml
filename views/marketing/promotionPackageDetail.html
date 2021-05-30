@@ -1,0 +1,224 @@
+<div class="xt_changeHtml" style="margin-bottom: 50px;">
+	<div class="addlistCenter">
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"><i class="colorRed">*</i> 促销主题：</span>
+			<div class="widthAuto zk_controlInput">
+				<span>{{vo.ppm_name}}</span>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"> 副标题：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.ppm_subtitle"  style="width:300px" placeholder="请输入副标题"/>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"> 图片：</span>
+			<div class="widthAuto zk_controlInput">
+				<image src="{{vo.ppm_picture_show}}" style="width:170px;height:70px;">
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi">活动类型：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				<span ng-if="vo.ppm_type==4">套餐促销</span> 
+			</div>
+		</div>
+	
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"><i class="colorRed">*</i> 促销时间：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.ppm_startdate}} 到 {{vo.ppm_enddate}}
+			</div>
+		</div>
+	
+	<div style="min-width:900px;margin-bottom: 20px;margin-top: 25px;box-sizing:border-box;padding:0 46px;">
+			<table class="table table3 table-bordered" style="margin-bottom: 0 !important; border: 1px solid #dedede; border-bottom: 0;">
+				<tbody>
+					<tr class="zk_headerTrSty">
+						<th style="width:10%;">
+							序号
+						</th>
+						<th style="width:50%;border-right: 1px solid #dedede;">活动(主)商品 </th>
+						<th style="width: 150px; min-width: 150px;border-right: 1px solid #dedede;">活动价 </th>
+						<th style="width:10%;border-right: 1px solid #dedede;">购买数量<br></th>
+				
+					</tr>
+					<tr ng-repeat="x in vo.detailList track by $index">
+						<td style="text-align:left;width:10%;">
+							{{$index+1}}
+						</th>
+						<td style="text-align:left;width:50%;">{{x.ppd_productid_nameref}} </td>
+						<td style="text-align:left;width: 150px; min-width: 150px;">{{x.ppd_product_price}} </td>
+						<td style="text-align:left;width:10%;">{{x.ppd_product_num}}<br></td>
+						
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi">套餐总金额：</span>
+		<div class="widthAuto zk_controlInput sale_inline" style="color:#8c7ee4;">
+			{{vo.ppm_amount_group}}元
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi">套餐总数量：</span>
+		<div class="widthAuto zk_controlInput sale_inline" style="color:#8c7ee4;">
+			{{vo.ppm_num_group}}
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+		<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 限购次数：</span>
+		<div class="widthAuto zk_controlInput">
+				{{vo.ppm_limit_num}} (0为不限购)
+		</div>
+	</div>
+	<!-- 团购 start -->
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi width-just">是否团购：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				<div>
+					<span ng-if="vo.ppm_isgroup =='Y'">开启</span>
+					<span ng-if="vo.ppm_isgroup =='N'">不开启</span>
+				</div>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" ng-if="vo.ppm_isgroup =='Y'">
+			<span class="xt_bzWenZi width-just"> 有效天数：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.ppm_valid_day}}天 (开团成功后水票有效期)
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" ng-if="vo.ppm_isgroup =='Y'">
+			<span class="xt_bzWenZi width-just"> 团购价格：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.ppm_group_price}}元
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" ng-if="vo.ppm_isgroup =='Y'">
+			<span class="xt_bzWenZi width-just">参与次数限制：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.ppm_limit_num}}次
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" ng-if="vo.ppm_isgroup =='Y'">
+			<span class="xt_bzWenZi width-just" >开团人数：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.ppm_group_peopler_num}}人
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" ng-if="vo.ppm_isgroup =='Y'">
+			<span class="xt_bzWenZi">团购类型：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				<span ng-if="vo.ppm_group_type==1">新人团</span> 
+				<span ng-if="vo.ppm_group_type==2">老带新</span> 
+				<span ng-if="vo.ppm_group_type==3">全民参与</span> 
+				
+			</div>
+		</div>
+		<!-- 团购 end -->
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi width-just">配送方式：</span>
+		<div class="widthAuto zk_controlInput sale_inline">
+			<div ng-repeat="x in deliveryTypeList">
+				<label class="m10right" ng-show="(vo.ppm_def3Arr).indexOf(x.bd_code)>-1">
+					{{x.bd_name}}
+				</label>
+			</div>
+		</div>
+	</div>
+	
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi width-just">支付方式：</span>
+		<div class="widthAuto zk_controlInput sale_inline">
+			<div ng-repeat="x in payMethodList">
+				<label class="m10right"  ng-show="(vo.ppm_paymethodArr).indexOf(x.bd_code)>-1;">
+					{{x.bd_name}}
+				</label>
+			</div>
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi width-just">支付类型：</span>
+		<div class="widthAuto zk_controlInput sale_inline">
+			<div ng-repeat="x in payWayList">
+				<label class="m10right"  ng-show="(vo.ppm_paywayArr).indexOf(x.bd_code)>-1;">
+					{{x.bd_name}}
+				</label>
+			</div>
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi" style="font-size: 12px;">是否与其他优惠叠加：</span>
+		<div class="widthAuto zk_controlInput sale_inline" style="color:#8c7ee4;">
+			<span ng-if="vo.ppm_isshareoffers ==1">是</span>
+			<span ng-if="vo.ppm_isshareoffers ==2">不是</span>
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5" >
+		<span class="xt_bzWenZi">是否关联优惠券：</span>
+		<div class="widthAuto zk_controlInput sale_inline" style="color:#8c7ee4;">
+			<span ng-if="vo.ppm_iscoupon ==1">是</span>
+			<span ng-if="vo.ppm_iscoupon ==2">不是</span>
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5" ng-if="vo.ppm_iscoupon==1">
+		<span class="xt_bzWenZi"></span>
+		<div class="widthAuto zk_controlInput sale_inline">
+			优惠券列表：
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5" ng-repeat="x in vo.couponRelList" ng-if="vo.ppm_iscoupon==1">
+		<span class="xt_bzWenZi"></span>
+		<div class="widthAuto zk_controlInput sale_inline">
+			• {{x.cr_couponid_nameref}}&nbsp;&nbsp;{{x.cr_num}}张
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi">区域：</span>
+		<div class="widthAuto zk_controlInput sale_inline">
+			<div>
+				<span>全部区域</span>
+			</div>
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+		<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 排序：</span>
+		<div class="widthAuto zk_controlInput">
+			<input type="text" ng-model="vo.ppm_sort" maxlength="10" style="width:300px" />
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi width-just"> 视频地址</span>
+		<div class="widthAuto zk_controlInput">
+			{{vo.ppm_def1_show}}
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi width-just"> 视频封面</span>
+		<div class="widthAuto zk_controlInput">
+			<image src="{{vo.ppm_def2_show}}" style="width:180px;height:80px;">
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5" ng-show="false">
+		<span class="xt_bzWenZi">区域：</span>
+		<div style="margin-left:116px">
+			<div id="treeDemo" class="ztree"></div>
+		</div>
+		
+	</div>
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi width-just">详情</span>
+		<div class="widthAuto zk_controlInput">
+			<div style="margin-bottom:1.25rem;width:664px;height: 300px; display:inline-block; z-index:1" id="myeditor1"
+			 get-ue="ue_myeditor1 = getUe" class="ueditor" ng-model="vo.ppm_describe" config="_simpleConfig"></div>
+		</div>
+	</div>
+</div>
+<div class="fixedBottom">
+	<div ng-show="vo.ppm_type==4" ><a ui-sref="index.marketing.promotionPackage" class="btnStyle Btncolor2 BtnHover2" >返回</a></div>
+</div>
+<style>
+.divVertical .xt_bzWenZi {width:125px;}
+</style>

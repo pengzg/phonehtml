@@ -1,0 +1,162 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">参数列表</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="search-filter-box">
+		<div>
+			<label>关键字<span>:</span></label>
+			<input type="text" placeholder="参数名称" ng-model="searchParam.searchKey">
+		</div>
+
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;" ng-click="doSearch()"><i class="glyphicon glyphicon-filter"></i>
+				筛选</a>
+			<a class="btn btn-default" ng-click="searchParam.searchKey='';doSearch();" style="text-shadow: none !important; color: #333 !important;"><i
+				 class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success add-btn" style="float:right;margin-right:50px;" ng-click="toEdit();"><i class="icon icon-plus"></i>新增</a>
+		</div>
+	</div>
+
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th style="width:5%;">序号</th>
+								<th style="width:15%;">编码</th>
+								<th style="width:30%;">值</th>
+								<th style="width:10%;">备注</th>
+								<th style="width:10%;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in parameterList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.bp_key}}</td>
+								<td class="text-center f14">{{x.bp_value}}</td>
+								<td class="text-center f14">{{x.bp_remark}}</td>
+								<td class="text-center f14">
+									<a class="common_btns common_edit" ng-click="toEdit(x.bp_id)" title="修改"></a>
+									<a class="common_btns common_delete" ng-click="toDelete(x)" title="删除"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 遮挡层 -->
+<div class="dialog" ng-show="dialogShow">
+	<div class="dialog-zdc"></div>
+		<!-- 弹出添加计量参数框 -->
+		<div class="dg-xg-zh" style="width: 620px; margin-left: -310px; top: 40%; margin-top: -142px;" ng-show="dialogShow">
+			<div class="dg-xg-js" style="width: 620px">
+				{{dialogTitle}}
+				<div class="dg-cancle" ng-click="closeDialog()"></div>
+			</div>
+			<div class="dg-content" style="margin: 12px auto; overflow: visible;">
+				<div id="formJiLu" class="formJiLu" style="border: none">
+					<form>
+						<div>
+							<input type="hidden" ng-model="vo.bp_id">
+							<div class="contentGroup clearfix">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14">编码</span> <i class="f14">*</i>
+								</div>
+								<div class="floatLeft p10left f14">
+									<input style="width: 210px;" type="text" name="bp_key"
+									 ng-model="vo.bp_key" >
+								</div>
+							</div>
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14">值</span> <i class="f14">*</i>
+								</div>
+
+								<div class="floatLeft p10left">
+									<!-- <input style="width: 210px;" type="text" name="bp_value"
+										ng-model="vo.bp_value" > -->
+										<textarea style="width: 400px;height: 84px;" name="bp_remark"
+										ng-model="vo.bp_value">{{vo.bp_value}}</textarea>
+								</div>
+							</div>
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14">级别</span>
+								</div>
+
+								<div class="floatLeft p10left">
+									<div class="zk_controlRadio" style=" width: 200px;">
+										<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+											<input class="xt_radio ng-pristine ng-untouched ng-valid valid" name="bp_level" ng-model="vo.bp_level" value="1" type="radio" ng-checked="vo.bp_level==1" checked="checked">
+											<div class="xt_inputBackimg"></div>门店
+										</lable>
+										<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+										<input class="xt_radio ng-pristine ng-untouched ng-valid" name="bp_level" ng-model="vo.bp_level" value="2" type="radio" ng-checked="vo.bp_level==2">
+											<div class="xt_inputBackimg"></div>系统
+										</lable>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14">备注</span>
+								</div>
+
+								<div class="floatLeft p10left">
+									<input style="width: 210px;" type="text" name="bp_remark"
+										ng-model="vo.bp_remark" maxlength="15">
+								</div>
+							</div> -->
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14">备注</span>
+								</div>
+
+								<div class="floatLeft p10left">
+									<textarea style="width: 400px;height: 84px;" name="bp_remark"
+										ng-model="vo.bp_remark">{{vo.bp_remark}}</textarea>
+								</div>
+							</div>
+							<div class="contentGroup clearfix" style="margin-top:5px;">
+								<div class="zk_controlLabel" style="width: 100px;">
+									<span class="f14" style="line-height: 32px;">状态</span>
+								</div>
+								<div class="floatLeft p10left" >
+									<zk-control-group ng-model="vo.status"
+										data-option='[{"0":"禁用"},{"1":"启用"}]'></zk-control-group>
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="create();">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+		</div>
+
+</div>

@@ -1,0 +1,193 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">app列表</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>来源</th>
+								<th>版本</th>
+								<th>显示版本</th>
+								<th>下载路径</th>
+								<th>是否强制更新</th>
+								<th>版本说明</th>
+
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in appList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								
+								<td class="text-center f14">
+                                 <span ng-if="x.bv_source ==4">柜子大屏深圳</span>
+                                 <span ng-if="x.bv_source ==5">小鱼鲜泉app</span>
+                                 <span ng-if="x.bv_source ==6">柜子大屏杭州</span>
+                                 <span ng-if="x.bv_source ==7">重力柜app</span>
+								</td>
+								<td class="text-center f14">
+
+                                    {{x.bv_version1}}
+                                </td>
+								<td class="text-center f14">
+                                    {{x.bv_version_name}}
+                                </td>
+								<td class="text-center f14">
+                                    {{x.bv_down_url}}
+                                </td>
+                                <td class="text-center f14">
+                                    <span ng-if="x.bv_upgrade ==1">是</span>
+                                    <span ng-if="x.bv_upgrade ==2">否</span>
+                                </td>
+								<td class="text-center f14">
+                                    {{x.bv_desc}}
+                                </td>
+								
+								<td class="text-center f14" style="position: relative;">
+									<a class="common_btns common_edit" ng-click="toEdit(x)" title="修改"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 添加和修改弹窗 -->
+<div class="dialog" ng-show="dialogShow" style="z-index:90">
+	<div class="dialog-zdc"style="z-index:100" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:110; width:660px; margin-left: -330px; top: 40%; margin-top: -204px;height:510px;"  ng-show="dialogShow">
+		<div class="dg-xg-js" style="width:660px;">
+			编辑
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+	    
+			<div class="dg-content" style="height: 450px; margin-bottom:0px;margin-top:0px;margin-left:0px;">
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">app来源</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<span ng-if="vo.bv_source ==4">柜子大屏深圳</span>
+							<span ng-if="vo.bv_source ==5">小鱼鲜泉app</span>
+							<span ng-if="vo.bv_source ==6">柜子大屏杭州</span>
+							<span ng-if="vo.bv_source ==7">重力柜app</span>
+							
+						</div>
+					</div>
+				</div>
+                <div class="zk_baseInfoBox mtop16" >
+                        <div class="zk_controlGroup" style=" width: 600px;" >
+                            <div class="zk_controlLabel">
+                                <span class="f14" style="line-height: 32px;">app上传</span>
+                            <i class="f14">*</i>
+                            </div>
+                            <div class="zk_controlInput" style=" width: 300px;">
+                               
+									<a class="btn btn-success"  ng-click="upFile($event,1,1)"><i class="glyphicon glyphicon-filter"></i>
+										上传附件</a>
+										<div  style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor" 
+																get-ue="ue_myeditor = getUe" ng-show="false" class="ueditor" ng-model="gb_content1"></div>
+                            </div>
+							<input  type="hidden" id="url_input">
+						</div>
+                    </div>
+				
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">版本</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text"
+										ng-model="vo.bv_version1">
+							
+						</div>
+					</div>
+				</div>
+                
+                <div class="zk_baseInfoBox mtop16" >
+                        <div class="zk_controlGroup" style=" width: 300px;" >
+                            <div class="zk_controlLabel">
+                                <span class="f14" style="line-height: 32px;">显示版本</span>
+                                <i class="f14">*</i>
+                            </div>
+                            <div class="zk_controlInput" style=" width: 150px;">
+                                <input style="width: 150px;" type="text"
+                                            ng-model="vo.bv_version_name">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 600px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">版本说明</span>
+							<!-- <i class="f14">*</i> -->
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 450px;" type="text"
+										ng-model="vo.bv_desc" maxlength="200">
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">强制更新</span>
+						</div>
+						<div class="zk_controlRadio" style=" width: 140px;">
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="update" ng-model="vo.bv_upgrade" value="1" type="radio" >
+								<div class="xt_inputBackimg"></div>是
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="update" ng-model="vo.bv_upgrade" value="2" type="radio">
+								<div class="xt_inputBackimg"></div>否
+							</lable>
+						</div>
+					</div>
+				</div>
+				
+				
+				
+				
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="save()">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+	</div>
+</div>

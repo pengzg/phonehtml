@@ -1,0 +1,219 @@
+<div class="xt_changeHtml" style="margin-bottom: 120px;">
+	<div class="addlistCenter">
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">店铺名：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.rs_title"  style="width:600px"  />
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">地址：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.rs_address"  style="width:600px"  />
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">地址简称：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.rs_address_simple"  style="width:600px"  />
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">电话：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.rs_phone"  style="width:300px"  />
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">美团appid：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.rs_meituan_appid"  style="width:600px"  />
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">美团地址：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.rs_meituan_path"  style="width:600px"  />
+			</div>
+		</div>
+		
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">纬度：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" id="lat" ng-model="vo.rs_lat"  style="width:600px"  />
+				<a class="btn btn-success js_openMap"  ng-click="mapShow=true;">地图选点</a>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">经度：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" id="lng" class="" ng-model="vo.rs_lng"  style="width:600px"  />
+			</div>
+		</div>
+		
+		
+
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 图片：</span>
+			<div class="widthAuto zk_controlInput">
+				<a ng-click="upImage($event,1,1)" style="color:#099fb8;" class="f14">上传图片</a>（图片建议尺寸为:{{imgsize[vo.rs_location]}}）
+				<div style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor" get-ue="ue_myeditor = getUe"
+				 ng-show="false" class="ueditor" ng-model="gb_content1"></div>
+				<div style="margin-top:5px;">
+					<div style="float:left;margin:5px;">
+						<div class="gsGoodsImgs" style="height:90px; border:1px solid #ddd;">
+							<img alt="" src="{{vo.rs_cover_show?vo.rs_cover_show:'img/prizedef.jpg'}}" style=" height:90px;">
+						</div>
+
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just">排序：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="text" ng-model="vo.rs_sort" maxlength="10" style="width:300px" placeholder="越大越靠前" /> (数字越大排序越靠前)
+				</div>
+			</div>
+			
+		</div>
+		<div class="fixedBottom">
+			<div class="btnStyle Btncolor1 BtnHover1" ng-click="submit();">保存</div>
+
+			<div class="btnStyle Btncolor2 BtnHover2"><a ui-sref="index.product.restaurantProduct" class="btnStyle Btncolor2 BtnHover2">返回</a></div>
+		</div>
+
+<!-- 地图定位 start  -->
+<div class="dialog" ng-show="mapShow" style="z-index: 98;">
+	<div class="dialog-zdc" ng-show="mapShow" style="z-index: 98;"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" ng-show="mapShow"
+		style="z-index: 99; width: 600px; top: 50px; margin-left: -300px;">
+		<div class="dg-xg-js f14" style="width: 600px;">
+			地图定位
+			<div class="dg-cancle" ng-click="mapShow=false;"></div>
+		</div>
+		<div>
+			<div style="width: 600px; height: 300px;">
+				<div id="r-result" class="f14" style="margin-top: 20px">
+					&nbsp;&nbsp;地点: &nbsp<input type="text" id="suggestId" size="20"
+						value="" style="width: 150px; height: 20px;" />
+					<div class="btnStyle Btncolor1 BtnHover1 js_searchMap f14">搜索</div>
+					&nbsp;&nbsp;已选择: &nbsp;<input type="text" id="selectlng" size="20"
+						value="" style="width: 70px;" />&nbsp;<input type="text"
+						id="selectlat" size="20" value="" style="width: 70px;" />
+				</div>
+				<div id="searchResultPanel"
+					style="border: 1px solid #C0C0C0; width: 150px; height: auto; display: none; z-index: 1000"></div>
+				<div id="allmap"
+					style="width: 98%; height: 90%; margin-top: 1%; margin-left: 1%">
+				</div>
+			</div>
+		</div>
+		<div class="dg-submint" style="text-align: center; margin: 10px;">
+			<div class="btnStyle Btncolor1 BtnHover1"
+				ng-click="updateLocation();">确定</div>
+			<div class="btnStyle Btncolor2 BtnHover2 " ng-click="mapShow=false;">取消</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+
+		$(".tabUl li").click(function() {
+			$(".tabUl li").removeClass("active");
+			$(this).addClass("active");
+			$(".t-box").hide();
+			var activeTab = $(this).find("a").attr("type");
+			$(activeTab).fadeIn();
+			return false;
+		});
+
+		// 显示定位
+		$('body').on("click", '.js_openMap', function() {
+			openMap("");
+		});
+
+	});
+</script>
+<script>
+	// 声明地图
+	var map;
+	function openMap(location) {
+		$('#map_show').show();
+		$("#close_mapbtn").show();
+		$("#open_mapbtn").hide();
+		map = new BMap.Map("allmap"); // 创建Map实例
+		map.centerAndZoom(new BMap.Point(116.404, 39.915), 11); // 初始化地图,设置中心点坐标和地图级别
+		map.addControl(new BMap.MapTypeControl()); //添加地图类型控件
+
+		// if (bcm_city != "") {
+		// 设置地图显示的城市 此项是必须设置的
+		// console.log(location);
+		if (location != "") {
+			
+			setpoint($("#lng").val(), $("#lat").val());
+			map.centerAndZoom(new BMap.Point($("#lng").val(), $("#lat").val()), 11);
+		} else {
+			
+			map.centerAndZoom(new BMap.Point($("#lng").val(), $("#lat").val()), 11);
+		}
+		map.enableScrollWheelZoom(true);
+		//第4步：向地图中添加缩放控件
+		var ctrlNav = new window.BMap.NavigationControl({
+			anchor : BMAP_ANCHOR_TOP_LEFT,
+			type : BMAP_NAVIGATION_CONTROL_LARGE
+		});
+		map.addControl(ctrlNav);
+		//第5步：向地图中添加缩略图控件
+		var ctrlOve = new window.BMap.OverviewMapControl({
+			anchor : BMAP_ANCHOR_BOTTOM_RIGHT,
+			isOpen : 1
+		});
+		map.addControl(ctrlOve);
+
+		//第6步：向地图中添加比例尺控件
+		var ctrlSca = new window.BMap.ScaleControl({
+			anchor : BMAP_ANCHOR_BOTTOM_LEFT
+		});
+		map.addControl(ctrlSca);
+		//单击获取点击的经纬度
+		map.addEventListener("click", function(e) {
+			setpoint(e.point.lng, e.point.lat);
+			console.log(111111);
+			$("#selectlng").val(e.point.lng);
+			$("#selectlat").val(e.point.lat);
+		});
+	}
+	// 关闭地图
+	function closeMap() {
+		$('#map_show').hide();
+		$("#close_mapbtn").hide();
+		$("#open_mapbtn").show();
+	}
+
+	// 创建标注
+	function setpoint(x, y) {
+		map.clearOverlays();
+		var new_point = new BMap.Point(x, y);
+		var marker = new BMap.Marker(new_point); // 创建标注
+		map.addOverlay(marker); // 将标注添加到地图中
+		map.panTo(new_point);
+	}
+	// 地图搜索 
+	$('.js_searchMap').click(function() {
+		var posi = $('#suggestId').val();
+		map.centerAndZoom(posi, 12);
+	});
+	// 重新定位
+	$('body').on('click', '.js_resetMap', function() {
+		var location = $(this).attr("location");
+		openMap(location);
+
+	});
+</script>
+

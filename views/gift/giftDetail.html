@@ -1,0 +1,176 @@
+<div class="contentHtml-new" style=" z-index: 10001; background-color: #fff;left:0;">
+	
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;">
+		<div class="row">
+			<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0; padding: 0; margin: 0 0 -1px 0;">
+					<li class="active">
+						<a class="f14 i-c-black" href="#tab1">
+							<i class="glyphicon glyphicon-edit"></i>
+							 礼品信息
+						</a>
+					</li>
+					<li>
+						<a class="f14 i-c-black" href="#tab2">
+							<i class="icon icon-dropbox"></i>
+							 库存管理
+						</a>
+					</li>
+				</ul>
+				<div class="t-box clearfix" id="tab1" style="display: block;">
+					<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+						<div class="panel-body">
+	    					<table class="table table-loose table-hover">
+								<tbody>
+									<tr>
+										<td>礼品类型</td>
+										<td>微信红包(代发)</td>
+									</tr>
+									<tr>
+										<td>名称</td>
+										<td>10</td>
+									</tr>
+									<tr>
+										<td>图片</td>
+										<td><img class="img-thumbnail good-thumbnail-middle" src="../../../img/20160707.png"></td>
+									</tr>
+	        						<tr>
+	        							<td>红包金额</td>
+	        							<td>10.00 元</td>
+	        						</tr>
+	        						<tr>
+	        							<td>祝福语</td>
+	        							<td>10</td>
+	        						</tr>
+									<tr class="danger">
+										<td>库存</td>
+										<td>
+	        								<span class="red f14">0 件 </span>
+											<span class="remark label label-danger">
+												<i class="icon icon-warning-sign"></i>
+												 库存不足
+											</span>
+										</td>
+									</tr>
+									<tr>
+										<td>图文详情</td>
+										<td>
+	        								<p class="f14"><strong>兑换说明：</strong></p>
+											<ul>
+												<li class="f14">兑换者或中奖者需登录微信客户端领取奖品。</li>
+												<li class="f14">系统将在消费者兑换后的24小时内将红包发送至兑换者的微信帐号内。</li>
+												<li class="f14">自系统将微信红包发送至兑奖者微信帐号，兑奖者应于24小时内完成领取，逾期造成的兑奖失败将视为兑奖者放弃兑奖机会，不予补发。</li>
+											</ul>
+										</td>
+									</tr>
+									<tr>
+										<td>上架至积分商城</td>
+										<td>否</td>
+									</tr>
+								</tbody>
+	    					</table>
+						</div>
+						<div class="panel-footer" style="background-color: #fff;">
+							<a class="btn btn-success" href="#/index/gift/giftAdd">修改</a>
+						</div>
+					</div>
+				</div>
+				<div class="t-box clearfix" id="tab2" style="display: none;">
+					<div class="panel panel-default" style="border-top-left-radius: 0; border-top-right-radius: 0;">
+						<div class="panel-body">
+	    					<div class="row">
+								<div class="col-xs-4 text-center">
+							        <h4>当前库存</h4>
+							        <hr>
+							        <h1 class="stock_quantity">0</h1>
+									<hr>
+								</div>
+								<div class="col-xs-8 left-border">
+									<h5>购买库存，购买后费用将从您的账户余额中扣除</h5>
+									<hr>
+									<form class="simple_form form-horizontal new_purchase">
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14" style="line-height: 32px;">资金余额</label>
+											<div class="col-md-9 col-lg-6">
+												<div class="form-control-static f14" style="line-height: 32px;">
+													0.00 元
+													<a class="btn btn-success btn-sm" href="">充值</a>
+	    										</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">采购单价</label>
+											<div class="col-md-9 col-lg-6">
+											    <div class="form-control-static f14">
+											      10.00 元
+											    </div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 col-lg-2 control-label f14">
+												<abbr title="必填">*</abbr>
+												 数量
+											</label>
+											<div class="col-md-9 col-lg-6">
+												<input class="form-control f14" type="number" step="1" value="1" name="">
+											</div>
+										</div>
+										<hr>
+										<a href="" class="btn btn-success">提交购买</a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default" style="border: 0;">
+    					<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+	      					<i class="fa fa-list"></i> 共4条记录
+	    				</div>
+	    				<!--无记录时显示-->
+	    				<!--<div class="panel-body" style="border: 1px solid #ddd;">
+							<div class="table-empty text-center">
+								<h4>查找不到相关记录</h4>
+							</div>
+						</div>-->
+						<table class="table table3 table-bordered table-hover" style="margin-bottom: 0;">
+							<thead>
+								<tr>
+									<th class="text-left">名称</th>
+									<th class="text-left">类型</th>
+									<th class="text-left">数量</th>
+									<th class="text-left">库存</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="text-left f14">微信红包</td>
+									<td class="text-left f14">购买</td>
+									<td class="text-left f14">10</td>
+									<td class="text-left red f14">10</td>
+								</tr>
+								<tr>
+									<td class="text-left f14">微信红包</td>
+									<td class="text-left f14">购买</td>
+									<td class="text-left f14">10</td>
+									<td class="text-left red f14">10</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".nav-tabs li").click(function() {
+			$(".nav-tabs li").removeClass("active");
+			$(this).addClass("active");
+			$(".t-box").hide();
+			var activeTab = $(this).find("a").attr("href");
+			$(activeTab).fadeIn();
+			return false;
+		});
+	});
+</script>

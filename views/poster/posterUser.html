@@ -1,0 +1,103 @@
+<div style="background: #fff;">
+    <div class="p-u-head">
+        <img src="img/login/2016-11-18-12.png" style="width: 50px;height:50px;border-radius:50%;">
+        <span style="font-size: 20px;">王小明</span>
+        <div class="su-line"></div>
+        <span>累计生成海报次数</span>
+        <span class="p-blue">2</span>
+        <div class="su-line"></div>
+        <span>累计直接推荐人数</span>
+        <span class="p-blue">7</span>
+        <div class="su-line"></div>
+        <span>累计获得红包奖励金额</span>
+        <span class="p-blue">8</span>
+        <span>元</span>
+        <div class="su-line"></div>
+        <span>累计提现金额</span>
+        <span class="p-blue">4</span>
+        <span>元</span>
+    </div>
+    <div class="tabUl-4 clearfix">
+        <ul>
+            <li style="width: 185px;" ng-class="{true:'active'}[tabIdx==0]" ng-click="tabIdx=0">
+                <a>关系图谱</a>
+            </li>
+            <li style="width: 185px;" ng-class="{true:'active'}[tabIdx==1]" ng-click="tabIdx=1">
+                <a>奖励记录</a>
+            </li>
+            <li style="width: 185px;" ng-class="{true:'active'}[tabIdx==2]" ng-click="tabIdx=2">
+                <a>红包提现记录</a>
+            </li>
+        </ul>
+    </div>
+    <div class="panel-body" ng-show="tabIdx==0">
+        <div class="charts-cost" id="activity_charts" style="height: 500px;">
+        </div>
+    </div>
+    <div class="panel-body" ng-show="tabIdx==1">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                        <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>奖励类目</th>
+                                <th>奖励方式</th>
+                                <th>红包奖励</th>
+                                <th>时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in [1,2,3,4,5,6]">
+                                <td class="text-center f14">直接推荐奖励</td>
+                                <td class="text-center f14" >红包</td>
+                                <td class="text-center f14">1.00元</td>
+                                <td class="text-center f14">2018-01-16 13:41</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body" ng-show="tabIdx==2">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                    <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                        <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                    </div>
+                    
+                    <table class="table table3 table-bordered table-hover user_table">
+                        <thead>
+                            <tr>
+                                <th>提现金额</th>
+                                <th>提现时间</th>
+                                <th>流水号</th>
+                                <th>手机号</th>
+                                <th>IP地址</th>
+                                <th>派发状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in [1,2,3,4,5,6]">
+                                <td class="text-center f14">4.00元</td>
+                                <td class="text-center f14" >2018-01-18 11:02:58</td>
+                                <td class="text-center f14">1801181566267817</td>
+                                <td class="text-center f14">*******5230</td>
+                                <td class="text-center f14">43.224.45.126</td>
+                                <td class="text-center f14">派发成功</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

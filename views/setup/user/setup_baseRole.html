@@ -1,0 +1,364 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">角色管理</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="search-filter-box">
+			<div>				
+				<label>关键字<span>:</span></label>
+				<input type="text" placeholder="角色名称" ng-model="searchParam.searchKey">
+			</div>
+			
+			<div>
+				<a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+				<a class="btn btn-default" ng-click="searchParam.searchKey='';doSearch();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+				<a class="btn btn-success add-btn" style="float:right;"  ng-click="toEdit();"><i class="icon icon-plus"></i>添加角色</a>
+			</div>
+		</div>
+	</div>	
+
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th class="colorCenter noSortCss"><input type="checkbox" class="checkbox" id="selectAll" ng-click="selectAll()"></th>
+								<th class="colorCenter noSortCss">序号</th>
+								<th ng-class="sortFun('sr_name',true);" ng-click="clickSortFun('sr_name');">角色名称</th>
+								<th ng-class="sortFun('sr_type_nameref',true);" ng-click="clickSortFun('sr_type_nameref');">角色类型</th>
+								<th ng-class="sortFun('sr_roletype_nameref',true);" ng-click="clickSortFun('sr_roletype_nameref');">系统</th>
+								<th class="noSortCss">角色描述</th>
+								<th ng-class="sortFun('sr_order',true);" ng-click="clickSortFun('sr_order');">顺序</th>
+								<th ng-class="sortFun('sr_status_nameref',true);" ng-click="clickSortFun('sr_status_nameref');">角色状态</th>
+								<th ng-class="sortFun('',false);">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in roleList" class="common-tr-height">
+								<th class="colorCenter noSortCss"><input type="checkbox" class="checkbox" 
+								ng-click="selectedRole()" name="role" sr_id="{{x.sr_id}}"></th>
+								<td class="colorCenter">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+								<td class="text-left">{{x.sr_name}}</td>
+								<td class="text-left">{{x.sr_type_nameref}}</td>
+								<td class="text-left">{{x.sr_roletype_nameref}}</td>
+								<td class="text-left">{{x.sr_desc}}</td>
+								<td>{{x.sr_order}}</td>
+								<td>{{x.sr_status_nameref}}</td>
+								<td class="colorCenter">
+									<a class="common_btns common_detail" ng-click="showCheckDialog(x.sr_id)" title="查看"></a>
+									<a class="common_btns common_edit" ng-click="toEdit(x.sr_id)" title="编辑" ng-show="x.sr_isgroup=='N'" ></a>
+									<a class="common_btns common_judge" ng-click="showAuthDialog(x)" title="授权" ng-show="x.sr_roletype == 1 "></a>
+									<a class="common_btns common_delete" ng-click="toDelete(x.sr_id)" title="删除" ng-show="x.sr_isgroup=='N'"> </a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 双击右侧弹窗 -->
+	<div class="role_pop_right" ng-show="roleLeftPop" id="roleLeftPop">
+		<div class="role_bottom_title role_title_background" style="text-align:center;color:#555;padding: 10px;">
+			<b>角色详情</b>
+		</div>
+		<div class="role_bottom_content">
+			<div class="role_bottom_left">
+				<div style="border-bottom:1px solid #ddd;text-align:center;color:#555;" class="role_title_background"><b>权限</b></div>
+				<div><div class="xt_addBtnAnNiu_role"><a href="javaScript:void(0)" 
+				ng-click="showAuthDialog()" style="width: 50px;margin: 5px auto 5px 11px;"><i class="xt_addImg"></i>授权</a></div></div>
+				<div style="clear: both;"></div>
+				<div style="border-top: 1px solid #ddd;">
+					<ul id="treePopRight" class="ztree">
+            		</ul>
+				</div>
+			</div><div class="role_bottom_right">
+					<div style="border-bottom:1px solid #ddd;border-left:1px solid #ddd;text-align:center;color:#555;" class="role_title_background"><b>用户</b></div>
+					<div style="border-left:1px solid #ddd;">
+						<div>
+							<div class="xt_addBtnAnNiu_role"><a href="javaScript:void(0)" ng-click="showAddUsers()" style="width: 50px;margin: 5px auto 5px 11px;"><i class="xt_addImg"></i>新增</a></div>
+							<div class="xt_addBtnAnNiu_role"><a href="javaScript:void(0)" ng-click="deleteUsers()" style="width: 50px;margin: 5px auto 5px 18px;"><i class="xt_addImg"></i>删除</a></div>
+						</div>
+						<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-left-color: transparent;border-right-color: transparent;">
+							<thead>
+								<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh">
+									<th class="colorCenter noSortCss"><input type="checkbox" ng-model="allChecked2" ng-change="toggleAll2()"></th>
+									<th class="colorCenter noSortCss">序号</th>
+									<th class="colorCenter noSortCss">用户名</th>
+									<th class="colorCenter noSortCss">登陆账号</th>
+									<th class="colorCenter" ng-class="sortFun('su_loginname',true);" ng-click="clickSortFun('su_loginname');">手机号</th>
+									<!-- <th class="noSortCss">邮箱</th> -->
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="x in roleUserList" style=" height:30px">
+									<td class="colorCenter"><input type="checkbox" ng-model="x.checked"></td>
+									<td class="colorCenter">{{pager1.rows * (pager1.page - 1)+ $index+1}}</td>
+									<td class="colorCenter">{{x.su_name}}</td>
+									<td>
+										{{x.su_loginname}}
+									</td>
+									<td>{{}}</td>
+								</tr>
+								
+							</tbody>
+						</table>
+				     	<tm-pagination conf="pager1" search-param ="searchParam1"></tm-pagination>
+					</div>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+	</div>
+</div>
+
+<!-- 添加编辑弹窗 -->
+<div class="dialog" ng-show="roleAddPop" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -230px;"  ng-show="roleAddPop">
+		<div class="dg-xg-js" style="width:660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeAddDialog()"></div>
+		</div>
+	    <form class="form-horizontal w5c-form demo-form" role="form"
+		w5c-form-validate="role" novalidate name="validateForm">
+			<div class="dg-content" style="height: 280px; margin:0 auto;">
+				<!-- <div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">编号：</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="text" name="sr_code"
+										ng-model="vo.sr_code" required="true">
+						</div>
+					</div>
+				</div> -->
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">顺序：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text"
+										ng-model="vo.sr_order" maxlength="3">
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">角色名称：</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" name="sr_name"
+										ng-model="vo.sr_name" required="true">
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">角色描述：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<input style="width: 150px;" type="text" 
+										ng-model="vo.sr_desc" >
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">角色状态</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<zk-control-group htmlid="bs_is_negative" ng-model="vo.sr_status"
+											data-option='[{"0":"禁用"},{"1":"启用"}]'></zk-control-group>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" w5c-form-submit="createRole()">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeAddDialog()">取消</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- 查看信息弹窗 -->
+<div class="dialog" ng-show="roleInfoPop" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -230px;"  ng-show="roleInfoPop">
+		<div class="dg-xg-js" style="width:660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeCheckDialog()"></div>
+		</div>
+	    <form class="form-horizontal w5c-form demo-form" role="form" novalidate name="validateForm">
+			<div class="dg-content" style="height: 280px; margin:0 auto;">
+				<!-- <div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">编号：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<span class="f14">{{vo.sr_code}}</span>
+						</div>
+					</div>
+				</div> -->
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">顺序：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;" id="treeInput">
+							<span class="f14">{{vo.sr_order}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">角色名称：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sr_name}}</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">角色状态：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sr_status_nameref}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">角色描述：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sr_desc}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">角色类型：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sr_type_nameref}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">系统：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sr_roletype_nameref}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">版本号：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sr_sersion}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 315px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">创建时间：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sr_ts}}</span>
+						</div>
+					</div>
+				</div>
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14">删除标志位：</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							<span class="f14">{{vo.sr_dr_nameref}}</span>
+						</div>
+					</div>
+				</div>
+				
+				
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeCheckDialog()">关闭</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<!-- 授权弹窗 -->
+<div class="dialog" ng-show="roleAuthPop" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -232px;"  ng-show="roleAuthPop">
+		<div class="dg-xg-js" style="width:660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeAuthDialog()"></div>
+		</div>
+		
+	    <form class="form-horizontal">
+			<div class="dg-content" style="height: 280px; margin:0 auto; overflow-y: scroll;">
+				<ul id="dataTreePop" class="ztree">
+            	</ul>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1"  ng-click="authIdx()" ng-show="temp.sr_isgroup=='N'">授权</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeAuthDialog()">关闭</div>
+				</div>
+			</div>
+	
+	</div>
+</div>

@@ -1,0 +1,268 @@
+<div class="xt_shouYeDiv" ng-show="!$root.isPager">
+	<span><a href="#/index/homePage">首页</a><a  style="font-size: 14px;font-weight: 100;" href="#/index/customer/csCustomerList">>设置</a> <a style="font-size: 14px;font-weight: 100;"><span>>详情</span></a></span>
+</div>
+<div class="xt_changeHtml">
+		<div class="zk_addMain">
+			<div class="zk_baseInfoBox">
+				<h4>基本信息</h4>
+				<div class="zk_controlBox">
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>主键</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cs_id" 
+							ng-model="csCustomerInfo.cs_id" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span></span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cs_orgid" 
+							ng-model="csCustomerInfo.cs_orgid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>主键</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_teypid" 
+							ng-model="csCustomerInfo.cd_teypid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span></span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_categoryid" 
+							ng-model="csCustomerInfo.cd_categoryid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span></span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_code" 
+							ng-model="csCustomerInfo.cd_code" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span></span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_name" 
+							ng-model="csCustomerInfo.cd_name" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span></span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_contacts_name" 
+							ng-model="csCustomerInfo.cd_contacts_name" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span></span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_contacts_mobile" 
+							ng-model="csCustomerInfo.cd_contacts_mobile" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>邮政编码</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_postcode" 
+							ng-model="csCustomerInfo.cd_postcode" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>详细地址</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_address" 
+							ng-model="csCustomerInfo.cd_address" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>客户条码</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_barcode" 
+							ng-model="csCustomerInfo.cd_barcode" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>是否定位 Y/N</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_islocation" 
+							ng-model="csCustomerInfo.cd_islocation" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>业务员</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_salesmanid" 
+							ng-model="csCustomerInfo.cd_salesmanid" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>经度</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_longitude" 
+							ng-model="csCustomerInfo.cd_longitude" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>纬度</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_latitude" 
+							ng-model="csCustomerInfo.cd_latitude" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>状态</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_stats" 
+							ng-model="csCustomerInfo.cd_stats" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>备注</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_remarks" 
+							ng-model="csCustomerInfo.cd_remarks" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>是否开通账号 Y/N</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_isaccount" 
+							ng-model="csCustomerInfo.cd_isaccount" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>账号</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_accountcode" 
+							ng-model="csCustomerInfo.cd_accountcode" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>密码</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_pwd" 
+							ng-model="csCustomerInfo.cd_pwd" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>最后登陆时间</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_last_logintime" 
+							ng-model="csCustomerInfo.cd_last_logintime" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>系统code</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_systemcode" 
+							ng-model="csCustomerInfo.cd_systemcode" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>微信code</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_weixincode" 
+							ng-model="csCustomerInfo.cd_weixincode" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span></span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_image" 
+							ng-model="csCustomerInfo.cd_image" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>最后登陆时间</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_dr" 
+							ng-model="csCustomerInfo.cd_dr" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span></span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_ts" 
+							ng-model="csCustomerInfo.cd_ts" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>版本</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_version" 
+							ng-model="csCustomerInfo.cd_version" readonly="readonly">
+						</div>
+					</div>
+					<div class="zk_controlGroup">
+						<div class="zk_controlLabel">
+							<span>注册时间</span>
+						</div>
+						<div class="zk_controlInput">
+							<input type="text" name="cd_regtime" 
+							ng-model="csCustomerInfo.cd_regtime" readonly="readonly">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+<div class="zk_saveBox">
+	<a ng-click="cancel();" class="btnStyle falseBtn">返回</a>
+</div>
+

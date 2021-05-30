@@ -1,0 +1,76 @@
+.mask2 { display: block; background-color: rgba(0,0,0,0.8); position: fixed; top: 0; left: 0; width: 100%;  height: 100%; z-index: 106;}
+.fire_loading {z-index: 9001; height: 100%; background-color: #fff; transition: left .35s; -moz-transition: left .45s; -webkit-transition: left .45s; -o-transition: left .45s; left: 0;}
+.fire_loading .loading_banner_bg { width: 320px; height: 434px; background-image: url("../../img/opening_bg2.jpg"); /*margin-left: -8rem;*/ top: 0rem; background-position: center center; background-size: contain;}
+.fire_loading .hz_logo_bg { width: 320px; height: 70px; background: url("../../img/opening_logo.png") no-repeat; /*margin-left: -8rem;*/ top: auto; bottom: 0; background-position: center center; background-size: 256px 52px; background-color: #fff;}
+.fire_loading span { color: #fff;}
+.fire_loading .skip_btn {position: absolute; background: rgba(0,0,0,0.35);  padding: 3px 2px; font-size: 12px; text-align: center; color: #fff;  top: 10px; border-radius: 4px; width: 54px; left: auto; right: 10px;}
+
+/*.fire_rule .rule_myprize_link { width: 105px;  height: 45px; margin-top: -217px; margin-left: 8px; z-index: 11;}
+.fire_rule .rule_rule_link {  width: 105px; height: 45px; margin-top: -210px; margin-left: -116px; z-index: 11;}*/
+.fire_res>.close {position: fixed; top: 45px; right: 0; background-image: url("../../img/fire_res_close.png"); background-size: 100% 100%; width: 50px; height: 50px; display: inline-block; background-repeat: no-repeat;  overflow: hidden; z-index: 108;}
+.fire_rule .fire_res_rule_bg { background: url("../../img/fire_res_rule.png") no-repeat; background-size: 100% auto; width: 300px; height: 440px; position: fixed; z-index: 107; top: 20px; left: 9px;}
+.fire_rule .fire_res_rule_bg2 { background: url("../../img/fire_res_myprize.png") no-repeat;background-size: 100% auto; width: 300px; height: 440px; position: fixed; z-index: 107; top: 20px; left: 9px;}
+.fire_rule .content { background-repeat: no-repeat; position: absolute; top: 50%; left: 50%; width: 80%; margin-top: -52%; margin-left: -40%;  font-size: 12px; line-height: 20px; text-align: left; padding: 10px; height: 350px; box-sizing: border-box; -webkit-box-sizing: border-box; overflow-y: auto; overflow-x: hidden;}
+.fire_rule .scroller { margin: 0rem .25rem 0 .25rem; position: relative; z-index: 109;}
+.fire_rule .scroller div, .fire_rule .scroller p { line-height: 20px !important; color: #813621 !important;}
+.fire_rule .fire_res_rule_award { background-image: url("../../img/fire_res_rule_award.png"); background-size: 100% auto; background-repeat: no-repeat; width: 66px; height: 23px;}
+.fire_rule .fire_res_rule_time { background-image: url("../../img/fire_res_rule_time.png"); background-size: 100% auto; background-repeat: no-repeat; width: 66px; height: 23px; margin-top: 4px;}
+.fire_rule .fire_res_rule_tips { background-image: url("../../img/fire_res_rule_tips.png"); background-size: 100% auto; background-repeat: no-repeat; width: 66px;  height: 23px; margin-top: 4px;}
+.fire_rule .fire_res_rule_organizer { background-image: url("../../img/fire_res_rule_organizer.png"); background-size: 100% auto; background-repeat: no-repeat; width: 66px; height: 23px;  margin-top: 4px;}
+.fire_rule .scroller a {display: inline-block; color: #813621;}
+.fire_rule #myprizeWrapper .myprize_list_cont {  padding-bottom: 18px;}
+#myprizeWrapper .myprize_item { background: url("../../img/prize_item.png") no-repeat; background-size: 100% auto; width: 230px; height: 100px; margin: 10px auto 0; position: relative; z-index: 2; color: #fff;  padding: 0 10px; box-sizing: border-box; -webkit-box-sizing: border-box;}
+.fire_rule #myprizeWrapper .myprize_list_cont p { font-size: 12px;}
+#myprizeWrapper .award_name { color: #fff !important; width: 100%; font-size: 18px !important; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; padding: 10px 0 0; box-sizing: border-box; line-height: 22px;}
+#myprizeWrapper .expired_time { -webkit-text-size-adjust: none; color: #fff !important;}
+#myprizeWrapper .exchange_statu { color: #fff !important; margin-top: 6px;}
+
+#backfill_panel { position: fixed; top: 0; left: 0; width: 320px; overflow-x: hidden; overflow-y: auto; z-index: 110;}
+.gameBox { width: 100%;  height: 100%;}
+#gameBgBox { width: 100%; height: 100%; overflow: hidden;}
+.game-title { position: absolute; top: 0; left: 0; z-index: 15;}
+
+#gameLayerBox { position: absolute; top: 0; left: 0; width: 100%; bottom: 0; overflow: visible !important;}
+.absCenter { position: absolute; left: 5px; right: 0; margin: auto;}
+.absCenter2 { position: absolute; right: 80px; bottom: 0; margin: auto;}
+.absCenter3 { position: absolute; right: 15px; bottom: 0; margin: auto;}
+
+.laba { position: absolute; width: 320px; height: 24px; left: 0; top: 88px; padding-left: 58px; line-height: 24px; color: white; background-image: url("../../img/laba.png");  background-size: 100% 100%;}
+.qipan { position: absolute; width: 320px; height: 350px; left: 0rem; top: 110px; background-image: url("../../img/qipan.png"); background-size: 100% 100%;}
+.editTarget-wysz_btn {width: 100px; height: 40px;}
+.editTarget-wdjp_btn {width: 60px; height: 40px;}
+
+.fire_award_info { position: fixed; top: 0; width: 100%; height: 100%; z-index: 2000; font-size: 14px; color: #fff; background-color: #f0eff4; overflow-y: auto; -webkit-overflow-scrolling: touch;}
+.fire_award_info>span.close { width: 16px; height: 16px; background: url('../../img/close.png') no-repeat; background-position: 0 0; top: 12px; z-index: 202; margin: 0; padding: 0; background-size: cover; position: absolute; right: 12px;}
+.fire_award_info .awardDetail { width: 100%; height: 150px; background-color: #33b3fa; text-align: center; position: relative;}
+.fire_award_info .awardDetail .organizerName { padding: 14px 14px 20px; text-align: left; color: #fff;}
+.fire_award_info .awardDetail .awardName { font-size: 24px; max-width: 320px; color: #fff;}
+.fire_award_info .awardDetail .awardSubTitle { font-size: 12px; line-height: 20px;}
+.fire_award_info .awardDetail .awardCodeTime { font-size: 12px; line-height: 20px; margin-top: 10px; color: #fff;}
+.fire_award_info .awardDetail .awardCodeTime span { color: #fff;}
+.fire_award_info .awardDetail .awardDetailWarp { height: 5px; width: 100%; background: url('../../img/quan.png') repeat-x; position: absolute; bottom: -2px; background-size: 10px auto; background-position: -1px -1px;}
+.fire_award_info .codeImgBox { text-align: center; color: #666; background-color: #fff; padding-bottom: 10px;}
+.fire_award_info #codeDetailInfoBox { padding-top: 4px;}
+.fire_award_info .codeImgBox .codeImg-wrapper { position: relative;}
+.fire_award_info .codeImgBox .codeImg-wrapper .codeImg { margin: 14px auto 0 auto; width: 145px; height: 145pxrem;}
+.fire_award_info .codeImgBox .codeLine { margin-bottom: 2px; padding-top: 8px; color: #333;}
+.fire_award_info .codeImgBox .codeLine span { font-size: 14px;}
+.fire_award_info .codeOptInfo { color: #1f3d86; font-size: 12px;}
+.fire_award_info .awardDetailBtn { border: 1px solid #ececec; height: 35px; color: #333; line-height: 35px; padding-left: 12px; background-color: #fff; font-size: 14px; text-align: left;}
+.fire_award_info .awardDeailIcon { width: 12px; height: 12px; background: url('../../img/gd.png') no-repeat; background-size: 100%; float: right; margin-top: 12px; margin-right: 10px;}
+.fire_award_info .awardDetailText { color: #333; font-size: 12px; padding: 10px 14px; background: #fff;}
+.awardDetailText .itemList { font-size: 12px; padding-bottom:  12px;}
+.awardDetailText .itemList .title { float: left; color: #666;}
+.awardDetailText .itemList .box { width: auto; margin-left: 70px; text-align: left;}
+.fire_award_info .awardVerifyPwd { position: fixed; bottom: 0; width: 100%; height: 55px; background-color: #f0effc;}
+.fire_award_info .awardVerifyPwd #awardVerifyPwdBtn { width: 275px; height: 35px; line-height:  35px; text-align: center; font-size: 16px; color: #fff; border-radius: 4px; background-color: #33b3fa; margin: 10px auto;}
+
+.fire_prize_success .prize_success, .fire_prize_hb_success .prize_success { width: 320px; margin-left: -160px; height: 220px; top: 20px; background-image: url("../../img/prize_success.png"); background-size: 100% auto; background-repeat: no-repeat; position: absolute; left: 50%; text-align: center; box-sizing: border-box; -webkit-box-sizing: border-box;}
+.fire_prize_success .prize_success .price_success_gift, .fire_prize_hb_success .prize_success .price_success_gift { height: 190px; background-image: url("../../img/gift.png"); background-size: 100% auto; background-repeat: no-repeat;}
+.fire_prize_success .p_text_1, .fire_prize_hb_success .p_text_1 { position: absolute; width: 90%; line-height: 33px; font-weight: bold; top: 250px; left: 5%; color: #fff; text-align: center;}
+.fire_prize_success .score { color: #ffcc17; font-size: 28px;}
+.fire_prize_success .fire_btn_cont, .fire_prize_hb_success .fire_btn_cont { top: 300px;}
+.fire_res .fire_btn_cont { position: absolute;}
+.fire_res .fire_btn_cont .fire_btn { background-size: 100% auto; background-repeat: no-repeat; position: absolute; left: auto; top: auto; margin-top: 8px; width: 150px; height: 50px; margin-left: 85px;}
+.fire_res .fire_btn_cont .fire_btn1 { background-image: url("../../img/show_detail_btn.png"); margin-top: 18px;}
+.fire_res .fire_btn_cont .fire_btn2 { background-image: url("../../img/subscribe_btn.png"); margin-top: 78px;}

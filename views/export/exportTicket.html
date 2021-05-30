@@ -1,0 +1,136 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">订单水票汇总</a></li>
+			</ul>
+		</div>
+    </div>
+	<div class="search-filter-box">
+		<div>
+			<label>时间<span>:</span></label>
+            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
+            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                />
+            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+				/>
+        </div>
+        <div>
+            <label>会员名<span>:</span></label>
+            <input type="text" placeholder="会员名" ng-model="searchParam.memberNameSearchKey">
+            <label>会员手机<span>:</span></label>
+            <input type="text" placeholder="会员手机" ng-model="searchParam.memberMobileSearchKey">
+            
+        </div>
+		<div>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doSearch();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+			<a class="btn btn-success" style="margin-left:80px;"  ng-click="doExport();" >导出数据</a>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>客户名</th>
+								<!-- <th>水票编码</th> -->
+								<th>客户电话</th>
+								<th>商品</th>
+								<th>期初数量</th>
+								<th>期初金额</th>
+								<th>购买数量</th>
+								<th>购买金额</th>
+								<th>受赠数量</th>
+								<th>受赠金额</th>
+								
+								<th>取水数量</th>
+								<th>取水金额</th>
+								<th>送人数量</th>
+								<th>送人金额</th>
+								<th>过期数量</th>
+								<th>过期金额</th>
+								<th>剩余数量</th>
+								<th>剩余金额</th>
+								
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in orderList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+                                <td class="text-center f14">{{x.tm_memberid_nameref}}</td>
+                                <td class="text-center f14">{{x.tm_memberid_mobile}}</td>
+								<td class="text-center f14">{{x.tm_productid_nameref}}</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.tsl_left_num"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.tsl_left_amount"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.orderNum"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.orderAmount"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.giftNum"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.giftAmount"></zk-format-num>
+								</td>
+							
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.waterNum"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.waterAmount"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.sendNum"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.sendAmount"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.outDateNum"></zk-format-num>
+								</td>
+								<td class="text-center f14">
+									<zk-format-num ng-model="x.outDateAmount"></zk-format-num>
+								</td>
+								<td class="text-center f14" ng-if="searchParam.endDate=='' || searchParam.endDate>=dateNow">
+									<zk-format-num ng-model="x.leftNum"></zk-format-num>
+								</td>
+								<td class="text-center f14" ng-if="searchParam.endDate=='' || searchParam.endDate>=dateNow">
+									<zk-format-num ng-model="x.leftAmount"></zk-format-num>
+								</td>
+								<td class="text-center f14" ng-if="!(searchParam.endDate=='' || searchParam.endDate>=dateNow)">
+									<zk-format-num ng-model="x.tsl_left_num_end"></zk-format-num>
+								</td>
+								<td class="text-center f14" ng-if="!(searchParam.endDate=='' || searchParam.endDate>=dateNow)">
+									<zk-format-num ng-model="x.tsl_left_amount_end"></zk-format-num>
+								</td>
+								
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

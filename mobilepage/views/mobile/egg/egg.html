@@ -1,0 +1,57 @@
+<ion-content>
+    <ion-refresher pulling-text="下拉查看活动..." on-refresh="onRefresh()"></ion-refresher>
+	<div class="egg-main">
+		<div class="top">
+			<img src="img/mobile/goldEgg/header.png">
+		</div>
+		<div class="center" id="center">
+			<div class="egg" ng-repeat="x in [1,2,3,4,5]" repeat-finish="eggFinish()">	
+				<div class="egg-img">
+					<div id="crack" class="crack"></div>
+					<img src="img/mobile/goldEgg/egg.png">
+				</div>
+				<div class="award" style="display: none;">
+					<img class="egg-shell" src="img/mobile/goldEgg/egg-shell-1.png">
+					<div class="award-img"></div>
+					<img class="egg-shell" src="img/mobile/goldEgg/egg-shell-2.png">
+				</div>
+				<div class="fail" style="display: none;">
+					<img src="img/mobile/goldEgg/fail.png" alt="">
+				</div>
+			</div>
+			<div class="time-left">
+				您还有<span ng-bind="timeLeft"></span>次机会
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="b-top">
+				<div class="winner-list">
+					<div class="list-head">
+						<span>本期中奖名单</span>
+						<div class="list-tip">中奖名单</div>
+					</div>
+					<div class="lists">
+						<div class="items" ng-repeat="x in [1,2,3,4,5]">
+							<div class="item-left">李小明</div>
+							<div class="item-right">砸中iPhone6一台</div>
+						</div>
+					</div>
+				</div>
+				<div class="rule-list">
+					<div class="list-head">
+						<div class="list-tip">活动规则</div>
+					</div>
+					<div class="lists">
+						<div class="items" ng-repeat="x in [1,2,3,4,5]">
+							{{x}}、每周二开奖，请及时兑奖活动截止日期2018-01-01，请及时兑奖
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="b-bottom">
+				<img src="img/mobile/goldEgg/curtain-bottom.png" alt="">
+			</div>
+		</div>
+	</div>
+</ion-content>
+<video-pop></video-pop>

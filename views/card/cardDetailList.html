@@ -1,0 +1,51 @@
+<div class="game-container">
+	<div class="headers">
+		<h3>优惠码列表：</h3>
+		
+        <div class="control-group" style="margin-top: 10px;">
+            <div class="controls" style="margin-left: 0px;">
+                <input type="text" id="activityRange" class="f14" maxlength="50" style="width: 190px; height: 21px; top: 2px; position: relative;"/>
+                <select class="f14" name="activity"  
+                style="width: 220px; height: 36px; top: 2px; position: relative;
+                 border: 1px solid #d5d5d5;" 
+                 ng-model="pager.mw_activityid"
+                 ng-options="  x.mm_id  as x.mm_name for x in [{mm_id:1,mm_name:'已领取'},{mm_id:1,mm_name:'未领取'},{mm_id:1,mm_name:'已核销'}]">
+                </select>
+                <input class="f14" type="text" placeholder="请输入优惠码或微信昵称 " style="width: 170px; height: 21px; top: 2px; position: relative;" />
+                <button class="btn btn-success" style="width: 80px; height: 36px;" ng-click="searchFun();">查询</button>
+                <button class="btn btn-default black" style="width: 80px; height: 36px; text-shadow: none !important;" 
+                ng-click="reset();">重置</button>
+            </div>
+        </div>
+	</div>
+	<div class="content" style="margin-top: 15px;">
+		<table class="table table3 table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>优惠券名称</th>
+                    <th>派发时间</th>                       
+                    <th>使用时间</th>                       
+                    <th>粉丝微信</th>
+                    <th>类型</th>
+                    <th>面值</th>
+                    <th>优惠码</th>
+                </tr>
+            </thead>
+            <tbody class="borBottom">
+                <tr class="js_selectLine" ng-repeat="x in [1,2,3,4]">
+                    <td>1000元代金券</td>
+                    <td>2018-01-09 14:45</td>
+                    <td>2018-11-09 14:45</td>
+                    <td>13213212</td>
+                    <td>已核销</td>
+                    <td>100</td>
+                    <td>0101010</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- 分页 -->
+     	<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+		<!--分页 -->
+	</div>
+</div>
+

@@ -1,0 +1,9 @@
+.gift-card-main { background: #f9f9f9; }
+.gift-card-main .gift-top img { width: 100%; }
+.gift-card-main .gift-center { padding: 1rem; }
+.gift-card-main .gift-center .gift-tips { font-size: 1.1rem; font-weight: 600; color: #444; margin-bottom: 1rem; letter-spacing: 1px; }
+.gift-card-main .gift-center .gift-list .gift-item { float: left; width: calc(50% - 0.5rem); background: #fff; border-radius: 8px; margin-bottom: 1rem; -webkit-box-shadow: 1px 1px 1px #aaa; box-shadow: 1px 1px 1px #aaa; }
+.gift-card-main .gift-center .gift-list .gift-item:nth-of-type(odd) { margin-right: 1rem; }
+.gift-card-main .gift-center .gift-list .gift-item .item-top img { width: 100%; border-radius: 8px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.gift-card-main .gift-center .gift-list .gift-item .item-bottom { text-align: center; font-weight: 600; }
+.gift-card-main .gift-bottom { text-align: center; color: #829df8; padding-bottom: 2rem; }

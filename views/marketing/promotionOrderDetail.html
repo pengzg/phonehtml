@@ -1,0 +1,76 @@
+<div class="xt_changeHtml" style="margin-bottom: 50px;">
+	<div class="addlistCenter">
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"><i class="colorRed">*</i> 促销主题：</span>
+			<div class="widthAuto zk_controlInput">
+				<span>{{vo.ppm_name}}</span>
+			</div>
+		</div>
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi">活动类型：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				<span ng-if="vo.ppm_type==3">订单促销</span> 
+				<span ng-if="vo.ppm_type==2">组合促销</span> 
+				<span ng-if="vo.ppm_type==1">商品促销</span> 
+			</div>
+		</div>
+	
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi"><i class="colorRed">*</i> 促销时间：</span>
+			<div class="widthAuto zk_controlInput">
+				{{vo.ppm_startdate}} 到 {{vo.ppm_enddate}}
+			</div>
+		</div>
+	
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi">促销规则：</span>
+		<div class="widthAuto zk_controlInput sale_inline" style="color:#8c7ee4;">
+			买赠
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi">促销阶梯：</span>
+		<div class="widthAuto zk_controlInput sale_inline" style="color:#8c7ee4;">
+			<span ng-if="vo.ppm_isladder ==1">开启</span>
+			<span ng-if="vo.ppm_isladder ==2">不开启</span>
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi"></span>
+		<div class="widthAuto zk_controlInput sale_inline">
+			订单金额：
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5" ng-repeat="x in vo.giftList">
+		<span class="xt_bzWenZi"></span>
+		<div class="widthAuto zk_controlInput sale_inline">
+			• 满{{x.ppg_minnum}} 元，获赠品 {{x.ppg_productid_nameref}}&nbsp;&nbsp;{{x.ppg_gift_num}}份
+		</div>
+	</div>
+	<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi">客户级别：</span>
+			<div class="widthAuto zk_controlInput sale_inline" ng-repeat="x in vo.gradeList">
+				{{x.ppmg_gradeid_nameref}}
+			</div>
+		</div>	
+	<div class="divVertical clearfix ray5">
+		<span class="xt_bzWenZi">区域：</span>
+		<div class="widthAuto zk_controlInput sale_inline">
+			<div>
+				<span>全部区域</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="divVertical clearfix ray5" ng-show="false">
+		<span class="xt_bzWenZi">区域：</span>
+		<div style="margin-left:116px">
+			<div id="treeDemo" class="ztree"></div>
+		</div>
+		
+	</div>
+</div>
+<div class="fixedBottom">
+	<div><a ui-sref="index.marketing.promotionOrder"   class="btnStyle Btncolor2 BtnHover2">返回</a></div>
+</div>
+

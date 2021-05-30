@@ -1,0 +1,7 @@
+.persion-data-main { position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; background: url(../../../img/mobile/personCenter/person-data-bg.jpg); background-size: 100% 100%; }
+.persion-data-main .p-head { margin: 2rem 0 2rem 0; text-align: center; }
+.persion-data-main .p-head img { width: 5rem; height: 5rem; -webkit-box-shadow: 0 0 0 10px rgba(142, 198, 216, 0.3), 0 0 0 15px rgba(255, 255, 255, 0.3); box-shadow: 0 0 0 10px rgba(142, 198, 216, 0.3), 0 0 0 15px rgba(255, 255, 255, 0.3); border-radius: 2.5rem; }
+.persion-data-main .p-list .p-item { display: -webkit-box; display: -ms-flexbox; display: flex; margin: 0 auto; padding: 0.5rem 2rem; width: 84%; border-bottom: 1px solid #81bed0; }
+.persion-data-main .p-list .p-item:first-of-type { border-top: 1px solid #81bed0; }
+.persion-data-main .p-list .p-item .p-item-left { -webkit-box-flex: 2; -ms-flex: 2; flex: 2; color: rgba(53, 168, 170, 0.8); font-weight: 600; }
+.persion-data-main .p-list .p-item .p-item-right { -webkit-box-flex: 8; -ms-flex: 8; flex: 8; color: #666; }

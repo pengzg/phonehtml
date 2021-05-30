@@ -1,0 +1,58 @@
+	<div class="gift-buy-main">
+		<ion-content>
+			<div class="gift-top">
+				<img ng-src="{{picList[picCheck].src}}">
+			</div>
+			<div class="gift-center">
+				<div class="center-tip">
+					<i class="icon ion-qr-scanner"></i>
+					<span>选择卡面</span>
+				</div>
+				<div class="center-list">
+					<div class="center-item" 
+						 ng-repeat="x in picList"
+						 ng-class="{'center-active':$parent.picCheck==$index}"
+						 ng-click="$parent.picCheck=$index;">
+						<img ng-src="{{x.src}}">
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="center-tip-tow">
+					<i class="icon ion-ios-plus-outline"></i>
+					<span>选择礼品</span>
+				</div>
+				<div class="center-list-money">
+					<div class="center-item" 
+						 ng-repeat="x in moneyList"
+						 ng-class="{'item-active':x.num}">
+						<div class="item-left">
+							<div class="item-l-t">{{x.price}}元</div>
+							<div class="item-l-b">{{x.type}}</div>
+						</div>
+						<div class="item-right">
+							<i class="icon ion-minus-round item-hide" ng-click="minus(x)"></i>
+							<span class="item-hide">{{x.num}}</span>
+							<i class="icon ion-plus-round" ng-click="plus(x)"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ion-content>	
+		<div class="gift-bottom">
+			<div class="gift-total" ng-show="totalNum>0">
+				<div class="total-top">共{{totalNum}}份</div>
+				<div class="total-bottom">
+					<span>&yen;</span>
+					<span>{{totalMoney.toFixed(2)}}</span>
+				</div>
+			</div>
+			<div class="gift-btns">
+				<div class="btns-left">
+					<button class="button button-balanced btn-bottom" ng-disabled="totalNum==0" ng-click="buy()">购买</button>
+				</div>
+				<div class="btns-right">
+					<button class="button button-my-red btn-bottom" ng-disabled="totalNum==0" ng-click="send()">赠送</button>
+				</div>
+			</div>
+		</div>
+	</div>

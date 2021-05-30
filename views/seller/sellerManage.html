@@ -1,0 +1,317 @@
+<div class="seller-m-main">
+	<div class="common-bar-top">
+		<div class="common-bar-top-t">
+			<strong class="common-bar-title">关键指标</strong>
+		</div>
+		<div class="common-bar-top-b">
+			<div>
+				<div class="div-first">本月新增门店数量</div>
+				<div class="div-second">{{statsVO.monthlyAddNum}}</div>
+			</div>
+			<div>
+				<div class="div-first">累计门店数量</div>
+				<div class="div-second">{{statsVO.totalNum}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="seller-m-bottom">
+		
+		<div class="search-filter-box">
+			<div>
+				<label>创建时间<span>:</span></label>
+				<span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+						ng-click="dateRange.chooseDate($event)" > 日期 </span>
+				<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+					onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+					/>
+				<input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+					onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+					/>
+				<label>关键字<span>:</span></label>
+				<input type="text" placeholder="请输入门店或联系电话" ng-model="searchKey">
+			</div>
+			
+			<div>
+				<a class="btn btn-success" style="margin-left:80px;"  ng-click="search();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+				<a class="btn btn-default" ng-click="clearParams();search();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+				<a class="btn btn-success add-btn" style="float:right;"  ng-click="addSeller();"><i class="icon icon-plus"></i>新增</a>
+			</div>
+		</div>
+
+		<table style="border-bottom: none;" class="common_table_1">
+			<thead>
+				<tr style="border-bottom: none;">
+					<th style="width: 5%">序号</th>
+					<th style="width: 10%;">门店名称</th>
+					<th style="width: 5%;" ng-class="sortFun('ms_type',true);" ng-click="clickSortFun('ms_type');">类型</th>
+					<th style="width: 15%;">门店地址</th>
+					<th ng-class="sortFun('ms_mobile',true);" ng-click="clickSortFun('ms_mobile');">联系电话</th>
+					<!-- <th style="width: 10%;">城市</th> -->
+					<th style="width: 5%;">行业类目</th>
+					<th style="width: 10%;" ng-class="sortFun('ms_payaccountid',true);" ng-click="clickSortFun('ms_payaccountid');">微信收款账号</th>
+					<th style="width: 10%;">创建时间</th>
+					<th style="width: 5%;" ng-class="sortFun('ms_check_state',true);" ng-click="clickSortFun('ms_check_state');">审核状态</th>
+					<th style="width: 15%;">操作</th>
+				</tr>
+			</thead>
+		</table>
+		<table class="common_table_1">
+			<tbody>
+				<tr ng-repeat="x in msList">
+					<td style="width: 5%;">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+					<td style="width: 10%;">{{x.ms_name}}</td>
+					<td style="width: 5%;">{{x.ms_type_nameref}}</td>
+					<td style="width: 15%;">{{x.ms_address}}</td>
+					<td style="width: 10%;">{{x.ms_mobile}}</td>
+					<!-- <td style="width: 10%;">{{x.ms_city_nameref}}</td> -->
+					<td style="width: 5%;">{{x.ms_category1}}</td>
+					<td style="width: 10%;">{{x.ms_payaccountid_nameref}}</td>
+					<td style="width: 10%;">{{x.ms_addtime}}</td>
+					<td style="width: 5%;">
+						<span ng-show="x.ms_check_state==0">审核不通过</span>
+						<span ng-show="x.ms_check_state==1">审核通过</span>
+						<span ng-show="x.ms_check_state==2">审核中</span>
+					</td>
+					<td style="width: 15%;">
+						<a class="common_publish" ng-show="x.ms_check_state==2" title="审核通过" ng-click="checkFun(x.ms_id,1);"></a>
+						<a class="common_publish" ng-show="x.ms_check_state==2" title="审核通过" ng-click="checkFun(x.ms_id,1);"></a>
+						<a class="common_publish_cancle" ng-show="x.ms_check_state==2" title="审核不通过" ng-click="checkFun(x.ms_id,0);"></a>
+						<!-- <a ng-if="x.ms_sourceid == ''|| x.ms_sourceid == null" class="common_delete" title="删除" ng-click="deleteSeller(x)"></a> -->
+						<a ng-if="x.ms_state ==1" class="common_band" title="禁用" ng-click="updateState(x, 0)"></a>
+						<a ng-if="x.ms_state !=1" class="common_active" title="启用" ng-click="updateState(x, 1)"></a>
+						<a class="common_judge" title="详情" ng-click="goDetail(x.ms_id);"></a>
+						<!-- <a class="common_relate" title="关联设备" ng-show="x.ms_check_state==1" ng-click="associatedEqp(1,x.ms_id)"></a>
+						<a class="common_cancel" title="取消关联设备" ng-click="associatedEqp(2,x.ms_id)"></a> -->
+						<!-- <a class="common_add" title="添加" ng-click="goDetail(x.ms_id);"></a> -->
+						<a class="common_cancel" title="关联微信账号" ng-click="associatedAccount(x.ms_id)"></a> 
+						<a class="common_staff" title="工作人员" ng-click="goWorkList(x.ms_id,x.ms_name);"></a>
+						<a class="red displayIn-Block" style="margin-left:12px;" ng-show="user.mb_isuse_fx=='Y'" ng-click="refreshShopInfor(x.ms_id);">更新门店信息</a>
+						<!-- <a class="red displayIn-Block" ng-click="removeAllData(x);">清空数据</a> -->
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+	</div>
+</div>
+
+<!-- 添加已有店铺弹框 -->
+<div class="dialog" ng-show="addPop" style="z-index:88">
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:684px; margin-left: -330px; top: 50%;margin-top: -276px;" ng-show="addPop">
+		<div class="dg-xg-js" style="width:684px;">
+			添加店铺
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+
+		<form class="form-horizontal">
+			<div class="dg-content" style=" margin:5px auto;height: 450px;overflow-y: scroll;">
+				<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-left-color: transparent;border-right-color: transparent;">
+					<thead>
+						<tr>
+							<div class="xt_sySearch" style="margin-top: 10px;margin-bottom: 10px;">
+								<input class="xt_searchInput" ng-model="searchKey" type='text' placeholder="请输入店铺名或编码" autocomplete="off" ng-enter="doSearch()">
+								<i class="btn btn-success" ng-click="doSearch()" style="position: relative;top: -1px;padding: 5px 12px 6px;margin-left: 10px;">查找</i>
+							</div>
+						</tr>
+						<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh" style="top:-10px;">
+							<th class="colorCenter noSortCss" style="width:10px">
+								<input id="selectedAll" ng-click="selectedAllSeller()" ng-checked="isChecked == true" type="checkbox" class="checkbox" style="margin-left:5px">
+							</th>
+							<th class="colorCenter noSortCss">序号</th>
+							<th class="colorCenter noSortCss">店铺编码</th>
+							<th class="colorCenter noSortCss">店铺名称</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in existSellerList" style=" height:30px">
+							<td class="colorCenter"><input type="checkbox" class="checkbox" style="margin-left:5px; width:10px" ng-click="selectedSeller()"
+								 name="seller" cc_id="{{x.cc_id}}" cs_customer="{{x}}"></td>
+							<td style="vertical-align: middle !important; min-width: 10px;">{{pager1.rows * (pager1.page - 1)+ $index+1}}</td>
+							<td class="colorCenter">{{x.cc_code}}</td>
+							<td class="colorCenter">{{x.cc_name}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<tm-pagination conf="pager1" search-param="searchParam1"></tm-pagination>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="addExistShop();">添加</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog()">关闭</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+<!-- 关联设备弹框 -->
+<div class="dialog" ng-show="eqpPop" style="z-index:88">
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:684px; margin-left: -330px; top: 50%;margin-top: -276px;" ng-show="eqpPop">
+		<div class="dg-xg-js" style="width:684px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeEqpDialog()"></div>
+		</div>
+
+		<form class="form-horizontal">
+			<div class="dg-content" style=" margin:5px auto;height: 450px;overflow-y: scroll;">
+				<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-left-color: transparent;border-right-color: transparent;">
+					<thead>
+						<tr>
+							<div class="xt_sySearch" style="margin-top: 10px;margin-bottom: 10px;">
+								<input class="xt_searchInput" ng-model="searchKeyEqp" type='text' placeholder="请输入设备序列号" autocomplete="off" ng-enter="doSearchEqp()">
+								<i class="btn btn-success" ng-click="doSearchEqp()" style="position: relative;top: -1px;padding: 5px 12px 6px;margin-left: 10px;">查找</i>
+							</div>
+						</tr>
+						<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh" style="top:-10px;">
+							<th class="colorCenter noSortCss" style="width:10px">
+								<input id="selectedAllEqp" ng-click="selectedAllEqp()" ng-checked="isChecked == true" type="checkbox" class="checkbox" style="margin-left:5px">
+							</th>
+							<th class="colorCenter noSortCss">序号</th>
+							<th class="colorCenter noSortCss">设备序列号</th>
+							<th class="colorCenter noSortCss">设备类型</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in eqpList" style=" height:30px">
+							<td class="colorCenter"><input type="checkbox" class="checkbox" style="margin-left:5px; width:10px" ng-click="selectedEqp()"
+								 name="eqp" me_id="{{x.me_id}}"></td>
+							<td style="vertical-align: middle !important; min-width: 10px;">{{pager2.rows * (pager2.page - 1)+ $index+1}}</td>
+							<td class="colorCenter">{{x.me_num}}</td>
+							<td class="colorCenter">{{x.me_type_nameref}}</td>
+						</tr>
+
+					</tbody>
+
+				</table>
+				<tm-pagination conf="pager2" search-param="searchParam2"></tm-pagination>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="saveSelectedEqp()">{{btnTitle}}</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeEqpDialog()">关闭</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<!-- 商家下工作人员弹框 -->
+<div class="dialog" ng-show="workPop" style="z-index:88">
+	<div class="dialog-zdc"></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:684px; margin-left: -330px; top: 50%;margin-top: -276px;" ng-show="workPop">
+		<div class="dg-xg-js" style="width:684px;">
+			{{popName}}-{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeWorkDialog()"></div>
+		</div>
+
+		<form class="form-horizontal">
+			<div class="dg-content" style=" margin:5px auto;height: 450px;overflow-y: scroll;">
+				<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-left-color: transparent;border-right-color: transparent;">
+					<thead>
+						<tr>
+							<div class="xt_sySearch" style="margin-top: 10px;margin-bottom: 10px;">
+								<input class="xt_searchInput" ng-model="searchKeyEqp" type='text' placeholder="请输入姓名或手机号" autocomplete="off" ng-enter="doSearchEqp()">
+								<i class="btn btn-success" ng-click="doSearchEqp()" style="position: relative;top: -1px;padding: 5px 12px 6px;margin-left: 10px;">查找</i>
+							</div>
+						</tr>
+						<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh" style="top:-10px;">
+							<!-- <th class="colorCenter noSortCss" style="width:10px">
+								<input id="selectedAllEqp" ng-click="selectedAllEqp()" 
+								ng-checked="isChecked == true" type="checkbox" class="checkbox"  style="margin-left:5px">
+							</th> -->
+							<th class="colorCenter noSortCss">序号</th>
+							<th class="colorCenter noSortCss">姓名</th>
+							<th class="colorCenter noSortCss">手机号</th>
+							<th class="colorCenter noSortCss">角色类型</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="x in workList" style=" height:30px">
+							<!-- <td class="colorCenter"><input type="checkbox" class="checkbox"  style="margin-left:5px; width:10px"
+							   ng-click="selectedEqp()" 
+							   name = "eqp" me_id="{{x.me_id}}" ></td> -->
+							<td style="vertical-align: middle !important; min-width: 10px;">{{workpager.rows * (workpager.page - 1)+ $index+1}}</td>
+							<td class="colorCenter">{{x.mbw_name}}</td>
+							<td class="colorCenter">{{x.mbw_mobile}}</td>
+							<td class="colorCenter">{{x.mbw_role_nameref}}</td>
+						</tr>
+
+					</tbody>
+
+				</table>
+				<tm-pagination conf="workpager" search-param="worksearchParam"></tm-pagination>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<!-- <div class="btnStyle Btncolor1 BtnHover1" ng-click="saveSelectedEqp()">{{btnTitle}}</div> -->
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeWorkDialog()">关闭</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+
+
+<!-- 关联账户弹框 -->
+<div class="dialog" ng-show="accountPop" style="z-index:88">
+		<div class="dialog-zdc"></div>
+		<!-- 弹出添加子类 -->
+		<div class="dg-xg-zh" style="z-index:999998; width:684px; margin-left: -330px; top: 50%;margin-top: -276px;" ng-show="accountPop">
+			<div class="dg-xg-js" style="width:684px;">
+				{{dialogTitle}}
+				<div class="dg-cancle" ng-click="closeAccountDialog()"></div>
+			</div>
+	
+			<form class="form-horizontal">
+				<div class="dg-content" style=" margin:5px auto;height: 450px;overflow-y: scroll;">
+					<table class="table table3 table-striped table-hover table-bordered SortCss" style="border-left-color: transparent;border-right-color: transparent;">
+						<thead>
+							<tr>
+								<div class="xt_sySearch" style="margin-top: 10px;margin-bottom: 10px;">
+									<input class="xt_searchInput" ng-model="searchKeyAccount" type='text' placeholder="请输入账号" autocomplete="off" ng-enter="doSearchAccount()">
+									<i class="btn btn-success" ng-click="doSearchAccount()" style="position: relative;top: -1px;padding: 5px 12px 6px;margin-left: 10px;">查找</i>
+								</div>
+							</tr>
+							<tr class="bgColor-tableTr tableMiddle zk_stockTitleTh" style="top:-10px;">
+								<!-- <th class="colorCenter noSortCss" style="width:10px">
+									<input id="selectedAllEqp" ng-click="selectedAllEqp()" ng-checked="isChecked == true" type="checkbox" class="checkbox" style="margin-left:5px">
+								</th> -->
+								<th class="colorCenter noSortCss">序号</th>
+								<th ng-class="sortFun('wp_name',true);" ng-click="clickSortFun('wp_name');">账号名称</th>
+								<th ng-class="sortFun('wp_mchid',true);" ng-click="clickSortFun('wp_mchid');">微信商户号</th>
+								<th class="colorCenter noSortCss">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in accountList" style=" height:30px">
+								<!-- <td class="colorCenter"><input type="redio" class="checkbox" style="margin-left:5px; width:10px" ng-click="selectedAccount()"
+									 name="account" wp_id="{{x.wp_id}}"></td> -->
+								<td style="vertical-align: middle !important; min-width: 10px;">{{pager2.rows * (pager2.page - 1)+ $index+1}}</td>
+								<td class="colorLeft">{{x.wp_name}}</td>
+								<td class="colorLeft">{{x.wp_mchid}}</td>
+								<td class="colorCenter"><div class="btnStyle Btncolor1 BtnHover1" ng-click="saveSelectedAccount(x.wp_id)">{{btnTitle}}</div></td>
+							</tr>
+	
+						</tbody>
+	
+					</table>
+					<tm-pagination conf="pager2" search-param="searchParam2"></tm-pagination>
+				</div>
+				<div class="dg-bottom-color">
+					<div class="dg-submint">
+						<!-- <div class="btnStyle Btncolor1 BtnHover1" ng-click="saveSelectedAccount()">{{btnTitle}}</div> -->
+						<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeAccountDialog()">关闭</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>

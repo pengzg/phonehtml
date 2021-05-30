@@ -1,0 +1,135 @@
+<div class="contentHtml-new" style=" z-index: 10001; background-color: #fff;left:0;">
+	<div class="search-filter-box">
+       
+        <div>
+            <label>上架状态<span>:</span></label>
+            <select ng-model="searchParam.pm_state">
+				<option ng-repeat="x in stateList" value="{{x.id}}">{{x.name}}</option>
+				
+			</select>
+			<label>类型<span>:</span></label>
+            <select ng-model="searchParam.pm_typeid">
+				<option ng-repeat="x in typeList" value="{{x.pt_id}}">{{x.pt_name}}</option>
+				
+			</select>
+			<label>关键字<span>:</span></label>
+			<input type="text" ng-model="searchParam.searchKey" placeholder="商品名或商品编码">
+		</div>
+		
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="searchFun();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();searchFun();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+        </div>
+    </div>
+	<div class="container-fluid" style="padding-top: 10px; box-sizing: border-box;"></div>
+		<div class="row">
+        	<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0; padding: 0; margin: 0;">
+					<li class="active f14">
+						<a class="active" href="">
+ 							商品
+							<span class="badge">{{pager.total}}</span>
+						</a>
+					</li>
+					<li style="position: absolute;top: 0;right: 15px;" ng-if="memberType=='7'">
+						<span class="page_actions" style="padding-left: 0; margin-left: 0;">
+							<a class="btn btn-success" ng-click="addProduct();"><i class="icon icon-plus"></i> 新建商品</a>
+						</span>
+					</li>
+				</ul>
+				<div class="panel panel-default" style="border: 0; border-radius: 0;">
+    				<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+      					<i class="icon icon-list"></i> 共{{pager.total}}条记录
+    				</div>
+					<!--<div class="panel-body" style="border: 1px solid #ddd;">
+						<div class="table-empty text-center">
+							<i class="icon icon-search fa-3x"></i>
+							<h4>查找不到相关记录</h4>
+						</div>
+					</div>-->
+					<table class="table table3 table-bordered table-hover">
+						<thead>
+							<tr>
+								<th class="text-left">图片</th>
+								<th class="text-left">名称</th>
+								<th class="text-left">编码</th>
+								<th class="text-left">类型</th>
+								<th class="text-left">分类</th>
+								<th class="text-left">是否内部</th>
+								<th class="text-left">是否上架</th>
+								<th class="text-left">关联产品</th>
+								<th class="text-left">分润类型</th>
+								<th class="text-left">成本</th>
+								<th class="text-left">排序</th>
+								<th class="text-left">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							 <tr ng-repeat="x in productList">
+								<td class="text-left">
+									<img style="height:30px;width:30px;" 
+										src="{{x.pm_picture_show?x.pm_picture_show:'img/prizedef.jpg'}}" 
+										img-err="img/prizedef.jpg"/>
+								</td>
+								<td class="text-left">
+									<p>
+										<a href="" class="f14">{{x.pm_title}}</a>
+									</p>
+									<!-- <p class="text-muted f14"> 金额：{{x.pm_price}} 元 </p> -->
+								</td>
+								<td class="text-left">
+									<p>
+										<a href="" class="f14">{{x.pm_code}}</a>
+									</p>
+								</td>
+								<td class="text-left f14">{{x.pm_typeid_nameref}}</td>
+								<td class="text-left red f14">{{x.pm_categoryid_nameref}} </td>
+								<td class="text-left red f14">
+									<span ng-if="x.pm_isinternal ==1">内部</span>
+									<span ng-if="x.pm_isinternal ==2">外部</span>
+								</td>
+								<td class="text-left f14">
+									<span ng-if="x.pm_state ==1">上架</span>
+									<span ng-if="x.pm_state ==2">下架</span>
+								</td>
+								
+								<td class="text-left f14">
+									{{x.pm_relationid_nameref}}
+								</td>
+								<td class="text-left f14">
+									{{x.pm_profit_type_nameref}}
+								</td>
+								<td class="text-left f14">
+									{{x.pm_price}}
+								</td>
+								<td class="text-left f14">
+									{{x.pm_sort}}
+								</td>
+								<td class="text-left f14">
+									<a ng-click="goStockList(x);" class="blue" style="display: inline-block;">库存分布</a>
+										- 
+									<a ng-click="goDetail(x);" class="blue" style="display: inline-block;">查看</a>
+									 - 
+									 <a ng-click="goEdit(x);" ng-if="memberType=='7'" class="blue" style="display: inline-block;">修改</a>
+									 <span ng-show="x.pm_state==2">-</span>
+									 <a ng-show="x.pm_state==2" ng-click="changeState(x,1);" class="blue" style="display: inline-block;">上架</a>
+									<span ng-show="x.pm_state==1">-</span>
+									 <a ng-show="x.pm_state==1" ng-click="changeState(x,2);" class="blue" style="display: inline-block;">下架</a>
+									<span ng-show="x.pm_isgroup=='Y'&&x.pm_state ==1">-</span>
+									<a href="" ng-show="x.pm_isgroup=='Y'&&x.pm_state ==1" class="blue" style="display: inline-block;" ng-click="insertGroupAuto(x);">自动开团</a>
+									<span ng-show="x.pm_state!=1">-</span>
+									<a href="" ng-show="x.pm_state!=1&&x.pm_typeid==1010" class="red" style="display: inline-block;" ng-click="getTicketRecord(x)">删除</a>
+									<a href="" ng-show="x.pm_state!=1&&x.pm_typeid==1011" class="red" style="display: inline-block;" ng-click="deleteProduct(x)">删除</a>
+								</td>	
+							</tr>
+						
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+				</div>
+	        </div>
+	    </div>
+	</div>
+</div>

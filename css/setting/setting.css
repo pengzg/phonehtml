@@ -1,0 +1,78 @@
+.setting_main {
+    position: absolute;
+    width: 100%;
+    overflow: auto;
+    left: 0;
+    top: 55px;
+    right: 0;
+    bottom: 0;
+/*    padding: 0 15px;*/
+    box-sizing: border-box;
+}
+
+.setting_btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.setting_label {
+    padding-top: 7px;
+    padding-left: 30px;
+    margin-bottom: 0;
+    text-align: left;
+    width: 70px;
+    font-size: 14px;
+}
+
+.setting_nav {
+    overflow: hidden;
+    padding: 5px 0 5px 10px;
+    margin-left: 0;
+}
+
+.setting_nav>ul>li {
+    float: left;
+    margin-left: 5px;
+}
+
+.setting_nav>ul>li>a {
+    float: left;
+    font-size: 14px;
+    color: #28A9E3;
+}
+
+.setting_panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #dddddd;
+    font-size: 14px;
+}
+.setting_panel p,span{
+    font-size: 14px;
+}
+
+.setting_panel input[type="text"],input[type="tel"],input[type="email"],input[type="password"],input[type="file"]{
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.setting_modal{
+	padding-top: 200px;
+}

@@ -1,0 +1,51 @@
+<common-toolbar>
+    <common-date-range config="{{config}}" on-pick="datePick(start,end)"></common-date-range>
+    <input class="su-input" type="text" placeholder="请输入微信昵称 或 用户ID">
+    <select class="su-select" ng-model="selectVal" ng-options="y.id as y.name for y in selectList"> </select>
+    <div class="btn btn-success su-btn">查询</div>
+    <div class="btn btn-default su-btn">导出</div>
+</common-toolbar>
+    
+<div class="panel-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel panel-default" style="border: 0; border-radius: 0;">
+                <div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+                    <i class="icon icon-list"></i> 共{{pager.total}}条记录
+                </div>
+                
+                <table class="table table3 table-bordered table-hover user_table">
+                    <thead>
+                        <tr>
+                            <th>用户ID</th>
+                            <th>头像</th>
+                            <th>用户名</th>
+                            <th>提现金额</th>
+                            <th>提现流水号</th>
+                            <th>提现时间</th>
+                            <th>手机号</th>
+                            <th>IP</th>
+                            <th>地址</th>
+                            <th>派发状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="x in [1,2,3,4,5,6]">
+                            <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
+                            <td class="text-center f14" ><img src="img/login/2016-11-18-12.png"  style="width:30px;height:30px;border-radius:50%;"></td>
+                            <td class="text-center f14">王小明</td>
+                            <td class="text-center f14">100.00</td>
+                            <td class="text-center f14">1801181403589726</td>
+                            <td class="text-center f14">2018-01-18 11:03:26</td>
+                            <td class="text-center f14">*******5230</td>
+                            <td class="text-center f14">*.*.45.126</td>
+                            <td class="text-center f14">--</td>
+                            <td class="text-center f14">派发成功</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="contentHtml-new" style=" z-index: 10001; background-color: #fff;left:0;">
+	
+	<div class="search-filter-box">
+       
+        <div>
+            <label>仓库<span>:</span></label>
+            <select ng-model="searchParam.pss_storeid">
+				<option value="{{x.bs_id}}" ng-repeat="x in storeList">{{x.bs_name}}</option>
+				
+			</select>
+           
+			<label>关键字<span>:</span></label>
+			<input type="text" ng-model="searchParam.searchKey" placeholder="商品名">
+		</div>
+		
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="searchFun();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();searchFun();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+        </div>
+    </div>
+
+	<div class="container-fluid" style="margin-top: 10px; box-sizing: border-box;">
+		
+		<div class="row">
+        	<div class="col-sm-12">
+				<ul class="nav nav-tabs" style="border: 0; padding: 0; margin: 0;">
+					<li class="active f14">
+						<a class="active" href="">
+ 							商品
+							<span class="badge">{{pager.total}}</span>
+						</a>
+					</li>
+					
+				</ul>
+				<div class="panel panel-default" style="border: 0; border-radius: 0;">
+    				<div class="panel-heading f14" style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+      					<i class="icon icon-list"></i> 共{{pager.total}}条记录
+    				</div>
+					<!--<div class="panel-body" style="border: 1px solid #ddd;">
+						<div class="table-empty text-center">
+							<i class="icon icon-search fa-3x"></i>
+							<h4>查找不到相关记录</h4>
+						</div>
+					</div>-->
+					<table class="table table3 table-bordered table-hover">
+						<thead>
+							<tr>
+								<th class="text-left">图片</th>
+								<th class="text-left">名称</th>
+								<th class="text-left">编码</th>
+								<th class="text-left">仓库</th>
+								<th class="text-left">仓库库存</th>
+								<th class="text-left">总库存</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							
+							 <tr ng-repeat="x in productList">
+								<td class="text-left">
+									<img style="height:30px;width:30px;" 
+										src="{{x.pm_picture_show?x.pm_picture_show:'img/prizedef.jpg'}}" 
+										img-err="img/prizedef.jpg"/>
+								</td>
+								<td class="text-left">
+									<p>
+										<a href="" class="f14">{{x.pss_productid_nameref}}</a>
+									</p>
+								</td>
+								<td class="text-left">
+									<p>
+										<a href="" class="f14">{{x.pm_code}}</a>
+									</p>
+								</td>
+								<td class="text-left f14">{{x.pss_storeid_nameref}}</td>
+								<td class="text-left red f14">{{x.pss_stocknum}} </td>
+								<td class="text-left red f14">{{x.ps_stock_num}} </td>
+
+								
+							</tr>
+						
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param ="searchParam"></tm-pagination>
+				</div>
+	        </div>
+	    </div>
+	</div>
+</div>

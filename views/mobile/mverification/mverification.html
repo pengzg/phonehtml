@@ -1,0 +1,62 @@
+<ion-content>
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="onRefresh()"></ion-refresher>
+    <div class="mverification-main" 
+    	 ng-class="{true:'blue-style',false:'yellow-style'}[blueStyle]" 
+    	 ng-init="blueStyle=true">
+        <div class="top">
+            <div class="title-name">恭喜获得{{data.mp_level}}</div>
+            <div class="title-name" ng-bind="data.mw_productname"></div>
+            <div class="title-close icon ion-ios-close-empty" ng-show="false"></div>
+            <div class="title-rule" ng-click="showRule()"><i class="icon ion-ios-help-outline"></i></div>
+        </div>
+        <div class="center" ng-show="data.mw_state == 1">
+            <div id="djQrcode" class="dj-qrcode" ng-show="hasShared"></div>
+            <div class="dj-check" ng-show="!hasShared">请先点击右上角分享后兑奖</div>
+            <div class="dj-num">兑奖码：{{data.mw_prizecode}}</div>
+           <!--  <div class="dj-tip">(长按可复制兑奖码)</div> -->
+            <div class="dj-note">凭券联系现场工作人员兑奖</div>
+        </div>
+        <div class="bottom">
+            <div class="dj-detail" ng-show="false">	
+        		<span>兑奖券详情</span>
+        		<i class="icon ion-ios-arrow-right"></i>
+        	</div>
+        	<div class="dj-detail" ng-show="data.mw_state == 1" ng-click="showPass()" ng-if="data.mw_state == 1">	
+        		<span>我要兑奖</span>
+        	</div>
+            <div class="dj-content">
+            	 <div class="dj-item">
+                    <div class="dj-left">领取状态</div>
+                    <div class="dj-right">{{data.mw_state_nameref}}</div>
+                </div>
+                <div class="dj-item">
+                    <div class="dj-left">兑奖时间</div>
+                    <div class="dj-right">{{data.mp_start_time}} 至  {{data.mp_end_time}}</div>
+                </div>
+                <div class="dj-item" ng-show="data.mp_change_address">
+                    <div class="dj-left">兑奖地址</div>
+                    <div class="dj-right" ng-bind="data.mp_change_address"></div>
+                </div>
+                <div class="dj-item" ng-show="data.mp_service_tel">
+                    <div class="dj-left">兑奖电话</div>
+                    <div class="dj-right" ng-bind="data.mp_service_tel"></div>
+                </div>
+                <div class="dj-item" ng-show="data.mw_shopid_nameref">
+                    <div class="dj-left">中奖店铺</div>
+                    <div class="dj-right" ng-bind="data.mw_shopid_nameref"></div>
+                </div>
+                <div class="dj-item" ng-show="data.mw_state == 2" >
+                    <div class="dj-left">领取时间</div>
+                    <div class="dj-right" ng-bind="data.mw_granttime"></div>
+                </div>
+                <div class="dj-item" >
+                    <div class="dj-left">兑奖须知</div>
+                    <div class="dj-right" ng-show="data.mp_change_notice" 
+                    ng-bind="data.mp_change_notice"></div>
+                   	<div class="dj-right" ng-show="!data.mp_change_notice" 
+                    	> 请及时兑奖</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

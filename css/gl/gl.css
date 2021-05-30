@@ -1,0 +1,70 @@
+/* glasset */
+.content-box-1{height:246px;}
+.content-box-1>div{display: inline-block;vertical-align: top;width:47%;height:200px;font-size: 14px;}
+/* 余额 */
+.content-box-1>div>.ye-box{height:50px;line-height: 50px;}
+.content-box-1>div>.ye-box>span:nth-of-type(3){margin-left:30px;}
+.content-box-1>div>.ye-box>span:nth-of-type(3)>span{color: #38f}
+.content-box-1>div>.ye-box>span:nth-of-type(4){color: #38f;margin-left:30px;}
+/* 充值 */
+.content-box-1>div>.cz-box{height:70px;width:100%;}
+.content-box-1>div>.cz-box>ul>li{float:left;list-style: none;font-size: 14px;height:40px;width:80px;line-height: 40px;text-align: center;border:1px solid #38f;color:#38f;margin:10px;border-radius: 3px;}
+.content-box-1>div>.cz-box>ul>li:nth-of-type(1){border: 0px;font-weight: bold;font-size: 18px;color:#000;}
+.content-box-1>div>.cz-box>ul>li.active{background:#38f;color:#fff;}
+/* 保证金 */
+.content-box-1>div>.bzj-box{background-color: #F8FDFF;height:80px;width:124px;padding:20px;border-radius: 3px;}
+.content-box-1>div>.bzj-box>div{height:40px;line-height: 40px;}
+.content-box-1>div>.bzj-box>div:nth-of-type(1)>span:nth-of-type(3){color:#38f;float:right;}
+.content-box-1>div>.bzj-box>div:nth-of-type(2){font-weight: bold;font-size: 18px;}
+/* 标题头 */
+.content-title-box{height:35px;background: #eee;font-size: 12px;line-height: 35px;}
+.content-title-box>div{display: inline-block;vertical-align: top;}
+.content-title-box>.title-box{margin-left:30px;}
+.content-title-box>.title-box>.title{height:12px;padding-left:10px;border-left:5px solid #21A8D7;font-weight: bold;}
+.content-title-box>.title-box>.time{font-size: 12px;}
+
+.content-title-box>.shop-box{float: right;margin-right:20px;position: relative;display:none;}
+.content-title-box>.shop-box>.shop-list{display:none;position: absolute;right:20px;width:70xp;top:30px;}
+.content-title-box>.shop-box>span{margin: 0px 10px;}
+.content-title-box>.shop-box>span.active{color:#21A8D7}
+/* 左右样式 */
+.content-box-2{width:100%;height: auto;}
+.content-box-2>div{display: inline-block;vertical-align: top;width:47%;}
+.content-box-2>.left-box>div{height:120px;width:100%;}
+.content-box-2>.left-box>div>div{display: inline-block;vertical-align: top;width:43%;padding:15px 15px 0px;}
+.content-box-2>.left-box>div>div>div{height:30px;line-height: 30px;}
+.content-box-2>.left-box>div>div>div:nth-of-type(1){font-weight: bold;}
+.content-box-2>.left-box>div>div>div:nth-of-type(2){font-size: 20px;font-weight: bold;}
+.content-box-2>.right-box>.chart-select-box{height:30px;padding-left:30px;margin-top:30px;}
+/* table通用样式 */
+table>thead>tr>th, table>tbody>tr>td { font-size: 14px; padding: 12px 0; text-align: center; vertical-align: middle;}
+table.changeColor>tbody>tr:hover{background-color: #eee;}
+
+/* glbill */
+/* 搜索条件 */
+.search-filter-box{width:100%;padding:30px 10px;}
+.search-filter-box>div{ height:50px;font-size: 14px;line-height: 50px; }
+.search-filter-box>div>label{font-weight: bold;width:80px;text-align: right; }
+.search-filter-box>div>label>span{margin-left:10px;}
+.search-filter-box>div>select{min-width:130px;padding:2px 6px;height:26px;}
+.search-filter-box>div>span{background:none;width: 32px;height: 40px;line-height: 39px;border-radius: 0;border: none;font-weight: bold;}
+.search-filter-box>div>input{width: 125px; padding:2px 6px;height:26px;}
+
+/* glbilldetail */
+/* 单行状态 */
+.content-box-3{background-color: #F8FDFF;height:50px;line-height: 50px;font-weight: bold;margin-left:30px;}
+
+/* 三列 */
+.content-box-4{width: 100%;padding: 50px 0px;margin-left:30px;border-bottom: 1px solid #eee;}
+.content-box-4>div{display: inline-block;vertical-align: top;width:33%;}
+.content-box-4>div:nth-of-type(2){padding-left:40px;}
+.content-box-4>div:nth-of-type(3){padding-left:40px;}
+.content-box-4>div{display: inline-block;vertical-align: top;width:30%;}
+.content-box-4>div>ul>li:nth-of-type(1){height:40px;font-weight: bold;color:#000;}
+
+/* note */
+.note-box{width:100%;margin-left:30px;}
+.note-box .note-title{height:40px;line-height: 40px;color:#000;font-weight: bold;}
+.note-box .note-content{height:80px;}
+
+

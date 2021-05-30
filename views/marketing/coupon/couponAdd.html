@@ -1,0 +1,617 @@
+<div class="contentHtml-new" style="background-color: #F5F6F8;left:0;">
+    <div class="content-add-box">
+        <div class="img-box" style="width: 0%;">
+            <img src="/img/coupon.png">
+
+        </div>
+        <div class="content-add-info">
+            <div class="content-item-box">
+                <div class="content-item-title">基本信息</div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>优惠券名称
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text" ng-model="vo.cb_title" placeholder="如国庆优惠券，最多9张">
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>优惠券编码
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text" ng-model="vo.cb_periods" maxlength="15" placeholder="优惠券编码">
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>优惠券金额
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text" ng-blur="change2num();" ng-model="vo.cb_amount" placeholder="优惠券金额">
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>使用门槛
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div ng-show="false">
+                            <input type="radio" name="min-amount" ng-model="vo.cb_min_amount_type" value="1" >无使用门槛
+                        </div>
+                        <div>
+                             <input type="radio" name="min-amount" ng-model="vo.cb_min_amount_type" value="2" ng-show="false" > 订单满<input type="text" ng-blur="change2num();" ng-model="vo.cb_min_amount">元
+                        </div>
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>发放总量
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text" ng-blur="change2num();" ng-model="vo.cb_num" placeholder="请输入数量">张
+                        </div>
+
+                    </div>
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>限定张数
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div ng-repeat="x in reveiveTypeList" ng-click="vo.cb_receive_type=x.bd_code">
+                            <input type="radio" name="receive_type" ng-model="vo.cb_receive_type" value="{{x.bd_code}}">{{x.bd_name}}
+                        </div>
+                       
+                    </div>
+                </div>
+                <div class="content-item" ng-show="vo.cb_receive_type==2">
+                    <div>
+                        <label><i class="colorRed">*</i>每位用户限定
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text" ng-blur="change2num();" ng-model="vo.cb_receive_value" placeholder="请输入数量">张
+                        </div>
+
+                    </div>
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>有效时间
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text" ng-blur="change2num();" ng-model="vo.cb_effective_time" placeholder="有效天数">天
+                        </div>
+
+                    </div>
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>类型
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div ng-repeat="x in couponTypeList" ng-click="vo.cb_coupon_type=x.bd_code">
+                            <input type="radio" name="coupon_type" ng-model="vo.cb_coupon_type" value="{{x.bd_code}}">{{x.bd_name}}
+                        </div>
+                       
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>使用场景
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div ng-repeat="x in couponSceneList" ng-click="vo.cb_scene=x.bd_code">
+                            <input type="radio" name="coupon_scene" ng-model="vo.cb_scene" value="{{x.bd_code}}">{{x.bd_name}}
+                        </div>
+                       
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>有效期
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                               
+                                <span class=" date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+                                ng-click="dateRange.chooseDate($event)" style="width: 36px;line-height: 40px;" > 日期 </span>
+                               <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;height:17px;"
+                                   onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                                   />
+                               <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="height:17px;border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                                   onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+                                   />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>状态
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div ng-repeat="x in stateList" ng-click="vo.cb_state=x.bd_code">
+                            <input type="radio" name="state" ng-model="vo.cb_state" value="{{x.bd_code}}">{{x.bd_name}}
+                        </div>
+                        
+                    </div>
+
+                </div>
+
+                <div class="content-item" ng-show="false">
+                    <div>
+                        <label><i class="colorRed">*</i>领取状态
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio" name="cb_draw_state" ng-model="vo.cb_draw_state" value="1">进行中
+                        </div>
+                        <div>
+                            <input type="radio" name="cb_draw_state" ng-model="vo.cb_draw_state" value="2">已截止
+                        </div>
+                        
+                    </div>
+
+                </div>
+                <div class="content-item" ng-show="false">
+                    <div>
+                        <label><i class="colorRed">*</i>是否与其他优惠共用
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio" name="shareoffers" ng-model="vo.cb_isshareoffers" value="1" >共用
+                        </div>
+                        <div>
+                                <input type="radio" name="shareoffers" ng-model="vo.cb_isshareoffers" value="2">不共用
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>指定使用类型
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div ng-repeat="x in categoryList" ng-click="vo.cb_category=x.bd_code">
+                            <input type="radio" name="category" ng-model="vo.cb_category" value="{{x.bd_code}}" ng-change="changeSelectedCategory();">{{x.bd_name}}
+                        </div>
+                        
+                    </div>
+
+                </div>
+                <div class="content-item" ng-if="vo.cb_category != 1">
+                    <div>
+                        <label><i class="colorRed">*</i>关联
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div style="padding-left: 20px;">
+                        
+                        <a class="btn btn-success"  ng-click="showSelectCategory()">选择</a> 
+                        <span ng-if="vo.cb_category_value_nameref">
+                            已选中：{{vo.cb_category_value_nameref}}
+                        </span>
+                        
+                        
+                    </div>
+
+                </div>
+ 
+                <div class="content-item" style="height:130px;">
+                    <!-- textarea输入框根据自己的row来控制高度 -->
+                    <div>
+                        <label><i class="colorRed">*</i>用券说明
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <textarea ng-model="vo.cb_content" name="" id="" cols="30" rows="5">优惠内容：无限制</textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>每次发放数量
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text"  ng-model="vo.cb_sendnum" placeholder="请输入数量">张
+                        </div>
+
+                    </div>
+                </div>
+
+
+                
+                <div class="content-item" ng-show="false">
+                    <div>
+                        <label><i class="colorRed">*</i>优惠内容
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio"> 减免<input type="text">元
+                        </div>
+                        <div>
+                            <input type="radio"> 打折<input type="text">折
+                        </div>
+                    </div>
+
+                </div>
+                <div class="content-item" ng-show="false">
+                    <div>
+                        <label><i class="colorRed">*</i>用券时间
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                                <input type="radio">
+                                <span class=" date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+                                ng-click="dateRange.chooseDate($event)" style="width: 36px;line-height: 40px;" > 日期 </span>
+                               <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;height:17px;"
+                                  
+                                   />
+                               <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="height:17px;border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                                   />
+                        </div>
+                        <div>
+                                <input type="radio">
+                                领券当日起<input type="text">天内可用
+                        </div>
+                        <div>
+                                <input type="radio">
+                                领券次日起<input type="text">天内可用
+                        </div>
+                        <div class="colorRed">
+                            请输入1-365的数
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="content-item" ng-show="false">
+                    <div>
+                        <label>分享设置
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="pt10">
+                            <input type="checkbox">允许把优惠券分享给朋友 
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="content-item" ng-show="false">
+                    <div>
+                        <label>优惠券名称
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="pt10">
+                            <input type="checkbox">多选1 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                            <input type="checkbox">多选2 
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="content-item" ng-show="false">
+                    <div>
+                        <label>优惠券名称
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                           <select name="" id="">
+                               <option value="1">项目1</option>
+                               <option value="1">项目2</option>
+                               <option value="1">项目3</option>
+                           </select>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="content-item" ng-show="false">
+                    <div>
+                        <label>优惠券名称
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="text">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="content-item-box" ng-show="false">
+                <div class="content-item-title">领取和使用规则</div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>领取人限制
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio">不限制，所有人可领
+                        </div>
+                        <div>
+                            <input type="radio">指定会员等级可领
+                        </div>
+                        <div>
+                            <input type="radio">指定权益卡可领
+                        </div>
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label><i class="colorRed">*</i>每人限领次数
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <input type="radio">不限次数
+                        </div>
+                        <div>
+                            <input type="radio"><input type="text">次
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label>过期提醒
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="pt10">
+                            <input type="checkbox">优惠券过期前提醒买家 
+                        </div>
+                    </div>
+
+                </div>
+                <div class="content-item">
+                    <div>
+                        <label>其他限制
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div class="pt10">
+                            <input type="checkbox">优惠券仅原价购买商品时可用
+                        </div>
+
+                    </div>
+
+                </div>
+
+                
+              
+                <div class="content-item" style="height:130px;">
+                    <!-- textarea输入框根据自己的row来控制高度 -->
+                    <div>
+                        <label><i class="colorRed">*</i>使用说明
+                            <span>:</span>
+                        </label>
+                    </div>
+                    <div>
+                        <div>
+                            <textarea name="" id="" cols="30" rows="5">优惠内容：无限制</textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div ng-if="canModify" style="height:50px;padding-top:10px;" >
+                    <a class="btn btn-success" style="margin-left:60%;" ng-click="submit();">
+                            确定</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 选择优惠券关联的商品 -->
+<div class="dialog" ng-show="dialog==4" style="z-index: 88">
+        <div class="dialog-zdc"></div>
+        <!-- 弹出添加子类 -->
+        <div class="dg-xg-zh"
+            style="z-index: 999998; width: 900px; margin-left: -450px; top: 5%; "
+            ng-show="dialog==4">
+            <div class="dg-xg-js" style="width: 900px;">
+                选择商品
+                <div class="dg-cancle" ng-click="dialog=0"></div>
+            </div>
+            <div class="search-filter-box" style="padding-top:0px;">
+                
+                 <div>
+                     <label>关键字<span>:</span></label>
+                        <input type="text" placeholder="" ng-model="searchParam2.searchKey"> 
+                        
+                        <a class="btn btn-success" style="margin-left:80px;" ng-click="searchFun2();">
+                            <i class="glyphicon glyphicon-filter"></i> 筛选</a>
+                            <a class="btn btn-default" ng-click="clearParams2();searchFun2();" style="text-shadow: none !important; color: #333 !important;"><i
+                                class="icon icon-eraser"></i> 清空</a>
+                 </div>
+         
+         
+                 
+             </div>
+            <div class="setting_panel panel-default">
+                <div class="panel panel-default" style="border: 0; border-radius: 0;height:370px;overflow-y:scroll;">
+                       
+                    <table class="changeColor" style="width:100%;">
+                        <thead style="font-weight: bold;background:#ddd;">
+                            <th>序号</th>
+                            <th>编码</th>
+                            <th>商品名称</th>
+                            <th>商品类别</th>
+                            <th>商品分类</th>
+                        </thead>
+                        <tbody>
+                            <tr  ng-class="{'tr-selected':selectGoodsid==x.pm_id}"  ng-repeat="x in goodsList track by $index" style="border-bottom: 1px solid #eee;" ng-click="selectGoods(x);">
+                                <td>{{goodsPager.rows * (goodsPager.page - 1)+ $index+1}}</td>
+                                <td>{{x.pm_code}}</td>
+                                <td>{{x.pm_title}}</td>
+                                <td>{{x.pm_typeid_nameref}}</td>
+                                <td>{{x.pm_categoryid_nameref}}</td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>       
+                    <tm-pagination conf="goodsPager" search-param="searchParam2"></tm-pagination>  
+                  </div>
+            </div>
+            <div>
+                <div class="btn btn-default"
+                    style="margin-left: 594px; margin-bottom: 10px"
+                    ng-click="dialog=0">取消</div>
+                    <div class="btn btn-success"
+                    style="margin-left: 69px; margin-bottom: 10px"
+                    ng-click="subSelectGoods();">确定</div>
+                   
+                   
+            </div>
+    
+        </div>
+    </div>
+
+
+    <!-- 选择优惠券关联的分类 -->
+<div class="dialog" ng-show="dialog==3" style="z-index: 88">
+        <div class="dialog-zdc"></div>
+        <!-- 弹出添加子类 -->
+        <div class="dg-xg-zh"
+            style="z-index: 999998; width: 900px; margin-left: -450px; top: 5%; "
+            ng-show="dialog==3">
+            <div class="dg-xg-js" style="width: 900px;">
+                选择分类
+                <div class="dg-cancle" ng-click="dialog=0"></div>
+            </div>
+            
+            <div class="setting_panel panel-default" style="height:300px;overflow: scroll;">
+                <ul tree id="tree" ng-model="selectNode" tree-click="select();" 
+                class="ztree" data-options='{"url":"/admin/product/productCategoryControl/queryProductCategoryTree.action"}' 
+                style="width:180px; overflow:auto;"></ul>
+            </div>
+            <div>
+                <div class="btn btn-default"
+                    style="margin-left: 594px; margin-bottom: 10px"
+                    ng-click="dialog=0">取消</div>
+                    <div class="btn btn-success"
+                    style="margin-left: 69px; margin-bottom: 10px"
+                    ng-click="subSelectGoods();">确定</div>
+                    
+                    
+            </div>
+    
+        </div>
+    </div>
+    <style>
+
+.tr-selected {
+    background:#abcdef;
+}
+/* .tr-selected::after{
+    content:'已选';
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    margin-top: -20rpx;
+    margin-left: -20rpx;
+    width: 80rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    color: #abcdef;
+    border: 1px dashed #abcdef;
+    border-radius: 5rpx;
+    transform:rotate(-45deg);
+    text-align: center;
+} */
+
+    
+    </style>

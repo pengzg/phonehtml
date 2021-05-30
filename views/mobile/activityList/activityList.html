@@ -1,0 +1,15 @@
+<ion-header-bar class="bar-balanced">
+    <h1 class="title">活动预览</h1>
+</ion-header-bar>
+<ion-content class="avtivity-bg">
+    <div class="list">
+        <a ng-repeat="item in items" href="#/{{item.id}}" class="item item-thumbnail-left item-icon-right item-activity">
+
+          <img ng-src="{{ item.image }}" class="acti-img">
+          <h2>&nbsp;</h2>
+          <h2>{{ item.name }}</h2>
+          <h3 class="color-gray">{{ item.note }}</h3>
+          <i class="icon ion-ios-arrow-right color-light-gray"></i>
+        </a>
+    </div>
+</ion-content>

@@ -1,0 +1,236 @@
+<div id="cost_evaluation" class="cost-container" style="display: block;">
+    <div class="cost-title">
+        <span class="cost-title-msg">红包成本概览</span>
+    </div>
+    <div class="cost-content" style="display:none;">
+        <div class="out-money fn-clear">
+            <p class="out-money-msg">累计派发奖励金额</p>
+            <div class="out-money-num">
+                <p class="money-num j-all-out1"></p>
+                <p class="money-trend hide">
+                    <span>日</span>
+                    <i class="up-icon"></i>
+                    <span class="j-day-num1"></span>
+                </p>
+            </div>
+        </div>
+        <div class="out-money fn-clear">
+            <p class="out-money-msg">累计粉丝提现金额</p>
+            <div class="out-money-num">
+                <p class="money-num j-all-out2"></p>
+                <p class="money-trend hide">日
+                    <i class="up-icon"></i>
+                    <span class="j-day-num2"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="cost-content">
+        <div class="cost-item">
+            <div class="cost-wrap first">
+                <p class="cost-item-title">当前单个粉丝成本</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="per_fans_cost">1.4</span>
+                    <span class="text-unite">元</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom">
+                <p class="out-money-tips ellipsis">预计活动最大涨粉
+                    <i id="max_fans_num" class="people-num">7</i>人</p>
+            </div>
+        </div>
+        <div class="cost-item j-cost-item">
+            <div class="cost-wrap">
+                <p class="cost-item-title">活动充值金额</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="all_active_num">10</span>
+                    <span class="text-unite">元</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom">
+                <p class="out-money-tips ellipsis">目前已涨粉
+                    <i id="has_up" class="people-num">5</i>人</p>
+            </div>
+        </div>
+        <div class="cost-item">
+            <div class="cost-wrap">
+                <p class="cost-item-title">活动剩余金额</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="remain_active_num">2</span>
+                    <span class="text-unite">元</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom">
+                <p class="out-money-tips ellipsis">预计还可涨粉
+                    <i id="may_up" class="people-num">1</i>人</p>
+            </div>
+        </div>
+        <div class="cost-item">
+            <div class="cost-wrap">
+                <p class="cost-item-title">未满提现门槛冻结总额</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="freeze_num">0</span>
+                    <span class="text-unite">元</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom cost-wrap-bottom-multi">
+                <p class="out-money-tips ellipsis">
+                    <i id="not_match" class="people-num">1</i>人未到达提现门槛</p>
+                <p>
+                    <span class="red-star">*</span>活动结束后该金额退还您的红包账户</p>
+            </div>
+        </div>
+        <div class="cost-item">
+            <div class="cost-wrap">
+                <p class="cost-item-title">达到提现门槛未提现总额</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="not_all_widthdraw">1</span>
+                    <span class="text-unite">元</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom cost-wrap-bottom-multi">
+                <p class="out-money-tips ellipsis">
+                    <i id="match_charge" class="people-num">1</i>人已达到提现门槛</p>
+                <p>
+                    <span class="red-star">*</span>活动期间或结束后可手动派发&nbsp;&nbsp;
+                    <a href="javascript:void(0);" style="white-space: nowrap;color:#03b3ff;"
+                        id="link_list_distribute">查看派发列表&gt;</a>
+                </p>
+            </div>
+        </div>
+        <div class="cost-item j-cost-item">
+            <div class="cost-wrap">
+                <p class="cost-item-title">粉丝提现金额</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="payout_num">7</span>
+                    <span class="text-unite">元</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom">
+                <p class="out-money-tips ellipsis">已有
+                    <i id="had_get" class="people-num">4</i>人提现</p>
+            </div>
+        </div>
+    </div>
+    <p class="text-tips-need" style="font-size: 12px;">注：活动充值金额=活动剩余金额+未满提现门槛冻结总额+达到提现门槛未提现总额+粉丝提现金额</p>
+
+    <!-- 优惠券概览 -->
+    <div class="cost-title j-view-wrap-itcket view-hide" style="margin-top: 20px;">
+        <span class="cost-title-msg">优惠券奖励概览</span>
+    </div>
+    <div class="cost-content j-view-wrap-itcket view-hide">
+        <div class="cost-item">
+            <div class="cost-wrap first">
+                <p class="cost-item-title">当前单个粉丝成本（元）</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="ticket_fans_cost">0</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom">
+                <p class="out-money-tips ellipsis">平均每个粉丝获得的优惠券金额</p>
+            </div>
+        </div>
+        <div class="cost-item">
+            <div class="cost-wrap">
+                <p class="cost-item-title">累计派发优惠券金额</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="ticket_num_all">0</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom cost-wrap-bottom-multi">
+                <p class="out-money-tips ellipsis">目前已涨粉
+                    <i id="ticket_fans_all" class="people-num">0</i>人</p>
+                <p>已派出
+                    <i id="ticket_send_num" class="people-num">0</i>张优惠券</p>
+            </div>
+        </div>
+        <div class="cost-item">
+            <div class="cost-wrap">
+                <p class="cost-item-title">冻结优惠券金额</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="ticket_frozen_num">0</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom cost-wrap-bottom-multi">
+                <p class="out-money-tips ellipsis">
+                    <i id="ticket_unreach_num" class="people-num">0</i>人未达到优惠券派发门槛</p>
+                <p>
+                    <span class="red-star">*</span>活动结束后自动清空</p>
+            </div>
+        </div>
+        <div class="cost-item">
+            <div class="cost-wrap">
+                <p class="cost-item-title">未领取优惠券金额</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="ticket_notget_num">0</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom">
+                <p class="out-money-tips ellipsis">
+                    <i id="ticket_notget_num_fans" class="people-num">0</i>人获取未领取</p>
+            </div>
+        </div>
+        <div class="cost-item">
+            <div class="cost-wrap">
+                <p class="cost-item-title">已领取优惠券金额</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="ticket_get_num">0</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom">
+                <p class="out-money-tips ellipsis">已有
+                    <i id="ticket_get_num_fans" class="people-num"></i>人领取</p>
+            </div>
+        </div>
+    </div>
+    <p class="text-tips-need j-view-wrap-itcket view-hide" style="font-size: 12px;">注：活动累计派发优惠券金额=冻结优惠券金额+已领取优惠券金额+未领取优惠券金额</p>
+
+
+    <!-- 积分概览 -->
+    <div class="cost-title j-view-wrap-point view-hide" style="margin-top: 20px;">
+        <span class="cost-title-msg">积分奖励概览</span>
+    </div>
+    <div class="cost-content j-view-wrap-point view-hide">
+        <div class="cost-item">
+            <div class="cost-wrap first">
+                <p class="cost-item-title">单个粉丝成本（积分）</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="point_fans_cost">0</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom">
+                <p class="out-money-tips ellipsis">平均每个粉丝获得积分数量</p>
+            </div>
+        </div>
+        <div class="cost-item">
+            <div class="cost-wrap">
+                <p class="cost-item-title">累计派发积分</p>
+                <p class="cost-item-num ellipsis">
+                    <span id="point_num_all">0</span>
+                </p>
+            </div>
+            <div class="cost-wrap-bottom cost-wrap-bottom-multi">
+                <p class="out-money-tips ellipsis">目前已涨粉
+                    <i id="point_fans_all" class="people-num">0</i>人</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 支出图表 -->
+    <div class="cost-title" style="margin-top: 20px;">
+        <span class="cost-title-msg">活动运行趋势图</span>
+    </div>
+    <div class="charts-cost  hide" id="cost_charts" _echarts_instance_="ec_1516780615390" style="-webkit-tap-highlight-color: transparent; user-select: none; position: relative; background-color: transparent;">
+        <div style="position: relative; overflow: hidden; width: 100px; height: 360px;">
+            <canvas width="100" height="360" data-zr-dom-id="zr_0" style="position: absolute; left: 0px; top: 0px; width: 100px; height: 360px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+        </div>
+        <div></div>
+    </div>
+    <!-- 活动趋势图表 -->
+    <div class="cvs-wrap">
+        <div class="charts-cost" id="activity_charts" style="height: 500px;">
+        </div>
+        <p class="cvs-money-tips">
+            <span class="red-star">*</span>冻结金额=未满提现门槛冻结总额+达到提现门槛未提现总额</p>
+    </div>
+</div>

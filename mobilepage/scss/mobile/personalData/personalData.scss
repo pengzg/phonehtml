@@ -1,0 +1,42 @@
+.persion-data-main {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	background: url(../../../img/mobile/personCenter/person-data-bg.jpg);
+	background-size: 100% 100%;
+	.p-head {
+		margin: 2rem 0 2rem 0;
+		text-align: center;
+		img{
+			width: 5rem;
+			height: 5rem;
+			box-shadow: 0 0 0 10px rgba(142, 198, 216,.3),
+    					0 0 0 15px rgba(255,255,255,.3);
+			border-radius: 2.5rem;
+		}
+	}
+	.p-list {
+		.p-item {
+			display: flex;
+			margin: 0 auto;
+			padding: 0.5rem 2rem;
+			width: 84%;
+			border-bottom: 1px solid #81bed0;
+			&:first-of-type{
+				border-top: 1px solid #81bed0;
+			}
+			.p-item-left {
+				flex: 2;
+				color: rgba(53,168,170,.8);
+				font-weight: 600;
+			}
+			.p-item-right {
+				flex: 8;
+				color: #666;
+			}
+		}
+	}
+}

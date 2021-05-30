@@ -1,0 +1,160 @@
+<div class="setting_panel panel-default">
+	<div class="panel-heading text-left">
+		<div class="setting_nav">
+			<ul>
+				<li><a href="">柜子申请列表</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="search-filter-box">
+        <div>
+           
+			<label>关键字<span>:</span></label>
+            <input type="text" placeholder="会员信息或小区信息" ng-model="searchParam.searchKey">
+        </div>
+       
+		<div>
+			<label>申请时间<span>:</span></label>
+            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
+				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
+				<input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
+					onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+					/>
+				<input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
+					onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
+					/>
+        </div>
+        
+        <div>
+            <a class="btn btn-success" style="margin-left:80px;"  ng-click="searchFun();" ><i class="glyphicon glyphicon-filter"></i> 筛选</a>
+			<a class="btn btn-default" ng-click="clearParams();searchFun();" style="text-shadow: none !important; color: #333 !important;"><i class="icon icon-eraser"></i> 清空</a>
+        </div>
+    </div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default"
+					style="border: 0; border-radius: 0;">
+					<div class="panel-heading f14"
+						style="background-color: #fff; border: 1px solid #ddd; border-bottom: 0; border-radius: 0;">
+						<i class="icon icon-list"></i> 共{{pager.total}}条记录
+					</div>
+
+					<table class="table table3 table-bordered table-hover user_table">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>会员名</th>
+								<th>手机号</th>
+								<th>申请小区</th>
+								<th>小区地址</th>
+								<th>申请时间</th>
+								
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="x in dataList">
+								<td class="text-center f14">{{pager.rows * (pager.page -
+									1)+ $index+1}}</td>
+								<td class="text-center f14">{{x.bsa_username}}
+								</td>
+								<td class="text-center f14">{{x.bsa_mobile}}</td>
+								
+								<td class="text-center f14">{{x.bsa_village}}
+								
+								</td>
+								<td class="text-center f14">
+									{{x.bsa_address}}
+								</td>
+								<td class="text-center f14">
+									{{x.bsa_addtime}}
+								</td>
+								
+								<td class="text-center f14"><a class="common_btns common_active" ng-if="x.bol_state==2 && x.bs_box_type != 3" ng-click="openBox(x)" title="远程开箱"></a></td>
+							</tr>
+						</tbody>
+					</table>
+					<tm-pagination conf="pager" search-param="searchParam"></tm-pagination>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- 添加和修改弹窗 -->
+
+<div class="dialog" ng-show="dialogShow" style="z-index:88">
+	<div class="dialog-zdc" ></div>
+	<!-- 弹出添加子类 -->
+	<div class="dg-xg-zh" style="z-index:999998; width:660px; margin-left: -330px; top: 50%; margin-top: -164px;"  ng-show="dialogShow">
+		<div class="dg-xg-js" style="width:660px;">
+			{{dialogTitle}}
+			<div class="dg-cancle" ng-click="closeDialog()"></div>
+		</div>
+	    
+			<div class="dg-content" style="height: 240px; margin-bottom:0px;margin-top:0px;margin-left:0px;">
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">格子编码</span>
+						</div>
+						<div class="zk_controlInput" style=" width: 190px;">
+							{{vo.bb_boxcode}}
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">状态</span>
+						</div>
+						<div class="zk_controlRadio" style=" width: 140px;">
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_stats" ng-model="vo.bb_state" value="1" type="radio" ng-checked="vo.bs_stats==1">
+								<div class="xt_inputBackimg"></div>满箱
+							</lable>
+							<lable class="xt_inputRadio m10right" style="margin-bottom:8px">
+								<input class="xt_radio" name="bs_stats" ng-model="vo.bb_state" value="0" type="radio" ng-checked="vo.bs_stats==0">
+								<div class="xt_inputBackimg" value="11"></div>空箱
+							</lable>
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 600px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">商品</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 450px;">
+							{{vo.bb_productid_nameref}}
+						</div>
+					</div>
+				</div>
+				<div class="zk_baseInfoBox mtop16" >
+					<div class="zk_controlGroup" style=" width: 300px;" >
+						<div class="zk_controlLabel">
+							<span class="f14" style="line-height: 32px;">商品数量</span>
+							<i class="f14">*</i>
+						</div>
+						<div class="zk_controlInput" style=" width: 150px;">
+							<input style="width: 150px;" type="number" name="bb_num" 
+										ng-model="vo.bb_num" maxlength="200">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="dg-bottom-color">
+				<div class="dg-submint">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="addcomplete(vo.bs_id,vo.bs_code);">保存</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeDialog();">取消</div>
+				</div>
+			</div>
+	</div>
+</div>

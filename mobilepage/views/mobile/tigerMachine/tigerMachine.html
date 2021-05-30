@@ -1,0 +1,25 @@
+<div class="tiger-main">
+	<div class="tiger-rule">
+		<img src="../../img/mobile/tigerMachine/rule.png">
+	</div>
+	<div class="tiger-center">
+		<div class="center-top">
+			<div class="pool-content"></div>
+		</div>
+		<div class="center-bottom">
+			<div class="my-prize" 
+				 ng-class="{'active':checked1}" 
+				 on-touch="checked1=true"
+				 on-release="checked1=false">
+				 	<img src="../../img/mobile/tigerMachine/btn_prize.png" style="display: none;">
+				 	<img src="../../img/mobile/tigerMachine/btn_prize_active.png" style="display: none;">
+				 </div>
+			<div class="start-game" on-touch="checked2=true" on-release="checked2=false">
+				<img src="../../img/mobile/tigerMachine/btn_go.png" ng-show="!checked2">
+				<img src="../../img/mobile/tigerMachine/btn_go_active.png"  ng-show="checked2">
+			</div>
+			<div class="game-get"></div>
+		</div>
+	</div>
+	<div class="tiger-bottom"></div>
+</div>

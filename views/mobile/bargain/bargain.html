@@ -1,0 +1,45 @@
+<div class="bargain-main">
+    <ion-content>
+        <div class="bargain-slide">
+            <ion-slide-box does-continue="true" auto-play="true" slide-interval="3000">
+                <ion-slide>
+                    <div class="goods-img">
+                        <img src="../../img/mobile/bargain/goods1.png" alt="">
+                    </div>
+                </ion-slide>
+                <ion-slide>
+                    <div class="goods-img">
+                        <img src="../../img/mobile/bargain/goods2.png" alt="">
+                    </div>
+                </ion-slide>
+                <ion-slide on-slide-changed="slideHasChanged(index)">
+                    <div class="goods-img">
+                        <img src="../../img/mobile/bargain/goods3.png" alt="">
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+        <div class="bargain-top">
+            <img src="../../img/mobile/bargain/price.png" alt="">
+            <div>{{oriPrice}}</div>
+            <div>{{killedPrice}}</div>
+        </div>
+        <div class="bargain-progress-main">
+            <div class="bargain-progress">
+                <div class="progress-content" ng-style="{width:percent+'%'}"><span>{{percent}}%</span></div>
+            </div>
+        </div>
+        <div class="bargain-btns" ng-click="bargaining()">
+            <img src="../../img/mobile/bargain/btn.png" alt="">
+            <div>帮他砍</div>
+        </div>
+    </ion-content>
+    <div class="bargain-bottom" ng-style="{bottom:$root.isBottomTab?'4rem':'0'}">
+        <div class="bargain-bottom-content">
+            <a class="bargain-btn-b" ng-click="showRanking()">砍价排行</a>
+        </div>
+        <div class="bargain-bottom-content">
+            <a class="bargain-btn-b" ng-click="showRule()">活动规则</a>
+        </div>
+    </div>
+</div>

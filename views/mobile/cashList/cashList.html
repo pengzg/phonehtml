@@ -1,0 +1,22 @@
+<ion-content overflow-scroll="false" class="cash-gray-bg">
+	<ion-refresher pulling-text="下拉刷新..." on-refresh="do_refresher()"></ion-refresher>
+	<div class="cash-list-main">
+		<div class="cash-list-item" ng-repeat="x in items track by $index">
+			<div>
+				<i class="icon ion-ios-clock-outline cash-list-color-green"></i>
+				<span>2015.06.06 21:00:06</span>
+			</div>
+			<div>
+				<span class="cash-list-color-gray">红包余额</span>&nbsp;
+				<span class="cash-list-color-orange cash-list-font-middle">+&yen;</span>
+				<span class="cash-list-color-orange cash-list-font-big">10.00</span>
+				<span class="cash-list-color-gray">&ensp;来源:</span>
+				<span class="cash-list-color-green">幸运大转盘</span>
+			</div>
+			<div ng-show="false">
+				<i class="icon ion-chevron-right cash-list-color-gray"></i>
+			</div>
+		</div>
+	</div>
+	<ion-infinite-scroll  on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,164 @@
+<div class="xt_changeHtml" style="margin-bottom: 120px;">
+	<div class="addlistCenter">
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just">标题：</span>
+			<div class="widthAuto zk_controlInput">
+				<input type="text" ng-model="vo.fb_title" maxlength="30" style="width:300px" placeholder="标题在30个字符以内" />
+			</div>
+		</div>
+
+		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 图片：</span>
+			<div class="widthAuto zk_controlInput">
+				<a ng-click="upImage($event,1,1)" style="color:#099fb8;" class="f14">上传图片</a>（图片建议尺寸为:{{imgsize[vo.fb_location]}}）
+				<div style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor" get-ue="ue_myeditor = getUe"
+				 ng-show="false" class="ueditor" ng-model="gb_content1"></div>
+				<div style="margin-top:5px;">
+					<div style="float:left;margin:5px;">
+						<div class="gsGoodsImgs" style="height:90px; border:1px solid #ddd;">
+							<img alt="" src="{{vo.fb_cover_show?vo.fb_cover_show:'img/prizedef.jpg'}}" style=" height:90px;">
+						</div>
+
+					</div>
+
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 促销时间：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="text" class="Wdate" style="width: 200px;" id="start_time" />
+				</div>
+			</div>
+
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">类型：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div>
+						<label class="m10right">
+							<input type="radio" name="Type" ng-model="vo.fb_type" value="2" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />
+							图片
+						</label>
+					</div>
+					<div>
+						<label class="m10right">
+							<input type="radio" name="Type" ng-model="vo.fb_type" value="1" class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" />视频
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" ng-show="vo.fb_type==2">
+				<span class="xt_bzWenZi width-just">跳转类型：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div>
+						<label class="m10right">
+							<input type="radio" name="targetType" ng-model="vo.fb_target_type" value="1" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" /> 无
+						</label>
+					</div>
+					<div>
+						<label class="m10right">
+							<input type="radio" name="targetType" ng-model="vo.fb_target_type" value="2" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" />公众号文章
+						</label>
+					</div>
+					<div>
+						<label class="m10right">
+							<input type="radio" name="targetType" ng-model="vo.fb_target_type" value="3" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" />小程序展示页面
+						</label>
+					</div>
+					<div>
+						<label class="m10right">
+							<input type="radio" name="targetType" ng-model="vo.fb_target_type" value="4" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" />小程序页面
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;" ng-show="vo.fb_type==2 &&(vo.fb_target_type==2||vo.fb_target_type==4)">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 跳转地址：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="text" title="{{vo.fb_target_id}}" ng-model="vo.fb_target_id" maxlength="200" style="width:300px" />
+				</div>
+			</div>
+			<!-- <div class="divVertical clearfix ray5" style="margin-top: 25px;" ng-show="vo.fb_type==1">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 视频路径：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="text" title="{{vo.fb_video}}" ng-model="vo.fb_video" maxlength="200" style="width:300px" />
+				</div>
+			</div> -->
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;" ng-show="vo.fb_type==1">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 视频：</span>
+				<div class="widthAuto zk_controlInput">
+					<a ng-click="upVideo($event,1,1)" style="color:#099fb8;" class="f14">上传视频</a><br> <span>{{vo.fb_video_show}}</span>
+					<div style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myvideoeditor" get-ue="ue_myvideoeditor = getUe"
+					 ng-show="false" class="ueditor" ng-model="gb_content2"></div>
+					
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5">
+				<span class="xt_bzWenZi width-just">显示位置：</span>
+				<div class="widthAuto zk_controlInput sale_inline">
+					<div ng-repeat="x in locationList">
+						<label class="m10right">
+							<input type="radio" name="location" ng-model="vo.fb_location" value="{{x.bd_code}}" class="widthAuto ant-checkboxStyle"
+							 style="margin-top: -2px;" /> {{x.bd_name}}
+						</label>
+					</div>
+					
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just">排序：</span>
+				<div class="widthAuto zk_controlInput">
+					<input type="text" ng-model="vo.fb_sort" maxlength="10" style="width:300px" placeholder="越大越靠前" /> (数字越大排序越靠前)
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" ng-if="vo.fb_target_type==3">
+				<span class="xt_bzWenZi width-just">详情</span>
+				<div class="widthAuto zk_controlInput">
+					<div style="margin-bottom:1.25rem;width:664px;height: 300px; display:inline-block; z-index:1" id="myeditor1" get-ue="ue_myeditor1 = getUe"
+					 class="ueditor" ng-model="vo.fb_content" config="_simpleConfig"></div>
+				</div>
+			</div>
+			<div class="divVertical clearfix ray5" style="margin-top: 25px;">
+				<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 城市：</span>
+				<div class="widthAuto zk_controlInput">
+					<a ng-click="showCityDialog();" style="color:#099fb8;" class="f14">选择城市</a>
+					<div><span>已选择城市：</span>
+						<div class="btn" ng-repeat="x in focusAreaRelation">{{x.far_areaid_nameref}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="fixedBottom">
+			<div class="btnStyle Btncolor1 BtnHover1" ng-click="submit();">保存</div>
+
+			<div class="btnStyle Btncolor2 BtnHover2"><a ui-sref="index.setting.focus" class="btnStyle Btncolor2 BtnHover2">返回</a></div>
+		</div>
+
+
+		<!-- 选择城市弹框 -->
+		<div class="dialog" ng-show="showCity">
+			<div class="dialog-zdc"></div>
+			<div class="dg-xg-zh" style=" width: 438px; margin-left: -219px; top: 50%; margin-top: -205px;" ng-show="showCity">
+				<div class="dg-xg-js" style="width: 438px;">
+					选择城市
+					<div class="dg-cancle" ng-click="closeCityDialog()"></div>
+				</div>
+				<form role="form" name="myform">
+					<div class="dg-content" style="margin-bottom: 0px; margin-top: 0px; height: 320px; overflow: auto; z-index: 100;">
+						<div style="border-right: none;">
+							<ul tree id="tree2" class="ztree f14" data-options='{"url":"/admin/base/baseAreaControl/queryBaseAreaTreeNew.action?state=1&shopid={{shopid}}"}'
+							 mysetting='mysetting' style="width: 400px; overflow: auto; border-right: none;" max-length="25"></ul>
+						</div>
+					</div>
+				</form>
+				<div class="dg-submint" style="width: 100%; text-align: center; margin: 10px 0;">
+					<div class="btnStyle Btncolor1 BtnHover1" ng-click="selectCity(vo.selectNode)">确定</div>
+					<div class="btnStyle Btncolor2 BtnHover2" ng-click="closeCityDialog()">取消</div>
+				</div>
+			</div>
+		</div>
