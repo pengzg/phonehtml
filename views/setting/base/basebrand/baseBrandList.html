@@ -45,14 +45,14 @@
 							<tr ng-repeat="x in baseBrandList">
 								<td class="text-center f14">{{pager.rows * (pager.page -
 									1)+ $index+1}}</td>
-								<td class="text-center f14">{{x.bd_title}}</td>
-								<td class="text-center f14">{{x.bd_intro}}</td>
+								<td class="text-center f14">{{x.bb_title}}</td>
+								<td class="text-center f14">{{x.bb_intro}}</td>
 								<td class="text-center f14">{{x.stats_nameref}}</td>
-								<td class="text-center f14">{{x.bd_is_show_nameref}}</td>
+								<td class="text-center f14">{{x.bb_is_show_nameref}}</td>
 							
 								<td class="text-center f14">
-									<a class="common_btns common_edit" ng-click="toEdit(x.bd_id)" title="修改"></a>
-									<a class="common_btns common_delete" ng-click="toDelete(x.bd_id)" title="删除"></a>
+									<a class="common_btns common_edit" ng-click="toEdit(x.bb_id)" title="修改"></a>
+									<a class="common_btns common_delete" ng-click="toDelete(x.bb_id)" title="删除"></a>
 								</td>
 							</tr>
 						</tbody>
@@ -77,7 +77,7 @@
 				<div id="formJiLu" class="formJiLu" style="border: none">
 					<form>
 						<div>
-							<input type="hidden" ng-model="vo.bd_id">
+							<input type="hidden" ng-model="vo.bb_id">
 
 							<div class="contentGroup clearfix">
 								<div class="zk_controlLabel">
@@ -85,8 +85,8 @@
 								</div>
 
 								<div class="floatLeft p10left">
-									<input style="width: 226px;" type="text" name="bd_title"
-										ng-model="vo.bd_title" maxlength="20">
+									<input style="width: 226px;" type="text" name="bb_title"
+										ng-model="vo.bb_title" maxlength="20">
 								</div>
 							</div>
 
@@ -98,14 +98,14 @@
 									<div class="zk_controlRadio" style="width: 200px;">
 										<lable class="xt_inputRadio m10right"
 											style="margin-bottom:8px"> <input class="xt_radio"
-											name="bs_type" ng-model="vo.bd_gl_brand" value="2" type="radio"
-											ng-checked="vo.bd_gl_brand==2" ng-click="delete_input()">
+											name="bs_type" ng-model="vo.bb_gl_brand" value="2" type="radio"
+											ng-checked="vo.bb_gl_brand==2" ng-click="delete_input()">
 										<div class="xt_inputBackimg"></div>
 										本品牌(默认	)</lable>
 										<lable class="xt_inputRadio m10right"
 											style="margin-bottom:8px"> <input class="xt_radio"
-											name="bs_type" ng-model="vo.bd_gl_brand" value="1" type="radio"
-											ng-checked="vo.bd_gl_brand==1">
+											name="bs_type" ng-model="vo.bb_gl_brand" value="1" type="radio"
+											ng-checked="vo.bb_gl_brand==1">
 										<div class="xt_inputBackimg" value="11"></div>
 										综合品牌 </lable>
 									</div>
@@ -118,8 +118,8 @@
 									<span class="f14">品牌简介</span> <i></i>
 								</div>
 								<div class="floatLeft p10left">
-									<input style="width: 226px;" type="text" name="bd_intro"
-										ng-model="vo.bd_intro" maxlength="20">
+									<input style="width: 226px;" type="text" name="bb_intro"
+										ng-model="vo.bb_intro" maxlength="20">
 								</div>
 							</div>
 							
@@ -129,7 +129,7 @@
 										<span class="f14">综合品牌</span>
 									</div>
 									<div class="zk_controlInput" style="width: 220px; height:35px; padding-left: 22px; overflow:hidden;">
-										<zk-control-group style=" height:auto" ng-model="vo.bd_is_main" htmlid="bd_is_main"
+										<zk-control-group style=" height:auto" ng-model="vo.bb_is_main" htmlid="bb_is_main"
 											data-option='[{"N":"否"},{"Y":"是"}]'></zk-control-group>
 									</div>
 								</div>
@@ -153,7 +153,7 @@
 										<span class="f14">是否前台显示</span>
 									</div>
 									<div class="zk_controlInput" style="width: 220px; height:35px; padding-left: 22px; overflow:hidden">
-										<zk-control-group ng-model="vo.bd_is_show" htmlid="bd_is_show"
+										<zk-control-group ng-model="vo.bb_is_show" htmlid="bb_is_show"
 											data-option='[{"0":"否"},{"1":"是"}]'></zk-control-group>
 									</div>
 								</div>

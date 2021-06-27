@@ -1,12 +1,12 @@
 tempApp.controller('ctr_baseBrandList', function($scope,
 		$state,http,EzConfirm,messageFactory) {
-	$scope.pager = {page:1,rows:'20',sort:'bd_id',order:'desc',pageList:['10','20','30']};
+	$scope.pager = {page:1,rows:'20',sort:'bb_sort',order:'desc',pageList:['10','20','30']};
 	$scope.searchParam = {};
 	$scope.vo = {};
 	
 	$scope.vm = {
 			rules : {
-				bd_title : {
+				bb_title : {
 					required : "品牌名称不能为空"
 				}
 			}
@@ -63,9 +63,9 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 		if (id == undefined || id == '') {
 			$scope.dialogTitle = '添加品牌';
 			$scope.vo.status = "1";
-			$scope.vo.bd_is_show = "1";
-			$scope.vo.bd_gl_brand = 2;
-			$scope.vo.bd_is_main = "N";
+			$scope.vo.bb_is_show = "1";
+			$scope.vo.bb_gl_brand = 2;
+			$scope.vo.bb_is_main = "N";
 		} else {
 			$scope.dialogTitle = '修改品牌';
 			$scope.queryDetail(id);
@@ -79,13 +79,13 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 	$scope.queryDetail = function(id){
 		var success = function(result){
 			$scope.vo = result.data;
-			if ($scope.vo.bd_is_main == undefined) {
+			if ($scope.vo.bb_is_main == undefined) {
 				//默认不是综合品牌
-				$scope.vo.bd_is_main = "N";
+				$scope.vo.bb_is_main = "N";
 			}
-			if ($scope.vo.bd_gl_brand == undefined || $scope.vo.bd_gl_brand == 0) {
+			if ($scope.vo.bb_gl_brand == undefined || $scope.vo.bb_gl_brand == 0) {
 				//默认本品牌
-				$scope.vo.bd_gl_brand = 2;
+				$scope.vo.bb_gl_brand = 2;
 			}
 			messageFactory.closeLoading();
 		}
@@ -95,7 +95,7 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 		}
 		messageFactory.showLoading();
 		var url = '/admin/base/baseBrandControl/getDetail.action';
-		http.post(url,{bd_id:id},success,error);
+		http.post(url,{bb_id:id},success,error);
 	}
 	
 	/**
@@ -103,7 +103,7 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 	 */
 	$scope.createBrand = function() {
 		
-		if (!$scope.vo.bd_title) {
+		if (!$scope.vo.bb_title) {
 			messageFactory.showMessage('error', "请输入品牌名称");
 			return false;
 		}
@@ -123,7 +123,7 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 		var url = "/admin/base/baseBrandControl/update.action";
 		var msg = '您确定添加本条记录吗？';
 		//console.log($stateParams.bc_id);
-		if($scope.vo.bd_id != undefined && $scope.vo.bd_id != ''){
+		if($scope.vo.bb_id != undefined && $scope.vo.bb_id != ''){
 			msg = '您确定修改本条记录吗？';
 		}
 		EzConfirm.create({
@@ -142,7 +142,7 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 	 * 去详情
 	 */
 	$scope.toDetail = function(id){
-		$state.go('index.baseBrandDetail',{bd_id:id})
+		$state.go('index.baseBrandDetail',{bb_id:id})
 	}
 	
 	/**
@@ -159,7 +159,7 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 			messageFactory.showMessage('error',result.desc);
 		}
 		
-		var data ={'bd_id':id}
+		var data ={'bb_id':id}
 		var url = "/admin/base/baseBrandControl/remove.action";
 		var	msg = '您确定修改本条记录吗？';
 		EzConfirm.create({
