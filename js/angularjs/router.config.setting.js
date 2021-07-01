@@ -591,5 +591,20 @@ function routeFn($stateProvider,$urlRouterProvider){
             }]
         } 
     })
+    // 分类管理
+    .state("index.setting.basecategory",{
+        url:"/basecategory",
+        templateUrl:"views/setting/base/basecategory/baseCategory.html",
+        controller: "ctr_baseCategory",
+        resolve:{
+            deps:["$ocLazyLoad",function($ocLazyLoad){
+                return $ocLazyLoad.load(
+                        {files:[
+                                "css/user/userdetail.css",
+                                "js/controllerRoute/setting/base/basecategory/ctr_baseCategory.js"
+                                ]});
+            }]
+        } 
+    })
 };
 
