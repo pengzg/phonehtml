@@ -73,7 +73,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 	 */
 	$scope.submit = function () {
 	
-
+		$scope.vo.pm_releasedate = $("#start_date").val();
 		var success = function (result) {
 			messageFactory.showMessage('success', '提交成功');
 			$scope.goBack();
@@ -258,7 +258,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 						        		var imgsArr1 = imgs1.split(",");
 							        	$scope.ba_path_show = imgsArr1[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
 							         	$scope.ba_path =imgsArr1[0].split("|")[0].split("static/upload/image")[1];
-							         	$scope.picList.push({"ba_path": $scope.ba_path,'ba_path_show':$scope.ba_path_show,"ba_ismain":"0"});
+							         	$scope.picList.push({"ba_path": $scope.ba_path,'ba_path_show':$scope.ba_path_show,"ba_is_main":"0"});
 						        	}
 								}
 								
