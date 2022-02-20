@@ -33,7 +33,20 @@ function routeFn($stateProvider,$urlRouterProvider){
         } 
     })
     
-
+ //手机列表
+ .state("index.phone.phoneAdd",{
+    url:"/phoneAdd",
+    templateUrl:"views/phone/phoneAdd.html",
+    controller:"ctr_phoneAdd",
+    resolve:{
+        deps:["$ocLazyLoad",function($ocLazyLoad){
+            return $ocLazyLoad.load(
+                    {files:[
+                            "js/controllerRoute/phone/ctr_phoneAdd.js"
+                            ]});
+        }]
+    } 
+})
         
 };
 

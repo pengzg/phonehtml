@@ -23,7 +23,7 @@ tempApp.controller('ctr_phoneList', function($scope, $rootScope, http, messageFa
     /**
      * 查询订单列表
      */
-    $scope.pager = {page:1,rows:'20',sort:'gca_apply_time',order:'desc',om_order_type:'2',pageList:['10','20','30']};
+    $scope.pager = {page:1,rows:'20',sort:'pm_sort',order:'desc',om_order_type:'2',pageList:['10','20','30']};
     var queryList = function(){
         messageFactory.showLoading();
         $scope.searchParam.startDate = $("#start_date").val();
@@ -162,7 +162,11 @@ $scope.selectTab = function(x) {
 		});
 
 	}  
-      
+     
+    
+    $scope.doAdd = function(){
+        $state.go("index.phone.phoneAdd");
+    }
      
       
      /**
