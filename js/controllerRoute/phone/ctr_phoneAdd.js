@@ -207,13 +207,13 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 
 	
 	$scope.brandList = [];
-	$scope.brandPager = {page:1,rows:'100',sort:'pm_id',order:'desc',pm_shopid:$rootScope.USER.shopId};
+	$scope.brandPager = {page:1,rows:'100',sort:'bb_id',order:'desc'};
 	$scope.queryBrandList = function(){
 
 		messageFactory.showLoading();
 		var success = function(result){
 			$scope.brandList = result.data.rows;
-			$scope.brandList.unshift({"pm_id":"","pm_title":"请选择商品"});
+			$scope.brandList.unshift({"bb_id":"","bb_title":"请选择品牌"});
 			messageFactory.closeLoading();
 		};
 		var error = function(result){
@@ -221,8 +221,8 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 			messageFactory.showMessage('error',result.desc);
 			
 		};
-		var url = '/admin/product/productMainControl/dataGrid.action';
-		http.post(url,$.extend({},$scope.machinePager),success,error);
+		var url = '/admin/base/baseBrandControl/dataGrid.action';
+		http.post(url,$.extend({},$scope.brandPager),success,error);
 	}
 	$scope.queryBrandList();
 
