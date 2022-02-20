@@ -1,677 +1,1115 @@
-tempApp.controller('ctr_productAdd', function($scope, http, messageFactory, $state, $stateParams, EzConfirm,dateUtil,$rootScope) {
-    $scope.pager = { page: 1, rows: "10", sort: "pm_id", order: "desc", pageList: ["10", "20", "30"] };
-    $scope.unitVO = {};
-    $scope.skuList = [{ps_code:"P"+dateUtil.getTs()}];
-    $scope.vo = {"pm_payway":"",pm_paymethod:"",pm_rebate_ratio:"0.00",pm_delivery_type:"",pm_delivery_fee_type:1,pm_market_price:0,pm_price:0,pm_typeid:$stateParams.pt_id,'pm_state':1,"pm_isgroup":"N","pm_valid_day":1,"pm_group_price":1,"pm_group_peopler_num":2, "pm_def3":"0.00", 'pm_weight':'8', "pm_profit_type":1, "pm_profit_value":10, "pm_property_profit_type":3, "pm_property_profit_value":0, "pm_def5":2};
-    $scope.vo.payMethodArr = ($scope.vo.pm_paymethod).split(",");
-    $scope.vo.payWayArr = ($scope.vo.pm_payway).split(",");
-    $scope.picList = [];
-    $scope.memberType = $rootScope.USER.memberType;
-    $scope.goBack = function() {
-      window.history.back();
-    };
-      var isImgEventExist = false;
-      $scope.pi_content = "";
-      
-      $scope._simpleConfig = {
-           //这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
-           
-           //focus时自动清空初始化时的内容
-           autoClearinitialContent: true,
-           //关闭字数统计
-           wordCount: true,
-           //关闭elementPath
-          /* elementPathEnabled: false,
-           retainOnlyLabelPasted:true,
-           pasteplain:true,
-           filterTxtRules://默认值：
-               function() {
-                  function transP(node) {
-                      node.tagName = 'p';
-                      node.setStyle();
-                  }
-                  return {
-                      //直接删除及其字节点内容
-                      '-': 'script style object iframe embed input select',
-                      'p': {
-                          $: {}
-                      },
-                      'br': {
-                          $: {}
-                      },
-                      'div': {
-                          '$': {}
-                      },
-                      'li': {
-                          '$': {}
-                      },
-                      'caption': transP,
-                      'th': transP,
-                      'tr': transP,
-                      'h1': transP,
-                      'h2': transP,
-                      'h3': transP,
-                      'h4': transP,
-                      'h5': transP,
-                      'h6': transP,
-                      'td': function(node) {
-                          //没有内容的td直接删掉
-                          var txt = !! node.innerText();
-                          if (txt) {
-                              node.parentNode.insertAfter(UE.uNode.createText('    '), node);
-                          }
-                          node.parentNode.removeChild(node, node.innerText())
-                      }
-                  }
-              }(),*/
-         };
+tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
+	$state, $timeout, http, $stateParams, EzConfirm, $compile, dateUtil, messageFactory, $q, $http, activityDetailFactory, $rootScope) {
+	$scope.promotion = {};
+	$scope.checkedAreas = "";
+	$scope.dataList = [{}];
+	$scope.goodsList = [];
+	$scope.today = dateUtil.getDate2() + " 至  " + dateUtil.getDate2();
+
+	$scope.couponVO = {};
+	$scope.couponRelationList = [$scope.couponVO];
+	$scope.iscouponList = [{ "bd_code": 1, "bd_name": "是" }, { "bd_code": 2, "bd_name": "否" }];
+	$scope.groupList = [{ 'dataList': [{}], "num":0 }];
+	$scope.ladderVO = { "ppg_skuid": "", "ppg_productid": '', "ppg_productid_nameref": '', "ppg_minnum": '', "ppg_minamount": '', "ppg_gift_num": '', "ppg_mj_amount": '', "ppg_discount": '', "ppg_productprice": '', "ppg_gift_totalnum": '' };
+	$scope.ladderList = [$scope.ladderVO];
+	$scope.spreadVO = { "pps_skuid": "", "pps_productid": '', "pps_productid_nameref": '',"pps_ticket_limit_is":"Y","pps_product_num": 8,"pps_valid_day":30,"pps_ticket_hour1start":"00:01","pps_ticket_hour1end":"23:59"};
+	$scope.spreadList = [$scope.spreadVO];
+	$scope.isGift = false;
+
+	$scope.vo = {ppm_use_type:1,ppm_membertype:1, ppm_ticket_valid_day:360, ppm_ticket_limit_is:"N", ppm_def3: "", "ppm_payway": "", "ppm_iscoupon": 2, ppm_isshareoffers: "1", ppm_paymethod: "", "ppm_group_type": 1, 'ppm_promotion_type': 1, "ppm_promotion_rules": 1, "ppm_range": 1, "ppm_state": 2, "ppm_amount_group": 0, "ppm_num_group": 0, "ppm_valid_day": 1, "ppm_group_price": 1, "ppm_limit_num": 0, "ppm_group_peopler_num": 2 ,"ppm_box_show":2,"ppm_isspread":2,"ppm_userrule":2,"ppm_def11":1,"ppm_def8":2,"ppm_def9":1,"ppm_isexchangecode":2,"ppm_machineid":"","ppm_def14":2};
+	$scope.vo.ppm_paymethodArr = ($scope.vo.ppm_paymethod).split(",");
+	$scope.vo.ppm_paywayArr = ($scope.vo.ppm_payway).split(",");
+	$scope.vo.ppm_def3Arr = ($scope.vo.ppm_def3).split(",");
+	$scope.vo.ppm_startdate = $scope.vo.ppm_enddate = dateUtil.getDate2();
+	$("#start_time").val($scope.today);
+	$('#start_time').daterangepicker($rootScope.dateRangeConfig, function (start, end, label) { // 格式化日期显示框
+		$scope.vo.ppm_startdate = start.format('YYYY-MM-DD');
+		$scope.vo.ppm_enddate = end.format('YYYY-MM-DD');
+		$scope.$apply();
+	});
+	$scope.goods_type = 1;
+
+	$scope._simpleConfig = {
+		//这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
+
+		//focus时自动清空初始化时的内容
+		autoClearinitialContent: true,
+		//关闭字数统计
+		wordCount: true,
+		//关闭elementPath
+		/* elementPathEnabled: false,
+		 retainOnlyLabelPasted:true,
+		 pasteplain:true,
+		 filterTxtRules://默认值：
+			 function() {
+				function transP(node) {
+					node.tagName = 'p';
+					node.setStyle();
+				}
+				return {
+					//直接删除及其字节点内容
+					'-': 'script style object iframe embed input select',
+					'p': {
+						$: {}
+					},
+					'br': {
+						$: {}
+					},
+					'div': {
+						'$': {}
+					},
+					'li': {
+						'$': {}
+					},
+					'caption': transP,
+					'th': transP,
+					'tr': transP,
+					'h1': transP,
+					'h2': transP,
+					'h3': transP,
+					'h4': transP,
+					'h5': transP,
+					'h6': transP,
+					'td': function(node) {
+						//没有内容的td直接删掉
+						var txt = !! node.innerText();
+						if (txt) {
+							node.parentNode.insertAfter(UE.uNode.createText('    '), node);
+						}
+						node.parentNode.removeChild(node, node.innerText())
+					}
+				}
+			}(),*/
+	};
+
+
+	/**
+	 *隐藏未选中节点
+	 * @param treeObj
+	 * @returns
+	 */
+	function hideUnChecked(treeObj) {
+		var nodes = treeObj.getNodesByFilter(function (node) {
+			return node.checked == false;
+		});
+		treeObj.hideNodes(nodes);
+	}
+
+	/**
+	 * 点击分类事件
+	 */
+	function onCheck(e, treeId, treeNode) {
+		var treeObj = $.fn.zTree.getZTreeObj("treeDemo"),
+			nodes = treeObj.getCheckedNodes(true);
+		var v = [];
+		for (var i = 0; i < nodes.length; i++) {
+
+			v.push(nodes[i].id);
+		}
+		$scope.checkedAreas = v.join(",");
+	};
+
+	/**
+	 * 分类树形结构配置
+	 */
+	var setting = {
+		view: {
+			selectedMulti: false
+		},
+		check: {
+			enable: true
+		},
+		data: {
+			simpleData: {
+				enable: true
+			}
+		},
+		callback: {
+			onCheck: onCheck
+		}
+	};
+	$scope.getDetail = function (pa_id, type) {
+		activityDetailFactory.getDetail($scope, pa_id, setting, type);
+	}
+
+	/**
+	 * 查询树
+	 */
+	$scope.getBaseArea = function () {
+		activityDetailFactory.getBaseArea($scope, setting);
+	}
+
+
+
+
+	$scope.getBaseArea();
+
+	$scope.queryDeliveryType = function () {
+		var success = function (result) {
+			$scope.deliveryTypeList = result.data;
+		}
+		var error = function (result) {
+
+		}
+		var url = "/admin/base/baseDataControl/detailItem.action";
+		http.post(url, { codekey: "2153" }, success, error);
+	}
+
+	$scope.queryDeliveryType();
+	$scope.getDeliveryCheckedIds = function () {
+		$scope.checkedIds = "";
+		var ids = [];
+		$("input[name='delivery_type']:checked").not(
+			":disabled").each(function () {
+				var selectId = $(this).val();
+				ids.push(selectId);
+			});
+		$scope.vo.ppm_def3 = ids.join(',')
+	}
+
     /**
-     * 显示图片上传
+     * 查询商品
      */
-    $scope.upImage = function($event, x,index) {
-      setX(x);
-      if (!isImgEventExist) {
-        isImgEventExist = true;
-        $scope.ue_myeditor.addListener("beforeInsertImage", function(t, arg) {
-          var x = getX();
-          var imgs = "";
-  
-          if (arg.length > 0) {
-            imgs = arg[0].src;
-          }
-          var imgsArr = imgs.split(",");
-          if (x == 1) {
-              $scope.vo.pm_picture_show = imgsArr[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
-               $scope.vo.pm_picture =imgsArr[0].split("|")[0].split("static/upload/image")[1];
-              for (i in arg) {
-                  imgs1 = arg[i].src;
-                  var imgsArr1 = imgs1.split(",");
-                  $scope.pp_path_show = imgsArr1[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
-                   $scope.pp_path =imgsArr1[0].split("|")[0].split("static/upload/image")[1];
-                   $scope.picList.push({"pp_path": $scope.pp_path,'pp_path_show':$scope.pp_path_show,"pp_ismain":"0"});
-              }
-              $scope.setCover($scope.picList[0]);
-              
-              
-          }
-          if (x == 2) {
-            $scope.skuList[index].ps_image_show = imgsArr[0].split("|")[0].ps_image_show.replace("m.shequkuaixian.com","imgtest.sqkx.net");
-            $scope.skuList[index].ps_image = imgsArr[0]
-              .split("|")[0]
-              .split("static/upload/image")[1];
-          }
-        });
-      }
-      var myImage = $scope.ue_myeditor.getDialog("insertimage");
-      myImage.open();
-    };
-    var tempX;
-    function setX(x) {
-      tempX = x;
-    }
-    function getX() {
-      return tempX;
-    }
-    
+	$scope.pager1 = { page: 1, rows: '10', sort: '', order: '', searchKey: '', ps_shopid: $rootScope.USER.shopId };
+	$scope.searchParam = {};
+	$scope.getGoods = function () {
+
+		activityDetailFactory.getGoods($scope);
+	}
+	/**
+	* 查询优惠券
+	*/
+	$scope.couponPager = { page: 1, rows: '10', sort: '', order: '', searchKey: '', cb_shopid: $rootScope.USER.shopId };
+	$scope.searchParam = {};
+	$scope.getCouponList = function () {
+
+		activityDetailFactory.getCouponList($scope);
+	}
+
+
     /**
-     * 选择品牌
+     * 商品模糊查询
      */
-    $scope.selectBrandFun = function(obj){
-        $scope.vo.pm_brandid = obj.bd_id;
-        $scope.vo.pm_brandid_nameref = obj.bd_title;
-    }
-    
+	$scope.keySearchFun = function (key, type) {
+		if (type == "goods") {
+			$scope.pager1.page = 1;
+			$scope.pager1.searchKey = key;
+
+			$scope.getGoods();
+		} else {
+			$scope.couponPager.page = 1;
+			$scope.couponPager.searchKey = key;
+			$scope.getCouponList();
+		}
+	}
+
     /**
-     * 选择品牌
-     */
-    $scope.selectUnitFun = function(obj){
-        $scope.unitVO.pur_unitid_min = obj.bu_id;
-        $scope.unitVO.pur_unitid_min_nameref = obj.bu_name;
-    }
-    
+	 * 上一页
+	 */
+	$scope.prevPage = function (pager, fun) {
+		activityDetailFactory.prevPage($scope, pager, fun);
+	}
+
+	/**
+	 * 下一页
+	 */
+	$scope.nextPage = function (pager, fun) {
+		activityDetailFactory.nextPage($scope, pager, fun);
+	}
     /**
-     * 添加商品
+     * 选择商品
      */
-        $scope.addProduct = function(){
-          
-          if (!$scope.vo.pm_title) {
-              messageFactory.showMessage("error", '请输入商品名称');
-              return;
-          }
-          if (!$scope.vo.pm_categoryid) {
-              messageFactory.showMessage("error", '请选择商品分类');
-              return;
-          }
-          if (!$scope.vo.pm_def3) {
-              $scope.vo.pm_def3 = "0.00";
-          }
-          
-          if (!$scope.unitVO.pur_unitid_min) {
-              messageFactory.showMessage("error", '请选择计量单位');
-              return;
-          }
-          if ($scope.vo.pm_code) {
-              var reg = /^[0-9a-zA-Z]{0,30}$/;
-              console.log($scope.vo.pm_code);
-              if (!reg.test($scope.vo.pm_code)) {
-                  messageFactory.showMessage("error", '商品编码只能是数字或者字母');
-                  return;
-              }
-          }
-          
-          var  reg = /^\d{1,10}$/;
-          
-          // 团购 start
-          if ($scope.vo.pm_isgroup == "Y") {
-              if (!reg.test($scope.vo.pm_valid_day)) {
-                  messageFactory.showMessage('error',"有效天数不能包含除数字以外的字符且必须大于0");
-                  return false;
-              }
-              if ($scope.vo.pm_valid_day<1) {
-                  messageFactory.showMessage('error',"有效天数不能包含除数字以外的字符且必须大于0");
-                  return false;
-              }
-              if (!$scope.vo.pm_group_price) {
-                  messageFactory.showMessage('error',"团购价格不能为空");
-                  return false;
-              }
-              if (!reg.test($scope.vo.pm_group_peopler_num)) {
-                  messageFactory.showMessage('error',"开团人数不能包含除数字以外的字符");
-                  return false;
-              }
-            }
-          // 团购 end
-          
-          if ($scope.picList.length < 1) {
-              messageFactory.showMessage("error", '请上传商品图片');
-              return;
-          }
-  
-          if (!$scope.vo.pm_market_price
-                  || $scope.vo.pm_market_price <= 0) {
-              messageFactory.showMessage("error", '商品价格必须大于0');
-              return;
-          }
-  
-          $scope.getCheckedIds();
-          if (!$scope.vo.pm_delivery_type) {
-              messageFactory.showMessage("error", '请至少选择一种配送方式');
-              return;
-          }
-          $scope.getPayMethodCheckedIds();
-          if (!$scope.vo.pm_paymethod) {
-              messageFactory.showMessage("error", '请至少选择一种支付方式');
-              return;
-          }
-      
-          $scope.getPayWayCheckedIds();
-          if (!$scope.vo.pm_payway) {
-              messageFactory.showMessage("error", '请至少选择一种支付类型');
-              return;
-          }
-      
-          var success = function(result) {
-              messageFactory.showMessage("success", result.desc);
-              $state.go("index.product.productList");
-          }
-          var error = function(result) {
-              messageFactory.showMessage("error", result.desc);
-          }
-        var url = "/admin/product/productMainControl/addProduct.action";
-        for(i in $scope.skuList){
-            $scope.skuList[i].productAttributeValueRelationStr = JSON.stringify([{pavr_attributeid:"",pavr_attribute_valueid:""}]);
-        }
-        
-        EzConfirm.create({
-              heading : '提示',
-              text : "您确定提交吗？"
-          }).then(function() {
-            var data = $.extend({},$scope.vo,$scope.unitVO,{priceListStr:JSON.stringify($scope.priceList)},{skuListStr:JSON.stringify($scope.skuList)},{"pi_content":$scope.pi_content},{"pictureListStr":JSON.stringify($scope.picList)});
-            http.post(url,data,success,error);
-          }, function() {
-  
-          });
-    }
-    
-    $scope.numberRegFun = function(){
-        $scope.vo.pm_sort=$scope.vo.pm_sort.replace(/[^\d]/g,'');
-    }
-    
-    /**
-     * 获取会员等级
+	$scope.chooseGoods = function (obj, obj2, type, group) {
+		if (type == 1) {
+
+			var flag = true;
+			if ($scope.groupList[group]) {
+				for (var i in $scope.groupList[group].dataList) {
+					if ($scope.groupList[group].dataList[i].ps_id == obj.ps_id) {
+						flag = false;
+						continue;
+					}
+				}
+			}
+			if (flag) {
+				$scope.groupList[group].dataList[obj2] = obj;
+				$scope.groupList[group].dataList[obj2].pm_num = 1;
+
+			} else {
+				messageFactory.showMessage('error', '活动商品不能重复');
+				return;
+			}
+			$scope.cal();
+
+		} else if (type == 4) {
+
+			var flag = true;
+			if ($scope.couponRelationList) {
+				for (var i in $scope.couponRelationList) {
+					if ($scope.couponRelationList[i].cr_couponid == obj.cb_id) {
+						flag = false;
+						continue;
+					}
+				}
+			}
+			if (flag) {
+				obj2.cr_couponid = obj.cb_id;
+				obj2.cr_couponid_nameref = obj.cb_title;
+			} else {
+				messageFactory.showMessage('error', '优惠券不能重复');
+				return;
+			}
+
+		} else if (type == 3) {
+			obj2.ppg_productid_nameref = obj.pm_title;
+			obj2.ppg_productid = obj.ps_productid;
+			obj2.ppg_skuid = obj.ps_id;
+			obj2.ppg_productprice = obj.ps_price;
+		}else if (type == 6) {
+			obj2.pps_productid_nameref = obj.pm_title;
+			obj2.pps_productid = obj.ps_productid;
+			obj2.pps_skuid = obj.ps_id;
+			obj2.pps_productprice = obj.ps_price;
+		}
+
+		$(".droplistWrap2").hide();
+	}
+	/**
+     * 添加全部商品
      */
-    $scope.priceList = [{ 
-      psp_grade_discount : 1,
-      psp_max_num : 1,
-      psp_is_buy:"Y",
-      psp_price :0,
-      psp_min_num : 0,
-      psp_add_num:1}];
-    /* $scope.getGrade = function(){
-        var success = function(result){
-            for(i in result.data){
-                var data = {
-                        psp_gradeid_nameref:  result.data[i].bg_title,
-                        psp_grade_discount : result.data[i].bg_discount,
-                        psp_gradeid : result.data[i].bg_id,
-                        psp_is_buy:"Y",
-                        psp_price :0,
-                        psp_min_num : 0
-                };
-                $scope.priceList.push(data);
-            }
-        }
-        var error = function(result){
-            messageFactory.showMessage("error",result.desc);
-        }
-        var url = "/admin/base/baseGradeControl/getItemList.action";
-        http.post(url,{},success,error);
-    }
-    $scope.getGrade(); */
-    
-    /**
-     * 获取分类
-     */
-    $scope.getCategory = function(){
-        var success = function(result){
-            var zNodes = result.data;
-            var zTreeObj = null;
-            var setting = {
-                data: { 
-                  key: { 
-                    title: "t"
-                  }, 
-                  simpleData: { 
-                    enable: true
-                  }
-                },
-                callback: { 
-                    onClick: function(event, treeId, treeNode){
-                      $scope.$apply(function(){
-                          if(treeNode.check_Child_State>=0){
-                              messageFactory.showMessage("error","只能选择子节点");
-                              return;
-                          }
-                          $scope.vo.pm_categoryid = treeNode.id;
-                          $scope.vo.pm_categorycode = treeNode.code;
-                          $scope.vo.pm_categoryid_nameref =treeNode.name;
-                          $scope.showCategory = false;
-                      })
-                    }
-                  }
-              };
-            zTreeObj = $.fn.zTree.init($("#categrayList"), setting, zNodes);
-        }
-        var error = function(result){
-            messageFactory.showMessage("error",result.desc);
-        }
-        var url = "/admin/product/productCategoryControl/queryProductCategoryTree.action";
-        http.post(url,{},success,error);
-    }
-    $scope.getCategory();
-    /**
-     * 计算价格
-     */
-    $scope.calPriceFun = function(){
-        $scope.vo.pm_market_price =$scope.vo.pm_market_price.replace(/[^\.\d]/g,'');
-        for(x in $scope.priceList){
-            $scope.priceList[x].psp_price = Number($scope.vo.pm_market_price*$scope.priceList[x].psp_grade_discount).toFixed(2);
-        }
-    }
-    
-    /**
-     * 查询单位
-     */
-    $scope.getUnit = function(){
-        var success = function(result){
-            $scope.unitList = result.data;
-        }
-        var error = function(result){
-            messageFactory.showMessage("error",result.desc);
-        }
-        var url = "/admin/base/baseUnitControl/queryUnitList.action";
-        http.post(url,{},success,error);
-    }
-    $scope.getUnit();
-    
-    
-    $scope.getBrand = function(){
-        var success = function(result){
-            $scope.brandList = result.data;
-        }
-        var error = function(result){
-            messageFactory.showMessage("error",result.desc);
-        }
-        var url = "/admin/base/baseBrandControl/queryBrandList.action";
-        http.post(url,{},success,error);
-    }
-    $scope.getBrand();
-    /**
-     * 获取品牌
-     */
-    $scope.getBrand = function(){
-        var success = function(result){
-            $scope.brandList = result.data;
-        }
-        var error = function(result){
-            messageFactory.showMessage("error",result.desc);
-        }
-        var url = "/admin/base/baseBrandControl/queryBrandList.action";
-        http.post(url,{},success,error);
-    }
-    $scope.getBrand();
-    /**
-     * 勾选
-     */
-    $scope.checkFun = function(obj){
-        if(obj.psp_is_buy=='Y'){
-            obj.psp_is_buy = 'N';
-        }else{
-            obj.psp_is_buy = 'Y';
-        }
-    }
-    /**
-     * 设置商品
-     */
-    $scope.setCover = function(x){
-        $scope.vo.pm_picture = x.pp_path;
-        $scope.vo.pm_picture_show = x.pp_path_show;
-        for (i in $scope.picList) {
-            if ($scope.picList[i].pp_path == x.pp_path) {
-                $scope.picList[i].pp_ismain = 1;
-            } else {
-                $scope.picList[i].pp_ismain = 0;
-            }
-        }
-    }
-      
-    /**
-     * 设置商品
-     */
-    $scope.del = function(index){
-       $scope.picList.splice(index,1);
-    }
-    
-    $scope.showTips = function(index) {
-        $(".js_setCover"+index).show();
-    }
-    $scope.hideTips = function(index) {
-       $(".js_setCover"+index).hide();
-    }
-    
-      // 返回首页
-      $scope.goList = function(){
-          $state.go("index.product.productList");
-      }
-      
-      /**
-       * 检查价格
-       */
-      $scope.checkPrice = function(x) {
-          x.psp_price =x.psp_price.replace(/[^\.\d]/g,'');
-          if (!x.psp_price) {
-              messageFactory.showMessage("error","输入的价格不正确");
-              return;
-          }
-      }
-      
-      $scope.change2Num = function(){
-          $scope.vo.pm_def3 =($scope.vo.pm_def3+"").replace(/[^\.\d]/g,'');
-          if (!$scope.vo.pm_def3) {
-              $scope.vo.pm_def3 = "0.00";
-              return;
-          }
-          $scope.vo.pm_def3 = parseFloat($scope.vo.pm_def3).toFixed(2);
-  
-          $scope.vo.pm_weight =($scope.vo.pm_weight+"").replace(/[^\.\d]/g,'');
-          if (!$scope.vo.pm_weight) {
-              $scope.vo.pm_weight = "0.001";
-          }
-          $scope.vo.pm_weight = parseFloat($scope.vo.pm_weight).toFixed(3);
-      }
-  
-      $scope.change2Num2 = function(){
-          
-          $scope.vo.pm_rebate_ratio =($scope.vo.pm_rebate_ratio+"").replace(/[^\.\d]/g,'');
-          if (!$scope.vo.pm_rebate_ratio) {
-              $scope.vo.pm_rebate_ratio = "0.00";
-          }
-          $scope.vo.pm_rebate_ratio = parseFloat($scope.vo.pm_rebate_ratio).toFixed(2);
-          
-          $scope.vo.pm_profit_value =($scope.vo.pm_profit_value+"").replace(/[^\.\d]/g,'');
-          if (!$scope.vo.pm_profit_value) {
-              $scope.vo.pm_profit_value = "0.00";
-          }
-          $scope.vo.pm_profit_value = parseFloat($scope.vo.pm_profit_value).toFixed(2);
-  
-          // 分润2
-          // $scope.vo.pm_property_profit_val =$scope.vo.pm_property_profit_val.replace(/[^\.\d]/g,'');
-          // if (!$scope.vo.pm_property_profit_val) {
-          // 	$scope.vo.pm_property_profit_val = "0.00";
-          // }
-          // $scope.vo.pm_property_profit_val = parseFloat($scope.vo.pm_property_profit_val).toFixed(2);
-  
-          if ($scope.vo.pm_recommend1_rate) {
-              $scope.vo.pm_recommend1_rate =($scope.vo.pm_recommend1_rate+"").replace(/[^\.\d]/g,'');
-              if (!$scope.vo.pm_recommend1_rate) {
-                  $scope.vo.pm_recommend1_rate = "0.00";
-              }
-              $scope.vo.pm_recommend1_rate = parseFloat($scope.vo.pm_recommend1_rate).toFixed(2);
-              $scope.vo.pm_recommend2_rate = 100-$scope.vo.pm_recommend1_rate;
-          }
-      }
-  
-      $scope.getCheckedIds = function()
-      {
-        $scope.checkedIds = "";
-        var ids = [];
-        $("input[name='delivery_type']:checked").not(":disabled").each(function(){		  
-          var selectId = $(this).val();	
-         //  console.log(selectId);
-          ids.push(selectId);
-        });
-        $scope.vo.pm_delivery_type = ids.join(',');
-  
-        var reg = /2/
-        $scope.vo.pm_delivery_type_show = reg.test($scope.vo.pm_delivery_type);
-        console.log($scope.vo.pm_delivery_type_show);
-      }
-  
-      /**
-       * 配送方式列表
-       */
-      $scope.deliveryList = [];
-      $scope.queryDeliveryList = function(){
-          var success = function(result){
-               
-               $scope.deliveryList = result.data;
-            }
-            var error = function(result){
-                messageFactory.closeLoading();
-                messageFactory.showMessage('error',result.desc);
-            }
-          var url = '/admin/base/baseDataControl/detailItem.action?codekey=2153';
-          http.post(url,null,success,error);
-      }
-      $scope.queryDeliveryList();
-  
-  
-  
-  
-  
-      $scope.getPayMethodCheckedIds = function()
-      {
-        $scope.payMethodCheckedIds = "";
-        var ids = [];
-        $("input[name='payMethod']:checked").not(":disabled").each(function(){		  
-          var selectId = $(this).val();	
-         //  console.log(selectId);
-          ids.push(selectId);
-        });
-        $scope.vo.pm_paymethod = ids.join(','); 
-      }
-  
-          /**
-       * 支付方式列表
-       */
-      $scope.payMethodList = [];
-      $scope.queryPayMethodList = function(){
-        var success = function(result){
-           $scope.payMethodList = result.data;
-        }
-        var error = function(result){
-            messageFactory.closeLoading();
-            messageFactory.showMessage('error',result.desc);
-        }
-          var url = '/admin/base/baseDataControl/detailItem.action?codekey=2163';
-          http.post(url,null,success,error);
-      }
-      $scope.queryPayMethodList();
-  
-  
-  
-      
-  
-  
-  
-  
-  
-      $scope.getPayWayCheckedIds = function()
-      {
-        $scope.payWayCheckedIds = "";
-        var ids = [];
-        $("input[name='payWay']:checked").not(":disabled").each(function(){		  
-          var selectId = $(this).val();	
-         //  console.log(selectId);
-          ids.push(selectId);
-        });
-        $scope.vo.pm_payway = ids.join(','); 
-      }
-      /**
-       * 支付类型列表
-       */
-      $scope.payWayList = [];
-      $scope.queryPayWayList = function(){
-        var success = function(result){
-          $scope.payWayList = result.data;
-          // $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
-        }
-        var error = function(result){
-            messageFactory.closeLoading();
-            messageFactory.showMessage('error',result.desc);
-        }
-          var url = '/admin/base/baseDataControl/detailItem.action?codekey=2166';
-          http.post(url,null,success,error);
-      }
-      $scope.queryPayWayList();
-  
-      $scope.upVideo = function($event) {
-          $scope.ue_myvideoeditor.addListener("afterUpVideo",
-              function(t, arg) {
-                  $scope.vo.pm_def1 = arg[0].url;
-                  $scope.vo.pm_def1_show = arg[0].url;
-              }
-          );
-          var myvideo = $scope.ue_myvideoeditor
-                  .getDialog("insertvideo");
-          myvideo.open();
-      };
-      $scope.clearVideo = function(){
-          $scope.vo.pm_def1 = "";
-          $scope.vo.pm_def1_show = "";
-      }
-  
-      $scope.upImage2 = function($event) {
-          
-          $scope.ue_myeditor2.addListener("beforeInsertImage", function(t, arg) {
-            var imgs = "";
-  
-            if (arg.length > 0) {
-              imgs = arg[0].src;
-            }
-            var imgsArr = imgs.split(",");
-          $scope.vo.pm_def2_show = imgsArr[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
-           $scope.vo.pm_def2 =imgsArr[0].split("|")[0].split("static/upload/image")[1];
-           
-          });
-            
-            var myImage = $scope.ue_myeditor2.getDialog("insertimage");
-            myImage.open();
-      };
-  
-      /**
-       * 分润类型列表
-       */
-      $scope.profitList = [];
-      $scope.queryProfitList = function(){
-        var success = function(result){
-          $scope.profitList = result.data;
-        }
-        var error = function(result){
-            messageFactory.closeLoading();
-            messageFactory.showMessage('error',result.desc);
-        }
-          var url = '/admin/base/baseDataControl/detailItem.action?codekey=2182';
-          http.post(url,null,success,error);
-      }
-      $scope.queryProfitList();
-  
-  
-      /**
-       * 全局商品编码
-       */
-      $scope.pmSysCodeList = [];
-      $scope.queryPmSysCodeList = function(){
-          var success = function(result){
-               
-               $scope.pmSysCodeList = result.data;
-               $scope.pmSysCodeList.unshift({'ba_code':'','ba_name':'请选择'});
-            }
-            var error = function(result){
-                messageFactory.closeLoading();
-                messageFactory.showMessage('error',result.desc);
-            }
-          var url = '/admin/base/baseDataControl/detailItem.action?codekey=2207';
-          http.post(url,null,success,error);
-      }
-      $scope.queryPmSysCodeList();
-  
-      /**
-       * 查询水厂
-       */
-      $scope.facList = [];
-      $scope.queryFacList = function(){
-          var success = function(result){
-               
-               $scope.facList = result.data.rows;
-              //  $scope.pmSysCodeList.unshift({'ba_code':'','ba_name':'请选择'});
-            }
-            var error = function(result){
-                messageFactory.closeLoading();
-                messageFactory.showMessage('error',result.desc);
-            }
-          var data = {"page":"1","rows":20,"bf_dr":1}
-          var url = '/admin/base/baseFactoryControl/dataGrid.action';
-          http.post(url,data,success,error);
-      }
-      $scope.queryFacList();
-  
-  
-      /**
-       * 支付类型列表
-       */
-      $scope.changeRateList = [];
-      $scope.queryChangeRateList = function(){
-        var success = function(result){
-          $scope.changeRateList = result.data;
-          // $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
-        }
-        var error = function(result){
-            messageFactory.closeLoading();
-            messageFactory.showMessage('error',result.desc);
-        }
-          var url = '/admin/base/baseDataControl/detailItem.action?codekey=2203';
-          http.post(url,null,success,error);
-      }
-      $scope.queryChangeRateList();
-  })
+	$scope.addAll = function (objList, index) {
+
+		for (var i = 0, len = objList.length; i < len; i++) {
+			$scope.chooseGoods(objList[i], index + i);
+		}
+	}
+
+	/**
+	 * 添加行
+	 */
+	$scope.addLine = function (type) {
+		console.log(type);
+		var typeArr = type.split(",");
+		if (typeArr[0] == 1) {
+			$scope.groupList[typeArr[1]].dataList.push({});
+		} else if (typeArr[0] == 4) {
+			$scope.couponRelationList.push({});
+		} else if (typeArr[0] == 5) {
+			$scope.groupList.push({ 'dataList': [{}],"num":0 });
+		} else if (typeArr[0] == 3) {
+			$scope.ladderList.push({});
+		}else if (typeArr[0] == 6) {
+			$scope.spreadList.push({"pps_skuid": "", "pps_productid": '', "pps_productid_nameref": '',"pps_ticket_limit_is":"Y","pps_product_num": 8,"pps_valid_day":30,"pps_ticket_hour1start":"00:01","pps_ticket_hour1end":"23:59"});
+		}
+	}
+
+	/**
+	 * 移除行
+	 */
+	$scope.removeLine = function (index, type) {
+		var typeArr = type.split(",");
+		if (typeArr[0] == 1) {
+			if ($scope.groupList[typeArr[1]].dataList.length > 1) {
+				$scope.groupList[typeArr[1]].dataList.splice(index, 1);
+				$scope.cal();
+			} else {
+				messageFactory.showMessage('error', "至少保留一条记录");
+			}
+
+		} else if (typeArr[0] == 4) {
+			if ($scope.couponRelationList.length > 1) {
+				$scope.couponRelationList.splice(index, 1);
+				// changeFrameHeight('index.'+$state.current.name);
+			} else {
+				messageFactory.showMessage('error', "至少保留一条记录");
+			}
+		} else if (typeArr[0] == 5) {
+			if ($scope.groupList.length > 1) {
+				$scope.groupList.splice(index, 1);
+				// changeFrameHeight('index.'+$state.current.name);
+			} else {
+				messageFactory.showMessage('error', "至少保留一条记录");
+			}
+		} else if (typeArr[0] == 3) {
+			if ($scope.ladderList.length > 1) {
+				$scope.ladderList.splice(index, 1);
+				// changeFrameHeight('index.'+$state.current.name);
+			} else {
+				messageFactory.showMessage('error', "至少保留一条记录");
+			}
+		}else if (typeArr[0] == 6) {
+			if ($scope.spreadList.length > 1) {
+				$scope.spreadList.splice(index, 1);
+				// changeFrameHeight('index.'+$state.current.name);
+			} else {
+				messageFactory.showMessage('error', "至少保留一条记录");
+			}
+		}
+	}
+
+
+	$scope.lineNum = 0;
+	$scope.subTotal = 0;
+
+	$scope.showDroplist = function (event, fun, type) {
+		activityDetailFactory.showDroplist($scope, event, fun, type);
+	};
+
+	/**
+	 * 保存
+	 */
+	$scope.submit = function () {
+		$scope.vo.ppm_def3 = "1,2";
+
+		if ($scope.vo.ppm_name == undefined || $scope.vo.ppm_name == "") {
+			messageFactory.showMessage('error', '活动名不能为空');
+			return;
+		}
+
+		if( $scope.vo.ppm_picture==undefined || $scope.vo.ppm_picture==""){
+			messageFactory.showMessage('error','请上传活动图片');
+			return;
+		}
+
+		if ($scope.vo.ppm_startdate < dateUtil.getDate2()) {
+			messageFactory.showMessage('error', '活动开始日期不能小于当前日期');
+			return;
+		}
+		if ($scope.vo.ppm_startdate > $scope.vo.ppm_enddate) {
+			messageFactory.showMessage('error', '活动结束时间不能小于开始时间');
+			return;
+		}
+		//$scope.getDeliveryCheckedIds();
+		if (!$scope.vo.ppm_def3) {
+			messageFactory.showMessage('error', '请选择配送方式！');
+			return;
+		}
+
+		$scope.getPayMethodCheckedIds();
+		if (!$scope.vo.ppm_paymethod) {
+			messageFactory.showMessage('error', '请选择支付方式！');
+			return;
+		}
+
+		$scope.getPayWayCheckedIds();
+		if (!$scope.vo.ppm_payway) {
+			messageFactory.showMessage('error', '请选择支付类型！');
+			return;
+		}
+
+		if ($scope.isLabber) {
+			$scope.vo.ppm_isladder = 1;
+		} else {
+			$scope.vo.ppm_isladder = 2;
+		}
+
+
+		var reg = /^\d{1,10}$/;
+
+
+		// 团购 start
+		if ($scope.isgroup) {
+			$scope.vo.ppm_isgroup = "Y";
+		} else {
+			$scope.vo.ppm_isgroup = "N";
+		}
+
+
+		if ($scope.vo.ppm_isgroup == "Y") {
+			if (!reg.test($scope.vo.ppm_valid_day)) {
+				messageFactory.showMessage('error', "有效天数不能包含除数字以外的字符");
+				return false;
+			}
+
+
+			if (!$scope.vo.ppm_group_price) {
+				messageFactory.showMessage('error', "请输入团购价格");
+				return false;
+			}
+
+			if (!reg.test($scope.vo.ppm_limit_num)) {
+				messageFactory.showMessage('error', "参入次数不能包含除数字以外的字符");
+				return false;
+			}
+
+
+			if (!reg.test($scope.vo.ppm_group_peopler_num)) {
+				messageFactory.showMessage('error', "开团人数不能包含除数字以外的字符");
+				return false;
+			}
+
+
+		}
+
+		// 团购 end
+
+
+
+		// 参加活动的商品
+		var goodsList = [];
+		for (j in $scope.groupList) {
+			for (i in $scope.groupList[j].dataList) {
+				if (!$scope.groupList[j].dataList[i].ps_id) {
+					messageFactory.showMessage('error', '请选择要参加活动的商品');
+					return;
+				}
+				var detailInfo = {}
+				var item = $scope.groupList[j].dataList[i];
+
+				var reg = /^\d{1,10}$/;
+				if (!reg.test(item.pm_num) || item.pm_num <= 0) {
+					messageFactory.showMessage('error', '商品数量只能为正整数');
+					return;
+				}
+				detailInfo["ppd_groupcode"] = j;
+				detailInfo["ppd_groupnum"] = $scope.groupList[j].num;
+				detailInfo["ppd_productid"] = item.ps_productid;
+				detailInfo["ppd_productid_nameref"] = item.pm_title;
+				detailInfo["ppd_product_describe"] = item.pm_text;
+				detailInfo["ppd_product_num"] = item.pm_num;
+				detailInfo["ppd_product_price"] = item.ps_price;
+				detailInfo["ppd_skuid"] = item.ps_id;
+				// 计算单个商品团购价格
+				if ($scope.vo.ppm_isgroup == "Y") {
+					var price = ($scope.vo.ppm_group_price * (
+						item.ps_price / $scope.vo.ppm_amount_group
+					)).toFixed(2);
+					detailInfo["ppd_product_gourp_price"] = price;
+				}
+				goodsList.push(detailInfo);
+			}
+		}
+
+		
+
+		var goodsListStr = JSON.stringify(goodsList);
+
+		if (!$scope.vo.ppm_picture) {
+			$scope.vo.ppm_picture = $scope.dataList[0].pm_picture;
+		}
+
+		//赠品 数据
+		
+		var giftList = [];
+		if ($scope.isGift) {
+			for (i in $scope.ladderList) {
+				if (!$scope.ladderList[i].ppg_skuid) {
+					if ($scope.ladderList[i].ppg_minnum || $scope.ladderList[i].ppg_gift_num) {
+						messageFactory.showMessage('error', "请选择赠品 ");
+						return false;
+					} else {
+						continue;
+					}
+				}
+				var ppgInfo = {}
+				var item = $scope.ladderList[i];
+	
+				for (j in $scope.ladderList) {
+					if (!$scope.ladderList[j].ppg_skuid) {
+						continue;
+					}
+				}
+	
+				if (!reg.test(item.ppg_gift_num)) {
+					messageFactory.showMessage('error', "赠品数量不能包含除数字以外的字符");
+					return false;
+				}
+				if (!item.ppg_gift_num || item.ppg_gift_num <= 0) {
+					messageFactory.showMessage('error', '请选择输入赠品数量且不能小于等于0');
+					return;
+				}
+	
+				ppgInfo = item;
+	
+				giftList.push(ppgInfo);
+			}
+	
+			if (giftList.length < 1) {
+				messageFactory.showMessage('error', '请选择参加活动的赠品');
+				return;
+			}
+		}
+		var giftListStr = JSON.stringify(giftList);
+
+
+		// 参加活动的优惠券
+		var couponRelationListStr = "";
+		$scope.couponRelationList2 = [];
+		if ($scope.vo.ppm_iscoupon == 1) {
+			for (i in $scope.couponRelationList) {
+				if (!$scope.couponRelationList[i].cr_couponid) {
+					continue;
+				}
+
+				if (!reg.test($scope.couponRelationList[i].cr_num)) {
+					messageFactory.showMessage('error', "优惠券数量不能包含除数字以外的字符");
+					return false;
+				}
+				if (!$scope.couponRelationList[i].cr_num || $scope.couponRelationList[i].cr_num <= 0) {
+					messageFactory.showMessage('error', '请选择输入优惠券数量且不能小于等于0');
+					return;
+				}
+
+				$scope.couponRelationList2.push($scope.couponRelationList[i]);
+
+			}
+
+			if ($scope.couponRelationList2.length < 1) {
+				messageFactory.showMessage('error', '请选择参加活动的优惠券');
+				return;
+			}
+
+			couponRelationListStr = JSON.stringify($scope.couponRelationList2);
+		}
+
+		// 推荐奖励
+		var spreadListArr = [];
+		if ($scope.vo.ppm_isspread==1) {
+			for (i in $scope.spreadList) {
+				if (!$scope.spreadList[i].pps_skuid) {
+					continue;
+				}
+				var spreadInfo = {}
+				var item = $scope.spreadList[i];
+	
+				
+				
+				if (!item.pps_product_num || item.pps_product_num <= 0) {
+					messageFactory.showMessage('error', '请选择输入赠品数量且不能小于等于0');
+					return;
+				}
+	
+				spreadInfo = item;
+	
+				spreadListArr.push(spreadInfo);
+			}
+	
+			if (spreadListArr.length < 1) {
+				messageFactory.showMessage('error', '请选择参加活动的赠品');
+				return;
+			}
+		}
+		var spreadListStr = JSON.stringify(spreadListArr);
+
+
+
+
+		if (!$scope.vo.ppm_ticket_valid_day) {
+			messageFactory.showMessage('error', "水票有效天数不能为空且为正数");
+			return false;
+		}
+		if (!reg.test($scope.vo.ppm_ticket_valid_day)) {
+			messageFactory.showMessage('error', "水票有效天数不能包含除数字以外的字符");
+			return false;
+		}
+
+
+		if ($scope.vo.ppm_ticket_limit_is == "Y") {
+
+			$scope.vo.ppm_ticket_hour1start = $("#hour1").val();
+			$scope.vo.ppm_ticket_hour1end = $("#hour2").val();
+			$scope.vo.ppm_ticket_hour2start = $("#hour3").val();
+			$scope.vo.ppm_ticket_hour2end = $("#hour4").val();
+			$scope.vo.ppm_ticket_hour3start = $("#hour5").val();
+			$scope.vo.ppm_ticket_hour3end = $("#hour6").val();
+
+
+		}
+
+		var success = function (result) {
+			messageFactory.showMessage('success', '提交成功');
+			$scope.goBack();
+			$scope.dataList = [{}];
+			$scope.subTotal = 0;
+		}
+		var error = function (result) {
+			messageFactory.showMessage('error', result.desc);
+		}
+
+		$scope.vo.ppm_type = 7;
+		$scope.vo.ppm_range = 1;
+		$scope.vo.ppm_group_type = 3;
+		EzConfirm.create({
+			heading: '提示',
+			text: "您确定提交吗？"
+		}).then(function () {
+			var url = "/admin/promotion/productPromotionMainControl/update.action";
+			http.post(url, $.extend({ 'ppdListStr': goodsListStr, "gfListStr": giftListStr, "promotionAreas": $scope.checkedAreas, "promotionGrades": $scope.getCheckedIds, "couponListStr": couponRelationListStr, "spreadListStr":spreadListStr }, $scope.vo), success, error);
+		}, function () {
+
+		});
+	}
+
+
+
+
+	// 返回
+	$scope.goBack = function () {
+
+		$state.go("index.marketing.combinationPackage");
+
+	}
+
+	/**
+	 * 显示图片上传
+	 */
+	$scope.upImage = function ($event) {
+		activityDetailFactory.upImage($scope, $event);
+	};
+
+	/**
+	 * 加减数目
+	 */
+	$scope.changeNum = function (x, name, opt, type) {
+		activityDetailFactory.changeNum($scope, x, name
+			, opt, type);
+	}
+
+	/**
+	 * 按金额与按数量
+	 */
+	$scope.promotionTypeChange = function () {
+		if ($scope.vo.ppm_promotion_type == 1) {
+			$scope.vo.ppm_promotion_rules = 1;
+		} else {
+			$scope.vo.ppm_promotion_rules = 4;
+		}
+	}
+
+	$scope.addSection = function () {
+		$scope.ladderList.push({});
+	}
+
+	$scope.delSection = function (index) {
+		$scope.ladderList.splice(index, 1);
+	}
+
+	/**
+	 * 查询树
+	 */
+	$scope.getBaseArea = function () {
+		activityDetailFactory.getBaseArea($scope, setting);
+	}
+
+	/**
+	 * 客户等级
+	 */
+	/*$scope.getBaseGradeList = function(){
+			
+    	var success = function(result){
+			$scope.gradeList = result.data;
+		};
+		var error = function(result){
+			messageFactory.closeLoading();
+			messageFactory.showMessage('error',result.desc);
+			
+		};
+		
+		var url = '/admin/base/baseGradeControl/getItemList.action';
+		
+		http.post(url,{"bg_state":1,bg_shopid:$rootScope.USER.shopId},success,error);
+	}
+	
+	$scope.getBaseGradeList();*/
+
+
+	$scope.getCheckedIds = function () {
+		$scope.checkedIds = "";
+		var ids = [];
+		$("input.js_grade:checked").not(":disabled").each(function () {
+			var selectId = $(this).attr("data-id");
+			//  console.log(selectId);
+			ids.push(selectId);
+		});
+		return ids.join(',');
+	}
+
+	/**
+	 * 计算
+	 */
+	$scope.cal = function () {
+		console.log(111111111);
+		for (j in $scope.groupList) {
+			var amount = 0;
+			for (i in $scope.groupList[j].dataList) {
+				if (!$scope.groupList[j].dataList[i].ps_id) {
+					continue;
+				}
+				if (!$scope.groupList[j].dataList[i].ps_price) {
+					$scope.groupList[j].dataList[i].ps_price = 0;
+				}
+
+				if (!$scope.groupList[j].dataList[i].pm_num) {
+					$scope.groupList[j].dataList[i].pm_num = 1;
+				}
+				var reg = /^\d{1,10}$/;
+				if (!reg.test($scope.groupList[j].dataList[i].pm_num) || $scope.groupList[j].dataList[i].pm_num <= 0) {
+					messageFactory.showMessage('error', '商品数量只能为正整数');
+					return;
+				}
+
+				amount += $scope.groupList[j].dataList[i].ps_price * $scope.groupList[j].dataList[i].pm_num;
+			}
+			
+			$scope.groupList[j].totalAmount = amount.toFixed(2);
+		}
+
+	}
+
+	$scope.upImage = function ($event) {
+
+		$scope.ue_myeditor.addListener("beforeInsertImage", function (t, arg) {
+			var imgs = "";
+
+			if (arg.length > 0) {
+				imgs = arg[0].src;
+			}
+			var imgsArr = imgs.split(",");
+			$scope.vo.ppm_picture_show = imgsArr[0].split("|")[0].replace("m.shequkuaixian.com", "imgtest.sqkx.net");
+			$scope.vo.ppm_picture = imgsArr[0].split("|")[0].split("static/upload/image")[1];
+
+		});
+
+		var myImage = $scope.ue_myeditor.getDialog("insertimage");
+		myImage.open();
+	};
+
+
+	/**
+* 支付方式
+*/
+	$scope.getPayMethodCheckedIds = function () {
+		$scope.payMethodCheckedIds = "";
+		var ids = [];
+		$("input[name='payMethod']:checked").not(":disabled").each(function () {
+			var selectId = $(this).val();
+			//  console.log(selectId);
+			ids.push(selectId);
+		});
+		$scope.vo.ppm_paymethod = ids.join(',');
+	}
+
+	/**
+* 支付方式列表
+*/
+	$scope.payMethodList = [];
+	$scope.queryPayMethodList = function () {
+		var success = function (result) {
+
+			$scope.payMethodList = result.data;
+		}
+		var error = function (result) {
+			messageFactory.closeLoading();
+			messageFactory.showMessage('error', result.desc);
+		}
+		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2163';
+		http.post(url, null, success, error);
+	}
+	$scope.queryPayMethodList();
+
+	$scope.getPayWayCheckedIds = function () {
+		$scope.payWayCheckedIds = "";
+		var ids = [];
+		$("input[name='payWay']:checked").not(":disabled").each(function () {
+			var selectId = $(this).val();
+			//  console.log(selectId);
+			ids.push(selectId);
+		});
+		$scope.vo.ppm_payway = ids.join(',');
+	}
+	/**
+	 * 国家
+	 */
+	$scope.countryList = [];
+	$scope.queryCountryList = function () {
+		var success = function (result) {
+			$scope.countryList = result.data;
+			// $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
+		}
+		var error = function (result) {
+			messageFactory.closeLoading();
+			messageFactory.showMessage('error', result.desc);
+		}
+		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2008';
+		http.post(url, null, success, error);
+	}
+	$scope.queryCountryList();
+	/**
+	 * 充电类型
+	 */
+	 $scope.chargeTypeList = [];
+	 $scope.queryChargeTypeList = function () {
+		 var success = function (result) {
+			 $scope.chargeTypeList = result.data;
+			 // $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
+		 }
+		 var error = function (result) {
+			 messageFactory.closeLoading();
+			 messageFactory.showMessage('error', result.desc);
+		 }
+		 var url = '/admin/base/baseDataControl/detailItem.action?codekey=2010';
+		 http.post(url, null, success, error);
+	 }
+	 $scope.queryChargeTypeList();
+	 /**
+	 * 键盘类型
+	 */
+	$scope.keyTypeList = [];
+	$scope.queryKeyTypeList = function () {
+		var success = function (result) {
+			$scope.keyTypeList = result.data;
+			// $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
+		}
+		var error = function (result) {
+			messageFactory.closeLoading();
+			messageFactory.showMessage('error', result.desc);
+		}
+		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2009';
+		http.post(url, null, success, error);
+	}
+	$scope.queryKeyTypeList();
+	/**
+	 * 操作系统
+	 */
+	 $scope.systemList = [];
+	 $scope.querySystemList = function () {
+		 var success = function (result) {
+			 $scope.systemList = result.data;
+			 // $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
+		 }
+		 var error = function (result) {
+			 messageFactory.closeLoading();
+			 messageFactory.showMessage('error', result.desc);
+		 }
+		 var url = '/admin/base/baseDataControl/detailItem.action?codekey=2011';
+		 http.post(url, null, success, error);
+	 }
+	 $scope.querySystemList();
+	 /**
+	 * 国家
+	 */
+	$scope.payWayList = [];
+	$scope.queryPayWayList = function () {
+		var success = function (result) {
+			$scope.payWayList = result.data;
+			// $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
+		}
+		var error = function (result) {
+			messageFactory.closeLoading();
+			messageFactory.showMessage('error', result.desc);
+		}
+		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2166';
+		http.post(url, null, success, error);
+	}
+	$scope.queryPayWayList();
+
+
+	
+	$scope.change2num = function(){
+		for (i in $scope.groupList) {
+			$scope.groupList[i].num = Math.abs(parseInt($scope.groupList[i].num));
+			if (!$scope.groupList[i].num) {
+				$scope.groupList[i].num = 0;
+			}
+		}
+	}
+
+	$scope.upVideo = function($event) {
+		$scope.ue_myvideoeditor.addListener("afterUpVideo",
+			function(t, arg) {
+				$scope.vo.ppm_def1 = arg[0].url;
+				$scope.vo.ppm_def1_show = arg[0].url;
+			}
+		);
+		var myvideo = $scope.ue_myvideoeditor
+				.getDialog("insertvideo");
+		myvideo.open();
+	};
+
+	$scope.clearVideo = function(type){
+		if (type == 1) {
+			$scope.vo.ppm_def1 = "";
+			$scope.vo.ppm_def1_show = "";
+		}else if(type==6){
+			$scope.vo.ppm_desc_pic = "";
+			$scope.vo.ppm_desc_pic_show = "";
+	
+		}else {
+			$scope.vo.ppm_home_picture = "";
+			$scope.vo.ppm_home_picture_show = "";
+	
+		}
+	}
+
+	$scope.upImage2 = function($event) {
+	    
+		$scope.ue_myeditor2.addListener("beforeInsertImage", function(t, arg) {
+		  var imgs = "";
+
+		  if (arg.length > 0) {
+			imgs = arg[0].src;
+		  }
+		  var imgsArr = imgs.split(",");
+		$scope.vo.ppm_def2_show = imgsArr[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
+		 $scope.vo.ppm_def2 =imgsArr[0].split("|")[0].split("static/upload/image")[1];
+		 
+		});
+		  
+		  var myImage = $scope.ue_myeditor2.getDialog("insertimage");
+		  myImage.open();
+	};
+
+	$scope.upImage3 = function($event) {
+	    
+		$scope.ue_myeditor3.addListener("beforeInsertImage", function(t, arg) {
+		  var imgs = "";
+
+		  if (arg.length > 0) {
+			imgs = arg[0].src;
+		  }
+		  var imgsArr = imgs.split(",");
+		$scope.vo.ppm_home_picture_show = imgsArr[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
+		 $scope.vo.ppm_home_picture =imgsArr[0].split("|")[0].split("static/upload/image")[1];
+		 
+		});
+		  
+		  var myImage = $scope.ue_myeditor3.getDialog("insertimage");
+		  myImage.open();
+	};
+
+	$scope.upImage4 = function($event) {
+	    
+		$scope.ue_myeditor4.addListener("beforeInsertImage", function(t, arg) {
+		  var imgs = "";
+
+		  if (arg.length > 0) {
+			imgs = arg[0].src;
+		  }
+		  var imgsArr = imgs.split(",");
+		$scope.vo.ppm_share_picture_show = imgsArr[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
+		 $scope.vo.ppm_share_picture =imgsArr[0].split("|")[0].split("static/upload/image")[1];
+		 
+		});
+		  
+		  var myImage = $scope.ue_myeditor4.getDialog("insertimage");
+		  myImage.open();
+	};
+
+	$scope.upImage6 = function($event) {
+	    
+		$scope.ue_myeditor6.addListener("beforeInsertImage", function(t, arg) {
+		  var imgs = "";
+
+		  if (arg.length > 0) {
+			imgs = arg[0].src;
+		  }
+		  var imgsArr = imgs.split(",");
+		$scope.vo.ppm_desc_pic_show = imgsArr[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
+		 $scope.vo.ppm_desc_pic =imgsArr[0].split("|")[0].split("static/upload/image")[1];
+		 
+		});
+		  
+		  var myImage = $scope.ue_myeditor6.getDialog("insertimage");
+		  myImage.open();
+	};
+	$scope.upImage7 = function($event) {
+	    
+		$scope.ue_myeditor7.addListener("beforeInsertImage", function(t, arg) {
+		  var imgs = "";
+
+		  if (arg.length > 0) {
+			imgs = arg[0].src;
+		  }
+		  var imgsArr = imgs.split(",");
+		$scope.vo.ppm_isspread_picture_show = imgsArr[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
+		 $scope.vo.ppm_isspread_picture =imgsArr[0].split("|")[0].split("static/upload/image")[1];
+		 
+		});
+		  
+		  var myImage = $scope.ue_myeditor7.getDialog("insertimage");
+		  myImage.open();
+	};
+	$scope.upImage8 = function($event) {
+	    
+		$scope.ue_myeditor8.addListener("beforeInsertImage", function(t, arg) {
+		  var imgs = "";
+
+		  if (arg.length > 0) {
+			imgs = arg[0].src;
+		  }
+		  var imgsArr = imgs.split(",");
+		$scope.vo.ppm_isspread_s_picture_show = imgsArr[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
+		 $scope.vo.ppm_isspread_s_picture =imgsArr[0].split("|")[0].split("static/upload/image")[1];
+		 
+		});
+		  
+		  var myImage = $scope.ue_myeditor8.getDialog("insertimage");
+		  myImage.open();
+	};
+	
+
+	$scope.useTypeList = [];
+	$scope.queryUseTypeList = function () {
+		var success = function (result) {
+
+			$scope.useTypeList = result.data;
+		}
+		var error = function (result) {
+			messageFactory.closeLoading();
+			messageFactory.showMessage('error', result.desc);
+		}
+		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2189';
+		http.post(url, null, success, error);
+	}
+	$scope.queryUseTypeList();
+
+
+	$scope.changeCheck = function(x) {
+		if (x.pps_ticket_limit_is=='Y') {
+			x.pps_ticket_limit_is='N';
+		} else {
+			x.pps_ticket_limit_is='Y';
+			x.pps_ticket_hour1start = "00:01"
+			x.pps_ticket_hour1end = "23:59"
+		}
+	}
+
+	$scope.upImage9 = function($event) {
+	    
+		$scope.ue_myeditor9.addListener("beforeInsertImage", function(t, arg) {
+		  var imgs = "";
+
+		  if (arg.length > 0) {
+			imgs = arg[0].src;
+		  }
+		  var imgsArr = imgs.split(",");
+		$scope.vo.ppm_userrule_pic_show = imgsArr[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
+		$scope.vo.ppm_userrule_pic =imgsArr[0].split("|")[0].split("static/upload/image")[1];
+		 
+		});
+		  
+		  var myImage = $scope.ue_myeditor9.getDialog("insertimage");
+		  myImage.open();
+	};
+
+	
+	$scope.machineList = [];
+	$scope.machinePager = {page:1,rows:'100',sort:'pm_id',order:'desc',pm_shopid:$rootScope.USER.shopId};
+	$scope.queryMachineList = function(){
+
+		messageFactory.showLoading();
+		var success = function(result){
+			$scope.machineList = result.data.rows;
+			$scope.machineList.unshift({"pm_id":"","pm_title":"请选择商品"});
+			messageFactory.closeLoading();
+		};
+		var error = function(result){
+			messageFactory.closeLoading();
+			messageFactory.showMessage('error',result.desc);
+			
+		};
+		var url = '/admin/product/productMainControl/dataGrid.action';
+		http.post(url,$.extend({},$scope.machinePager),success,error);
+	}
+	$scope.queryMachineList();
+})

@@ -12,6 +12,8 @@ function routeFn($stateProvider,$urlRouterProvider){
             deps:["$ocLazyLoad",function($ocLazyLoad){
                 return $ocLazyLoad.load(
                 		{files:[
+                            "css/product/product.css",
+                            "css/goods/goods.css",
                                 "js/controllerRoute/phone/ctr_phone.js"
             			        ]});
             }]
@@ -33,7 +35,7 @@ function routeFn($stateProvider,$urlRouterProvider){
         } 
     })
     
- //手机列表
+ //手机添加
  .state("index.phone.phoneAdd",{
     url:"/phoneAdd",
     templateUrl:"views/phone/phoneAdd.html",
@@ -42,6 +44,8 @@ function routeFn($stateProvider,$urlRouterProvider){
         deps:["$ocLazyLoad",function($ocLazyLoad){
             return $ocLazyLoad.load(
                     {files:[
+                           "css/product/product.css",
+                           "css/goods/goods.css",
                             "js/controllerRoute/phone/ctr_phoneAdd.js"
                             ]});
         }]
