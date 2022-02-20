@@ -175,7 +175,7 @@
 			<span class="xt_bzWenZi width-just">描述</span>
 			<div class="widthAuto zk_controlInput">
 				<div style="margin-bottom:1.25rem;width:664px;height: 300px; display:inline-block; z-index:1"
-					id="myeditor1" get-ue="ue_myeditor1 = getUe" class="ueditor" ng-model="vo.ppm_describe"
+					id="myeditor1" get-ue="ue_myeditor1 = getUe" class="ueditor" ng-model="pm_description"
 					config="_simpleConfig"></div>
 			</div>
 		</div>
@@ -189,115 +189,4 @@
 				class="btnStyle Btncolor2 BtnHover2">返回</a></div>
 	</div>
 
-	<!-- 遮挡层 -->
-	<div class="dialog" ng-show="ac_showHtml.show">
-		<div class="dialog-zdc"></div>
-		<!-- 遮挡层 -->
-
-		<!-- 选择商品 -->
-		<div class="dg-xg-zh" style="width: 620px" ng-if="ac_showHtml.warn_html == 1">
-			<div class="dg-xg-js" style="width: 620px">
-				选择商品
-				<div class="dg-cancle" ng-click="cancleBtnClick()"></div>
-			</div>
-			<div class="dg-content">
-				<div class="xt_filter floatLeft" style=" width: 370px; margin-left:10px; margin-bottom: 10px;">
-					<input type="text" ng-model="searchParam.searchKey" placeholder="请输入关键词搜索"
-						style="width:235px; height:20px; margin-right: 5px;">
-					<div class="btnStyle Btncolor2 BtnHover2" ng-click="queryGoodsList();">搜索</div>
-				</div>
-				<div class="xt_filter mtop16" style="display: block;">
-					<table class="table table1 tableTh tdHover" style="max-height: 300px; overflow: auto;">
-						<thead>
-							<tr>
-								<th style="width: 15px;"><input type="checkbox" name="check_all"
-										ng-click="checkFun('check_all');"></th>
-								<th class="colorCenter">商品编码</th>
-								<th class="colorCenter">商品国际码</th>
-								<th class="colorCenter" style="width: 275px">商品名称</th>
-							</tr>
-						</thead>
-						<tbody class="borBottom">
-							<tr ng-repeat="x in dataList" ng-click="checkFun(x.gp_id+'_'+$index,$event);">
-								<td><input type="checkbox" name="id_{{x.gp_id}}_{{$index}}"></td>
-								<td class="colorCenter">{{x.gb_goods_code}}</td>
-								<td class="colorCenter">{{x.gb_international_code}}</td>
-								<td class="colorCenter">{{x.gb_title}}</td>
-							</tr>
-
-						</tbody>
-					</table>
-					<tm-pagination conf="pager"></tm-pagination>
-				</div>
-
-			</div>
-			<div class="dg-bottom-color">
-				<div class="dg-submint">
-					<div class="btnStyle Btncolor1 BtnHover1" ng-click="sureBtnClick();">确定</div>
-				</div>
-			</div>
-		</div>
-		<!-- 选择商品 -->
-
-		<script>
-
-			$(function () {
-				$('.droplistWrap2').hide()
-				$(document).on('click', function (ev) {
-					if ($(ev.target).parents('.SelectMulti-Container2').length) { return }
-					$('.droplistWrap2').hide()
-				})
-
-				//全选框不好使时
-				$('body').on('click', '.js_selectAll', function () {
-					var thisObj = $(this);
-					if (thisObj.is(':checked')) {
-						// $('.select').attr('checked', true); 
-						$('.js_select').prop("checked", true);
-						$('.js_selectAll').prop("checked", true);
-
-					} else {
-						$('.js_select').attr('checked', false);
-						$('.js_selectAll').prop("checked", false);
-					}
-				});
-
-				$('body').on('click', '.js_select', function (event) {
-					event.stopPropagation();
-					var thisObj = $(this);
-					if (thisObj.is(':checked')) {
-						// $('.select').attr('checked', true); 
-						// $('.select').prop("checked", true);  					 					
-					} else {
-						$('.js_selectAll').prop("checked", false);
-					}
-				});
-			});
-
-			function showDropList(obj) {
-				$('.droplistWrap2').hide();
-				$(obj).parent().find('.droplistWrap2').toggle();
-				console.log($(obj).parent().find('.droplistWrap2'))
-			};
-		</script>
-
-		<style>
-			.group-title {
-				height: 55px;
-				line-height: 55px;
-				font-size: 20px;
-				padding-left: 20px;
-			}
-
-			.group-title span {
-				margin-left: 100px;
-			}
-
-			.group-title span input {
-				line-height: 20px;
-			}
-
-			.group-title img {
-				margin-top: 20px;
-			}
-		</style>
+	

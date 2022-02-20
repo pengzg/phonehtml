@@ -2,7 +2,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 	$state, $timeout, http, $stateParams, EzConfirm, $compile, dateUtil, messageFactory, $q, $http, activityDetailFactory, $rootScope) {
 
 
-	$scope.vo = {ppm_use_type:1,ppm_membertype:1, ppm_ticket_valid_day:360, ppm_ticket_limit_is:"N", ppm_def3: "", "ppm_payway": "", "ppm_iscoupon": 2, ppm_isshareoffers: "1", ppm_paymethod: "", "ppm_group_type": 1, 'ppm_promotion_type': 1, "ppm_promotion_rules": 1, "ppm_range": 1, "ppm_state": 2, "ppm_amount_group": 0, "ppm_num_group": 0, "ppm_valid_day": 1, "ppm_group_price": 1, "ppm_limit_num": 0, "ppm_group_peopler_num": 2 ,"ppm_box_show":2,"ppm_isspread":2,"ppm_userrule":2,"ppm_def11":1,"ppm_def8":2,"ppm_def9":1,"ppm_isexchangecode":2,"ppm_machineid":"","ppm_def14":2};
+	$scope.vo = {pm_state:1,pm_dr:1};
 	
 
 	$scope._simpleConfig = {
@@ -72,9 +72,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 	 * 保存
 	 */
 	$scope.submit = function () {
-		$scope.vo.ppm_def3 = "1,2";
-
-		
+	
 
 		var success = function (result) {
 			messageFactory.showMessage('success', '提交成功');
@@ -91,8 +89,8 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 			heading: '提示',
 			text: "您确定提交吗？"
 		}).then(function () {
-			var url = "/admin/promotion/productPromotionMainControl/update.action";
-			http.post(url, $.extend({ 'ppdListStr': goodsListStr, "gfListStr": giftListStr, "promotionAreas": $scope.checkedAreas, "promotionGrades": $scope.getCheckedIds, "couponListStr": couponRelationListStr, "spreadListStr":spreadListStr }, $scope.vo), success, error);
+			var url = "/admin/phone/phoneMainControl/update.action";
+			http.post(url,  $scope.vo, success, error);
 		}, function () {
 
 		});

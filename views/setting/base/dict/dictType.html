@@ -29,7 +29,7 @@
 					<!-- <th ng-class="sortFun('bdt_type',true);" ng-click="clickSortFun('bdt_type');">类型</th> -->
 					<th class="colorCenter noSortCss">描述</th>
 					<!-- ng-class="sortFun('bdt_des',true);" ng-click="clickSortFun('bdt_des');" -->
-					<th ng-class="sortFun('bdt_status',true);" ng-click="clickSortFun('bdt_status');">状态</th>
+					<th ng-class="sortFun('bdt_state',true);" ng-click="clickSortFun('bdt_state');">状态</th>
 					<th ng-class="sortFun('',false);">操作</th>
 				</tr>
 			</thead>
@@ -42,7 +42,7 @@
 					<!-- <td>{{x.bdt_isgroup_nameref}}</td> -->
 					<!-- <td>{{x.bdt_type}}</td> -->
 					<td>{{x.bdt_des}}</td>
-					<td>{{x.bdt_status_nameref}}</td>
+					<td>{{x.bdt_state_nameref}}</td>
 					<td class="colorCenter">
 						<a class="common_btns common_detail" ng-click="showViewDetail(x.bdt_id)" title="查看"></a>
 						<a class="common_btns common_edit" ng-click="toEdit(x.bdt_id)" title="编辑"></a>
@@ -141,7 +141,7 @@
 								<span class="f14">状态：</span>
 							</div>
 							<div class="zk_controlInput" style=" width: 120px;">
-								<zk-control-group ng-model="vo.bdt_status" data-option='[{"0":"禁用"},{"1":"启用"}]'></zk-control-group>
+								<zk-control-group ng-model="vo.bdt_state" data-option='[{"0":"禁用"},{"1":"启用"}]'></zk-control-group>
 							</div>
 						</div>
 					</div>
@@ -232,7 +232,7 @@
 								<span class="f14">状态：</span>
 							</div>
 							<div class="zk_controlInput" style=" width: 190px;">
-								<span class="f14">{{vo.bdt_status_nameref}}</span>
+								<span class="f14">{{vo.bdt_state_nameref}}</span>
 							</div>
 						</div>
 					</div>
