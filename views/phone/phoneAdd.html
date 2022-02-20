@@ -58,17 +58,17 @@
 				<div>
 					<div style="float:left;margin:5px;position: relative;" ng-repeat="x in picList track by $index"
 						ng-mouseenter="showTips($index)" ng-mouseleave="hideTips($index)">
-						<div class="js_setCover{{$index}}" ng-show="x.pp_ismain==0"
+						<div class="js_setCover{{$index}}" ng-show="x.ba_is_main==0"
 							style="z-index:4;display:none;position: absolute;background: #eee;width: 102px;height: 22px;text-align:center;"
 							ng-click="del($index)">删除</div>
 						<div class="gsGoodsImgs" style="width:100px; height:100px;border:1px solid #ddd;">
-							<img alt="" src="{{x.pp_path_show?x.pp_path_show:'img/prizedef.jpg'}}"
+							<img alt="" src="{{x.ba_path_show?x.ba_path_show:'img/prizedef.jpg'}}"
 								style="width:100px; height:100px;">
 						</div>
-						<div ng-show="x.pp_ismain==1"
+						<div ng-show="x.ba_is_main==1"
 							style="position: absolute;background: #eee;width: 102px;height: 22px;top: 40px;text-align:center;">
 							封面</div>
-						<div class="js_setCover{{$index}}" ng-show="x.pp_ismain==0"
+						<div class="js_setCover{{$index}}" ng-show="x.ba_is_main==0"
 							style="display:none;position: absolute;background: #eee;width: 102px;height: 22px;top: 78px;text-align:center;"
 							ng-click="setCover(x)">设置为封面</div>
 					</div>
