@@ -84,7 +84,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 			messageFactory.showMessage('error', result.desc);
 		}
 
-		
+		$scope.vo.attListStr = JSON.stringify($scope.picList);
 		EzConfirm.create({
 			heading: '提示',
 			text: "您确定提交吗？"
@@ -232,8 +232,8 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 	 * 显示图片上传
 	 */
 	 $scope.picList = [];
-	 $scope.pp_path_show = "";
-	 $scope.pp_path = "";
+	 $scope.ba_path_show = "";
+	 $scope.ba_path = "";
 
 	 var isImgEventExist = false;
 	 $scope.upImage = function($event, x, index) {
@@ -256,9 +256,9 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 						        	for (i in arg) {
 						        		imgs1 = arg[i].src;
 						        		var imgsArr1 = imgs1.split(",");
-							        	$scope.pp_path_show = imgsArr1[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
-							         	$scope.pp_path =imgsArr1[0].split("|")[0].split("static/upload/image")[1];
-							         	$scope.picList.push({"pp_path": $scope.pp_path,'pp_path_show':$scope.pp_path_show,"pp_ismain":"0"});
+							        	$scope.ba_path_show = imgsArr1[0].split("|")[0].replace("m.shequkuaixian.com","imgtest.sqkx.net");
+							         	$scope.ba_path =imgsArr1[0].split("|")[0].split("static/upload/image")[1];
+							         	$scope.picList.push({"ba_path": $scope.ba_path,'ba_path_show':$scope.ba_path_show,"ba_ismain":"0"});
 						        	}
 								}
 								
@@ -280,13 +280,13 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 	   * 设置商品图片
 	   */
 	  $scope.setCover = function(x){
-		$scope.vo.pm_picture = x.pp_path;
-		$scope.vo.pm_picture_show = x.pp_path_show;
+		$scope.vo.pm_cover = x.ba_path;
+		$scope.vo.pm_cover_show = x.ba_path_show;
 		for (i in $scope.picList) {
-			if ($scope.picList[i].pp_path == x.pp_path) {
-				$scope.picList[i].pp_ismain = 1;
+			if ($scope.picList[i].ba_path == x.ba_path) {
+				$scope.picList[i].ba_is_main = 1;
 			} else {
-				$scope.picList[i].pp_ismain = 0;
+				$scope.picList[i].ba_is_main = 0;
 			}
 		}
 	}

@@ -49,21 +49,12 @@
                         <thead>
                             <tr>
                                 <th>序号</th>
-                                <!-- <th>头像</th> -->
-                                <th>用户名</th>
-                                <th>申请日期</th>
-                                <th>申请金额</th>
-                                <!-- <th>税点</th>
-                                <th>税额金额</th> -->
-                                <th>到账金额</th>
-                                <th>姓名</th>
-                                <th>开户行</th>
-                                <th>银行账号</th>
-                                <th>身份证号</th>
-                                <th>手机</th>
-                                <th>状态</th>
-                                <th>审核时间</th>
-                                <th>审核意见</th>
+                                <th>手机名称</th>
+                                <th>型号</th>
+                                <th>品牌</th>
+                                
+                                <th>国家</th>
+                                
                                 
                                 
                                 <th>操作</th>
@@ -72,25 +63,14 @@
                         <tbody>
                             <tr ng-repeat="x in dataList">
                                 <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
-                                <!-- <td class="text-center f14" ><img width="20" ng-src="{{x.mb_img}}" ></td> -->
-                                <td class="text-center f14">{{x.gca_apply_member_id_nameref}}</td>
-                                <td class="text-center f14">{{x.gca_apply_time}}</td>
-                                <td class="text-center f14">{{x.gca_apply_amount}}</td>
-                                <!-- <td class="text-center f14">{{x.gca_tax_point}}</td>
-                                <td class="text-center f14">{{x.gca_tax_amount}}</td> -->
-                                <td class="text-center f14">{{x.gca_pay_amount}}</td>
-                                <td class="text-center f14">{{x.gca_bank_account_name}}</td>
-                                <td class="text-center f14">{{x.gca_bank_name}}</td>
-                                <td class="text-center f14">{{x.gca_bank_account_code}}</td>
-                                <td class="text-center f14">{{x.gca_member_idcard}}</td>
-                                <td class="text-center f14">{{x.gca_member_mobile}}</td>
-                                <td class="text-center f14">{{x.gca_audit_state_nameref}}</td>
-                                <td class="text-center f14">{{x.gca_audit_time}}</td>
-                                <td class="text-center f14">{{x.gca_audit_opinion}}</td>
+                                <td class="text-center f14">{{x.pm_name}}</td>
+                                <td class="text-center f14">{{x.pm_model}}</td>
+                                <td class="text-center f14">{{x.pm_brand_nameref}}</td>
+                                <td class="text-center f14">{{x.pm_country_nameref}}</td>
+                                
                               
                                 <td class="text-center f14">
-                                   <!--  <a class="red" style="display: inline-block;" class="common_offsell" ng-click="getDetail(x.mb_id)" title="查看">查看</a>  -->
-                                    <a ng-if="x.gca_audit_state==1" class="common_edit" title="审核" ng-click="showCheckBox(x)"></a>
+                                    <a  class="common_edit" title="审核" ng-click="goEdit(x)"></a>
                                     
                                 </td>
                             </tr>
