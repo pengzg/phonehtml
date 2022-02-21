@@ -72,6 +72,8 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 		var success = function(result){
             $scope.vo = result.data;
             $scope.picList = $scope.vo.picList;
+
+			$("#start_date").val($scope.vo.pm_releasedate);
 			
 		};
 		var error = function(result){
@@ -107,6 +109,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 		}
 
 		$scope.vo.attListStr = JSON.stringify($scope.picList);
+		$scope.vo.picList = "";
 		EzConfirm.create({
 			heading: '提示',
 			text: "您确定提交吗？"
@@ -322,5 +325,10 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 	}
 	$scope.hideTips = function(index) {
 	   $(".js_setCover"+index).hide();
+	}
+
+
+	$scope.goBack = function(){
+		$state.go("index.phone.phoneList");
 	}
 })

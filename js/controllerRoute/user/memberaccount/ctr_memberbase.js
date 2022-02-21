@@ -40,7 +40,7 @@ tempApp.controller('ctr_memberbase', function($scope,EzConfirm,messageFactory,ht
 		$scope.searchParam.endDate = $("#end_date").val();
 		//console.log("===========ttt=============="+$scope.searchParam.startDate);
 		//console.log("===========ttt=============="+$scope.searchParam.endDate);
-		var url = '/admin/member/memberBaseControl/dataGrid.action';
+		var url = '/admin/phone/memberBaseControl/dataGrid.action';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 	}
     

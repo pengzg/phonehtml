@@ -37,7 +37,7 @@ function routeFn($stateProvider,$urlRouterProvider){
     
  //手机添加
  .state("index.phone.phoneAdd",{
-    url:"/phoneAdd",
+    url:"/phoneAdd?pm_id",
     templateUrl:"views/phone/phoneAdd.html",
     controller:"ctr_phoneAdd",
     resolve:{

@@ -57,7 +57,7 @@ tempApp.controller('ctr_baseParameterList', function($scope, $state, http,
 		if (id == undefined || id == '') {
 			$scope.dialogTitle = '添加';
 			$scope.vo.bp_level = 2;
-			$scope.vo.status = 1;
+			$scope.vo.bp_state = 1;
 		} else {
 			$scope.dialogTitle = '修改';
 			$scope.queryDetail(id);

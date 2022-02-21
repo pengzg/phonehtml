@@ -33,7 +33,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 			
 		}
 		
-		var url = '/admin/member/memberBaseControl/dataGrid.action';
+		var url = '/admin/phone/memberBaseControl/dataGrid.action';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 	}
     
