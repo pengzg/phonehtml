@@ -3,7 +3,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 
 
 	$scope.vo = {pm_state:1,pm_dr:1};
-	
+	$scope.picList = [];
 
 	$scope._simpleConfig = {
 		//这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
@@ -64,7 +64,29 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 	
 	
 
-	
+	/**
+	 * 查询
+	 */
+	 $scope.getDetail = function(){
+		messageFactory.showLoading();
+		var success = function(result){
+            $scope.vo = result.data;
+            $scope.picList = $scope.vo.picList;
+			
+		};
+		var error = function(result){
+			messageFactory.closeLoading();
+			messageFactory.showMessage('error',result.desc);
+			
+		};
+		var url = '/admin/phone/phoneMainControl/getDetail.action';
+		http.post(url,{"pm_id":$scope.pm_id},success,error);
+	}
+
+    if ($stateParams.pm_id != undefined && $stateParams.pm_id) {
+        $scope.pm_id = $stateParams.pm_id;
+        $scope.getDetail();
+    }
 
    
 
@@ -231,7 +253,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 	/**
 	 * 显示图片上传
 	 */
-	 $scope.picList = [];
+	
 	 $scope.ba_path_show = "";
 	 $scope.ba_path = "";
 

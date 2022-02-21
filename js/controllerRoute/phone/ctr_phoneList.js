@@ -20,6 +20,10 @@ tempApp.controller('ctr_phoneList', function($scope, $rootScope, http, messageFa
     $scope.tab  = "1";
     $scope.searchParam.gca_type = "1";
 
+
+
+
+
     /**
      * 查询订单列表
      */
@@ -117,72 +121,25 @@ $scope.selectTab = function(x) {
     queryList();
 }   
       
-   /**
-	 * 显示审核框
-	 */
-	$scope.showCheckBox = function(x) {
-		$scope.vo = x;
-		$scope.checkBoxShow = true;
-	}   
+   
       
-     /**
-	 * 启用与禁用
-	 */
-	$scope.updateCheckstate = function(state) {
-		var success = function(result){
-    		messageFactory.closeLoading();
-            messageFactory.showMessage('success',result.desc);
-            $scope.checkBoxShow = false;
-            $scope.vo = {};
-    			queryList();
-    	}
-    	
-    	var error = function(result){
-    		messageFactory.showMessage('error',result.desc);
-    		messageFactory.closeLoading();
-    	}
-    	
-        
-        var data = {gca_id:$scope.vo.gca_id,gca_audit_state:state,"gca_audit_opinion": $("#comment").val()};
-		var url = "/admin/gl/glCashApplyControl/updateCheckApply.action";
-		
-		var msg = '您确定要审核通过吗？';
-		if (state ==3) {
-			msg = '您确定要审核不通过吗？';
-		}
-		
-		EzConfirm.create({
-			heading : '提示',
-			text : msg
-		}).then(function() {
-			messageFactory.showLoading();
-			http.post(url, data, success, error);
-		}, function() {
-
-		});
-
-	}  
+    
      
     
     $scope.doAdd = function(){
         $state.go("index.phone.phoneAdd");
+
+
+    }
+
+    $scope.goEdit = function(x){
+        var url = "";
+        url = $state.href('index.phone.phoneAdd',{"pm_id":x.pm_id});
+        window.open(url,'_blank');
     }
      
       
-     /**
-     * 导出
-     */
-    $scope.doExport = function(){
-        var str = "gca_shopid="+$rootScope.USER.shopId;
-          str += "&startDate="+$('#start_date').val();
-          str += "&endDate="+$('#end_date').val();
-          str += "&gca_type="+$scope.searchParam.gca_type;
-         
-          str += "&searchKey="+$scope.searchParam.searchKey;
-
-		var url = '/admin/gl/glCashApplyControl/doExportGlCash.action?'+str;
-		window.location.href = url;
-    }  
+    
     
       
       
