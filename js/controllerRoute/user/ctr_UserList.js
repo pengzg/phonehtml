@@ -104,7 +104,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 				messageFactory.showMessage('error',result.desc);
 				
 			}
-			var url = '/admin/member/memberBaseControl/getDetail.action';
+			var url = '/admin/phone/memberBaseControl/getDetail.action';
 			http.post(url,{'mb_id':id},success,error);
 	 }
 	
