@@ -37,7 +37,7 @@ function routeFn($stateProvider,$urlRouterProvider){
     
  //手机添加
  .state("index.dict.dictAdd",{
-    url:"/dictAdd?pm_id",
+    url:"/dictAdd?dm_id",
     templateUrl:"views/dict/dictAdd.html",
     controller:"ctr_dictAdd",
     resolve:{

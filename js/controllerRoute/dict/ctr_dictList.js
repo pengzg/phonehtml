@@ -134,7 +134,7 @@ $scope.selectTab = function(x) {
 
     $scope.goEdit = function(x){
         var url = "";
-        url = $state.href('index.dict.dictAdd',{"pm_id":x.pm_id});
+        url = $state.href('index.dict.dictAdd',{"dm_id":x.dm_id});
         window.open(url,'_blank');
     }
      
