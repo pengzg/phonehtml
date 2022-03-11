@@ -1,4 +1,4 @@
-tempApp.controller('ctr_phoneList', function($scope, $rootScope, http, messageFactory, $state, $stateParams, EzConfirm,dateUtil,$rootScope) {
+tempApp.controller('ctr_dictList', function($scope, $rootScope, http, messageFactory, $state, $stateParams, EzConfirm,dateUtil,$rootScope) {
 
     
     $scope.searchParam = {"searchKey":""};
@@ -27,7 +27,7 @@ tempApp.controller('ctr_phoneList', function($scope, $rootScope, http, messageFa
     /**
      * 查询订单列表
      */
-    $scope.pager = {page:1,rows:'20',sort:'pm_sort',order:'desc',om_order_type:'2',pageList:['10','20','30']};
+    $scope.pager = {page:1,rows:'20',sort:'dm_addtime',order:'desc',om_order_type:'2',pageList:['10','20','30']};
     var queryList = function(){
         messageFactory.showLoading();
         $scope.searchParam.startDate = $("#start_date").val();
@@ -42,7 +42,7 @@ tempApp.controller('ctr_phoneList', function($scope, $rootScope, http, messageFa
             messageFactory.closeLoading();
             messageFactory.showMessage('error',result.desc);
         }
-        var url = '/admin/phone/phoneMainControl/dataGrid.action';
+        var url = '/admin/dict/dictMainControl/dataGrid.action';
         http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
     }
   
@@ -127,14 +127,14 @@ $scope.selectTab = function(x) {
      
     
     $scope.doAdd = function(){
-        $state.go("index.phone.phoneAdd");
+        $state.go("index.dict.dictAdd");
 
 
     }
 
     $scope.goEdit = function(x){
         var url = "";
-        url = $state.href('index.phone.phoneAdd',{"pm_id":x.pm_id});
+        url = $state.href('index.dict.dictAdd',{"pm_id":x.pm_id});
         window.open(url,'_blank');
     }
      

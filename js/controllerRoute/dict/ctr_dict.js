@@ -1,3 +1,3 @@
-tempApp.controller('ctr_phone', function($scope, http, messageFactory, $state, $stateParams, EzConfirm) {
+tempApp.controller('ctr_dict', function($scope, http, messageFactory, $state, $stateParams, EzConfirm) {
 	
 })

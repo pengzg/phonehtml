@@ -4,181 +4,30 @@
 
 
 
-		<!-- 名称 -->
+		<!-- 语言 -->
 		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
-			<span class="xt_bzWenZi width-just"> 手机名称：</span>
+			<span class="xt_bzWenZi width-just"> 日语：</span>
 			<div class="widthAuto zk_controlInput">
-				<input type="text" ng-model="vo.pm_name" style="width:300px" />
+				<input type="text" ng-model="vo.dm_lang" style="width:300px" />
 			</div>
 		</div>
-		<!-- 类型  -->
+		<!-- 读音  -->
 		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
-			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 手机型号：</span>
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 假名：</span>
 			<div class="widthAuto zk_controlInput">
-				<input type="text" ng-model="vo.pm_model" maxlength="60" style="width:300px" />
+				<input type="text" ng-model="vo.dm_lang2" maxlength="60" style="width:300px" />
 			</div>
 		</div>
-		<!-- 品牌 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">品牌：</span>
-			<div class="widthAuto zk_controlInput sale_inline">
-				<div>
-					<label class="m10right">
-						<select ng-model="vo.pm_brand">
-							<option ng-repeat="x in brandList" value="{{x.bb_id}}">{{x.bb_title}}</option>
-						</select>
-					</label>
-				</div>
-			</div>
-		</div>
-		<!-- 国家 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">国家：</span>
-			<div class="widthAuto zk_controlInput sale_inline">
-				<div ng-repeat="x in countryList">
-					<label class="m10right">
-						<input type="radio" name="pm_country" value="{{x.bd_code}}" ng-model="vo.pm_country"
-							class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" /> {{x.bd_name}}
-					</label>
-				</div>
-			</div>
-		</div>
-		<!-- 封面 -->
-		<!-- 图片 -->
-		<div class="divVertical clearfix ray5" style="height: 130px;">
-			<label class="item-label control-label f14">
-				图片
-			</label>
-			<div class="widthAuto zk_controlInput">
-				<div>
-					<a ng-click="upImage($event,1)" style="color:#099fb8;" class="f14">上传图片</a>
-					<div style="margin-bottom:1.25rem;width:794px; height:300px; display:inline-block;" id="myeditor"
-						get-ue="ue_myeditor = getUe" ng-show="false" class="ueditor" ng-model="gb_content1"></div>
-				</div>
-				<div>
-					<div style="float:left;margin:5px;position: relative;" ng-repeat="x in picList track by $index"
-						ng-mouseenter="showTips($index)" ng-mouseleave="hideTips($index)">
-						<div class="js_setCover{{$index}}" ng-show="x.ba_is_main==0"
-							style="z-index:4;display:none;position: absolute;background: #eee;width: 102px;height: 22px;text-align:center;"
-							ng-click="del($index)">删除</div>
-						<div class="gsGoodsImgs" style="width:100px; height:100px;border:1px solid #ddd;">
-							<img alt="" src="{{x.ba_path_show?x.ba_path_show:'img/prizedef.jpg'}}"
-								style="width:100px; height:100px;">
-						</div>
-						<div ng-show="x.ba_is_main==1"
-							style="position: absolute;background: #eee;width: 102px;height: 22px;top: 40px;text-align:center;">
-							封面</div>
-						<div class="js_setCover{{$index}}" ng-show="x.ba_is_main==0"
-							style="display:none;position: absolute;background: #eee;width: 102px;height: 22px;top: 78px;text-align:center;"
-							ng-click="setCover(x)">设置为封面</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 屏幕大小 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">屏幕大小：</span>
-			<div class="widthAuto zk_controlInput">
-				<input type="text" ng-model="vo.pm_screen" style="width:300px" />
-			</div>
-		</div>
-		<!-- 电池 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">电池：</span>
-			<div class="widthAuto zk_controlInput">
-				<input type="text" ng-model="vo.pm_battery" style="width:300px" />
-			</div>
-		</div>
-		<!-- 重量 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">重量：</span>
-			<div class="widthAuto zk_controlInput">
-				<input type="text" ng-model="vo.pm_weight" style="width:300px" />
-			</div>
-		</div>
-		<!-- 长 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">长：</span>
-			<div class="widthAuto zk_controlInput">
-				<input type="text" ng-model="vo.pm_longth" style="width:300px" />
-			</div>
-		</div>
-		<!-- 宽 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">宽：</span>
-			<div class="widthAuto zk_controlInput">
-				<input type="text" ng-model="vo.pm_width" style="width:300px" />
-			</div>
-		</div>
-		<!-- 厚 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">厚：</span>
-			<div class="widthAuto zk_controlInput">
-				<input type="text" ng-model="vo.pm_height" style="width:300px" />
-			</div>
-		</div>
-		<!-- 键盘种类 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">键盘种类：</span>
-			<div class="widthAuto zk_controlInput sale_inline">
-				<div ng-repeat="x in keyTypeList">
-					<label class="m10right">
-						<input type="radio" name="pm_keytype" value="{{x.bd_code}}" ng-model="vo.pm_keytype"
-							class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" /> {{x.bd_name}}
-					</label>
-				</div>
-			</div>
-		</div>
-		<!-- 充电接口 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">充电接口：</span>
-			<div class="widthAuto zk_controlInput sale_inline">
-				<div ng-repeat="x in chargeTypeList">
-					<label class="m10right">
-						<input type="radio" name="pm_chargetype" value="{{x.bd_code}}" ng-model="vo.pm_chargetype"
-							class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" /> {{x.bd_name}}
-					</label>
-				</div>
-			</div>
-		</div>
-		<!-- 系统 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">系统：</span>
-			<div class="widthAuto zk_controlInput sale_inline">
-				<div ng-repeat="x in systemList">
-					<label class="m10right">
-						<input type="radio" name="pm_system" value="{{x.bd_code}}" ng-model="vo.pm_system"
-							class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" /> {{x.bd_name}}
-					</label>
-				</div>
-			</div>
-		</div>
-		<!-- 发布日期 -->
+		<!-- 汉语  -->
 		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
-			<span class="xt_bzWenZi width-just"> 发布时间：</span>
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 汉语：</span>
 			<div class="widthAuto zk_controlInput">
-
-				<input id="start_date" autocomplete="off" type="text" class="Wdate"
-					style="margin-left:-4px;height:17px;"
-					onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})" />
+				<input type="text" ng-model="vo.dm_ch" maxlength="60" style="width:300px" />
 			</div>
 		</div>
-		<!-- 排序 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">排序：</span>
-			<div class="widthAuto zk_controlInput">
-				<input type="text" ng-model="vo.pm_sort" style="width:300px" />
-			</div>
-		</div>
-		<!-- 描述 -->
-		<div class="divVertical clearfix ray5">
-			<span class="xt_bzWenZi width-just">描述</span>
-			<div class="widthAuto zk_controlInput">
-				<div style="margin-bottom:1.25rem;width:664px;height: 300px; display:inline-block; z-index:1"
-					id="myeditor1" get-ue="ue_myeditor1 = getUe" class="ueditor" ng-model="vo.pm_description"
-					config="_simpleConfig"></div>
-			</div>
-		</div>
+		
+	
+		
 
 	</div>
 	<div class="fixedBottom">

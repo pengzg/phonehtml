@@ -54,11 +54,11 @@
                         <thead>
                             <tr>
                                 <th>序号</th>
-                                <th>手机名称</th>
-                                <th>型号</th>
-                                <th>品牌</th>
+                                <th>日语</th>
+                                <th>假名</th>
+                                <th>汉语</th>
                                 
-                                <th>国家</th>
+                                <th>添加时间</th>
                                 
                                 
                                 
@@ -68,10 +68,10 @@
                         <tbody>
                             <tr ng-repeat="x in dataList">
                                 <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
-                                <td class="text-center f14">{{x.pm_name}}</td>
-                                <td class="text-center f14">{{x.pm_model}}</td>
-                                <td class="text-center f14">{{x.pm_brand_nameref}}</td>
-                                <td class="text-center f14">{{x.pm_country_nameref}}</td>
+                                <td class="text-center f14">{{x.dm_lang}}</td>
+                                <td class="text-center f14">{{x.dm_lang2}}</td>
+                                <td class="text-center f14">{{x.dm_ch}}</td>
+                                <td class="text-center f14">{{x.dm_addtime}}</td>
                                 
                               
                                 <td class="text-center f14">
