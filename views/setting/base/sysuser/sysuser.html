@@ -43,30 +43,21 @@
                         <thead>
                             <tr>
                                 <th>序号</th>
-                                <th>姓名</th>
-                                <th>手机号</th>
-                                <th>角色类型</th>
-                                <!-- <th>登录密码</th> -->
-                                <th>有效起始时间</th>
-                                <th>有效结束时间</th>
+                                <th>登录账号</th>
+                               
                                 <th>状态</th>
-                                <th>所属服务商</th>
+                              
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="x in workUserList">
                                 <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
-                                <td class="text-left f14">{{x.mbw_name}}</td>
-                                <td class="text-center f14">{{x.mbw_mobile}}</td>
-                                <td class="text-center f14">{{x.mbw_role == 0?'系统管理员':x.mbw_role_nameref}}</td>
-                                <!-- <td class="text-center f14">{{x.mbw_pwd}}</td> -->
-                                <td class="text-center f14">{{x.mbw_statdate}}</td>
-                                <td class="text-center f14">{{x.mbw_enddate}}</td>
+                                <td class="text-center f14">{{x.su_loginname}}</td>
+                               
+                               
                                 <td class="text-center f14">{{x.mbw_state_nameref}}</td>
-                                <td class="text-left f14">{{x.mbw_shopid_nameref}}</td>
                                 <td class="text-center f14">
-                                   <!--  <a class="red" style="display: inline-block;" class="common_offsell" ng-click="getDetail(x.mb_id)" title="查看">查看</a>  -->
                                    
 									<a  class="common_auth" ng-click="showUserRole(x)" ng-show="x.mbw_role>0" title="授权"></a>
 									<a  class="common_auth" ng-click="showUserShop(x)" ng-show="x.mbw_role>0" title="数据权限"></a>

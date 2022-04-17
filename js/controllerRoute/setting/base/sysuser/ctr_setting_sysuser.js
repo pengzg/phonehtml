@@ -1,5 +1,5 @@
 tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,messageFactory,http,$state,$stateParams,$rootScope) {
-    $scope.pager = {page:1,rows:'20',sort:'mbw_role',order:'asc',pageList:['10','20','30'],mbw_shopid:$rootScope.USER.shopId};
+    $scope.pager = {page:1,rows:'20',sort:'su_id',order:'asc',pageList:['10','20','30']};
     $scope.searchParam = {};
 	$scope.vo = {};
 	$scope.merchantShopList = {'ms_id':'','ms_name':''};
@@ -39,7 +39,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/member/memberBaseWorkControl/dataGrid.action';
+		var url = '/admin/sys/sysUserControl/dataGrid.action';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 		// http.post(url,$.extend({mbw_role_str:'0,1'},$scope.pager,$scope.searchParam),success,error);
 	}

@@ -145,7 +145,7 @@ tempApp.controller('ctr_houseAdd', function ($scope, $rootScope, $location,
 	
 	
 	 /**
-	 * 键盘类型
+	 * 类型
 	 */
 	$scope.typeList = [];
 	$scope.queryKeyTypeList = function () {
@@ -160,6 +160,22 @@ tempApp.controller('ctr_houseAdd', function ($scope, $rootScope, $location,
 		http.post(url, null, success, error);
 	}
 	$scope.queryKeyTypeList();
+	/**
+	 * 类型
+	 */
+	 $scope.stateList = [];
+	 $scope.queryStateList = function () {
+		 var success = function (result) {
+			 $scope.stateList = result.data;
+		 }
+		 var error = function (result) {
+			 messageFactory.closeLoading();
+			 messageFactory.showMessage('error', result.desc);
+		 }
+		 var url = '/admin/base/baseDataControl/detailItem.action?codekey=2006';
+		 http.post(url, null, success, error);
+	 }
+	 $scope.queryStateList();
 	
 	
 

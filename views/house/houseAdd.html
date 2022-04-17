@@ -204,6 +204,18 @@
                 <input type="number" ng-model="vo.cb_sort" style="width:300px" />
             </div>
         </div>
+         <!-- 状态 -->
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi width-just">状态：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				<div ng-repeat="x in stateList">
+					<label class="m10right">
+						<input type="radio" name="state" value="{{x.bd_code}}" ng-model="vo.cb_state"
+							class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" /> {{x.bd_name}}
+					</label>
+				</div>
+			</div>
+		</div>
 		
 		<!-- 描述 -->
 		<div class="divVertical clearfix ray5">
