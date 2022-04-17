@@ -329,6 +329,6 @@ tempApp.controller('ctr_houseAdd', function ($scope, $rootScope, $location,
 
 
 	$scope.goBack = function(){
-		$state.go("index.phone.phoneList");
+		$state.go("index.house.houseList");
 	}
 })
