@@ -2,13 +2,13 @@
     <div class="panel-heading text-left">
         <div class="setting_nav">
             <ul>
-                <li><a href="">手机列表</a></li>
+                <li><a href="">楼盘列表</a></li>
             </ul>
         </div>
     </div>
     <div class="xt_offOne tabUl-2 clearfix">
 		<ul>
-			<li ng-class="{'active':tab=='1'}" style="width: 185px;" ng-click="selectTab(1);"><a>手机列表</a>
+			<li ng-class="{'active':tab=='1'}" style="width: 185px;" ng-click="selectTab(1);"><a>楼盘列表</a>
 				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">6</span></li>
 			<!-- <li ng-class="{'active':tab=='2'}" style="width: 185px;" ng-click="selectTab(2);"><a>其他资产提现</a>
 				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">6</span></li> -->
@@ -26,13 +26,9 @@
             <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
                 onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
                 />
-            <label>品牌<span>:</span></label>
-			<select ng-model="searchParam.pm_brand">
-				<option value="{{x.bb_id}}" ng-repeat="x in brandList">{{x.bb_title}}</option>
-				
-			</select>
+           
             <label>关键字<span>:</span></label>
-            <input type="text" placeholder="手机名称或型号" ng-model="searchParam.searchKey">
+            <input type="text" placeholder="关键字" ng-model="searchParam.searchKey">
         </div>
         
         <div>
@@ -54,28 +50,27 @@
                         <thead>
                             <tr>
                                 <th>序号</th>
-                                <th>手机名称</th>
-                                <th>型号</th>
-                                <th>品牌</th>
-                                
-                                <th>国家</th>
-                                
-                                
-                                
+
+                                <th>图片</th>
+                                <th>名称</th>
+                                <th>卖点</th>
+                                <th>均价</th>
+                                <th>排序</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="x in dataList">
                                 <td class="text-center f14">{{pager.rows * (pager.page - 1)+ $index+1}}</td>
-                                <td class="text-center f14">{{x.pm_name}}</td>
-                                <td class="text-center f14">{{x.pm_model}}</td>
-                                <td class="text-center f14">{{x.pm_brand_nameref}}</td>
-                                <td class="text-center f14">{{x.pm_country_nameref}}</td>
+                                <td class="text-center f14"><img src="{{x.cb_cover_show}}" style="height: 100px;"></td>
+                                <td class="text-center f14">{{x.cb_name}}</td>
+                                <td class="text-center f14">{{x.cb_selling_point}}</td>
+                                <td class="text-center f14">{{x.cb_price}}</td>
+                                <td class="text-center f14">{{x.cb_sort}}</td>
                                 
                               
                                 <td class="text-center f14">
-                                    <a  class="common_edit" title="审核" ng-click="goEdit(x)"></a>
+                                    <a  class="common_edit" title="编辑" ng-click="goEdit(x)"></a>
                                     
                                 </td>
                             </tr>
