@@ -143,74 +143,24 @@ tempApp.controller('ctr_houseAdd', function ($scope, $rootScope, $location,
 	
 
 	
-	/**
-	 * 国家
-	 */
-	$scope.countryList = [];
-	$scope.queryCountryList = function () {
-		var success = function (result) {
-			$scope.countryList = result.data;
-			// $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
-		}
-		var error = function (result) {
-			messageFactory.closeLoading();
-			messageFactory.showMessage('error', result.desc);
-		}
-		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2008';
-		http.post(url, null, success, error);
-	}
-	$scope.queryCountryList();
-	/**
-	 * 充电类型
-	 */
-	 $scope.chargeTypeList = [];
-	 $scope.queryChargeTypeList = function () {
-		 var success = function (result) {
-			 $scope.chargeTypeList = result.data;
-			 // $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
-		 }
-		 var error = function (result) {
-			 messageFactory.closeLoading();
-			 messageFactory.showMessage('error', result.desc);
-		 }
-		 var url = '/admin/base/baseDataControl/detailItem.action?codekey=2010';
-		 http.post(url, null, success, error);
-	 }
-	 $scope.queryChargeTypeList();
+	
 	 /**
 	 * 键盘类型
 	 */
-	$scope.keyTypeList = [];
+	$scope.typeList = [];
 	$scope.queryKeyTypeList = function () {
 		var success = function (result) {
-			$scope.keyTypeList = result.data;
-			// $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
+			$scope.typeList = result.data;
 		}
 		var error = function (result) {
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error', result.desc);
 		}
-		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2009';
+		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2014';
 		http.post(url, null, success, error);
 	}
 	$scope.queryKeyTypeList();
-	/**
-	 * 操作系统
-	 */
-	 $scope.systemList = [];
-	 $scope.querySystemList = function () {
-		 var success = function (result) {
-			 $scope.systemList = result.data;
-			 // $scope.payWayList = [{"bd_code":"1", "bd_name":"线上支付"},{"bd_code":"2", "bd_name":"线下支付"}];
-		 }
-		 var error = function (result) {
-			 messageFactory.closeLoading();
-			 messageFactory.showMessage('error', result.desc);
-		 }
-		 var url = '/admin/base/baseDataControl/detailItem.action?codekey=2011';
-		 http.post(url, null, success, error);
-	 }
-	 $scope.querySystemList();
+	
 	
 
 	
@@ -231,25 +181,7 @@ tempApp.controller('ctr_houseAdd', function ($scope, $rootScope, $location,
 	
 
 	
-	$scope.brandList = [];
-	$scope.brandPager = {page:1,rows:'100',sort:'bb_id',order:'desc'};
-	$scope.queryBrandList = function(){
-
-		messageFactory.showLoading();
-		var success = function(result){
-			$scope.brandList = result.data.rows;
-			$scope.brandList.unshift({"bb_id":"","bb_title":"请选择品牌"});
-			messageFactory.closeLoading();
-		};
-		var error = function(result){
-			messageFactory.closeLoading();
-			messageFactory.showMessage('error',result.desc);
-			
-		};
-		var url = '/admin/base/baseBrandControl/dataGrid.action';
-		http.post(url,$.extend({},$scope.brandPager),success,error);
-	}
-	$scope.queryBrandList();
+	
 
 
 
