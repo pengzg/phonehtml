@@ -2,13 +2,13 @@
     <div class="panel-heading text-left">
         <div class="setting_nav">
             <ul>
-                <li><a href="">手机列表</a></li>
+                <li><a href="">单词列表</a></li>
             </ul>
         </div>
     </div>
     <div class="xt_offOne tabUl-2 clearfix">
 		<ul>
-			<li ng-class="{'active':tab=='1'}" style="width: 185px;" ng-click="selectTab(1);"><a>手机列表</a>
+			<li ng-class="{'active':tab=='1'}" style="width: 185px;" ng-click="selectTab(1);"><a>单词列表</a>
 				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">6</span></li>
 			<!-- <li ng-class="{'active':tab=='2'}" style="width: 185px;" ng-click="selectTab(2);"><a>其他资产提现</a>
 				<span class="badge ng-binding" style="position: absolute; top: 8px; right: 10px; z-index: 1" ng-show="false">6</span></li> -->
@@ -17,22 +17,14 @@
 	</div>
     <div class="search-filter-box">
     	<div>
-			<label>上市时间<span>:</span></label>
-            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
-				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
-            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
-                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
-                />
-            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
-                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
-                />
-            <label>品牌<span>:</span></label>
+			
+            <label>语言<span>:</span></label>
 			<select ng-model="searchParam.pm_brand">
 				<option value="{{x.bb_id}}" ng-repeat="x in brandList">{{x.bb_title}}</option>
 				
 			</select>
             <label>关键字<span>:</span></label>
-            <input type="text" placeholder="手机名称或型号" ng-model="searchParam.searchKey">
+            <input type="text" placeholder="" ng-model="searchParam.searchKey">
         </div>
         
         <div>

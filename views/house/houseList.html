@@ -17,15 +17,8 @@
 	</div>
     <div class="search-filter-box">
     	<div>
-			<label>上市时间<span>:</span></label>
-            <span class="input-group-addon date_check_main" title="点击选择更多" tabindex="0" onblur="dateRangeUtil.hideDateSelect()"
-				 ng-click="dateRange.chooseDate($event)" > 日期 </span>
-            <input id="start_date" autocomplete="off"  type="text" class="Wdate" style="margin-left:-4px;"
-                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
-                />
-            <input id="end_date" autocomplete="off"  type="text" class="Wdate" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"
-                onFocus="WdatePicker({onpicked: function (dp) { angular.element(this).scope().changeDate(); },dateFmt:'yyyy-MM-dd',lang:'zh-cn'})"
-                />
+			
+           
            
             <label>关键字<span>:</span></label>
             <input type="text" placeholder="关键字" ng-model="searchParam.searchKey">
