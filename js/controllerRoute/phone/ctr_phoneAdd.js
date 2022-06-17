@@ -1,5 +1,5 @@
 tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
-	$state, $timeout, http, $stateParams, EzConfirm, $compile, dateUtil, messageFactory, $q, $http, activityDetailFactory, $rootScope) {
+	$state, $timeout, http, $stateParams, EzConfirm, $compile, dateUtil, messageFactory, $q, $http, $rootScope) {
 
 
 	$scope.vo = {pm_state:1,pm_dr:1};

@@ -1,5 +1,5 @@
 tempApp.controller('ctr_houseAdd', function ($scope, $rootScope, $location,
-	$state, $timeout, http, $stateParams, EzConfirm, $compile, dateUtil, messageFactory, $q, $http, activityDetailFactory, $rootScope) {
+	$state, $timeout, http, $stateParams, EzConfirm, $compile, dateUtil, messageFactory, $q, $http, $rootScope) {
 
 
 	$scope.vo = {cb_state:1,cb_dr:1};
