@@ -41,7 +41,7 @@ tempApp.controller('ctr_baseUnitList', function($scope, $state, http,
 		var error = function(result) {
 			messageFactory.closeLoading();
 		}
-		var url = '/admin/base/baseUnitControl/dataGrid.action';
+		var url = '/admin/base/baseUnitControl/dataGrid';
 		http.post(url, $.extend({}, $scope.pager, $scope.searchParam), success, error);
 	}
 
@@ -90,7 +90,7 @@ tempApp.controller('ctr_baseUnitList', function($scope, $state, http,
 			messageFactory.closeLoading();
 		}
 		messageFactory.showLoading();
-		var url = '/admin/base/baseUnitControl/getDetail.action';
+		var url = '/admin/base/baseUnitControl/getDetail';
 		http.post(url,{bu_id:id},success,error);
 	}
 
@@ -120,7 +120,7 @@ tempApp.controller('ctr_baseUnitList', function($scope, $state, http,
 			messageFactory.showMessage('error', result.desc);
 		}
 
-		var url = "/admin/base/baseUnitControl/update.action";
+		var url = "/admin/base/baseUnitControl/update";
 		
 		var msg = '您确定添加本条记录吗？';
 		//console.log($stateParams.bc_id);
@@ -175,7 +175,7 @@ tempApp.controller('ctr_baseUnitList', function($scope, $state, http,
 		var data = {
 			'bu_id' : id
 		}
-		var url = "/admin/base/baseUnitControl/delete.action";
+		var url = "/admin/base/baseUnitControl/delete";
 		
 		var msg = '您确定修改本条记录吗？';
 		EzConfirm.create({

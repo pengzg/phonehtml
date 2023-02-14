@@ -33,7 +33,7 @@ tempApp.controller('ctr_dictManage', function($scope, http,EzConfirm,$compile,me
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error',result.desc);
 		}
-		var url =  '/admin/base/baseDataTypeControl/dataGrid.action';
+		var url =  '/admin/base/baseDataTypeControl/dataGrid';
 		http.post(url,$.extend({'bdt_status':1},$scope.pager,$scope.searchParam),success,error);
 	}
 	
@@ -125,7 +125,7 @@ tempApp.controller('ctr_dictManage', function($scope, http,EzConfirm,$compile,me
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error',result.desc);
 		}
-		var url =  '/admin/base/baseDataControl/queryBaseDataDetailTree.action';
+		var url =  '/admin/base/baseDataControl/queryBaseDataDetailTree';
 		http.post(url,{bd_datatypeid:$scope.typeid},success,error);
 	}
 	
@@ -170,7 +170,7 @@ tempApp.controller('ctr_dictManage', function($scope, http,EzConfirm,$compile,me
 			return;
 		}
 		var msg = "您确定添加本条记录吗？";
-		var url = "/admin/base/baseDataControl/update.action";
+		var url = "/admin/base/baseDataControl/update";
 		EzConfirm.create({
 			heading : '提示',
 			text : msg
@@ -194,7 +194,7 @@ tempApp.controller('ctr_dictManage', function($scope, http,EzConfirm,$compile,me
 			messageFactory.closeLoading();
 		}
 		messageFactory.showLoading();
-		var url = '/admin/base/baseDataControl/getDetail.action';
+		var url = '/admin/base/baseDataControl/getDetail';
 		http.post(url,{bd_id:id},success,error);
 	}
 	
@@ -213,7 +213,7 @@ tempApp.controller('ctr_dictManage', function($scope, http,EzConfirm,$compile,me
 		}
 		
 		var data ={'bd_id':id}
-		var url = "/admin/base/baseDataControl/remove.action";
+		var url = "/admin/base/baseDataControl/remove";
 		var	msg = '您确定删除本条记录吗？';
 		EzConfirm.create({
 			heading : '提示',

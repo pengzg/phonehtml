@@ -15,7 +15,7 @@ $scope.vo = {};
 				messageFactory.showMessage('error',result.desc);
 				
 			}
-			var url = '/admin/member/memberBaseControl/getDetail.action';
+			var url = '/admin/member/memberBaseControl/getDetail';
 			http.post(url,{'mb_id':id},success,error);
 	 }
 	 $scope.getDetail($stateParams.id);

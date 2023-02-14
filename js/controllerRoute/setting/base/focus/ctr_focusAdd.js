@@ -22,7 +22,7 @@ tempApp.controller('ctr_focusAdd', function($scope, $rootScope, $location,
 			messageFactory.closeLoading();
 		}
 
-		var url = '/admin/base/focusBaseControl/getDetail.action';
+		var url = '/admin/base/focusBaseControl/getDetail';
 		http.post(url,{"fb_id":$scope.fb_id},success,error);
 	}
 	
@@ -46,7 +46,7 @@ tempApp.controller('ctr_focusAdd', function($scope, $rootScope, $location,
 		}
 		
 		var data ={'fb_id':$scope.fb_id}
-		var url = "/admin/base/focusAreaRelationControl/getRelationList.action";
+		var url = "/admin/base/focusAreaRelationControl/getRelationList";
 				
 		http.post(url, data, success, error);
     }
@@ -103,7 +103,7 @@ tempApp.controller('ctr_focusAdd', function($scope, $rootScope, $location,
 			heading : '提示',
 			text : "您确定提交吗？"
 		}).then(function() {
-			var url = "/admin/base/focusBaseControl/update.action";
+			var url = "/admin/base/focusBaseControl/update";
 			http.post(url,$.extend({},$scope.vo),success,error);
 		}, function() {
 

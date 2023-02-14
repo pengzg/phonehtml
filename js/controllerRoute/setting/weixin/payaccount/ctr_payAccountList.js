@@ -42,7 +42,7 @@ tempApp.controller('ctr_payaccount', function($scope,
 		var error = function(result){
 			messageFactory.closeLoading();
 		}
-		var url = '/admin/base/weixinPayaccountControl/dataGrid.action';
+		var url = '/admin/base/weixinPayaccountControl/dataGrid';
 		http.post(url,$.extend({}, $scope.pager, $scope.searchParam),success,error);
 	}
 	
@@ -83,7 +83,7 @@ tempApp.controller('ctr_payaccount', function($scope,
 			messageFactory.closeLoading();
 		}
 		messageFactory.showLoading();
-		var url = '/admin/base/weixinPayaccountControl/getDetail.action';
+		var url = '/admin/base/weixinPayaccountControl/getDetail';
 		http.post(url,{wp_id:id},success,error);
 	}
 	
@@ -120,7 +120,7 @@ tempApp.controller('ctr_payaccount', function($scope,
 			messageFactory.showMessage('error', result.desc);
 		}
 
-		var url = "/admin/base/weixinPayaccountControl/update.action";
+		var url = "/admin/base/weixinPayaccountControl/update";
 		var msg = '您确定添加本条记录吗？';
 		//console.log($stateParams.bc_id);
 		if($scope.vo.wp_id != undefined && $scope.vo.wp_id != ''){
@@ -160,7 +160,7 @@ tempApp.controller('ctr_payaccount', function($scope,
 			messageFactory.showMessage('error',result.desc);
 		}
 		var data ={'wp_id':id}
-		var url = "/admin/base/weixinPayaccountControl/remove.action";
+		var url = "/admin/base/weixinPayaccountControl/remove";
 		var	msg = '您确定删除本条记录吗？';
 		EzConfirm.create({
 			heading : '提示',

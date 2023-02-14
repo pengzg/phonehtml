@@ -28,7 +28,7 @@ tempApp.controller('ctr_memberBankAccount', function($scope, $rootScope, http, m
             messageFactory.closeLoading();
             messageFactory.showMessage('error',result.desc);
         }
-        var url = '/admin/member/memberBankAccountControl/dataGrid.action';
+        var url = '/admin/member/memberBankAccountControl/dataGrid';
         http.post(url,$.extend({"mba_dr":1},$scope.pager,$scope.searchParam),success,error);
     }
   
@@ -81,7 +81,7 @@ tempApp.controller('ctr_memberBankAccount', function($scope, $rootScope, http, m
 	// 		messageFactory.showMessage('error',result.desc);
 	// 	}
 		
-	// 	var url = "/admin/gl/glCashApplyControl/updateCheckApply.action";
+	// 	var url = "/admin/gl/glCashApplyControl/updateCheckApply";
 	// 	var	msg = '您确定要审核通过吗？';
 	// 	EzConfirm.create({
 	// 		heading : '提示',
@@ -154,7 +154,7 @@ tempApp.controller('ctr_memberBankAccount', function($scope, $rootScope, http, m
     	
         
         var data = $scope.vo;
-		var url = "/admin/member/memberBankAccountControl/update.action";
+		var url = "/admin/member/memberBankAccountControl/update";
 		
 		var msg = '您确定要修改吗？';
 		

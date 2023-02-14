@@ -73,7 +73,7 @@ $scope.editOrAdd = function(){
         var	msg = '您确定修改本条记录吗？';
         data = {"bc_name":name,'bc_id':$scope.selectNode.id}
     }
-    var url = "/admin/base/baseCategoryControl/update.action";
+    var url = "/admin/base/baseCategoryControl/update";
     
     EzConfirm.create({
         heading : '提示',
@@ -100,7 +100,7 @@ $scope.toDelete = function(){
         messageFactory.showMessage('error',result.desc);
     }
     var data ={'bc_id':$scope.selectNode.id}
-    var url = "/admin/base/baseCategoryControl/remove.action";
+    var url = "/admin/base/baseCategoryControl/remove";
     var	msg = '您确定修改本条记录吗？';
     EzConfirm.create({
         heading : '提示',

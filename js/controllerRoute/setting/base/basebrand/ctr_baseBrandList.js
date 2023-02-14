@@ -42,7 +42,7 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 		var error = function(result){
 			messageFactory.closeLoading();
 		}
-		var url = '/admin/base/baseBrandControl/dataGrid.action';
+		var url = '/admin/base/baseBrandControl/dataGrid';
 		http.post(url,$.extend({}, $scope.pager, $scope.searchParam),success,error);
 	}
 	
@@ -94,7 +94,7 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 			messageFactory.closeLoading();
 		}
 		messageFactory.showLoading();
-		var url = '/admin/base/baseBrandControl/getDetail.action';
+		var url = '/admin/base/baseBrandControl/getDetail';
 		http.post(url,{bb_id:id},success,error);
 	}
 	
@@ -120,7 +120,7 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 			messageFactory.showMessage('error', result.desc);
 		}
 
-		var url = "/admin/base/baseBrandControl/update.action";
+		var url = "/admin/base/baseBrandControl/update";
 		var msg = '您确定添加本条记录吗？';
 		//console.log($stateParams.bc_id);
 		if($scope.vo.bb_id != undefined && $scope.vo.bb_id != ''){
@@ -160,7 +160,7 @@ tempApp.controller('ctr_baseBrandList', function($scope,
 		}
 		
 		var data ={'bb_id':id}
-		var url = "/admin/base/baseBrandControl/remove.action";
+		var url = "/admin/base/baseBrandControl/remove";
 		var	msg = '您确定修改本条记录吗？';
 		EzConfirm.create({
 			heading : '提示',

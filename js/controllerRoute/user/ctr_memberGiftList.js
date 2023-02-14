@@ -23,7 +23,7 @@ var queryList = function(){
     var error = function(result){
         messageFactory.closeLoading();
     }
-    var url = '/admin/member/memberGiftControl/dataGrid.action';
+    var url = '/admin/member/memberGiftControl/dataGrid';
     http.post(url,$.extend({}, $scope.pager, $scope.searchParam),success,error);
 }
 

@@ -18,7 +18,7 @@ tempApp.controller('ctr_baseParameterList', function($scope, $state, http,
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error',result.desc);
 		}
-		var url =  '/admin/base/baseParameterControl/dataGrid.action';
+		var url =  '/admin/base/baseParameterControl/dataGrid';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 	}
 	
@@ -78,7 +78,7 @@ tempApp.controller('ctr_baseParameterList', function($scope, $state, http,
 			messageFactory.closeLoading();
 		}
 		messageFactory.showLoading();
-		var url = '/admin/base/baseParameterControl/getDetail.action';
+		var url = '/admin/base/baseParameterControl/getDetail';
 		http.post(url,{'bp_id':id},success,error);
 	}
 
@@ -108,7 +108,7 @@ tempApp.controller('ctr_baseParameterList', function($scope, $state, http,
 		if($scope.vo.bp_id){
 			msg = "您确定编辑本条记录吗？";
 		}
-		var url = "/admin/base/baseParameterControl/update.action";
+		var url = "/admin/base/baseParameterControl/update";
 		EzConfirm.create({
 			heading : '提示',
 			text : msg
@@ -147,7 +147,7 @@ tempApp.controller('ctr_baseParameterList', function($scope, $state, http,
 		var data = angular.copy(vo);
 		data.bp_dr = 0;
 		console.log(data);
-		var url = "/admin/base/baseParameterControl/update.action";
+		var url = "/admin/base/baseParameterControl/update";
 		
 		var msg = '您确定删除本条记录吗？';
 		EzConfirm.create({

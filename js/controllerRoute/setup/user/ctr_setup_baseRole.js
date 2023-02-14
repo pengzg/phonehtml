@@ -81,7 +81,7 @@ tempApp.controller('ctr_setup_baseRole', function($scope, http, messageFactory,E
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error',result.desc);
 		}
-		var url =  '/admin/sys/sysRoleControl/queryShopRole.action';
+		var url =  '/admin/sys/sysRoleControl/queryShopRole';
 		http.post(url,$.extend({'sr_isgroup':'N','is_menu':'Y'},$scope.pager,$scope.searchParam),success,error);
 	}
 	
@@ -170,7 +170,7 @@ tempApp.controller('ctr_setup_baseRole', function($scope, http, messageFactory,E
 		}else{
 			msg = "您确定添加本条记录吗？";
 		}
-		var url = "/admin/sys/sysRoleControl/update.action";
+		var url = "/admin/sys/sysRoleControl/update";
 		EzConfirm.create({
 			heading : '提示',
 			text : msg
@@ -193,7 +193,7 @@ tempApp.controller('ctr_setup_baseRole', function($scope, http, messageFactory,E
 			messageFactory.closeLoading();
 		}
 		messageFactory.showLoading();
-		var url = '/admin/sys/sysRoleControl/getDetail.action';
+		var url = '/admin/sys/sysRoleControl/getDetail';
 		http.post(url,{sr_id:id},success,error);
 	}
 	
@@ -212,7 +212,7 @@ tempApp.controller('ctr_setup_baseRole', function($scope, http, messageFactory,E
 		}
 		
 		var data ={'sr_id':id}
-		var url = "/admin/sys/sysRoleControl/remove.action";
+		var url = "/admin/sys/sysRoleControl/remove";
 		var	msg = '您确定删除本条记录吗？';
 		EzConfirm.create({
 			heading : '提示',
@@ -312,7 +312,7 @@ tempApp.controller('ctr_setup_baseRole', function($scope, http, messageFactory,E
 			messageFactory.showMessage('error',result.desc);
 		}
 		var data = {'roleId':id,'status':status,'sm_systemid':'1006',userid:$rootScope.USER.userid,sur_source:'2'};
-		var url =  '/admin/sys/sysMenuControl/queryAllMenueTree.action';
+		var url =  '/admin/sys/sysMenuControl/queryAllMenueTree';
 		http.post(url,data,success,error);
 	}
 	
@@ -343,7 +343,7 @@ tempApp.controller('ctr_setup_baseRole', function($scope, http, messageFactory,E
 			messageFactory.showMessage('error',result.desc);
 		}
 		var data ={'roleId':id,'menuStr':str}
-		var url = "/admin/sys/sysRoleControl/insertAuth.action";
+		var url = "/admin/sys/sysRoleControl/insertAuth";
 		var	msg = '您确定授权吗？';
 		EzConfirm.create({
 			heading : '提示',
@@ -440,7 +440,7 @@ tempApp.controller('ctr_setup_baseRole', function($scope, http, messageFactory,E
 			}
 			var roleIdStr = arrRoleIds.join(",");
 			var data ={'roleIdStr':roleIdStr}
-			var url = "/admin/sys/sysRoleControl/removeMulti.action";
+			var url = "/admin/sys/sysRoleControl/removeMulti";
 			if(arrRoleIds.length == 1){
 				var	msg = '您确定删除这个角色吗？';
 			}else{

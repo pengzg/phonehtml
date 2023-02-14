@@ -28,7 +28,7 @@ tempApp.controller('ctr_memberAddressList', function($scope,EzConfirm,messageFac
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/member/memberAddressControl/dataGrid.action';
+		var url = '/admin/member/memberAddressControl/dataGrid';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 	}
     
@@ -103,7 +103,7 @@ tempApp.controller('ctr_memberAddressList', function($scope,EzConfirm,messageFac
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/member/memberShopControl/dataGrid.action';
+		var url = '/admin/member/memberShopControl/dataGrid';
 		http.post(url,$.extend({},$scope.pagerShop,$scope.searchParamShop),success,error);
 	}
 	
@@ -147,7 +147,7 @@ tempApp.controller('ctr_memberAddressList', function($scope,EzConfirm,messageFac
 			messageFactory.showMessage('error',result.desc);
 		}
 		var data ={'ma_id':$scope.addressId,'ms_id':$scope.ms_id};
-		var url = "/admin/member/memberAddressControl/associateServicer.action";
+		var url = "/admin/member/memberAddressControl/associateServicer";
 		var	msg = '您确定关联该服务商吗？原关联服务商将解除！';
 		EzConfirm.create({
 			heading : '提示',
@@ -191,7 +191,7 @@ tempApp.controller('ctr_memberAddressList', function($scope,EzConfirm,messageFac
 				messageFactory.showMessage('error',result.desc);
 				
 			}
-			var url = '/admin/member/memberAddressControl/getDetail.action';
+			var url = '/admin/member/memberAddressControl/getDetail';
 			http.post(url,{'ma_id':id},success,error);
 	 }
 	
@@ -207,7 +207,7 @@ tempApp.controller('ctr_memberAddressList', function($scope,EzConfirm,messageFac
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/member/memberAddressControl/delete.action';
+		var url = '/admin/member/memberAddressControl/delete';
 		EzConfirm.create({
 			heading : '提示',
 			text : '确认删除吗？'
@@ -245,7 +245,7 @@ tempApp.controller('ctr_memberAddressList', function($scope,EzConfirm,messageFac
 			}
 			
 			var data ={'ma_id':id}
-			var url = "/admin/member/memberAddressControl/changeStatus.action";
+			var url = "/admin/member/memberAddressControl/changeStatus";
 			var	msg = '您确定'+text+'该用户吗？';
 			EzConfirm.create({
 				heading : '提示',

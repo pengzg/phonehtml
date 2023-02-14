@@ -26,7 +26,7 @@ var queryAppList = function(){
     var error = function(result){
         messageFactory.closeLoading();
     }
-    var url = '/admin/base/baseAppVersionControl/dataGrid.action';
+    var url = '/admin/base/baseAppVersionControl/dataGrid';
     http.post(url,$.extend({}, $scope.pager, $scope.searchParam),success,error);
 }
 
@@ -94,7 +94,7 @@ $scope.save = function(){
         messageFactory.closeLoading();
     }
     $scope.vo.bv_down_url = $("#url_input").val();
-    var url = "/admin/base/baseAppVersionControl/update.action" ;
+    var url = "/admin/base/baseAppVersionControl/update" ;
     msg = '您确定修改本条记录吗？';
     EzConfirm.create({
         heading : '提示',
@@ -121,7 +121,7 @@ $scope.queryDetail = function(x){
         messageFactory.closeLoading();
     }
     messageFactory.showLoading();
-    var url = '/admin/base/baseAppVersionControl/getNewVersion.action';
+    var url = '/admin/base/baseAppVersionControl/getNewVersion';
     http.post(url,{source:x.bv_source},success,error);
 }
 

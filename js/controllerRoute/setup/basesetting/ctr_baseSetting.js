@@ -11,7 +11,7 @@ tempApp.controller('ctr_baseSetting', function($scope,dateUtil,messageFactory,ht
         var error = function(result) {
 
         }
-        var url = "/admin/base/BaseOrgIniterControl/getCompanyInfo.action";
+        var url = "/admin/base/BaseOrgIniterControl/getCompanyInfo";
         http.post(url, {"shopid":$rootScope.USER.shopId}, success, error);
     }
 	
@@ -40,7 +40,7 @@ tempApp.controller('ctr_baseSetting', function($scope,dateUtil,messageFactory,ht
 			heading : '提示',
 			text : message 
 		}).then(function() {
-			var url = "/admin/base/BaseOrgIniterControl/update.action";
+			var url = "/admin/base/BaseOrgIniterControl/update";
 			http.post(url,$scope.vo,success,error);
 		}, function() {
 		});

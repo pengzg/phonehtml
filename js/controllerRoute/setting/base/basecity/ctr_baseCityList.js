@@ -15,7 +15,7 @@ tempApp.controller('ctr_baseCityList', function($scope,$compile,
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error',result.desc);
 		}
-		var url =  '/admin/base/baseAreaControl/queryBaseAreaTreeNew.action';
+		var url =  '/admin/base/baseAreaControl/queryBaseAreaTreeNew';
 		http.post(url,{},success,error);
 	}
 	
@@ -131,7 +131,7 @@ tempApp.controller('ctr_baseCityList', function($scope,$compile,
 			messageFactory.showMessage('error',result.desc);
 		}
 		
-		var url = "/admin/member/memberShopAreaControl/updateState.action";
+		var url = "/admin/member/memberShopAreaControl/updateState";
 		EzConfirm.create({
 			heading : '提示',
 			text : msg
@@ -195,7 +195,7 @@ tempApp.controller('ctr_baseCityList', function($scope,$compile,
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error',result.desc);
 		}
-		var url = "/admin/member/memberShopAreaControl/queryBanStore.action";
+		var url = "/admin/member/memberShopAreaControl/queryBanStore";
 		http.post(url, {ids:ids.join(',')}, success, error);
     }
     
@@ -209,7 +209,7 @@ tempApp.controller('ctr_baseCityList', function($scope,$compile,
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error',result.desc);
 		}
-		var url = "/admin/member/memberShopAreaControl/updateState.action";
+		var url = "/admin/member/memberShopAreaControl/updateState";
 		http.post(url, {ids:ids.join(','),ba_state:0}, success, error);
     }
     

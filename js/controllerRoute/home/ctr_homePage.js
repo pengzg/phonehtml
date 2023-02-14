@@ -3,7 +3,7 @@ tempApp.controller('ctr_homePage', function($scope, $rootScope, $location,
 	
 	
 	 $scope.getUserInfo = function() {
-         var url = "/admin/login/loginControl/getSessionInfo.action";
+         var url = "/admin/login/loginControl/getSessionInfo";
          var success = function(result) {
              $rootScope.USER = result.data;
              $state.go('index.homePage');

@@ -26,7 +26,7 @@ $scope.queryCommunityDetail = function(id){
         messageFactory.closeLoading();
         messageFactory.showMessage('error',result.desc);
     }
-    var url = '/admin/base/baseCommunityControl/getDetail.action';
+    var url = '/admin/base/baseCommunityControl/getDetail';
     
     http.post(url,{bcm_id:$scope.bcm_id},success,error);
 }
@@ -48,7 +48,7 @@ var queryBuildingList = function(){
         messageFactory.closeLoading();
     }
     
-    var url = '/admin/base/baseBuildingDoorControl/dataGrid.action';
+    var url = '/admin/base/baseBuildingDoorControl/dataGrid';
     http.post(url,$.extend({}, $scope.pager, $scope.searchParam),success,error);
 //		http.post(url,$scope.pager,success,error);
 }
@@ -67,7 +67,7 @@ $scope.toRemove = function(x){
     }
     
     var data ={'bbd_id':x.bbd_id,addType:4}
-    var url = "/admin/base/baseBuildingDoorControl/insertBatch.action";
+    var url = "/admin/base/baseBuildingDoorControl/insertBatch";
     var	msg = '您确定清空绽定的用户吗？';
     EzConfirm.create({
         heading : '提示',
@@ -93,7 +93,7 @@ $scope.toDelete = function(x){
     }
     
     var data ={'bbd_id':x.bbd_id}
-    var url = "/admin/base/baseBuildingDoorControl/delete.action";
+    var url = "/admin/base/baseBuildingDoorControl/delete";
     var	msg = '您确定删除本条记录吗？';
     EzConfirm.create({
         heading : '提示',
@@ -175,7 +175,7 @@ $scope.save = function(){
         /*$scope.closeDialog();*/
     }
     
-    var url = "/admin/base/baseBuildingDoorControl/update.action" ;
+    var url = "/admin/base/baseBuildingDoorControl/update" ;
         var msg = '您确定修改数据吗？';
         
         EzConfirm.create({
@@ -248,7 +248,7 @@ $scope.saveInit = function(){
         /*$scope.closeDialog();*/
     }
     
-    var url = "/admin/base/baseBuildingDoorControl/insertInit.action" ;
+    var url = "/admin/base/baseBuildingDoorControl/insertInit" ;
         var msg = '您确定初始化数据吗？';
         
         EzConfirm.create({
@@ -291,7 +291,7 @@ $scope.saveBuilding = function(){
         /*$scope.closeDialog();*/
     }
     
-    var url = "/admin/base/baseBuildingDoorControl/insertBatch.action" ;
+    var url = "/admin/base/baseBuildingDoorControl/insertBatch" ;
         var msg = '您确定添加楼栋数据吗？';
         
         EzConfirm.create({
@@ -358,7 +358,7 @@ $scope.saveUnit = function(){
         /*$scope.closeDialog();*/
     }
     
-    var url = "/admin/base/baseBuildingDoorControl/insertBatch.action" ;
+    var url = "/admin/base/baseBuildingDoorControl/insertBatch" ;
         var msg = '您确定添加楼栋数据吗？';
         
         EzConfirm.create({
@@ -385,7 +385,7 @@ $scope.queryDetail = function(id){
         messageFactory.closeLoading();
     }
     messageFactory.showLoading();
-    var url = '/admin/base/baseBuildingDoorControl/getDetail.action';
+    var url = '/admin/base/baseBuildingDoorControl/getDetail';
     http.post(url,{bbd_id:id},success,error);
 }
 

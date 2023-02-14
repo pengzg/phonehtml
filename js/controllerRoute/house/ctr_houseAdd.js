@@ -81,7 +81,7 @@ tempApp.controller('ctr_houseAdd', function ($scope, $rootScope, $location,
 			messageFactory.showMessage('error',result.desc);
 			
 		};
-		var url = '/admin/house/communityBaseControl/getDetail.action';
+		var url = '/admin/house/communityBaseControl/getDetail';
 		http.post(url,{"cb_id":$scope.cb_id},success,error);
 	}
 
@@ -114,7 +114,7 @@ tempApp.controller('ctr_houseAdd', function ($scope, $rootScope, $location,
 			heading: '提示',
 			text: "您确定提交吗？"
 		}).then(function () {
-			var url = "/admin/house/communityBaseControl/update.action";
+			var url = "/admin/house/communityBaseControl/update";
 			http.post(url,  $scope.vo, success, error);
 		}, function () {
 

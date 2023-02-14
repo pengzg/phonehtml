@@ -30,7 +30,7 @@ tempApp.controller('ctr_index', function($scope, $compile, $rootScope,
 	 * 退出登录
 	 */
 	$scope.exitLogin = function() {
-		var url = "/admin/login/loginControl/loginOut.action";
+		var url = "/admin/login/loginControl/loginOut";
 		var success = function(data) {
 			sessionFactory.clearSession();
 			$state.go("login");
@@ -81,7 +81,7 @@ tempApp.controller('ctr_index', function($scope, $compile, $rootScope,
 		var error = function(result) {
 			// messageFactory.closeLoading();
 		}
-		var url = "/admin/member/memberShopControl/queryAuthorityShopeList.action";
+		var url = "/admin/member/memberShopControl/queryAuthorityShopeList";
 		http.post(url, {}, success, error); 
 	}; 
 	$scope.getShopList();
@@ -99,12 +99,12 @@ tempApp.controller('ctr_index', function($scope, $compile, $rootScope,
 		var error = function(result) {
 			// messageFactory.closeLoading();
 		}
-		var url = "/admin/login/loginControl/switchShop.action";
+		var url = "/admin/login/loginControl/switchShop";
 		http.post(url, {shopid:$("#shop-select").val()}, success, error); 
 	};
 
 	$scope.getUserInfo = function() {
-		var url = "/admin/login/loginControl/getSessionInfo.action";
+		var url = "/admin/login/loginControl/getSessionInfo";
 		var success = function(result) {
 			$rootScope.USER = result.data;
 			sessionStorage.USER = JSON.stringify(result.data);
@@ -149,7 +149,7 @@ tempApp.controller('ctr_index', function($scope, $compile, $rootScope,
 					text : msg
 				}).then(function() {
 					messageFactory.showLoading();
-					var url = '/admin/member/memberBaseWorkControl/resetPwd.action';
+					var url = '/admin/member/memberBaseWorkControl/resetPwd';
 					http.post(url,{'mbw_id':$scope.USER.workid,'mbw_pwd':$scope.passWord}, success, error);
 				}, function() {
 

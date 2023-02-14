@@ -78,7 +78,7 @@ tempApp.controller('ctr_dictAdd', function ($scope, $rootScope, $location,
 			messageFactory.showMessage('error',result.desc);
 			
 		};
-		var url = '/admin/dict/dictMainControl/getDetail.action';
+		var url = '/admin/dict/dictMainControl/getDetail';
 		http.post(url,{"dm_id":$scope.dm_id},success,error);
 	}
 
@@ -111,7 +111,7 @@ tempApp.controller('ctr_dictAdd', function ($scope, $rootScope, $location,
 			heading: '提示',
 			text: "您确定提交吗？"
 		}).then(function () {
-			var url = "/admin/dict/dictMainControl/update.action";
+			var url = "/admin/dict/dictMainControl/update";
 			http.post(url,  $scope.vo, success, error);
 		}, function () {
 

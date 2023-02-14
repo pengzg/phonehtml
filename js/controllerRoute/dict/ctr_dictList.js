@@ -42,7 +42,7 @@ tempApp.controller('ctr_dictList', function($scope, $rootScope, http, messageFac
             messageFactory.closeLoading();
             messageFactory.showMessage('error',result.desc);
         }
-        var url = '/admin/dict/dictMainControl/dataGrid.action';
+        var url = '/admin/dict/dictMainControl/dataGrid';
         http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
     }
   
@@ -96,7 +96,7 @@ tempApp.controller('ctr_dictList', function($scope, $rootScope, http, messageFac
 			messageFactory.showMessage('error',result.desc);
 		}
 		
-		var url = "/admin/gl/glCashApplyControl/updateCheckApply.action";
+		var url = "/admin/gl/glCashApplyControl/updateCheckApply";
 		var	msg = '您确定要审核通过吗？';
 		EzConfirm.create({
 			heading : '提示',

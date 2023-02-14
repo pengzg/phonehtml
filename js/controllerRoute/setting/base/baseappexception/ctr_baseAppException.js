@@ -28,7 +28,7 @@ var queryDataList = function(){
     var error = function(result){
         messageFactory.closeLoading();
     }
-    var url = '/admin/base/baseAppExceptionControl/dataGrid.action';
+    var url = '/admin/base/baseAppExceptionControl/dataGrid';
     http.post(url,$.extend({}, $scope.pager, $scope.searchParam),success,error);
 }
 

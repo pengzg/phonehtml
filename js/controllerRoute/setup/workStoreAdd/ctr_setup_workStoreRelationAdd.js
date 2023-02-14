@@ -46,7 +46,7 @@ tempApp.controller('ctr_setup_workStoreRelationAdd', function($scope, $rootScope
 			
 		};
 		var data = {"msa_work_id":$scope.workid,"msa_dr":1};
-		var url = '/admin/member/memberStoreAuthorityControl/dataGrid.action';
+		var url = '/admin/member/memberStoreAuthorityControl/dataGrid';
 		http.post(url,$.extend(data,$scope.pager),success,error);
     }
     
@@ -101,7 +101,7 @@ tempApp.controller('ctr_setup_workStoreRelationAdd', function($scope, $rootScope
 			}
 		}
 		var str = bs_storeid_arr.join(',');
-		var url = '/admin/base/baseStorehouseControl/dataGrid.action';
+		var url = '/admin/base/baseStorehouseControl/dataGrid';
 		http.post(url,$.extend({'bs_storeid_arr':str},$scope.pager1,$scope.searchParam),success,error);    	
     }
     
@@ -260,7 +260,7 @@ tempApp.controller('ctr_setup_workStoreRelationAdd', function($scope, $rootScope
 			heading : '提示',
 			text : "您确定提交吗？"
 		}).then(function() {
-			var url = "/admin/member/memberStoreAuthorityControl/update.action";
+			var url = "/admin/member/memberStoreAuthorityControl/update";
 			http.post(url,{'relationListStr':addStoreListStr,"workid":$scope.workid},success,error);
 		}, function() {
 
@@ -296,7 +296,7 @@ tempApp.controller('ctr_setup_workStoreRelationAdd', function($scope, $rootScope
 			
 		}
 		
-		var url = "/admin/member/memberBaseWorkControl/queryItemList.action";
+		var url = "/admin/member/memberBaseWorkControl/queryItemList";
 		http.post(url,{"mbw_dr":1,"mbw_role_str":"2001,2005","mbw_state":1,mbw_shopid:$rootScope.USER.shopId},success,error);
 	}
 	$scope.getStoreHouse();

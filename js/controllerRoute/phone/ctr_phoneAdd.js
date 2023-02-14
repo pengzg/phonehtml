@@ -81,7 +81,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 			messageFactory.showMessage('error',result.desc);
 			
 		};
-		var url = '/admin/phone/phoneMainControl/getDetail.action';
+		var url = '/admin/phone/phoneMainControl/getDetail';
 		http.post(url,{"pm_id":$scope.pm_id},success,error);
 	}
 
@@ -114,7 +114,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 			heading: '提示',
 			text: "您确定提交吗？"
 		}).then(function () {
-			var url = "/admin/phone/phoneMainControl/update.action";
+			var url = "/admin/phone/phoneMainControl/update";
 			http.post(url,  $scope.vo, success, error);
 		}, function () {
 
@@ -246,7 +246,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 			messageFactory.showMessage('error',result.desc);
 			
 		};
-		var url = '/admin/base/baseBrandControl/dataGrid.action';
+		var url = '/admin/base/baseBrandControl/dataGrid';
 		http.post(url,$.extend({},$scope.brandPager),success,error);
 	}
 	$scope.queryBrandList();

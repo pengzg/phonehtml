@@ -31,7 +31,7 @@ tempApp.controller('ctr_dictType', function($scope, http,EzConfirm,messageFactor
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error',result.desc);
 		}
-		var url =  '/admin/base/baseDataTypeControl/dataGrid.action';
+		var url =  '/admin/base/baseDataTypeControl/dataGrid';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 	}
 	
@@ -120,7 +120,7 @@ tempApp.controller('ctr_dictType', function($scope, http,EzConfirm,messageFactor
 		}
 
 		messageFactory.showBakLoading();
-		var url = "/admin/base/baseDataTypeControl/update.action";
+		var url = "/admin/base/baseDataTypeControl/update";
 		 $scope.vo.bdt_isgroup = '1';
 		http.post(url, $scope.vo, success, error);
 	}
@@ -138,7 +138,7 @@ tempApp.controller('ctr_dictType', function($scope, http,EzConfirm,messageFactor
 			messageFactory.closeLoading();
 		}
 		messageFactory.showLoading();
-		var url = '/admin/base/baseDataTypeControl/getDetail.action';
+		var url = '/admin/base/baseDataTypeControl/getDetail';
 		http.post(url,{bdt_id:id},success,error);
 	}
 	
@@ -165,7 +165,7 @@ tempApp.controller('ctr_dictType', function($scope, http,EzConfirm,messageFactor
 		}
 		
 		var data ={'bdt_id':id}
-		var url = "/admin/base/baseDataTypeControl/remove.action";
+		var url = "/admin/base/baseDataTypeControl/remove";
 		var	msg = '您确定修改本条记录吗？';
 		EzConfirm.create({
 			heading : '提示',

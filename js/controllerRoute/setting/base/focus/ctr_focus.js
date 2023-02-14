@@ -28,7 +28,7 @@ tempApp.controller('ctr_focus', function($scope,$stateParams,$state,http,EzConfi
 		var error = function(result){
 			messageFactory.closeLoading();
 		}
-		var url = '/admin/base/focusBaseControl/dataGrid.action';
+		var url = '/admin/base/focusBaseControl/dataGrid';
 		http.post(url,$.extend({}, $scope.pager, $scope.searchParam),success,error);
 	}
 
@@ -99,7 +99,7 @@ tempApp.controller('ctr_focus', function($scope,$stateParams,$state,http,EzConfi
     		messageFactory.closeLoading();
     	}
     	var data = {"fb_id":x.fb_id,"fb_state":state};
-		var url = "/admin/base/focusBaseControl/updateState.action" ;
+		var url = "/admin/base/focusBaseControl/updateState" ;
 		
 		var msg = '您确定要禁用吗？';
 		if (state ==1) {
@@ -156,7 +156,7 @@ tempApp.controller('ctr_focus', function($scope,$stateParams,$state,http,EzConfi
     		messageFactory.closeLoading();
     	}
     	var data = {"fb_id":$scope.vo.fb_id,"fb_checkstate":checkstate,"fb_checkcomment": $("#comment").val()};
-		var url = "/admin/base/focusBaseControl/updateCheckstate.action" ;
+		var url = "/admin/base/focusBaseControl/updateCheckstate" ;
 		
 		var msg = '您确定要审核通过吗？';
 		if (checkstate ==3) {

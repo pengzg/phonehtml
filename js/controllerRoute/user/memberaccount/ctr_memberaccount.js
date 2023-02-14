@@ -27,7 +27,7 @@ tempApp.controller('ctr_memberaccount', function($scope,EzConfirm,messageFactory
 			
 		}
 		
-		var url = '/admin/member/memberAccountControl/dataGrid.action';
+		var url = '/admin/member/memberAccountControl/dataGrid';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 	}
     

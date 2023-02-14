@@ -39,7 +39,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/sys/sysUserControl/dataGrid.action';
+		var url = '/admin/sys/sysUserControl/dataGrid';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 		// http.post(url,$.extend({mbw_role_str:'0,1'},$scope.pager,$scope.searchParam),success,error);
 	}
@@ -96,7 +96,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 			messageFactory.showMessage('error',result.desc);
 				
 		}
-		var url = '/admin/member/memberBaseWorkControl/getDetail.action';
+		var url = '/admin/member/memberBaseWorkControl/getDetail';
 		http.post(url,{'mbw_id':id},success,error);
 	 }
 	
@@ -112,7 +112,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/member/memberBaseControl/delete.action';
+		var url = '/admin/member/memberBaseControl/delete';
 		EzConfirm.create({
 			heading : '提示',
 			text : '确认删除吗？'
@@ -150,7 +150,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 			}
 			
 			var data ={'mbw_id':id}
-			var url = "/admin/member/memberBaseWorkControl/changeStatus.action";
+			var url = "/admin/member/memberBaseWorkControl/changeStatus";
 			var	msg = '您确定'+text+'该用户吗？';
 			EzConfirm.create({
 				heading : '提示',
@@ -206,7 +206,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 				messageFactory.showMessage('error',result.desc);
 				
 			}
-			var url = '/admin/member/memberBaseWorkControl/update.action';
+			var url = '/admin/member/memberBaseWorkControl/update';
 			var msg = "您确定添加本条记录么？";
 			if(id != undefined && id != ''){
 				var msg = "您确定修改本条记录吗？";
@@ -245,7 +245,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 				}
 				var error = function(result){
 				}
-				var url = '/admin/member/memberBaseWorkControl/queryMemberInforByMobile.action';
+				var url = '/admin/member/memberBaseWorkControl/queryMemberInforByMobile';
 				http.post(url,{'mbw_mobile':mobile},success,error);
 			}
 		}
@@ -282,7 +282,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 				messageFactory.closeLoading();
 				messageFactory.showMessage('error',result.desc);
 			}
-			var url =  '/admin/member/memberShopControl/dataGrid.action';
+			var url =  '/admin/member/memberShopControl/dataGrid';
 			http.post(url,$.extend({},$scope.pager1,$scope.searchParam1),success,error);
 		}
 		$scope.queryMemberShopList();
@@ -376,7 +376,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 					text : msg
 				}).then(function() {
 						messageFactory.showLoading();
-						var url = '/admin/member/memberBaseWorkControl/resetPwd.action';
+						var url = '/admin/member/memberBaseWorkControl/resetPwd';
 						http.post(url,{'mbw_id':$scope.mbw_id,'mbw_pwd':$scope.passWord}, success, error);
 				}, function() {
 
@@ -418,7 +418,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 				messageFactory.closeLoading();
 				messageFactory.showMessage('error',result.desc);
 			}
-			var url =  '/admin/sys/sysRoleControl/queryRoleToAuth.action';
+			var url =  '/admin/sys/sysRoleControl/queryRoleToAuth';
 			http.post(url,$.extend({'userId':$scope.userId,'sr_isgroup':'Y'},$scope.rolepager,$scope.rolesearchParam),success,error);
 		}
 		
@@ -443,7 +443,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 				messageFactory.showMessage('error',result.desc);
 			}
 			var data ={'userId':$scope.userId,'roleStr':roleIdStr,sur_source:2}
-			var url = "/admin/sys/sysUserRoleControl/insertAuth.action";
+			var url = "/admin/sys/sysUserRoleControl/insertAuth";
 			var	msg = '您确定授权吗？';
 			EzConfirm.create({
 				heading : '提示',
@@ -520,7 +520,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error',result.desc);
 		}
-		var url =  '/admin/member/memberShopControl/dataGridToUser.action';
+		var url =  '/admin/member/memberShopControl/dataGridToUser';
 		http.post(url,$.extend({'userId':$scope.userId},$scope.shoppager,$scope.shopsearchParam),success,error);
 	}
 	
@@ -545,7 +545,7 @@ tempApp.controller('ctr_setting_sysuser', function($scope,$rootScope,EzConfirm,m
 			messageFactory.showMessage('error',result.desc);
 		}
 		var data ={'userId':$scope.userId,'ids':shopIdStr};
-		var url = "/admin/member/memberShopControl/insertShopToUser.action";
+		var url = "/admin/member/memberShopControl/insertShopToUser";
 		var	msg = '您确定授权吗？';
 		EzConfirm.create({
 			heading : '提示',

@@ -40,7 +40,7 @@ tempApp.controller('ctr_memberbase', function($scope,EzConfirm,messageFactory,ht
 		$scope.searchParam.endDate = $("#end_date").val();
 		//console.log("===========ttt=============="+$scope.searchParam.startDate);
 		//console.log("===========ttt=============="+$scope.searchParam.endDate);
-		var url = '/admin/phone/memberBaseControl/dataGrid.action';
+		var url = '/admin/phone/memberBaseControl/dataGrid';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 	}
     
@@ -164,7 +164,7 @@ tempApp.controller('ctr_memberbase', function($scope,EzConfirm,messageFactory,ht
 
 
 
-			var url = '/admin/ticket/ticketVerificationControl/updateMemberData.action';
+			var url = '/admin/ticket/ticketVerificationControl/updateMemberData';
 			var msg = "您确定调整日期吗？";
 			EzConfirm.create({
 				heading : '提示',
@@ -195,7 +195,7 @@ tempApp.controller('ctr_memberbase', function($scope,EzConfirm,messageFactory,ht
 				messageFactory.closeLoading();
 				messageFactory.showMessage('error',result.desc);
 			}
-			var url =  '/admin/member/memberShopControl/dataGrid.action';
+			var url =  '/admin/member/memberShopControl/dataGrid';
 			http.post(url,$.extend({},$scope.pager1,$scope.searchParam1),success,error);
 		}
 		$scope.queryMemberShopList();
@@ -294,7 +294,7 @@ tempApp.controller('ctr_memberbase', function($scope,EzConfirm,messageFactory,ht
 			
 		}
 
-		var url = '/admin/member/memberBaseControl/updateMemberUsertype.action';
+		var url = '/admin/member/memberBaseControl/updateMemberUsertype';
 		var msg = "您确定修改吗？";
 		EzConfirm.create({
 			heading : '提示',
@@ -332,7 +332,7 @@ tempApp.controller('ctr_memberbase', function($scope,EzConfirm,messageFactory,ht
 			  messageFactory.closeLoading();
 			  messageFactory.showMessage('error',result.desc);
 		  }
-		  var url = '/admin/member/memberBaseControl/dataGrid.action';
+		  var url = '/admin/member/memberBaseControl/dataGrid';
 		  http.post(url,$.extend({},$scope.agentPager,$scope.agentSearchParam),success,error);
 	}	
 	
@@ -379,7 +379,7 @@ tempApp.controller('ctr_memberbase', function($scope,EzConfirm,messageFactory,ht
 		}
 		
 		var data ={'mb_id':$scope.upUser.mb_id, "mb_firstspread":x.mb_id, "mb_agenttype_sale":$scope.agenttype_sale}
-		var url = "/admin/member/memberBaseControl/updateProfitInfo.action";
+		var url = "/admin/member/memberBaseControl/updateProfitInfo";
 		var	msg = "您确定将"+x.mb_name+"设置为"+$scope.upUser.mb_name+"的上级吗？";
 		EzConfirm.create({
 			heading : '提示',
@@ -406,7 +406,7 @@ tempApp.controller('ctr_memberbase', function($scope,EzConfirm,messageFactory,ht
 			messageFactory.showMessage('error',result.desc);
 		}
 		
-		var url = "/admin/member/memberBaseControl/updateSetPartnerLevel.action";
+		var url = "/admin/member/memberBaseControl/updateSetPartnerLevel";
 		var	msg = '您确定要升级这个人为管理员吗？';
 		EzConfirm.create({
 			heading : '提示',
@@ -431,7 +431,7 @@ tempApp.controller('ctr_memberbase', function($scope,EzConfirm,messageFactory,ht
 			messageFactory.showMessage('error',result.desc);
 		}
 		
-		var url = "/admin/member/memberBaseControl/updateSetPartnerAgent.action";
+		var url = "/admin/member/memberBaseControl/updateSetPartnerAgent";
 		var	msg = '您确定要升级这个人为管理员吗？';
 		EzConfirm.create({
 			heading : '提示',

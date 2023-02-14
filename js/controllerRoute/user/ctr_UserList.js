@@ -33,7 +33,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 			
 		}
 		
-		var url = '/admin/phone/memberBaseControl/dataGrid.action';
+		var url = '/admin/phone/memberBaseControl/dataGrid';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 	}
     
@@ -104,7 +104,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 				messageFactory.showMessage('error',result.desc);
 				
 			}
-			var url = '/admin/member/memberBaseControl/getDetail.action';
+			var url = '/admin/member/memberBaseControl/getDetail';
 			http.post(url,{'mb_id':id},success,error);
 	 }
 	
@@ -120,7 +120,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/member/memberBaseControl/delete.action';
+		var url = '/admin/member/memberBaseControl/delete';
 		EzConfirm.create({
 			heading : '提示',
 			text : '确认删除吗？'
@@ -147,7 +147,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 			}
 			
 			var data ={'mb_id':id}
-			var url = "/admin/member/memberBaseControl/changeStatus.action";
+			var url = "/admin/member/memberBaseControl/changeStatus";
 			var	msg = '您确定'+text+'该用户吗？';
 			EzConfirm.create({
 				heading : '提示',
@@ -172,7 +172,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 				  messageFactory.showMessage('error',result.desc);
 			  }
 			  $scope.searchParam_order.om_memberid = $scope.om_memberid;
-			  var url = '/admin/order/orderMainControl/dataGrid.action';
+			  var url = '/admin/order/orderMainControl/dataGrid';
 			  http.post(url,$.extend({},$scope.orderPager,$scope.searchParam_order),success,error);
 		}		
 	 
@@ -224,7 +224,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 			}
 			
 			var data =$scope.vo;
-			var url = "/admin/member/memberBaseControl/updateMemberMobile.action";
+			var url = "/admin/member/memberBaseControl/updateMemberMobile";
 			var	msg = "您确定提交吗？";
 			EzConfirm.create({
 				heading : '提示',
@@ -261,7 +261,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 				messageFactory.showMessage('error',result.desc);
 			}
 			
-			var url = "/admin/member/memberBaseControl/updateClearQrcode.action";
+			var url = "/admin/member/memberBaseControl/updateClearQrcode";
 			var	msg = '您确定要重新生成推广码吗？';
 			EzConfirm.create({
 				heading : '提示',
@@ -300,7 +300,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 			  messageFactory.closeLoading();
 			  messageFactory.showMessage('error',result.desc);
 		  }
-		  var url = '/admin/member/memberBaseControl/dataGrid.action';
+		  var url = '/admin/member/memberBaseControl/dataGrid';
 		  http.post(url,$.extend({},$scope.spreadPager,$scope.spreadSearchParam),success,error);
 	}	
 
@@ -324,7 +324,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 			messageFactory.showMessage('error',result.desc);
 		}
 		
-		var url = "/admin/member/memberBaseControl/updateSpreadInfo.action";
+		var url = "/admin/member/memberBaseControl/updateSpreadInfo";
 		var	msg = '您确定要修改用户的推荐人吗？';
 		EzConfirm.create({
 			heading : '提示',

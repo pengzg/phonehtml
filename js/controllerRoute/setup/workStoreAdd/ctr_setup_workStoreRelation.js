@@ -23,7 +23,7 @@ tempApp.controller('ctr_setup_workStoreRelation', function($scope,EzConfirm,mess
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/member/memberStoreAuthorityControl/dataGrid.action';
+		var url = '/admin/member/memberStoreAuthorityControl/dataGrid';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 	}
     
@@ -50,7 +50,7 @@ tempApp.controller('ctr_setup_workStoreRelation', function($scope,EzConfirm,mess
 			
 		}
 		
-		var url = "/admin/member/memberBaseWorkControl/queryItemList.action";
+		var url = "/admin/member/memberBaseWorkControl/queryItemList";
 		http.post(url,{"mbw_dr":"1","mbw_role_str":"2001,2005",mbw_shopid:$rootScope.USER.shopId},success,error);
 	}
 	$scope.getStoreHouse();
@@ -84,7 +84,7 @@ tempApp.controller('ctr_setup_workStoreRelation', function($scope,EzConfirm,mess
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/member/memberStoreAuthorityControl/delete.action';
+		var url = '/admin/member/memberStoreAuthorityControl/delete';
 		var data = {"msa_id":x.msa_id};
 		
 		EzConfirm.create({

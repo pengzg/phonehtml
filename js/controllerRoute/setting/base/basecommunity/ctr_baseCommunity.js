@@ -23,7 +23,7 @@ var queryCommunityList = function(){
         messageFactory.closeLoading();
     }
     
-    var url = '/admin/base/baseCommunityControl/dataGrid.action';
+    var url = '/admin/base/baseCommunityControl/dataGrid';
     http.post(url,$.extend({}, $scope.pager, $scope.searchParam),success,error);
 //		http.post(url,$scope.pager,success,error);
 }
@@ -44,7 +44,7 @@ $scope.toDelete = function(id){
     }
     
     var data ={'bcm_id':id}
-    var url = "/admin/base/baseCommunityControl/delete.action";
+    var url = "/admin/base/baseCommunityControl/delete";
     var	msg = '您确定修改本条记录吗？';
     EzConfirm.create({
         heading : '提示',
@@ -146,7 +146,7 @@ $scope.save = function(){
         /*$scope.closeDialog();*/
     }
     
-    var url = "/admin/base/baseCommunityControl/update.action" ;
+    var url = "/admin/base/baseCommunityControl/update" ;
         var msg = '您确定添加本条记录吗？';
         //console.log($stateParams.bc_id);
         if($scope.vo.bcm_id != undefined && $scope.vo.bcm_id != ''){
@@ -176,7 +176,7 @@ $scope.queryDetail = function(id){
         messageFactory.closeLoading();
     }
     messageFactory.showLoading();
-    var url = '/admin/base/baseCommunityControl/getDetail.action';
+    var url = '/admin/base/baseCommunityControl/getDetail';
     http.post(url,{bcm_id:id},success,error);
 }
 

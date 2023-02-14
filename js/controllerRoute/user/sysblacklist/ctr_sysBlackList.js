@@ -29,7 +29,7 @@ tempApp.controller('ctr_sysBlackList', function($scope,$rootScope,EzConfirm,mess
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/member/sysBlackListControl/dataGrid.action';
+		var url = '/admin/member/sysBlackListControl/dataGrid';
 		http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
 	}
     
@@ -86,7 +86,7 @@ tempApp.controller('ctr_sysBlackList', function($scope,$rootScope,EzConfirm,mess
 			messageFactory.showMessage('error',result.desc);
 				
 		}
-		var url = '/admin/member/sysBlackListControl/getDetail.action';
+		var url = '/admin/member/sysBlackListControl/getDetail';
 		http.post(url,{'sbl_id':id},success,error);
 	 }
 	
@@ -102,7 +102,7 @@ tempApp.controller('ctr_sysBlackList', function($scope,$rootScope,EzConfirm,mess
 			messageFactory.showMessage('error',result.desc);
 			
 		}
-		var url = '/admin/member/memberBaseControl/delete.action';
+		var url = '/admin/member/memberBaseControl/delete';
 		EzConfirm.create({
 			heading : '提示',
 			text : '确认删除吗？'
@@ -140,7 +140,7 @@ tempApp.controller('ctr_sysBlackList', function($scope,$rootScope,EzConfirm,mess
 			}
 			
 			var data ={'sbl_id':x.sbl_id,"sbl_status":status}
-			var url = "/admin/member/sysBlackListControl/updateStatus.action";
+			var url = "/admin/member/sysBlackListControl/updateStatus";
 			var	msg = '您确定操作该用户吗？';
 			EzConfirm.create({
 				heading : '提示',
@@ -188,7 +188,7 @@ tempApp.controller('ctr_sysBlackList', function($scope,$rootScope,EzConfirm,mess
 				messageFactory.showMessage('error',result.desc);
 				
 			}
-			var url = '/admin/member/sysBlackListControl/update.action';
+			var url = '/admin/member/sysBlackListControl/update';
 			var msg = "您确定添加本条记录么？";
 			if(id != undefined && id != ''){
 				var msg = "您确定修改本条记录吗？";
@@ -221,7 +221,7 @@ tempApp.controller('ctr_sysBlackList', function($scope,$rootScope,EzConfirm,mess
 				}
 				var error = function(result){
 				}
-				var url = '/admin/member/memberBaseWorkControl/queryMemberInforByMobile.action';
+				var url = '/admin/member/memberBaseWorkControl/queryMemberInforByMobile';
 				http.post(url,{'mbw_mobile':mobile},success,error);
 			}
 		}

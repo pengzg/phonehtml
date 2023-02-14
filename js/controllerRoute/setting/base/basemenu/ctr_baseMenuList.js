@@ -15,7 +15,7 @@ tempApp.controller('ctr_baseMenuList', function($scope,$compile,
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error',result.desc);
 		}
-		var url =  '/admin/sys/sysMenuControl/queryAllMenueTree.action';
+		var url =  '/admin/sys/sysMenuControl/queryAllMenueTree';
 		http.post(url,{systemId:'1006'},success,error);
 	}
 	
@@ -145,7 +145,7 @@ tempApp.controller('ctr_baseMenuList', function($scope,$compile,
 		}else{
 			msg = "您确定添加本条记录吗？";
 		}
-		var url = "/admin/sys/sysMenuControl/update.action";
+		var url = "/admin/sys/sysMenuControl/update";
 		EzConfirm.create({
 			heading : '提示',
 			text : msg
@@ -201,7 +201,7 @@ tempApp.controller('ctr_baseMenuList', function($scope,$compile,
 			messageFactory.closeLoading();
 		}
 		messageFactory.showLoading();
-		var url = '/admin/sys/sysMenuControl/getDetail.action';
+		var url = '/admin/sys/sysMenuControl/getDetail';
 		http.post(url,{sm_id:id},success,error);
 	}
 	
@@ -280,7 +280,7 @@ tempApp.controller('ctr_baseMenuList', function($scope,$compile,
 		}
 		
 		var data ={'sm_id':id}
-		var url = "/admin/sys/sysMenuControl/remove.action";
+		var url = "/admin/sys/sysMenuControl/remove";
 		var	msg = '您确定删除本条记录吗？';
 		EzConfirm.create({
 			heading : '提示',

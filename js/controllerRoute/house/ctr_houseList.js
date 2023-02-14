@@ -42,7 +42,7 @@ tempApp.controller('ctr_houseList', function($scope, $rootScope, http, messageFa
             messageFactory.closeLoading();
             messageFactory.showMessage('error',result.desc);
         }
-        var url = '/admin/house/communityBaseControl/dataGrid.action';
+        var url = '/admin/house/communityBaseControl/dataGrid';
         http.post(url,$.extend({},$scope.pager,$scope.searchParam),success,error);
     }
   
@@ -95,7 +95,7 @@ tempApp.controller('ctr_houseList', function($scope, $rootScope, http, messageFa
 			messageFactory.showMessage('error',result.desc);
 		}
 		
-		var url = "/admin/gl/glCashApplyControl/updateCheckApply.action";
+		var url = "/admin/gl/glCashApplyControl/updateCheckApply";
 		var	msg = '您确定要审核通过吗？';
 		EzConfirm.create({
 			heading : '提示',

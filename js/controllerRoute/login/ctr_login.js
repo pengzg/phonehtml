@@ -33,7 +33,7 @@ tempApp.controller('ctr_login', ['$scope', '$rootScope', '$state', 'http', 'sess
             messageFactory.showLoading();
             $scope.loginInfo.userType = 2;
             $scope.loginInfo.systemcode = Modules_Config.systemcode;
-            var url = "/admin/login/loginControl/doLogin.action";
+            var url = "/admin/login/loginControl/doLogin";
             http.post(url, $scope.loginInfo, success, error);
         };
 
@@ -46,7 +46,7 @@ tempApp.controller('ctr_login', ['$scope', '$rootScope', '$state', 'http', 'sess
         slider.callback = $scope.submit;
 
         $scope.getUserInfo = function() {
-            var url = "/admin/login/loginControl/getSessionInfo.action";
+            var url = "/admin/login/loginControl/getSessionInfo";
             var success = function(result) {
                 $rootScope.USER = result.data;
                 sessionStorage.USER = JSON.stringify(result.data);
