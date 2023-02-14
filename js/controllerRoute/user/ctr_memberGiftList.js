@@ -81,7 +81,7 @@ $scope.clearParams = function(){
           str += "&order="+$scope.pager.order;
           str += "&sort="+$scope.pager.sort;
          
-		var url = '/admin/member/memberGiftControl/doExportTicketsend.action?'+str;
+		var url = '/admin/member/memberGiftControl/doExportTicketsend?'+str;
 		window.location.href = url;
     }
 })

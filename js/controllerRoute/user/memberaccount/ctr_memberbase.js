@@ -268,7 +268,7 @@ tempApp.controller('ctr_memberbase', function($scope,EzConfirm,messageFactory,ht
 			  messageFactory.closeLoading();
 			  messageFactory.showMessage('error',result.desc);
 		  }
-		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2136';
+		var url = '/admin/base/baseDataControl/detailItem?codekey=2136';
 		http.post(url,null,success,error);
 	}
 	$scope.queryUsertypeList();

@@ -156,7 +156,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error', result.desc);
 		}
-		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2008';
+		var url = '/admin/base/baseDataControl/detailItem?codekey=2008';
 		http.post(url, null, success, error);
 	}
 	$scope.queryCountryList();
@@ -173,7 +173,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 			 messageFactory.closeLoading();
 			 messageFactory.showMessage('error', result.desc);
 		 }
-		 var url = '/admin/base/baseDataControl/detailItem.action?codekey=2010';
+		 var url = '/admin/base/baseDataControl/detailItem?codekey=2010';
 		 http.post(url, null, success, error);
 	 }
 	 $scope.queryChargeTypeList();
@@ -190,7 +190,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error', result.desc);
 		}
-		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2009';
+		var url = '/admin/base/baseDataControl/detailItem?codekey=2009';
 		http.post(url, null, success, error);
 	}
 	$scope.queryKeyTypeList();
@@ -207,7 +207,7 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 			 messageFactory.closeLoading();
 			 messageFactory.showMessage('error', result.desc);
 		 }
-		 var url = '/admin/base/baseDataControl/detailItem.action?codekey=2011';
+		 var url = '/admin/base/baseDataControl/detailItem?codekey=2011';
 		 http.post(url, null, success, error);
 	 }
 	 $scope.querySystemList();

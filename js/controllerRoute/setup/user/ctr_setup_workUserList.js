@@ -555,7 +555,7 @@ tempApp.controller('ctr_setup_workUserList', function($scope,$rootScope,EzConfir
 					messageFactory.closeLoading();
 					messageFactory.showMessage('error',result.desc);
 				}
-			var url = '/admin/base/baseDataControl/detailItem.action?codekey=2149';
+			var url = '/admin/base/baseDataControl/detailItem?codekey=2149';
 			http.post(url,null,success,error);
 		}						
 	$scope.queryRoleList();

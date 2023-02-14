@@ -246,7 +246,7 @@ tempApp.controller('ctr_userList', function($scope,EzConfirm,messageFactory,http
 			
 			  str += "&searchKey="+$scope.searchParam.searchKey ;
 			  
-			var url = '/admin/member/memberBaseControl/doExportMember.action?'+str;
+			var url = '/admin/member/memberBaseControl/doExportMember?'+str;
 			window.location.href = url;
 		}
 

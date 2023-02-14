@@ -156,7 +156,7 @@ tempApp.controller('ctr_houseAdd', function ($scope, $rootScope, $location,
 			messageFactory.closeLoading();
 			messageFactory.showMessage('error', result.desc);
 		}
-		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2014';
+		var url = '/admin/base/baseDataControl/detailItem?codekey=2014';
 		http.post(url, null, success, error);
 	}
 	$scope.queryKeyTypeList();
@@ -172,7 +172,7 @@ tempApp.controller('ctr_houseAdd', function ($scope, $rootScope, $location,
 			 messageFactory.closeLoading();
 			 messageFactory.showMessage('error', result.desc);
 		 }
-		 var url = '/admin/base/baseDataControl/detailItem.action?codekey=2006';
+		 var url = '/admin/base/baseDataControl/detailItem?codekey=2006';
 		 http.post(url, null, success, error);
 	 }
 	 $scope.queryStateList();

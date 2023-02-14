@@ -235,7 +235,7 @@ tempApp.controller('ctr_focusAdd', function($scope, $rootScope, $location,
 		  messageFactory.closeLoading();
 		  messageFactory.showMessage('error',result.desc);
 	  }
-		var url = '/admin/base/baseDataControl/detailItem.action?codekey=1051';
+		var url = '/admin/base/baseDataControl/detailItem?codekey=1051';
 		http.post(url,null,success,error);
 	}
 	$scope.queryLocationList();

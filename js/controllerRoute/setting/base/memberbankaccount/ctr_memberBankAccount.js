@@ -109,7 +109,7 @@ tempApp.controller('ctr_memberBankAccount', function($scope, $rootScope, http, m
 			  messageFactory.closeLoading();
 			  messageFactory.showMessage('error',result.desc);
 		  }
-		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2183';
+		var url = '/admin/base/baseDataControl/detailItem?codekey=2183';
 		http.post(url,null,success,error);
 	}
 	$scope.queryStatus(); 
