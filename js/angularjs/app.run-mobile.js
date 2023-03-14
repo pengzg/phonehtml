@@ -519,7 +519,7 @@ tempApp.run(['$rootScope','$timeout','commonFactory','http','$state','$ionicTabs
 			//console.log('wx.error');
 		};
 		var data = {'wi_appid':wi_appid,'url': $location.absUrl().split('#')[0]};
-		var url = '/weixin/web/weixinIndexController/queryWxJsSdkConf.action';
+		var url = '/weixin/web/weixinIndexController/queryWxJsSdkConf';
 		http.post(url,data,success,error);
 
     }

@@ -3,7 +3,7 @@
 	tempApp.factory('sessionFactory', function($q,http,Modules_Config,$location) {
 	   var factory = {};
 	   factory.getMenu = function(callBackGetMenu) {
-		   var url = "/admin/login/loginControl/queryMenuByUser.action";
+		   var url = "/admin/login/loginControl/queryMenuByUser";
 		   var success = function(data){
 			   sessionStorage.menuStr = JSON.stringify(data);
 			   callBackGetMenu(data);
@@ -43,7 +43,7 @@
 	   }
 	   
 	   factory.getUser = function(callBackGetUser) {
-		   var url = "/admin/member/sysUserControl/getSessionInfo.action";
+		   var url = "/admin/member/sysUserControl/getSessionInfo";
 		   var success = function(result){
 			   sessionStorage.userStr = JSON.stringify(result.data);
 			   callBackGetUser(result.data);

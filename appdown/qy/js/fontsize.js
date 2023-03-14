@@ -19,7 +19,7 @@ function isWeiXin(){
 $(function(){
     $.ajax({
       dataType: "json",
-      url: '/admin/base/baseAppVersionControl/getNewVersion.action',
+      url: '/admin/base/baseAppVersionControl/getNewVersion',
       data: {'source':8},
       success: function(data){
          if(data){
@@ -43,7 +43,7 @@ function downApp(){
   }else{
     $.ajax({
       dataType: "json",
-      url: '/admin/base/baseAppVersionControl/getNewVersion.action',
+      url: '/admin/base/baseAppVersionControl/getNewVersion',
       data: {'source':8},
       success: function(data){
         console.log(data);
