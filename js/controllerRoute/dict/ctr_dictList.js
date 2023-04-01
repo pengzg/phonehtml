@@ -18,7 +18,6 @@ tempApp.controller('ctr_dictList', function($scope, $rootScope, http, messageFac
     $('.right-pop').hide();
  
     $scope.tab  = "1";
-    $scope.searchParam.gca_type = "1";
 
 
 
@@ -75,7 +74,6 @@ tempApp.controller('ctr_dictList', function($scope, $rootScope, http, messageFac
        */
       $scope.clearInput = function(){
           $scope.searchParam.searchKey = '';
-          $scope.searchParam.gca_audit_state = '';
           $('#start_date').val($scope.dateNow);
           $('#end_date').val($scope.dateNow);
           $scope.searchParam.startDate = $scope.dateNow;
@@ -143,6 +141,7 @@ $scope.selectTab = function(x) {
 		var success = function(result){
              $scope.dmTypeList = result.data;
 			 $scope.dmTypeList.unshift({'bd_code':'','bd_name':"全部语言"});
+            
 		  }
 		  var error = function(result){
 			  messageFactory.closeLoading();
