@@ -148,7 +148,7 @@ $scope.selectTab = function(x) {
 			  messageFactory.closeLoading();
 			  messageFactory.showMessage('error',result.desc);
 		  }
-		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2012';
+		var url = '/admin/base/baseDataControl/detailItem?codekey=2012';
 		http.post(url,null,success,error);
 	}
 	$scope.queryDmTypeList(); 
