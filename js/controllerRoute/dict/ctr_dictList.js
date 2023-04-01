@@ -138,19 +138,19 @@ $scope.selectTab = function(x) {
         window.open(url,'_blank');
     }
      
-      
-    
-    
-      
-      
-
-    
-     
-      
-     
-    
-      
-     
-  
+    $scope.dmTypeList = []; 
+    $scope.queryDmTypeList = function(){	
+		var success = function(result){
+             $scope.dmTypeList = result.data;
+			 $scope.dmTypeList.unshift({'bd_code':'','bd_name':"全部语言"});
+		  }
+		  var error = function(result){
+			  messageFactory.closeLoading();
+			  messageFactory.showMessage('error',result.desc);
+		  }
+		var url = '/admin/base/baseDataControl/detailItem.action?codekey=2012';
+		http.post(url,null,success,error);
+	}
+	$scope.queryDmTypeList(); 
 
   })
