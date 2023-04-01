@@ -7,7 +7,9 @@ tempApp.controller('ctr_dictList', function($scope, $rootScope, http, messageFac
     $scope.dateNow = "";
     $scope.searchParam.startDate = $scope.dateNow;
     $scope.searchParam.endDate = $scope.dateNow;
-      
+    $scope.searchParam.dm_type = "";
+      /*  */
+      /*  */
       $("#start_date").val($scope.searchParam.startDate);
       
       $("#end_date").val($scope.searchParam.endDate);
