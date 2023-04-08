@@ -124,8 +124,6 @@ tempApp.controller('ctr_dictAdd', function ($scope, $rootScope, $location,
     $scope.queryDmTypeList = function(){	
 		var success = function(result){
              $scope.dmTypeList = result.data;
-			 $scope.dmTypeList.unshift({'bd_code':'','bd_name':"全部语言"});
-            
 		  }
 		  var error = function(result){
 			  messageFactory.closeLoading();
