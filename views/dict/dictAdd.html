@@ -3,17 +3,28 @@
 
 
 
-
+		<!-- 类型 -->
+		<div class="divVertical clearfix ray5">
+			<span class="xt_bzWenZi width-just">类型：</span>
+			<div class="widthAuto zk_controlInput sale_inline">
+				<div ng-repeat="x in dmTypeList">
+					<label class="m10right">
+						<input type="radio" name="type" value="{{x.bd_code}}" ng-model="vo.dm_type"
+							class="widthAuto ant-checkboxStyle" style="margin-top: -2px;" /> {{x.bd_name}}
+					</label>
+				</div>
+			</div>
+		</div>
 		<!-- 语言 -->
 		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
-			<span class="xt_bzWenZi width-just"> 日语：</span>
+			<span class="xt_bzWenZi width-just"> 外语：</span>
 			<div class="widthAuto zk_controlInput">
 				<input type="text" ng-model="vo.dm_lang" style="width:300px" />
 			</div>
 		</div>
 		<!-- 读音  -->
 		<div class="divVertical clearfix ray5" style="margin-top: 25px;">
-			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 假名：</span>
+			<span class="xt_bzWenZi width-just"><i class="colorRed">*</i> 外语2：</span>
 			<div class="widthAuto zk_controlInput">
 				<input type="text" ng-model="vo.dm_lang2" maxlength="60" style="width:300px" />
 			</div>

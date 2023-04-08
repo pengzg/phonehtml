@@ -3,7 +3,6 @@ tempApp.controller('ctr_dictAdd', function ($scope, $rootScope, $location,
 
 
 	$scope.vo = {pm_state:1,pm_dr:1};
-	$scope.picList = [];
 
 	$scope._simpleConfig = {
 		//这里可以选择自己需要的工具按钮名称,此处仅选择如下五个
@@ -98,15 +97,11 @@ tempApp.controller('ctr_dictAdd', function ($scope, $rootScope, $location,
 		var success = function (result) {
 			messageFactory.showMessage('success', '提交成功');
 			$scope.goBack();
-			$scope.dataList = [{}];
-			$scope.subTotal = 0;
 		}
 		var error = function (result) {
 			messageFactory.showMessage('error', result.desc);
 		}
 
-		$scope.vo.attListStr = JSON.stringify($scope.picList);
-		$scope.vo.picList = "";
 		EzConfirm.create({
 			heading: '提示',
 			text: "您确定提交吗？"
@@ -123,4 +118,21 @@ tempApp.controller('ctr_dictAdd', function ($scope, $rootScope, $location,
 	$scope.goBack = function(){
 		$state.go("index.dict.dictList");
 	}
+
+
+	$scope.dmTypeList = []; 
+    $scope.queryDmTypeList = function(){	
+		var success = function(result){
+             $scope.dmTypeList = result.data;
+			 $scope.dmTypeList.unshift({'bd_code':'','bd_name':"全部语言"});
+            
+		  }
+		  var error = function(result){
+			  messageFactory.closeLoading();
+			  messageFactory.showMessage('error',result.desc);
+		  }
+		var url = '/admin/base/baseDataControl/detailItem?codekey=2012';
+		http.post(url,null,success,error);
+	}
+	$scope.queryDmTypeList(); 
 })
