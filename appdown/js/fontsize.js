@@ -43,7 +43,7 @@ function downApp(){
   }else{
     $.ajax({
       dataType: "json",
-      url: '/admin/base/baseAppVersionControl/getNewVersion.action',
+      url: '/admin/base/baseAppVersionControl/getNewVersion',
       data: {'source':5},
       success: function(data){
         console.log(data);

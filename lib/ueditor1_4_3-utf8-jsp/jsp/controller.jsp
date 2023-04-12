@@ -12,7 +12,6 @@
 	//自定义保存目录
 	String saveRootPath = rootPath;
 	
-	//saveRootPath = "D:/workspace1/sqkxboxui/Community-box";
 	//saveRootPath = "/data/web/web";
 	
 	System.out.println("rootPath1:["+rootPath+"]");
