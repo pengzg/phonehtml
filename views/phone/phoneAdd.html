@@ -56,7 +56,7 @@
 						get-ue="ue_myeditor = getUe" ng-show="false" class="ueditor" ng-model="gb_content1"></div>
 				</div> -->
 				<div>
-					<input type="file" class="f14"> 
+					<input type="file" multiple class="f14" @change="change($event, value)"> 
 				</div>
 				
 

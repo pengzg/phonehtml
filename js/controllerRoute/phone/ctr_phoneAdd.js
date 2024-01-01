@@ -331,4 +331,23 @@ tempApp.controller('ctr_phoneAdd', function ($scope, $rootScope, $location,
 	$scope.goBack = function(){
 		$state.go("index.phone.phoneList");
 	}
+
+	$scope.change = function($event, value){
+
+		messageFactory.showLoading();
+		var success = function(result){
+			
+			messageFactory.closeLoading();
+		};
+		var error = function(result){
+			messageFactory.closeLoading();
+			messageFactory.showMessage('error',result.desc);
+			
+		};
+		var url = '/admin/base/baseCommonControl/uploadFiles';
+		http.post(url,{files:$event.target.files, "module":"phone"},success,error);
+
+	};
+
+
 })
